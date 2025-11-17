@@ -1,0 +1,247 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cân Nhà Bếp",
+      "icon": "🍽️"
+    },
+    {
+      "id": 2,
+      "name": "Cân Sức Khỏe",
+      "icon": "⚖️"
+    },
+    {
+      "id": 3,
+      "name": "Cân Công Nghiệp",
+      "icon": "📦"
+    },
+    {
+      "id": 4,
+      "name": "Cân Tính Tiền",
+      "icon": "💰"
+    },
+    {
+      "id": 5,
+      "name": "Cân Đơ",
+      "icon": "🎣"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Cân Nhà Bếp Điện Tử K3",
+      "category": 1,
+      "price": 245000,
+      "originalPrice": 350000,
+      "rating": 4.8,
+      "reviews": 145,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/11/can-dien-tu-k019_6-510x510.webp",
+      "description": "Cân nhà bếp điện tử chính xác cao, dung lượng 5kg",
+      "specifications": {
+        "weight": "5kg",
+        "accuracy": "1g",
+        "material": "Thép không gỉ",
+        "warranty": "2 năm",
+        "features": ["Lấy nước", "Đo nhiệt độ", "Tự động tắt"]
+      }
+    },
+    {
+      "id": 2,
+      "name": "Cân Sức Khỏe Thông Minh AF-600",
+      "category": 2,
+      "price": 899000,
+      "originalPrice": 1299000,
+      "rating": 4.9,
+      "reviews": 312,
+      "image": "/images/can-suc-khoe-1.jpg",
+      "description": "Cân sức khỏe thông minh có WiFi, phân tích BMI",
+      "specifications": {
+        "weight": "180kg",
+        "accuracy": "0.1kg",
+        "material": "Kính cường lực",
+        "warranty": "3 năm",
+        "features": ["WiFi", "Ứng dụng di động", "Phân tích BMI", "Lưu trữ 16 người"]
+      }
+    },
+    {
+      "id": 3,
+      "name": "Cân Công Nghiệp Điện Tử 30kg",
+      "category": 3,
+      "price": 1899000,
+      "originalPrice": 2500000,
+      "rating": 4.7,
+      "reviews": 87,
+      "image": "/images/can-cong-nghiep-1.jpg",
+      "description": "Cân công nghiệp chuyên dụng cho cửa hàng bán lẻ",
+      "specifications": {
+        "weight": "30kg",
+        "accuracy": "10g",
+        "material": "Thép sơn",
+        "warranty": "2 năm",
+        "features": ["Tính tiền", "Cổng USB", "LCD hiển thị", "Bàn phím bền"]
+      }
+    },
+    {
+      "id": 4,
+      "name": "Cân Tính Tiền Vàng Bạc 0.01g",
+      "category": 4,
+      "price": 1299000,
+      "originalPrice": 1799000,
+      "rating": 4.9,
+      "reviews": 201,
+      "image": "/images/can-tinh-tien-1.jpg",
+      "description": "Cân tính tiền chuyên dụng cho trang sức vàng bạc",
+      "specifications": {
+        "weight": "200g",
+        "accuracy": "0.01g",
+        "material": "Hợp kim nhôm",
+        "warranty": "3 năm",
+        "features": ["Tính tiền tự động", "Đo lượng vàng", "Chế độ bảo trì", "Pin sạc"]
+      }
+    },
+    {
+      "id": 5,
+      "name": "Cân Đơ Cơ Học 50kg",
+      "category": 5,
+      "price": 189000,
+      "originalPrice": 299000,
+      "rating": 4.5,
+      "reviews": 156,
+      "image": "/images/can-do-1.jpg",
+      "description": "Cân đơ cơ học truyền thống, không dùng pin",
+      "specifications": {
+        "weight": "50kg",
+        "accuracy": "500g",
+        "material": "Thép khoáng",
+        "warranty": "1 năm",
+        "features": ["Không dùng pin", "Bền bỉ", "Dễ sử dụng", "Giá rẻ"]
+      }
+    },
+    {
+      "id": 6,
+      "name": "Cân Nhà Bếp Cơ Bản TK-2g",
+      "category": 1,
+      "price": 89000,
+      "originalPrice": 150000,
+      "rating": 4.3,
+      "reviews": 98,
+      "image": "/images/can-nhà-bep-2.jpg",
+      "description": "Cân nhà bếp cơ bản, chính xác 2g",
+      "specifications": {
+        "weight": "2kg",
+        "accuracy": "2g",
+        "material": "Nhựa ABS",
+        "warranty": "1 năm",
+        "features": ["Nhẹ", "Gọn", "Giá rẻ", "Pin AAA"]
+      }
+    },
+    {
+      "id": 7,
+      "name": "Cân Sức Khỏe Cơ Bản AF-100",
+      "category": 2,
+      "price": 399000,
+      "originalPrice": 699000,
+      "rating": 4.4,
+      "reviews": 203,
+      "image": "/images/can-suc-khoe-2.jpg",
+      "description": "Cân sức khỏe cơ bản, chính xác 100g",
+      "specifications": {
+        "weight": "150kg",
+        "accuracy": "0.1kg",
+        "material": "Kính cường lực",
+        "warranty": "2 năm",
+        "features": ["Tự động tắt", "Tối ưu hóa BMI", "Hiển thị kỹ thuật số", "An toàn"]
+      }
+    },
+    {
+      "id": 8,
+      "name": "Cân Công Nghiệp 50kg DH-50",
+      "category": 3,
+      "price": 2499000,
+      "originalPrice": 3299000,
+      "rating": 4.8,
+      "reviews": 112,
+      "image": "/images/can-cong-nghiep-2.jpg",
+      "description": "Cân công nghiệp chuyên dụng 50kg",
+      "specifications": {
+        "weight": "50kg",
+        "accuracy": "20g",
+        "material": "Thép sơn",
+        "warranty": "3 năm",
+        "features": ["Tính tiền chính xác", "In tem", "Bảo hành lâu", "Chế độ nạp"]
+      }
+    },
+    {
+      "id": 9,
+      "name": "Cân Tính Tiền 100g TS-100",
+      "category": 4,
+      "price": 699000,
+      "originalPrice": 999000,
+      "rating": 4.6,
+      "reviews": 78,
+      "image": "/images/can-tinh-tien-2.jpg",
+      "description": "Cân tính tiền 100g cho trang sức",
+      "specifications": {
+        "weight": "100g",
+        "accuracy": "0.01g",
+        "material": "Hợp kim",
+        "warranty": "2 năm",
+        "features": ["Tính tiền nhanh", "Chế độ giác ngạc", "Thay pin dễ", "Bảo hành tốt"]
+      }
+    },
+    {
+      "id": 10,
+      "name": "Cân Đơ 25kg DC-25",
+      "category": 5,
+      "price": 149000,
+      "originalPrice": 249000,
+      "rating": 4.5,
+      "reviews": 134,
+      "image": "/images/can-do-2.jpg",
+      "description": "Cân đơ cơ 25kg, nhỏ gọn dễ mang",
+      "specifications": {
+        "weight": "25kg",
+        "accuracy": "250g",
+        "material": "Thép khoáng",
+        "warranty": "1 năm",
+        "features": ["Nhỏ gọn", "Dễ mang", "Chính xác", "Rẻ"]
+      }
+    },
+    {
+      "id": 11,
+      "name": "Cân Nhà Bếp Chuyên Dụng M300",
+      "category": 1,
+      "price": 599000,
+      "originalPrice": 899000,
+      "rating": 4.7,
+      "reviews": 187,
+      "image": "/images/can-nhà-bep-3.jpg",
+      "description": "Cân nhà bếp chuyên dụng với màn hình lớn",
+      "specifications": {
+        "weight": "10kg",
+        "accuracy": "1g",
+        "material": "Thép không gỉ",
+        "warranty": "3 năm",
+        "features": ["Màn hình lớn", "Nhớ công thức", "Tính năng giải nén", "Bluetooth"]
+      }
+    },
+    {
+      "id": 12,
+      "name": "Cân Sức Khỏe Cao Cấp AF-800",
+      "category": 2,
+      "price": 1299000,
+      "originalPrice": 1899000,
+      "rating": 4.9,
+      "reviews": 267,
+      "image": "/images/can-suc-khoe-3.jpg",
+      "description": "Cân sức khỏe cao cấp với 13 chỉ số sức khỏe",
+      "specifications": {
+        "weight": "200kg",
+        "accuracy": "0.1kg",
+        "material": "Kính cường lực",
+        "warranty": "3 năm",
+        "features": ["13 chỉ số sức khỏe", "WiFi + Bluetooth", "Lưu trữ 8 người", "Ứng dụng"]
+      }
+    }
+  ]
+}
