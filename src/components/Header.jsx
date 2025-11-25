@@ -27,7 +27,18 @@ export default function Header() {
         <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Chip
             icon={<PhoneIcon />}
-            label="0913331919 - 0938561544"
+            label="0913331919"
+            variant="outlined"
+            sx={{
+              background: 'rgba(255, 255, 255, 0.2)',
+              color: 'white',
+              border: 'none',
+              '& .MuiChip-icon': { color: 'white' },
+            }}
+          />
+          <Chip
+            icon={<PhoneIcon />}
+            label="0938561544"
             variant="outlined"
             sx={{
               background: 'rgba(255, 255, 255, 0.2)',
