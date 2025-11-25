@@ -150,13 +150,13 @@ export default function Footer() {
             </Typography>
             <Stack spacing={1.5}>
               <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📞 Hotline: 1900-5555
+                📞 Hotline: 0913331916 (CN Huế) - 0938561554 (CN Đà Nẵng)
               </Typography>
               <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📧 Email: info@candientu.vn
+                📧 Email: candientubk.hue@gmail.com
               </Typography>
               <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📍 Địa chỉ: 123 Nguyễn Hue, TP.HCM
+                📍 Địa chỉ: 13 Trần Quý Khoáng, An Hòa, TP.Huế 
               </Typography>
 
               {/* Social Links */}
@@ -211,7 +211,7 @@ export default function Footer() {
         {/* Divider */}
         <Box sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', pt: 3 }}>
           <Typography variant="body2" sx={{ color: '#bdbdbd', textAlign: 'center' }}>
-            &copy; 2025 Cân Điện Tử Hoàng Gia. All rights reserved.
+            &copy; 2025 Cân Điện Tử Bách Khoa. All rights reserved.
           </Typography>
         </Box>
       </Container>
