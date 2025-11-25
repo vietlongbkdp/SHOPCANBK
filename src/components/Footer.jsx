@@ -153,12 +153,11 @@ export default function Footer() {
                 📞 Hotline: 0913331916 (CN Huế) - 0938561554 (CN Đà Nẵng)
               </Typography>
               <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📧 Email: candientubk.hue@gmail.com
+                📍 Chi nhánh 1: 13 Trần Quý Khoáng, An Hòa, TP.Huế 
               </Typography>
               <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📍 Địa chỉ: 13 Trần Quý Khoáng, An Hòa, TP.Huế 
+                📍 Chi nhánh 2: 293 Hà Huy Tập, Thanh Khê, TP.Đà Nẵng
               </Typography>
-
               {/* Social Links */}
               <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
                 <IconButton
