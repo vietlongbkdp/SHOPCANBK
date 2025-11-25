@@ -16,10 +16,10 @@ export default function Header() {
         {/* Logo */}
         <Box sx={{ flex: 1 }}>
           <Typography variant="h4" sx={{ fontWeight: 700, letterSpacing: 1 }}>
-            ⚖️ CÂN ĐIỆN TỬ HOÀNG GIA
+            ⚖️ CÂN ĐIỆN TỬ BÁCH KHOA
           </Typography>
           <Typography variant="body2" sx={{ opacity: 0.9, fontStyle: 'italic' }}>
-            Cung cấp các loại cân điện tử chất lượng cao
+            Dịch vụ sữa chữa tận nơi, bào trì bảo dưỡng và mua bán cân điện tử
           </Typography>
         </Box>
 
@@ -27,18 +27,7 @@ export default function Header() {
         <Stack direction="row" spacing={2} sx={{ display: { xs: 'none', md: 'flex' } }}>
           <Chip
             icon={<PhoneIcon />}
-            label="1900-5555"
-            variant="outlined"
-            sx={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              color: 'white',
-              border: 'none',
-              '& .MuiChip-icon': { color: 'white' },
-            }}
-          />
-          <Chip
-            icon={<EmailIcon />}
-            label="info@candientu.vn"
+            label="0913331919 - 0938561544"
             variant="outlined"
             sx={{
               background: 'rgba(255, 255, 255, 0.2)',
