@@ -1,4 +1,5 @@
 import { getDb } from './lib/mongodb.js';
+import { autoSeedIfEmpty } from './init.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,7 +12,8 @@ export default async function handler(req, res) {
     const col = db.collection('categories');
 
     if (req.method === 'GET') {
-      const cats = await col.find({}).sort({ id: 1 }).toArray();
+      await autoSeedIfEmpty(db);
+      const cats = await col.find({}, { projection: { _id: 0 } }).sort({ id: 1 }).toArray();
       return res.status(200).json(cats);
     }
 
@@ -20,7 +22,8 @@ export default async function handler(req, res) {
       const newId = last.length > 0 ? last[0].id + 1 : 1;
       const cat   = { ...req.body, id: newId };
       await col.insertOne(cat);
-      return res.status(201).json(cat);
+      const { _id, ...clean } = cat;
+      return res.status(201).json(clean);
     }
 
     if (req.method === 'PUT') {

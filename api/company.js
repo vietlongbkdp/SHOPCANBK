@@ -1,4 +1,5 @@
 import { getDb } from './lib/mongodb.js';
+import { autoSeedIfEmpty } from './init.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -11,12 +12,13 @@ export default async function handler(req, res) {
     const col = db.collection('company');
 
     if (req.method === 'GET') {
-      const doc = await col.findOne({ _key: 'info' });
+      await autoSeedIfEmpty(db);
+      const doc = await col.findOne({ _key: 'info' }, { projection: { _id: 0, _key: 0 } });
       return res.status(200).json(doc || {});
     }
 
     if (req.method === 'PUT') {
-      const { _id, ...body } = req.body;
+      const { _id, _key, ...body } = req.body;
       await col.updateOne(
         { _key: 'info' },
         { $set: { ...body, _key: 'info' } },

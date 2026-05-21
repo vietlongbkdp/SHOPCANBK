@@ -1,5 +1,5 @@
 import { getDb } from './lib/mongodb.js';
-import { ObjectId } from 'mongodb';
+import { autoSeedIfEmpty } from './init.js';
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -8,22 +8,23 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    const db = await getDb();
+    const db  = await getDb();
     const col = db.collection('products');
 
     if (req.method === 'GET') {
-      const products = await col.find({}).sort({ id: 1 }).toArray();
+      // Auto seed if empty
+      await autoSeedIfEmpty(db);
+      const products = await col.find({}, { projection: { _id: 0 } }).sort({ id: 1 }).toArray();
       return res.status(200).json(products);
     }
 
     if (req.method === 'POST') {
-      const body = req.body;
-      // Auto increment id
-      const last = await col.find({}).sort({ id: -1 }).limit(1).toArray();
+      const last  = await col.find({}).sort({ id: -1 }).limit(1).toArray();
       const newId = last.length > 0 ? last[0].id + 1 : 1;
-      const product = { ...body, id: newId };
+      const product = { ...req.body, id: newId };
       await col.insertOne(product);
-      return res.status(201).json(product);
+      const { _id, ...clean } = product;
+      return res.status(201).json(clean);
     }
 
     if (req.method === 'PUT') {
