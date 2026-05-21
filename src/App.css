@@ -1,40 +1,32 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+html { scroll-behavior: smooth; }
+
 body {
   font-family: 'Be Vietnam Pro', 'Segoe UI', sans-serif;
   background: #f5f5f5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Prevent horizontal scroll on mobile */
+  overflow-x: hidden;
 }
+
+#root { overflow-x: hidden; }
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 
-/* Remove tap highlight on mobile */
-* { -webkit-tap-highlight-color: transparent; }
-
-/* Smooth scrollbar */
-html { scroll-behavior: smooth; }
-
-/* Prevent horizontal overflow */
-#root { overflow-x: hidden; }
-
-/* ── Mobile tweaks ── */
-@media (max-width: 600px) {
-  /* Tighter container edges on small screens */
-  .MuiContainer-root {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-  /* Ensure grid items don't overflow */
-  .MuiGrid-item {
-    min-width: 0;
-  }
+/* Remove tap highlight & outline on mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+button, a {
+  touch-action: manipulation;
 }
 
-/* Touch-friendly tap targets */
-@media (hover: none) {
-  button, a, [role="button"] {
-    -webkit-tap-highlight-color: rgba(198,40,40,0.15);
-  }
+/* Hide scrollbar but keep scrollable */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
