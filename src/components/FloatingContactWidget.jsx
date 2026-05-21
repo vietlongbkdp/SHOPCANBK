@@ -1,85 +1,72 @@
 import { useState } from 'react';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, Stack, IconButton, Tooltip, Typography, Fade } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import CloseIcon from '@mui/icons-material/Close';
+import ChatIcon from '@mui/icons-material/Chat';
+import data from '../data.json';
+
+const { company } = data;
+
+const ACTIONS = [
+  { icon: '📞', label: `Huế: ${company.phone1}`, color: '#c62828', action: () => window.location.href = `tel:${company.phone1.replace(/\s/g, '')}` },
+  { icon: '📞', label: `Đà Nẵng: ${company.phone2}`, color: '#1565c0', action: () => window.location.href = `tel:${company.phone2.replace(/\s/g, '')}` },
+  { icon: '💬', label: 'Zalo tư vấn', color: '#0068ff', action: () => window.open(`https://zalo.me/${company.phone1.replace(/\s/g, '')}`, '_blank') },
+  { icon: '📘', label: 'Nhắn tin Facebook', color: '#3b5998', action: () => window.open(company.facebook, '_blank') },
+];
 
 export default function FloatingContactWidget() {
-  const [showWidget, setShowWidget] = useState(true);
-
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const contactItems = [
-    {
-      id: 'zalo',
-      icon: '💬',
-      label: 'Zalo',
-      color: '#0084ff',
-      link: 'https://zalo.me/0981912347',
-      action: () => window.open('https://zalo.me/0981912347', '_blank'),
-    },
-    {
-      id: 'phone',
-      icon: <PhoneIcon />,
-      label: 'Điện Thoại',
-      color: '#d32f2f',
-      action: () => window.location.href = 'tel:0981912347',
-    },
-    {
-      id: 'messenger',
-      icon: '💬',
-      label: 'Messenger',
-      color: '#0084ff',
-      action: () => window.open('https://m.me/yourpage', '_blank'),
-    },
-    {
-      id: 'scroll',
-      icon: <ExpandLessIcon />,
-      label: 'Lên Đầu',
-      color: '#4caf50',
-      action: scrollToTop,
-    },
-  ];
+  const [open, setOpen] = useState(false);
 
   return (
-    <Box
-      sx={{
-        position: 'fixed',
-        right: 20,
-        bottom: 20,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 2,
-        zIndex: 1000,
-      }}
-    >
-      {contactItems.map((item) => (
-        <Tooltip key={item.id} title={item.label} placement="left">
-          <IconButton
-            onClick={item.action}
-            sx={{
-              background: item.color,
-              color: 'white',
-              width: 60,
-              height: 60,
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '28px',
-              '&:hover': {
-                background: item.color,
-                transform: 'scale(1.1)',
-                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-              },
-              transition: 'all 0.3s ease',
-            }}
-          >
-            {typeof item.icon === 'string' ? item.icon : item.icon}
-          </IconButton>
-        </Tooltip>
-      ))}
+    <Box sx={{ position: 'fixed', bottom: 24, right: 16, zIndex: 9999 }}>
+      {/* Action buttons */}
+      <Fade in={open}>
+        <Stack spacing={1} sx={{ mb: 1.5, alignItems: 'flex-end' }}>
+          {ACTIONS.map((a, i) => (
+            <Stack key={i} direction="row" alignItems="center" spacing={1} sx={{ cursor: 'pointer' }} onClick={a.action}>
+              <Box sx={{
+                background: 'white', boxShadow: '0 2px 10px rgba(0,0,0,0.15)',
+                borderRadius: 1, px: 1.5, py: 0.6, whiteSpace: 'nowrap',
+              }}>
+                <Typography sx={{ fontSize: 12.5, fontWeight: 600, color: '#333' }}>{a.label}</Typography>
+              </Box>
+              <Box sx={{
+                width: 42, height: 42, borderRadius: '50%', background: a.color,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 20, boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.1)' },
+              }}>
+                {a.icon}
+              </Box>
+            </Stack>
+          ))}
+        </Stack>
+      </Fade>
+
+      {/* Toggle button */}
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Box
+          onClick={() => setOpen(!open)}
+          sx={{
+            width: 52, height: 52, borderRadius: '50%',
+            background: open ? '#555' : 'linear-gradient(135deg, #c62828, #e65100)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            cursor: 'pointer', boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+            transition: 'all 0.3s', '&:hover': { transform: 'scale(1.08)' },
+            animation: open ? 'none' : 'pulse 2s infinite',
+            '@keyframes pulse': {
+              '0%': { boxShadow: '0 0 0 0 rgba(198,40,40,0.4)' },
+              '70%': { boxShadow: '0 0 0 10px rgba(198,40,40,0)' },
+              '100%': { boxShadow: '0 0 0 0 rgba(198,40,40,0)' },
+            },
+          }}
+        >
+          {open
+            ? <CloseIcon sx={{ color: 'white', fontSize: 22 }} />
+            : <PhoneIcon sx={{ color: 'white', fontSize: 24 }} />
+          }
+        </Box>
+      </Box>
     </Box>
   );
 }

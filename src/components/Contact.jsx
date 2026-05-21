@@ -1,303 +1,180 @@
 import { useState } from 'react';
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  TextField,
-  Button,
-  Stack,
-  Paper,
-  Divider,
-} from '@mui/material';
+import { Box, Container, Grid, Typography, TextField, Button, Stack, Paper, Divider } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
+import data from '../data.json';
+
+const { company } = data;
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const [form, setForm] = useState({ name: '', phone: '', message: '' });
+  const [sent, setSent] = useState(false);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
+  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    alert('Cảm ơn bạn đã gửi tin nhắn! Chúng tôi sẽ liên hệ với bạn sớm.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setSent(true);
+    setTimeout(() => setSent(false), 4000);
+    setForm({ name: '', phone: '', message: '' });
   };
 
   return (
-    <Box sx={{ flex: 1, py: { xs: 3, sm: 4, md: 6 }, background: '#f9f9f9' }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 1, sm: 2, md: 3 } }}>
-        {/* Title */}
-        <Typography
-          variant="h3"
-          sx={{
-            textAlign: 'center',
-            fontWeight: 700,
-            color: '#d32f2f',
-            mb: { xs: 3, sm: 4, md: 6 },
-            textTransform: 'uppercase',
-            letterSpacing: { xs: 0.5, sm: 1, md: 2 },
-            fontSize: { xs: '20px', sm: '28px', md: '38px' },
-          }}
-        >
-          Liên Hệ
-        </Typography>
+    <Box sx={{ background: '#f5f5f5', minHeight: '60vh' }}>
+      {/* Header */}
+      <Box sx={{ background: 'linear-gradient(135deg, #c62828, #e65100)', color: 'white', py: { xs: 3, md: 5 } }}>
+        <Container maxWidth="lg">
+          <Typography variant="h3" sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '22px', md: '36px' } }}>LIÊN HỆ</Typography>
+          <Typography sx={{ opacity: 0.9, fontSize: { xs: 13, md: 16 } }}>
+            Cân Điện Tử Bách Khoa – Hỗ trợ tư vấn và sửa chữa tại Huế & Đà Nẵng
+          </Typography>
+        </Container>
+      </Box>
 
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
+        <Grid container spacing={3}>
           {/* Contact Info */}
-          <Grid item xs={12} sm={12} md={5}>
-            <Paper sx={{ p: 4, background: 'white' }}>
-              <Typography variant="h6" sx={{ fontWeight: 700, mb: 3 }}>
-                CÔNG TY CÂN ĐIỆN TỬ HOÀNG GIA
+          <Grid item xs={12} md={5}>
+            <Paper sx={{ p: 2.5, mb: 2, borderRadius: 1 }}>
+              <Typography sx={{ fontWeight: 700, fontSize: 15, color: '#c62828', mb: 2 }}>
+                🏢 CÂN ĐIỆN TỬ BÁCH KHOA
               </Typography>
 
-              {/* Address */}
-              <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-                <LocationOnIcon sx={{ color: '#d32f2f', mt: 0.5, flexShrink: 0 }} />
-                <Box>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                    Địa chỉ:
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Số 78 đường 10/3, P. Buôn Ma Thuột, Tỉnh Đắk Lắk, Việt Nam.
-                  </Typography>
-                </Box>
-              </Stack>
+              {/* Branch 1 */}
+              <Box mb={2}>
+                <Typography sx={{ fontWeight: 700, fontSize: 13, background: '#c62828', color: 'white', px: 1.5, py: 0.4, borderRadius: 1, display: 'inline-block', mb: 1.5 }}>
+                  Chi Nhánh Huế
+                </Typography>
+                <Stack spacing={1.2}>
+                  <Stack direction="row" spacing={1.5} alignItems="flex-start">
+                    <LocationOnIcon sx={{ color: '#c62828', mt: 0.2, fontSize: 18, flexShrink: 0 }} />
+                    <Typography sx={{ fontSize: 13.5, color: '#444' }}>{company.address1}</Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={1.5} alignItems="center">
+                    <PhoneIcon sx={{ color: '#c62828', fontSize: 18, flexShrink: 0 }} />
+                    <Typography component="a" href={`tel:${company.phone1.replace(/\s/g, '')}`}
+                      sx={{ fontSize: 15, color: '#c62828', fontWeight: 700, textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+                      {company.phone1}
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Box>
 
               <Divider sx={{ my: 2 }} />
 
-              {/* Phone */}
-              <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-                <PhoneIcon sx={{ color: '#d32f2f', mt: 0.5, flexShrink: 0 }} />
-                <Box>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                    Điện thoại:
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    02623.821 888 – 0981912347
-                  </Typography>
-                </Box>
-              </Stack>
+              {/* Branch 2 */}
+              <Box mb={2}>
+                <Typography sx={{ fontWeight: 700, fontSize: 13, background: '#1565c0', color: 'white', px: 1.5, py: 0.4, borderRadius: 1, display: 'inline-block', mb: 1.5 }}>
+                  Chi Nhánh Đà Nẵng
+                </Typography>
+                <Stack spacing={1.2}>
+                  <Stack direction="row" spacing={1.5} alignItems="flex-start">
+                    <LocationOnIcon sx={{ color: '#1565c0', mt: 0.2, fontSize: 18, flexShrink: 0 }} />
+                    <Typography sx={{ fontSize: 13.5, color: '#444' }}>{company.address2}</Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={1.5} alignItems="center">
+                    <PhoneIcon sx={{ color: '#1565c0', fontSize: 18, flexShrink: 0 }} />
+                    <Typography component="a" href={`tel:${company.phone2.replace(/\s/g, '')}`}
+                      sx={{ fontSize: 15, color: '#1565c0', fontWeight: 700, textDecoration: 'none', '&:hover': { textDecoration: 'underline' } }}>
+                      {company.phone2}
+                    </Typography>
+                  </Stack>
+                </Stack>
+              </Box>
 
               <Divider sx={{ my: 2 }} />
 
-              {/* Email */}
-              <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-                <EmailIcon sx={{ color: '#d32f2f', mt: 0.5, flexShrink: 0 }} />
-                <Box>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                    Email:
+              <Stack spacing={1.5}>
+                <Stack direction="row" spacing={1.5} alignItems="center">
+                  <EmailIcon sx={{ color: '#c62828', fontSize: 18 }} />
+                  <Typography component="a" href={`mailto:${company.email}`}
+                    sx={{ fontSize: 13.5, color: '#444', textDecoration: 'none', '&:hover': { color: '#c62828' } }}>
+                    {company.email}
                   </Typography>
-                  <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    component="a"
-                    href="mailto:info@candientu.vn"
-                    sx={{ textDecoration: 'none', color: 'inherit', '&:hover': { color: '#d32f2f' } }}
-                  >
-                    info@candientu.vn
-                  </Typography>
-                </Box>
+                </Stack>
+                <Stack direction="row" spacing={1.5} alignItems="center">
+                  <AccessTimeIcon sx={{ color: '#c62828', fontSize: 18 }} />
+                  <Typography sx={{ fontSize: 13.5, color: '#444' }}>{company.hours}</Typography>
+                </Stack>
               </Stack>
+            </Paper>
 
-              <Divider sx={{ my: 2 }} />
-
-              {/* Hours */}
-              <Stack direction="row" spacing={2}>
-                <AccessTimeIcon sx={{ color: '#d32f2f', mt: 0.5, flexShrink: 0 }} />
-                <Box>
-                  <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
-                    Giờ mở cửa:
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    7:30 AM – 5:30 PM (Thứ 2 – Thứ 7)
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary">
-                    Chủ nhật: Đóng cửa
-                  </Typography>
-                </Box>
-              </Stack>
+            {/* Map Chi nhánh Huế */}
+            <Paper sx={{ borderRadius: 1, overflow: 'hidden' }}>
+              <Typography sx={{ p: 1.5, fontWeight: 700, fontSize: 13, background: '#f5f5f5', borderBottom: '1px solid #e0e0e0' }}>
+                📍 Bản đồ Chi Nhánh Huế
+              </Typography>
+              <iframe
+                title="Bản đồ Cân Điện Tử Bách Khoa Huế"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.085!2d107.5894!3d16.4637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141a13c3fa90c07%3A0x1234!2zMTMgVHLhuqduIFF1w70gS2hob8OhbmcsIEFuIEjDsmEsIEh14bq_!5e0!3m2!1svi!2s!4v1234567890"
+                width="100%" height="200"
+                style={{ border: 0, display: 'block' }}
+                allowFullScreen loading="lazy"
+              />
             </Paper>
           </Grid>
 
           {/* Contact Form */}
-          <Grid item xs={12} sm={12} md={7}>
-            <Paper sx={{ p: 4, background: 'white' }}>
+          <Grid item xs={12} md={7}>
+            <Paper sx={{ p: { xs: 2, md: 3 }, borderRadius: 1 }}>
+              <Typography variant="h6" sx={{ fontWeight: 700, mb: 0.5 }}>Gửi Yêu Cầu Hỗ Trợ</Typography>
+              <Typography sx={{ color: '#666', fontSize: 13, mb: 2.5 }}>
+                Điền thông tin, chúng tôi sẽ liên hệ lại trong vòng 30 phút trong giờ làm việc.
+              </Typography>
+
+              {sent && (
+                <Box sx={{ background: '#e8f5e9', border: '1px solid #a5d6a7', borderRadius: 1, p: 1.5, mb: 2 }}>
+                  <Typography sx={{ color: '#2e7d32', fontWeight: 600, fontSize: 14 }}>
+                    ✅ Cảm ơn! Chúng tôi sẽ liên hệ bạn sớm nhất có thể.
+                  </Typography>
+                </Box>
+              )}
+
               <form onSubmit={handleSubmit}>
-                <Stack spacing={3}>
-                  {/* Name */}
-                  <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>
-                      Your name
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      variant="outlined"
-                      placeholder="Nhập tên của bạn"
-                      required
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          '&:hover fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                        },
-                      }}
-                    />
-                  </Box>
-
-                  {/* Email */}
-                  <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>
-                      Your email
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      variant="outlined"
-                      placeholder="Nhập email của bạn"
-                      required
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          '&:hover fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                        },
-                      }}
-                    />
-                  </Box>
-
-                  {/* Subject */}
-                  <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>
-                      Subject
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      variant="outlined"
-                      placeholder="Nhập tiêu đề"
-                      required
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          '&:hover fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                        },
-                      }}
-                    />
-                  </Box>
-
-                  {/* Message */}
-                  <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>
-                      Your message (optional)
-                    </Typography>
-                    <TextField
-                      fullWidth
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      variant="outlined"
-                      placeholder="Nhập tin nhắn của bạn"
-                      multiline
-                      rows={5}
-                      sx={{
-                        '& .MuiOutlinedInput-root': {
-                          '&:hover fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                          '&.Mui-focused fieldset': {
-                            borderColor: '#d32f2f',
-                          },
-                        },
-                      }}
-                    />
-                  </Box>
-
-                  {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{
-                      background: '#1976d2',
-                      color: 'white',
-                      fontWeight: 700,
-                      fontSize: '16px',
-                      py: 1.5,
-                      textTransform: 'uppercase',
-                      '&:hover': {
-                        background: '#1565c0',
-                      },
-                    }}
+                <Stack spacing={2}>
+                  <TextField label="Họ và tên *" name="name" value={form.name} onChange={handleChange} required fullWidth size="small"
+                    sx={{ '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#c62828' }, '& .MuiInputLabel-root.Mui-focused': { color: '#c62828' } }}
+                  />
+                  <TextField label="Số điện thoại *" name="phone" value={form.phone} onChange={handleChange} required fullWidth size="small" type="tel"
+                    sx={{ '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#c62828' }, '& .MuiInputLabel-root.Mui-focused': { color: '#c62828' } }}
+                  />
+                  <TextField label="Nội dung yêu cầu" name="message" value={form.message} onChange={handleChange} fullWidth size="small" multiline rows={5}
+                    placeholder="Mô tả sự cố hoặc yêu cầu của bạn..."
+                    sx={{ '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#c62828' }, '& .MuiInputLabel-root.Mui-focused': { color: '#c62828' } }}
+                  />
+                  <Button type="submit" variant="contained" size="large"
+                    sx={{ background: '#c62828', fontWeight: 700, py: 1.2, '&:hover': { background: '#8e0000' } }}
                   >
-                    Submit
+                    📨 Gửi Yêu Cầu
                   </Button>
                 </Stack>
               </form>
+
+              <Divider sx={{ my: 2.5 }} />
+
+              {/* Quick contact */}
+              <Typography sx={{ fontWeight: 700, fontSize: 13, mb: 1.5 }}>Hoặc liên hệ trực tiếp:</Typography>
+              <Grid container spacing={1}>
+                {[
+                  { icon: '📞', label: 'Gọi CN Huế', value: company.phone1, action: `tel:${company.phone1.replace(/\s/g, '')}` },
+                  { icon: '📞', label: 'Gọi CN Đà Nẵng', value: company.phone2, action: `tel:${company.phone2.replace(/\s/g, '')}` },
+                  { icon: '💬', label: 'Zalo Tư Vấn', value: 'Zalo ngay', action: `https://zalo.me/${company.phone1.replace(/\s/g, '')}` },
+                  { icon: '📘', label: 'Facebook', value: 'Nhắn tin FB', action: company.facebook },
+                ].map((c, i) => (
+                  <Grid item xs={6} key={i}>
+                    <Button fullWidth variant="outlined" href={c.action} target="_blank"
+                      sx={{ borderColor: '#e0e0e0', color: '#333', py: 1, fontSize: 12, fontWeight: 600, '&:hover': { borderColor: '#c62828', color: '#c62828', background: '#fff5f5' } }}
+                    >
+                      {c.icon} {c.value}
+                    </Button>
+                  </Grid>
+                ))}
+              </Grid>
             </Paper>
           </Grid>
         </Grid>
-
-        {/* Google Map */}
-        <Box sx={{ mt: 6 }}>
-          <Typography variant="h5" sx={{ fontWeight: 700, mb: 3, color: '#333' }}>
-            Vị Trí Cửa Hàng
-          </Typography>
-          <Paper sx={{ p: 0, overflow: 'hidden', height: 500, boxShadow: 3 }}>
-            <iframe
-              title="Google Map - Cân Điện Tử Hoàng Gia"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.0394894029155!2d108.00430937520127!3d12.664849287349706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31723e7e7e7e7e7f%3A0x1234567890abcdef!2s78%20%C4%90%C6%B0%E1%BB%9Dng%2010%2F3%2C%20Bu%C3%B4n%20Ma%20Thu%E1%BB%99t%2C%20%C4%90%E1%BA%AFk%20L%E1%BA%AFk!5e0!3m2!1svi!2s!4v1234567890123"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </Paper>
-
-          {/* Map Info */}
-          <Paper sx={{ p: 3, mt: 3, background: '#f5f5f5' }}>
-            <Typography variant="body2" sx={{ color: '#666', lineHeight: 1.8 }}>
-              <strong>📍 Địa chỉ:</strong> Số 78 đường 10/3, P. Buôn Ma Thuột, Tỉnh Đắk Lắk, Việt Nam<br />
-              <strong>📞 Điện thoại:</strong> 02623.821 888 – 0981912347<br />
-              <strong>⏰ Giờ mở cửa:</strong> 7:30 AM – 5:30 PM (Thứ 2 – Thứ 7)<br />
-              <strong>✉️ Email:</strong> info@candientu.vn
-            </Typography>
-          </Paper>
-        </Box>
       </Container>
     </Box>
   );

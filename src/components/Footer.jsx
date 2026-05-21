@@ -1,218 +1,126 @@
-import {
-  Box,
-  Container,
-  Grid,
-  Typography,
-  Link,
-  Stack,
-  IconButton,
-} from '@mui/material';
+import { Box, Container, Grid, Typography, Link, Stack, IconButton, Divider } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import YouTubeIcon from '@mui/icons-material/YouTube';
+import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import data from '../data.json';
+
+const { company, categories } = data;
 
 export default function Footer() {
   return (
-    <Box
-      component="footer"
-      sx={{
-        background: '#212121',
-        color: 'white',
-        py: { xs: 3, sm: 4, md: 6 },
-        mt: { xs: 4, sm: 6, md: 8 },
-      }}
-    >
+    <Box component="footer" sx={{ background: '#1a1a1a', color: 'white', pt: { xs: 3, md: 5 }, pb: 2 }}>
       <Container maxWidth="lg">
-        <Grid container spacing={{ xs: 2, sm: 3, md: 4 }} sx={{ mb: { xs: 2, sm: 3, md: 4 } }}>
-          {/* About */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 700,
-                mb: { xs: 1.5, md: 2 },
-                color: '#d32f2f',
-                textTransform: 'uppercase',
-                letterSpacing: { xs: 0.5, md: 1 },
-                fontSize: { xs: '13px', sm: '14px', md: '16px' },
-              }}
-            >
-              Về Chúng Tôi
+        <Grid container spacing={3} mb={3}>
+          {/* Brand */}
+          <Grid item xs={12} md={4}>
+            <Stack direction="row" alignItems="center" spacing={1.5} mb={1.5}>
+              <Box sx={{
+                width: 44, height: 44, background: 'linear-gradient(135deg, #c62828, #e65100)',
+                borderRadius: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 22,
+              }}>⚖️</Box>
+              <Box>
+                <Typography sx={{ fontWeight: 800, fontSize: 15, color: '#fff', lineHeight: 1.2 }}>CÂN ĐIỆN TỬ BÁCH KHOA</Typography>
+                <Typography sx={{ fontSize: 12, color: '#f44336', fontStyle: 'italic' }}>{company.slogan}</Typography>
+              </Box>
+            </Stack>
+            <Typography sx={{ fontSize: 13, color: '#aaa', lineHeight: 1.7, mb: 2 }}>
+              Chuyên sửa chữa, bảo trì tận nơi và cung cấp cân điện tử kỹ thuật số tại Huế và Đà Nẵng. Giao hàng toàn quốc.
             </Typography>
-            <Stack spacing={1}>
-              {['Giới thiệu', 'Tin tức', 'Blog'].map((item) => (
-                <Link
-                  key={item}
-                  href="#"
-                  sx={{
-                    color: '#bdbdbd',
-                    textDecoration: 'none',
-                    fontSize: { xs: '12px', sm: '13px', md: '14px' },
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      color: '#d32f2f',
-                      pl: 1,
-                    },
-                  }}
-                >
-                  {item}
+            <Stack direction="row" spacing={1}>
+              <IconButton href={company.facebook} target="_blank"
+                sx={{ background: '#3b5998', width: 36, height: 36, '&:hover': { background: '#2d4373' } }}>
+                <FacebookIcon sx={{ color: 'white', fontSize: 18 }} />
+              </IconButton>
+              <IconButton
+                sx={{ background: '#ff0000', width: 36, height: 36, '&:hover': { background: '#cc0000' } }}>
+                <YouTubeIcon sx={{ color: 'white', fontSize: 18 }} />
+              </IconButton>
+            </Stack>
+          </Grid>
+
+          {/* Products */}
+          <Grid item xs={6} sm={4} md={2}>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#f44336', textTransform: 'uppercase', mb: 1.5, letterSpacing: 0.5 }}>
+              Sản Phẩm
+            </Typography>
+            <Stack spacing={0.8}>
+              {categories.slice(0, 6).map(c => (
+                <Link key={c.id} href="#" underline="hover" sx={{ color: '#aaa', fontSize: 13, '&:hover': { color: '#f44336' }, transition: 'color 0.2s' }}>
+                  {c.name}
                 </Link>
               ))}
             </Stack>
           </Grid>
 
-          {/* Policies */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 700,
-                mb: { xs: 1.5, md: 2 },
-                color: '#d32f2f',
-                textTransform: 'uppercase',
-                letterSpacing: { xs: 0.5, md: 1 },
-                fontSize: { xs: '13px', sm: '14px', md: '16px' },
-              }}
-            >
-              Chính Sách
+          {/* Services */}
+          <Grid item xs={6} sm={4} md={2}>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#f44336', textTransform: 'uppercase', mb: 1.5, letterSpacing: 0.5 }}>
+              Dịch Vụ
             </Typography>
-            <Stack spacing={1}>
-              {['Chính sách giao hàng', 'Chính sách trả hàng', 'Chính sách bảo hành'].map((item) => (
-                <Link
-                  key={item}
-                  href="#"
-                  sx={{
-                    color: '#bdbdbd',
-                    textDecoration: 'none',
-                    fontSize: '0.9rem',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      color: '#d32f2f',
-                      pl: 1,
-                    },
-                  }}
-                >
-                  {item}
-                </Link>
-              ))}
-            </Stack>
-          </Grid>
-
-          {/* Support */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 700,
-                mb: 2,
-                color: '#d32f2f',
-                textTransform: 'uppercase',
-                letterSpacing: 1,
-              }}
-            >
-              Hỗ Trợ
-            </Typography>
-            <Stack spacing={1}>
-              {['Liên hệ', 'Câu hỏi thường gặp', 'Hướng dẫn mua hàng'].map((item) => (
-                <Link
-                  key={item}
-                  href="#"
-                  sx={{
-                    color: '#bdbdbd',
-                    textDecoration: 'none',
-                    fontSize: '0.9rem',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      color: '#d32f2f',
-                      pl: 1,
-                    },
-                  }}
-                >
-                  {item}
+            <Stack spacing={0.8}>
+              {['Sửa Chữa Tận Nơi', 'Bảo Trì Định Kỳ', 'Kiểm Định Cân', 'Lắp Đặt Hệ Thống', 'Tư Vấn Kỹ Thuật'].map(s => (
+                <Link key={s} href="#" underline="hover" sx={{ color: '#aaa', fontSize: 13, '&:hover': { color: '#f44336' }, transition: 'color 0.2s' }}>
+                  {s}
                 </Link>
               ))}
             </Stack>
           </Grid>
 
           {/* Contact */}
-          <Grid item xs={12} sm={6} md={3}>
-            <Typography
-              variant="h6"
-              sx={{
-                fontWeight: 700,
-                mb: 2,
-                color: '#d32f2f',
-                textTransform: 'uppercase',
-                letterSpacing: 1,
-              }}
-            >
+          <Grid item xs={12} sm={4} md={4}>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#f44336', textTransform: 'uppercase', mb: 1.5, letterSpacing: 0.5 }}>
               Liên Hệ
             </Typography>
             <Stack spacing={1.5}>
-              <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📞 Hotline: 0913331916 (CN Huế) - 0938561554 (CN Đà Nẵng)
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📍 Chi nhánh 1: 13 Trần Quý Khoáng, An Hòa, TP.Huế 
-              </Typography>
-              <Typography variant="body2" sx={{ color: '#bdbdbd' }}>
-                📍 Chi nhánh 2: 293 Hà Huy Tập, Thanh Khê, TP.Đà Nẵng
-              </Typography>
-              {/* Social Links */}
-              <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-                <IconButton
-                  color="inherit"
-                  sx={{
-                    background: '#d32f2f',
-                    width: 40,
-                    height: 40,
-                    '&:hover': {
-                      background: '#1976d2',
-                      transform: 'translateY(-3px)',
-                    },
-                  }}
-                >
-                  <FacebookIcon fontSize="small" />
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  sx={{
-                    background: '#d32f2f',
-                    width: 40,
-                    height: 40,
-                    '&:hover': {
-                      background: '#1976d2',
-                      transform: 'translateY(-3px)',
-                    },
-                  }}
-                >
-                  <YouTubeIcon fontSize="small" />
-                </IconButton>
-                <IconButton
-                  color="inherit"
-                  sx={{
-                    background: '#d32f2f',
-                    width: 40,
-                    height: 40,
-                    '&:hover': {
-                      background: '#1976d2',
-                      transform: 'translateY(-3px)',
-                    },
-                  }}
-                >
-                  <EmailIcon fontSize="small" />
-                </IconButton>
+              <Stack direction="row" spacing={1} alignItems="flex-start">
+                <LocationOnIcon sx={{ color: '#f44336', fontSize: 16, mt: 0.2, flexShrink: 0 }} />
+                <Box>
+                  <Typography sx={{ fontSize: 12, color: '#f44336', fontWeight: 600 }}>Chi nhánh Huế:</Typography>
+                  <Typography sx={{ fontSize: 12.5, color: '#aaa' }}>{company.address1}</Typography>
+                </Box>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="flex-start">
+                <LocationOnIcon sx={{ color: '#1565c0', fontSize: 16, mt: 0.2, flexShrink: 0 }} />
+                <Box>
+                  <Typography sx={{ fontSize: 12, color: '#64b5f6', fontWeight: 600 }}>Chi nhánh Đà Nẵng:</Typography>
+                  <Typography sx={{ fontSize: 12.5, color: '#aaa' }}>{company.address2}</Typography>
+                </Box>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <PhoneIcon sx={{ color: '#f44336', fontSize: 16 }} />
+                <Link href={`tel:${company.phone1.replace(/\s/g, '')}`} sx={{ color: '#aaa', fontSize: 13, '&:hover': { color: '#f44336' } }}>
+                  {company.phone1} (Huế)
+                </Link>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <PhoneIcon sx={{ color: '#64b5f6', fontSize: 16 }} />
+                <Link href={`tel:${company.phone2.replace(/\s/g, '')}`} sx={{ color: '#aaa', fontSize: 13, '&:hover': { color: '#64b5f6' } }}>
+                  {company.phone2} (Đà Nẵng)
+                </Link>
+              </Stack>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <EmailIcon sx={{ color: '#f44336', fontSize: 16 }} />
+                <Link href={`mailto:${company.email}`} sx={{ color: '#aaa', fontSize: 13, '&:hover': { color: '#f44336' } }}>
+                  {company.email}
+                </Link>
               </Stack>
             </Stack>
           </Grid>
         </Grid>
 
-        {/* Divider */}
-        <Box sx={{ borderTop: '1px solid rgba(255, 255, 255, 0.1)', pt: 3 }}>
-          <Typography variant="body2" sx={{ color: '#bdbdbd', textAlign: 'center' }}>
-            &copy; 2025 Cân Điện Tử Bách Khoa. All rights reserved.
+        <Divider sx={{ borderColor: 'rgba(255,255,255,0.08)', mb: 2 }} />
+        <Stack direction={{ xs: 'column', sm: 'row' }} justifyContent="space-between" alignItems="center" spacing={1}>
+          <Typography sx={{ fontSize: 12.5, color: '#666' }}>
+            © 2025 Cân Điện Tử Bách Khoa. Đã đăng ký bản quyền.
           </Typography>
-        </Box>
+          <Stack direction="row" spacing={2}>
+            {['Chính sách bảo mật', 'Điều khoản sử dụng'].map(t => (
+              <Link key={t} href="#" underline="hover" sx={{ fontSize: 12, color: '#666', '&:hover': { color: '#f44336' } }}>{t}</Link>
+            ))}
+          </Stack>
+        </Stack>
       </Container>
     </Box>
   );

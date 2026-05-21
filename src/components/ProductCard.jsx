@@ -1,124 +1,125 @@
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Button,
-  Stack,
-  Rating,
-  Chip,
-  Box,
-} from '@mui/material';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import { Box, Typography, Button, Chip, Stack, Rating } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PhoneIcon from '@mui/icons-material/Phone';
 
-export default function ProductCard({ product, onProductClick }) {
-  const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+export default function ProductCard({ product, onClick }) {
+  const discount = product.originalPrice
+    ? Math.round((1 - product.price / product.originalPrice) * 100)
+    : 0;
 
   return (
-    <Card
+    <Box
+      onClick={() => onClick && onClick(product)}
       sx={{
+        background: 'white',
+        border: '1px solid #e8e8e8',
+        borderRadius: 1,
+        overflow: 'hidden',
+        cursor: 'pointer',
+        transition: 'all 0.25s',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
-        position: 'relative',
+        '&:hover': {
+          boxShadow: '0 6px 24px rgba(0,0,0,0.12)',
+          transform: 'translateY(-3px)',
+          borderColor: '#c62828',
+        },
       }}
     >
-      {/* Image Container */}
-      <Box sx={{ position: 'relative', overflow: 'hidden', height: 200 }}>
-        <img
+      {/* Image */}
+      <Box sx={{ position: 'relative', background: '#f9f9f9' }}>
+        <Box
+          component="img"
           src={product.image}
           alt={product.name}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
+          sx={{
+            width: '100%', aspectRatio: '1/1', objectFit: 'cover',
+            display: 'block',
+            transition: 'transform 0.3s',
+            '.product-card:hover &': { transform: 'scale(1.05)' },
           }}
-          onError={(e) => {
-            e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23f5f5f5" width="100" height="100"/%3E%3Ctext x="50" y="50" font-size="40" text-anchor="middle" dy=".3em" fill="%23999"%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E';
-          }}
+          onError={(e) => { e.target.src = 'https://via.placeholder.com/247x247?text=Cân+Điện+Tử'; }}
         />
         {discount > 0 && (
           <Chip
             label={`-${discount}%`}
+            size="small"
             sx={{
-              position: 'absolute',
-              top: 10,
-              right: 10,
-              background: '#d32f2f',
-              color: 'white',
-              fontWeight: 700,
-              fontSize: '14px',
+              position: 'absolute', top: 8, left: 8,
+              background: '#c62828', color: 'white', fontWeight: 700, fontSize: 11,
+            }}
+          />
+        )}
+        {product.badge && (
+          <Chip
+            label={product.badge}
+            size="small"
+            sx={{
+              position: 'absolute', top: 8, right: 8,
+              background: '#e65100', color: 'white', fontWeight: 600, fontSize: 10,
+              maxWidth: 90, '& .MuiChip-label': { px: 0.8 },
             }}
           />
         )}
       </Box>
 
       {/* Content */}
-      <CardContent sx={{ flex: 1 }}>
-        <Typography
-          gutterBottom
-          variant="h6"
-          sx={{
-            fontWeight: 600,
-            minHeight: '48px',
-            lineHeight: 1.4,
-          }}
-        >
+      <Box sx={{ p: 1.5, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <Typography sx={{
+          fontSize: { xs: 12, md: 13 }, fontWeight: 600, color: '#333',
+          lineHeight: 1.4, mb: 1,
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+          flex: 1,
+        }}>
           {product.name}
         </Typography>
 
-        {/* Rating */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-          <Rating value={product.rating} readOnly size="small" />
-          <Typography variant="body2" color="textSecondary">
-            ({product.reviews})
-          </Typography>
-        </Box>
+        <Stack direction="row" alignItems="center" spacing={0.5} mb={0.5}>
+          <Rating value={product.rating} precision={0.1} size="small" readOnly sx={{ fontSize: 14 }} />
+          <Typography sx={{ fontSize: 11, color: '#888' }}>({product.reviews})</Typography>
+        </Stack>
 
-        {/* Description */}
-        <Typography variant="body2" color="textSecondary" sx={{ mb: 2, minHeight: '40px' }}>
-          {product.description}
-        </Typography>
-
-        {/* Price */}
-        <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 1, mb: 2 }}>
-          <Typography
-            variant="h5"
-            sx={{
-              fontWeight: 700,
-              color: '#d32f2f',
-            }}
-          >
+        <Box mb={1}>
+          <Typography sx={{ color: '#c62828', fontWeight: 700, fontSize: { xs: 15, md: 16 }, lineHeight: 1 }}>
             {product.price.toLocaleString('vi-VN')}₫
           </Typography>
-          {product.originalPrice > product.price && (
-            <Typography
-              variant="body2"
-              sx={{
-                textDecoration: 'line-through',
-                color: 'textSecondary',
-              }}
-            >
+          {product.originalPrice && (
+            <Typography sx={{ color: '#aaa', fontSize: 12, textDecoration: 'line-through' }}>
               {product.originalPrice.toLocaleString('vi-VN')}₫
             </Typography>
           )}
         </Box>
-      </CardContent>
 
-      {/* Actions */}
-      <CardActions sx={{ gap: 1 }}>
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          size="small"
-          startIcon={<VisibilityIcon />}
-          onClick={() => onProductClick(product)}
-        >
-          Xem Chi Tiết
-        </Button>
-      </CardActions>
-    </Card>
+        <Stack direction="row" spacing={0.5}>
+          <Button
+            size="small"
+            variant="contained"
+            fullWidth
+            startIcon={<ShoppingCartIcon sx={{ fontSize: '14px !important' }} />}
+            sx={{
+              background: '#c62828', fontSize: 11, py: 0.6,
+              '&:hover': { background: '#8e0000' },
+            }}
+          >
+            Mua ngay
+          </Button>
+          <Button
+            size="small"
+            variant="outlined"
+            sx={{
+              minWidth: 36, p: 0.6, borderColor: '#c62828', color: '#c62828',
+              '&:hover': { background: '#fff5f5' },
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              window.location.href = 'tel:0913331919';
+            }}
+          >
+            <PhoneIcon sx={{ fontSize: 16 }} />
+          </Button>
+        </Stack>
+      </Box>
+    </Box>
   );
 }

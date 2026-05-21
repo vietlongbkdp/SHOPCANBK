@@ -1,171 +1,112 @@
-import { useState } from 'react';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Box,
-  Typography,
-  Button,
-  Stack,
-  Rating,
-  Chip,
-  Grid,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-} from '@mui/material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { Box, Dialog, DialogContent, Grid, Typography, Button, Stack, Rating, Chip, Divider, IconButton, Avatar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import PhoneIcon from '@mui/icons-material/Phone';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import LocalShippingIcon from '@mui/icons-material/LocalShipping';
+import data from '../data.json';
+
+const { company } = data;
 
 export default function ProductDetail({ product, onClose }) {
-  const discount = Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100);
+  if (!product) return null;
+
+  const discount = product.originalPrice
+    ? Math.round((1 - product.price / product.originalPrice) * 100)
+    : 0;
 
   return (
-    <Dialog open={!!product} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Typography variant="h6" sx={{ fontWeight: 700 }}>
-          Chi Tiết Sản Phẩm
-        </Typography>
-        <IconButton onClick={onClose} size="small">
-          <CloseIcon />
+    <Dialog open={Boolean(product)} onClose={onClose} maxWidth="md" fullWidth
+      PaperProps={{ sx: { borderRadius: 2, m: { xs: 1, sm: 2 } } }}>
+      <Box sx={{ position: 'absolute', top: 8, right: 8, zIndex: 1 }}>
+        <IconButton onClick={onClose} size="small" sx={{ background: 'rgba(0,0,0,0.05)' }}>
+          <CloseIcon fontSize="small" />
         </IconButton>
-      </DialogTitle>
+      </Box>
 
-      <DialogContent sx={{ py: 3 }}>
+      <DialogContent sx={{ p: { xs: 2, md: 3 } }}>
         <Grid container spacing={3}>
           {/* Image */}
-          <Grid item xs={12} md={6}>
-            <Box
-              sx={{
-                background: '#f5f5f5',
-                borderRadius: 2,
-                height: 300,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <img
-                src={product.image}
-                alt={product.name}
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                }}
-                onError={(e) => {
-                  e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"%3E%3Crect fill="%23e0e0e0" width="100" height="100"/%3E%3Ctext x="50" y="50" font-size="40" text-anchor="middle" dy=".3em" fill="%23999"%3E%E2%9A%96%EF%B8%8F%3C/text%3E%3C/svg%3E';
-                }}
+          <Grid item xs={12} sm={5}>
+            <Box sx={{ position: 'relative' }}>
+              <Box component="img" src={product.image} alt={product.name}
+                sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', borderRadius: 1, border: '1px solid #f0f0f0' }}
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/400x400?text=Cân+Điện+Tử'; }}
               />
               {discount > 0 && (
-                <Chip
-                  label={`-${discount}%`}
-                  sx={{
-                    position: 'absolute',
-                    top: 15,
-                    right: 15,
-                    background: '#d32f2f',
-                    color: 'white',
-                    fontWeight: 700,
-                    fontSize: '16px',
-                  }}
-                />
+                <Chip label={`Giảm ${discount}%`} sx={{ position: 'absolute', top: 12, left: 12, background: '#c62828', color: 'white', fontWeight: 700 }} />
               )}
             </Box>
           </Grid>
 
-          {/* Details */}
-          <Grid item xs={12} md={6} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {/* Name */}
-            <Typography variant="h5" sx={{ fontWeight: 700 }}>
+          {/* Info */}
+          <Grid item xs={12} sm={7}>
+            {product.badge && <Chip label={product.badge} size="small" sx={{ background: '#e65100', color: 'white', mb: 1, fontWeight: 600 }} />}
+            <Typography variant="h5" sx={{ fontWeight: 700, color: '#212121', mb: 1, lineHeight: 1.3, fontSize: { xs: '16px', md: '20px' } }}>
               {product.name}
             </Typography>
 
-            {/* Rating */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-              <Rating value={product.rating} readOnly />
-              <Typography variant="body2" color="textSecondary">
-                ({product.reviews} đánh giá)
+            <Stack direction="row" spacing={1} alignItems="center" mb={1.5}>
+              <Rating value={product.rating} precision={0.1} size="small" readOnly />
+              <Typography sx={{ fontSize: 13, color: '#666' }}>({product.reviews} đánh giá)</Typography>
+            </Stack>
+
+            <Box mb={2}>
+              <Typography sx={{ color: '#c62828', fontWeight: 800, fontSize: { xs: '22px', md: '28px' }, lineHeight: 1 }}>
+                {product.price.toLocaleString('vi-VN')}₫
               </Typography>
-            </Box>
-
-            {/* Description */}
-            <Typography variant="body1" color="textSecondary">
-              {product.description}
-            </Typography>
-
-            {/* Price */}
-            <Box sx={{ background: '#f5f5f5', p: 2, borderRadius: 1 }}>
-              <Stack direction="row" spacing={2} alignItems="baseline">
-                <Typography
-                  variant="h4"
-                  sx={{
-                    fontWeight: 700,
-                    color: '#d32f2f',
-                  }}
-                >
-                  {product.price.toLocaleString('vi-VN')}₫
+              {product.originalPrice && (
+                <Typography sx={{ color: '#aaa', fontSize: 15, textDecoration: 'line-through' }}>
+                  {product.originalPrice.toLocaleString('vi-VN')}₫
                 </Typography>
-                {product.originalPrice > product.price && (
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      textDecoration: 'line-through',
-                      color: 'textSecondary',
-                    }}
-                  >
-                    {product.originalPrice.toLocaleString('vi-VN')}₫
-                  </Typography>
-                )}
-              </Stack>
+              )}
             </Box>
 
-            {/* Specifications */}
-            <Box>
-              <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
-                Thông Số Kỹ Thuật:
-              </Typography>
-              <List dense>
-                {Object.entries(product.specifications || {}).map(([key, value]) => (
-                  <ListItem key={key} disablePadding>
-                    <Typography variant="body2" sx={{ fontWeight: 600, mr: 1 }}>
-                      {key}:
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {Array.isArray(value) ? value.join(', ') : value}
-                    </Typography>
-                  </ListItem>
-                ))}
-              </List>
-            </Box>
+            <Typography sx={{ color: '#555', fontSize: 13.5, lineHeight: 1.7, mb: 2 }}>{product.description}</Typography>
 
-            {/* Benefits */}
-            <Box sx={{ background: 'rgba(76, 175, 80, 0.1)', p: 2, borderRadius: 1 }}>
-              <List dense>
-                <ListItem disablePadding sx={{ mb: 0.5 }}>
-                  <ListItemIcon sx={{ minWidth: 32 }}>
-                    <CheckCircleIcon sx={{ color: '#4caf50' }} />
-                  </ListItemIcon>
-                  <ListItemText primary="Bảo hành chính hãng" />
-                </ListItem>
-                <ListItem disablePadding sx={{ mb: 0.5 }}>
-                  <ListItemIcon sx={{ minWidth: 32 }}>
-                    <CheckCircleIcon sx={{ color: '#4caf50' }} />
-                  </ListItemIcon>
-                  <ListItemText primary="Giao hàng nhanh" />
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemIcon sx={{ minWidth: 32 }}>
-                    <CheckCircleIcon sx={{ color: '#4caf50' }} />
-                  </ListItemIcon>
-                  <ListItemText primary="Hỗ trợ 24/7" />
-                </ListItem>
-              </List>
-            </Box>
+            {/* Specs */}
+            {product.specifications && (
+              <Box mb={2}>
+                <Typography sx={{ fontWeight: 700, fontSize: 13, mb: 1 }}>Thông số kỹ thuật:</Typography>
+                <Grid container spacing={0.5}>
+                  {Object.entries(product.specifications).map(([k, v]) => (
+                    <Grid item xs={6} key={k}>
+                      <Box sx={{ background: '#f5f5f5', borderRadius: 0.5, px: 1, py: 0.5 }}>
+                        <Typography sx={{ fontSize: 11, color: '#888', textTransform: 'capitalize' }}>{k}</Typography>
+                        <Typography sx={{ fontSize: 12.5, fontWeight: 600, color: '#333' }}>{v}</Typography>
+                      </Box>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
+            )}
+
+            <Divider sx={{ my: 1.5 }} />
+
+            {/* Guarantees */}
+            <Stack spacing={0.8} mb={2}>
+              {[
+                { icon: <VerifiedIcon sx={{ color: '#2e7d32', fontSize: 16 }} />, text: 'Hàng chính hãng, có bảo hành đầy đủ' },
+                { icon: <LocalShippingIcon sx={{ color: '#1565c0', fontSize: 16 }} />, text: 'Giao hàng toàn quốc 24–48h' },
+              ].map((g, i) => (
+                <Stack key={i} direction="row" spacing={0.8} alignItems="center">
+                  {g.icon}
+                  <Typography sx={{ fontSize: 12.5, color: '#555' }}>{g.text}</Typography>
+                </Stack>
+              ))}
+            </Stack>
+
+            <Stack spacing={1}>
+              <Button variant="contained" size="large" fullWidth startIcon={<ShoppingCartIcon />}
+                sx={{ background: '#c62828', fontWeight: 700, py: 1.2, '&:hover': { background: '#8e0000' } }}>
+                Mua Ngay
+              </Button>
+              <Button variant="outlined" size="large" fullWidth startIcon={<PhoneIcon />}
+                onClick={() => window.location.href = `tel:${company.phone1.replace(/\s/g, '')}`}
+                sx={{ borderColor: '#c62828', color: '#c62828', fontWeight: 700, py: 1.2, '&:hover': { background: '#fff5f5' } }}>
+                Gọi {company.phone1} để đặt hàng
+              </Button>
+            </Stack>
           </Grid>
         </Grid>
       </DialogContent>

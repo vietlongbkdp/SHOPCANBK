@@ -1,247 +1,213 @@
 {
+  "company": {
+    "name": "Cân Điện Tử Bách Khoa",
+    "slogan": "Uy tín – Chính xác – Giá tốt",
+    "description": "Chuyên sửa chữa, bảo trì tận nơi, cung cấp cân điện tử kỹ thuật số tại Huế và Đà Nẵng. Giao hàng toàn quốc.",
+    "phone1": "0913 331 919",
+    "phone2": "0938 561 544",
+    "email": "candientubachkhoa@gmail.com",
+    "address1": "13 Trần Quý Khoáng, An Hòa, TP. Huế",
+    "address2": "293 Hà Huy Tập, Thanh Khê, TP. Đà Nẵng",
+    "hours": "7:30 – 17:30 (Thứ 2 – Thứ 7)",
+    "facebook": "https://facebook.com/candientubachkhoa",
+    "zalo": "0913331919"
+  },
   "categories": [
-    {
-      "id": 1,
-      "name": "Cân Nhà Bếp",
-      "icon": "🍽️"
-    },
-    {
-      "id": 2,
-      "name": "Cân Sức Khỏe",
-      "icon": "⚖️"
-    },
-    {
-      "id": 3,
-      "name": "Cân Công Nghiệp",
-      "icon": "📦"
-    },
-    {
-      "id": 4,
-      "name": "Cân Tính Tiền",
-      "icon": "💰"
-    },
-    {
-      "id": 5,
-      "name": "Cân Đơ",
-      "icon": "🎣"
-    }
+    { "id": 1, "name": "Cân Tính Tiền", "icon": "🧾", "slug": "can-tinh-tien", "image": "https://candientuhoanggia.com/wp-content/uploads/2024/11/can-dien-tu-k019_6-247x247.webp" },
+    { "id": 2, "name": "Cân Bàn", "icon": "⚖️", "slug": "can-ban", "image": "https://candientuhoanggia.com/wp-content/uploads/2023/04/can-ban-dien-tu-1.jpg" },
+    { "id": 3, "name": "Cân Ghế", "icon": "🪑", "slug": "can-ghe", "image": "https://candientuhoanggia.com/wp-content/uploads/2023/08/can-ghe-dien-tu_7-247x247.webp" },
+    { "id": 4, "name": "Cân Treo", "icon": "🔗", "slug": "can-treo", "image": "https://candientuhoanggia.com/wp-content/uploads/2023/05/can-treo-dien-tu-50kg_2-247x247.webp" },
+    { "id": 5, "name": "Cân Sàn", "icon": "📦", "slug": "can-san", "image": "https://candientuhoanggia.com/wp-content/uploads/2024/04/can-san-dien-tu-in-phieu-247x247.webp" },
+    { "id": 6, "name": "Cân Kỹ Thuật", "icon": "🔬", "slug": "can-ky-thuat", "image": "https://candientuhoanggia.com/wp-content/uploads/2022/10/can-dien-tu-mini_4-247x247.webp" },
+    { "id": 7, "name": "Phụ Kiện", "icon": "🔧", "slug": "phu-kien", "image": "https://candientuhoanggia.com/wp-content/uploads/2022/10/can-dien-tu-mini_9-1.jpg" }
   ],
   "products": [
     {
+      "id": 1, "name": "Cân Điện Tử Tính Tiền K019+ 30kg", "category": 1,
+      "price": 600000, "originalPrice": 750000, "rating": 4.8, "reviews": 145,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/11/can-dien-tu-k019_6-247x247.webp",
+      "badge": "Bán Chạy",
+      "description": "Cân điện tử tính tiền 30kg chuyên cân khô, trái cây, rau củ. Màn hình LCD sắc nét, pin sạc tiện lợi.",
+      "specifications": { "weight": "30kg", "accuracy": "10g", "material": "Thép sơn", "warranty": "12 tháng" }
+    },
+    {
+      "id": 2, "name": "Cân Điện Tử 30kg QUA 832 Chống Nước", "category": 1,
+      "price": 1150000, "originalPrice": 1350000, "rating": 4.9, "reviews": 89,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/12/can-thit-dien-tu-qua-832-247x247.webp",
+      "badge": "Chống Nước",
+      "description": "Cân tính tiền chống nước 100%, chuyên dùng cho thủy sản, hải sản, thịt cá tươi sống.",
+      "specifications": { "weight": "30kg", "accuracy": "5g", "material": "Inox 304", "warranty": "12 tháng" }
+    },
+    {
+      "id": 3, "name": "Cân Điện Tử ACS 60kg Inox", "category": 1,
+      "price": 1490000, "originalPrice": 1700000, "rating": 4.7, "reviews": 67,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2023/01/can-dien-tu-acs_10-1-247x247.webp",
+      "badge": "",
+      "description": "Cân tính tiền dạng đồng hồ Full Inox 304, bền đẹp, chống ăn mòn.",
+      "specifications": { "weight": "60kg", "accuracy": "20g", "material": "Full Inox 304", "warranty": "12 tháng" }
+    },
+    {
+      "id": 4, "name": "Cân Bàn 200kg 30x40cm 501E Taiwan", "category": 2,
+      "price": 3200000, "originalPrice": 3900000, "rating": 4.8, "reviews": 112,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2023/04/can-ban-dien-tu-11-247x247.webp",
+      "badge": "Giảm 18%",
+      "description": "Cân bàn điện tử 200kg chuyên công nghiệp, đầu cân 501E Taiwan, mặt cân Inox 304 bền bỉ.",
+      "specifications": { "weight": "200kg", "accuracy": "50g", "material": "Inox 304", "warranty": "24 tháng" }
+    },
+    {
+      "id": 5, "name": "Cân Bàn 300kg B19S Amcell USA Inox", "category": 2,
+      "price": 4000000, "originalPrice": 4800000, "rating": 4.9, "reviews": 78,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2023/03/can-ban-dien-tu-247x247.webp",
+      "badge": "Chống Nước IP68",
+      "description": "Cân bàn B19S Amcell USA chuyên thủy sản công nghiệp, chống nước hoàn toàn IP68.",
+      "specifications": { "weight": "300kg", "accuracy": "100g", "material": "100% Inox", "warranty": "24 tháng" }
+    },
+    {
+      "id": 6, "name": "Cân Bàn 500kg 50x60cm 8201 Japan", "category": 2,
+      "price": 3950000, "originalPrice": 4695000, "rating": 4.7, "reviews": 54,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/09/can-dien-tu_13-247x247.webp",
+      "badge": "Giảm 16%",
+      "description": "Cân bàn điện tử 500kg, đầu cân Japan cao cấp, khung thép chắc chắn.",
+      "specifications": { "weight": "500kg", "accuracy": "200g", "material": "Thép + Inox", "warranty": "24 tháng" }
+    },
+    {
+      "id": 7, "name": "Cân Ghế 200kg Đầu UPE 30x40cm", "category": 3,
+      "price": 2000000, "originalPrice": 2300000, "rating": 4.8, "reviews": 93,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/06/can-dien-tu_14-3-247x247.webp",
+      "badge": "Công Nghiệp",
+      "description": "Cân ghế điện tử 200kg chuyên cân hàng hóa, nông sản, kho bãi.",
+      "specifications": { "weight": "200kg", "accuracy": "50g", "material": "Thép sơn", "warranty": "24 tháng" }
+    },
+    {
+      "id": 8, "name": "Cân Ghế 300kg B19S USA LED 40x50cm", "category": 3,
+      "price": 3500000, "originalPrice": 3900000, "rating": 4.9, "reviews": 61,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/01/can-dien-tu-300kg-b19s_2-247x247.webp",
+      "badge": "LED Chống Chói",
+      "description": "Cân ghế 300kg B19S USA, màn hình LED chống chói, chuyên cân lúa, nông sản.",
+      "specifications": { "weight": "300kg", "accuracy": "100g", "material": "Thép", "warranty": "24 tháng" }
+    },
+    {
+      "id": 9, "name": "Cân Ghế 1 Tấn Đầu 501E 60x80cm", "category": 3,
+      "price": 7200000, "originalPrice": 7900000, "rating": 4.8, "reviews": 42,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2023/02/can-dien-tu-1-tan-247x247.webp",
+      "badge": "1 Tấn",
+      "description": "Cân ghế điện tử 1 tấn, đầu cân 501E, 2 loadcell, chuyên công nghiệp nặng.",
+      "specifications": { "weight": "1000kg", "accuracy": "500g", "material": "Thép sơn", "warranty": "24 tháng" }
+    },
+    {
+      "id": 10, "name": "Cân Treo 50kg WH-A23 Cầm Tay", "category": 4,
+      "price": 290000, "originalPrice": 350000, "rating": 4.6, "reviews": 234,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2023/05/can-treo-dien-tu-50kg_2-247x247.webp",
+      "badge": "Bán Chạy",
+      "description": "Cân treo điện tử cầm tay 50kg, nhỏ gọn tiện lợi, dùng cho chợ và hộ gia đình.",
+      "specifications": { "weight": "50kg", "accuracy": "10g", "material": "Hợp kim nhôm", "warranty": "12 tháng" }
+    },
+    {
+      "id": 11, "name": "Cân Treo 500kg OCS S4", "category": 4,
+      "price": 2250000, "originalPrice": 2600000, "rating": 4.8, "reviews": 56,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/12/can-treo-dien-tu_2-247x247.webp",
+      "badge": "",
+      "description": "Cân treo công nghiệp OCS S4 từ 500kg – 2 tấn, chính xác cao, dễ thao tác.",
+      "specifications": { "weight": "500kg-2T", "accuracy": "200g", "material": "Thép", "warranty": "12 tháng" }
+    },
+    {
+      "id": 12, "name": "Cân Sàn In Phiếu DS169 Japan 1 Tấn", "category": 5,
+      "price": 11000000, "originalPrice": 15000000, "rating": 4.9, "reviews": 38,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/04/can-san-dien-tu-in-phieu-247x247.webp",
+      "badge": "Giảm 27%",
+      "description": "Cân sàn điện tử có in phiếu tự động, chuyên kho bãi, cảng biển, 500kg – 3 tấn.",
+      "specifications": { "weight": "500kg-3T", "accuracy": "500g", "material": "Thép sơn", "warranty": "24 tháng" }
+    },
+    {
+      "id": 13, "name": "Cân Sàn 8280 Japan 1m2x1m2 – 3 Tấn", "category": 5,
+      "price": 17900000, "originalPrice": 21500000, "rating": 4.8, "reviews": 29,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/04/can-san-dien-tu_11-247x247.webp",
+      "badge": "",
+      "description": "Cân sàn điện tử 8280 Japan, kích thước 1.2x1.2m, tải trọng 500kg – 3 tấn.",
+      "specifications": { "weight": "500kg-3T", "accuracy": "500g", "material": "Thép + sơn epoxy", "warranty": "24 tháng" }
+    },
+    {
+      "id": 14, "name": "Cân Tiểu Ly KD-TBED 1.2kg Cân Vàng", "category": 6,
+      "price": 3450000, "originalPrice": 5500000, "rating": 4.9, "reviews": 187,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/10/can-dien-tu-mini_4-247x247.webp",
+      "badge": "Giảm 37%",
+      "description": "Cân tiểu ly chính xác 0.01g chuyên cân vàng, cân yến, phòng thí nghiệm.",
+      "specifications": { "weight": "1.2kg", "accuracy": "0.01g", "material": "Hợp kim", "warranty": "24 tháng" }
+    },
+    {
+      "id": 15, "name": "Cân Phân Tích Shinko GS-2202N 2.2kg", "category": 6,
+      "price": 4200000, "originalPrice": 6500000, "rating": 4.9, "reviews": 73,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/10/can-dien-tu-mini_13-247x247.webp",
+      "badge": "Nhật Bản",
+      "description": "Cân phân tích Shinko Nhật Bản 2200g/0.01g, độ chính xác cực cao cho phòng thí nghiệm.",
+      "specifications": { "weight": "2.2kg", "accuracy": "0.01g", "material": "Hợp kim nhôm", "warranty": "24 tháng" }
+    },
+    {
+      "id": 16, "name": "Cân Phân Tích Ohaus PX523E 520g", "category": 6,
+      "price": 16900000, "originalPrice": 18900000, "rating": 5.0, "reviews": 24,
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/10/can-dien-tu-mini_2-2-247x247.webp",
+      "badge": "USA",
+      "description": "Cân điện tử phân tích Ohaus USA 520g/0.001g, chuẩn phòng thí nghiệm quốc tế.",
+      "specifications": { "weight": "520g", "accuracy": "0.001g", "material": "Inox + nhôm", "warranty": "36 tháng" }
+    }
+  ],
+  "services": [
+    {
       "id": 1,
-      "name": "Cân Nhà Bếp Điện Tử K3",
-      "category": 1,
-      "price": 245000,
-      "originalPrice": 350000,
-      "rating": 4.8,
-      "reviews": 145,
-      "image": "https://candientuhoanggia.com/wp-content/uploads/2024/11/can-dien-tu-k019_6-510x510.webp",
-      "description": "Cân nhà bếp điện tử chính xác cao, dung lượng 5kg",
-      "specifications": {
-        "weight": "5kg",
-        "accuracy": "1g",
-        "material": "Thép không gỉ",
-        "warranty": "2 năm",
-        "features": ["Lấy nước", "Đo nhiệt độ", "Tự động tắt"]
-      }
+      "title": "Sửa Chữa Cân Điện Tử",
+      "icon": "🔧",
+      "description": "Chuyên sửa chữa tất cả các loại cân điện tử: cân bàn, cân ghế, cân treo, cân sàn, cân tiểu ly. Kỹ thuật viên có hơn 10 năm kinh nghiệm.",
+      "features": ["Sửa tận nơi tại Huế & Đà Nẵng", "Thay loadcell, mạch hiển thị", "Bảo hành sau sửa chữa 3 tháng", "Tư vấn miễn phí qua điện thoại"]
     },
     {
       "id": 2,
-      "name": "Cân Sức Khỏe Thông Minh AF-600",
-      "category": 2,
-      "price": 899000,
-      "originalPrice": 1299000,
-      "rating": 4.9,
-      "reviews": 312,
-      "image": "/images/can-suc-khoe-1.jpg",
-      "description": "Cân sức khỏe thông minh có WiFi, phân tích BMI",
-      "specifications": {
-        "weight": "180kg",
-        "accuracy": "0.1kg",
-        "material": "Kính cường lực",
-        "warranty": "3 năm",
-        "features": ["WiFi", "Ứng dụng di động", "Phân tích BMI", "Lưu trữ 16 người"]
-      }
+      "title": "Bảo Trì & Kiểm Định",
+      "icon": "📋",
+      "description": "Dịch vụ bảo trì định kỳ, kiểm định và hiệu chỉnh cân theo tiêu chuẩn kỹ thuật quốc gia ĐLVN 26.",
+      "features": ["Bảo trì định kỳ 6 tháng/lần", "Kiểm định theo tiêu chuẩn nhà nước", "Hiệu chỉnh đầu cân & loadcell", "Lập biên bản kiểm định đầy đủ"]
     },
     {
       "id": 3,
-      "name": "Cân Công Nghiệp Điện Tử 30kg",
-      "category": 3,
-      "price": 1899000,
-      "originalPrice": 2500000,
-      "rating": 4.7,
-      "reviews": 87,
-      "image": "/images/can-cong-nghiep-1.jpg",
-      "description": "Cân công nghiệp chuyên dụng cho cửa hàng bán lẻ",
-      "specifications": {
-        "weight": "30kg",
-        "accuracy": "10g",
-        "material": "Thép sơn",
-        "warranty": "2 năm",
-        "features": ["Tính tiền", "Cổng USB", "LCD hiển thị", "Bàn phím bền"]
-      }
+      "title": "Lắp Đặt Hệ Thống Cân",
+      "icon": "⚙️",
+      "description": "Tư vấn, thiết kế và lắp đặt hệ thống cân tổng thể cho nhà máy, kho bãi, chợ đầu mối, cảng biển.",
+      "features": ["Khảo sát thực địa miễn phí", "Tư vấn chọn cân phù hợp", "Lắp đặt đúng kỹ thuật", "Hướng dẫn sử dụng & bàn giao"]
     },
     {
       "id": 4,
-      "name": "Cân Tính Tiền Vàng Bạc 0.01g",
-      "category": 4,
-      "price": 1299000,
-      "originalPrice": 1799000,
-      "rating": 4.9,
-      "reviews": 201,
-      "image": "/images/can-tinh-tien-1.jpg",
-      "description": "Cân tính tiền chuyên dụng cho trang sức vàng bạc",
-      "specifications": {
-        "weight": "200g",
-        "accuracy": "0.01g",
-        "material": "Hợp kim nhôm",
-        "warranty": "3 năm",
-        "features": ["Tính tiền tự động", "Đo lượng vàng", "Chế độ bảo trì", "Pin sạc"]
-      }
-    },
-    {
-      "id": 5,
-      "name": "Cân Đơ Cơ Học 50kg",
-      "category": 5,
-      "price": 189000,
-      "originalPrice": 299000,
-      "rating": 4.5,
-      "reviews": 156,
-      "image": "/images/can-do-1.jpg",
-      "description": "Cân đơ cơ học truyền thống, không dùng pin",
-      "specifications": {
-        "weight": "50kg",
-        "accuracy": "500g",
-        "material": "Thép khoáng",
-        "warranty": "1 năm",
-        "features": ["Không dùng pin", "Bền bỉ", "Dễ sử dụng", "Giá rẻ"]
-      }
-    },
-    {
-      "id": 6,
-      "name": "Cân Nhà Bếp Cơ Bản TK-2g",
-      "category": 1,
-      "price": 89000,
-      "originalPrice": 150000,
-      "rating": 4.3,
-      "reviews": 98,
-      "image": "/images/can-nhà-bep-2.jpg",
-      "description": "Cân nhà bếp cơ bản, chính xác 2g",
-      "specifications": {
-        "weight": "2kg",
-        "accuracy": "2g",
-        "material": "Nhựa ABS",
-        "warranty": "1 năm",
-        "features": ["Nhẹ", "Gọn", "Giá rẻ", "Pin AAA"]
-      }
-    },
-    {
-      "id": 7,
-      "name": "Cân Sức Khỏe Cơ Bản AF-100",
-      "category": 2,
-      "price": 399000,
-      "originalPrice": 699000,
-      "rating": 4.4,
-      "reviews": 203,
-      "image": "/images/can-suc-khoe-2.jpg",
-      "description": "Cân sức khỏe cơ bản, chính xác 100g",
-      "specifications": {
-        "weight": "150kg",
-        "accuracy": "0.1kg",
-        "material": "Kính cường lực",
-        "warranty": "2 năm",
-        "features": ["Tự động tắt", "Tối ưu hóa BMI", "Hiển thị kỹ thuật số", "An toàn"]
-      }
-    },
-    {
-      "id": 8,
-      "name": "Cân Công Nghiệp 50kg DH-50",
-      "category": 3,
-      "price": 2499000,
-      "originalPrice": 3299000,
-      "rating": 4.8,
-      "reviews": 112,
-      "image": "/images/can-cong-nghiep-2.jpg",
-      "description": "Cân công nghiệp chuyên dụng 50kg",
-      "specifications": {
-        "weight": "50kg",
-        "accuracy": "20g",
-        "material": "Thép sơn",
-        "warranty": "3 năm",
-        "features": ["Tính tiền chính xác", "In tem", "Bảo hành lâu", "Chế độ nạp"]
-      }
-    },
-    {
-      "id": 9,
-      "name": "Cân Tính Tiền 100g TS-100",
-      "category": 4,
-      "price": 699000,
-      "originalPrice": 999000,
-      "rating": 4.6,
-      "reviews": 78,
-      "image": "/images/can-tinh-tien-2.jpg",
-      "description": "Cân tính tiền 100g cho trang sức",
-      "specifications": {
-        "weight": "100g",
-        "accuracy": "0.01g",
-        "material": "Hợp kim",
-        "warranty": "2 năm",
-        "features": ["Tính tiền nhanh", "Chế độ giác ngạc", "Thay pin dễ", "Bảo hành tốt"]
-      }
-    },
-    {
-      "id": 10,
-      "name": "Cân Đơ 25kg DC-25",
-      "category": 5,
-      "price": 149000,
-      "originalPrice": 249000,
-      "rating": 4.5,
-      "reviews": 134,
-      "image": "/images/can-do-2.jpg",
-      "description": "Cân đơ cơ 25kg, nhỏ gọn dễ mang",
-      "specifications": {
-        "weight": "25kg",
-        "accuracy": "250g",
-        "material": "Thép khoáng",
-        "warranty": "1 năm",
-        "features": ["Nhỏ gọn", "Dễ mang", "Chính xác", "Rẻ"]
-      }
-    },
-    {
-      "id": 11,
-      "name": "Cân Nhà Bếp Chuyên Dụng M300",
-      "category": 1,
-      "price": 599000,
-      "originalPrice": 899000,
-      "rating": 4.7,
-      "reviews": 187,
-      "image": "/images/can-nhà-bep-3.jpg",
-      "description": "Cân nhà bếp chuyên dụng với màn hình lớn",
-      "specifications": {
-        "weight": "10kg",
-        "accuracy": "1g",
-        "material": "Thép không gỉ",
-        "warranty": "3 năm",
-        "features": ["Màn hình lớn", "Nhớ công thức", "Tính năng giải nén", "Bluetooth"]
-      }
-    },
-    {
-      "id": 12,
-      "name": "Cân Sức Khỏe Cao Cấp AF-800",
-      "category": 2,
-      "price": 1299000,
-      "originalPrice": 1899000,
-      "rating": 4.9,
-      "reviews": 267,
-      "image": "/images/can-suc-khoe-3.jpg",
-      "description": "Cân sức khỏe cao cấp với 13 chỉ số sức khỏe",
-      "specifications": {
-        "weight": "200kg",
-        "accuracy": "0.1kg",
-        "material": "Kính cường lực",
-        "warranty": "3 năm",
-        "features": ["13 chỉ số sức khỏe", "WiFi + Bluetooth", "Lưu trữ 8 người", "Ứng dụng"]
-      }
+      "title": "Cung Cấp Phụ Kiện",
+      "icon": "🔩",
+      "description": "Cung cấp đầy đủ phụ kiện chính hãng: loadcell, đầu cân, mạch điện tử, dây cáp, quả cân chuẩn.",
+      "features": ["Loadcell chính hãng các loại", "Đầu hiển thị cân điện tử", "Mạch main cân điện tử", "Quả cân chuẩn kiểm định"]
     }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "Hướng Dẫn Chọn Cân Điện Tử Phù Hợp Cho Cửa Hàng",
+      "date": "10/05/2025",
+      "summary": "Với hơn 20 loại cân khác nhau trên thị trường, làm thế nào để chọn được cân điện tử phù hợp nhất cho nhu cầu kinh doanh của bạn?",
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/12/mua-ban-sua-chua-can-dien-tu-1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "5 Lỗi Thường Gặp Ở Cân Điện Tử Và Cách Khắc Phục",
+      "date": "22/04/2025",
+      "summary": "Cân hiển thị sai số, cân bị đơ, màn hình không lên... là những lỗi phổ biến nhất. Bài viết hướng dẫn bạn tự kiểm tra và khi nào cần gọi kỹ thuật.",
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2023/07/can-100kg.png"
+    },
+    {
+      "id": 3,
+      "title": "Cân Điện Tử Tiểu Ly – Lựa Chọn Số 1 Cho Tiệm Vàng",
+      "date": "05/04/2025",
+      "summary": "Cân tiểu ly độ chính xác 0.01g là thiết bị không thể thiếu tại các tiệm vàng, bạc, đá quý. Tổng hợp các dòng cân phổ biến nhất hiện nay.",
+      "image": "https://candientuhoanggia.com/wp-content/uploads/2022/10/dong-can-tieu-ly-kd-tbed-series.jpg"
+    }
+  ],
+  "stats": [
+    { "value": "10+", "label": "Năm kinh nghiệm" },
+    { "value": "500+", "label": "Khách hàng tin dùng" },
+    { "value": "2000+", "label": "Cân đã sửa chữa" },
+    { "value": "100%", "label": "Bảo hành chính hãng" }
   ]
 }

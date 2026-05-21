@@ -1,182 +1,154 @@
 import { useState } from 'react';
 import {
-  Box,
-  Container,
-  AppBar,
-  Toolbar,
-  Button,
-  MenuItem,
-  Menu,
-  Stack,
-  TextField,
-  InputAdornment,
-  useMediaQuery,
-  useTheme,
+  Box, Container, AppBar, Toolbar, Button, MenuItem, Menu,
+  Stack, InputBase, useMediaQuery, useTheme, IconButton, Drawer,
+  List, ListItem, ListItemText, Divider, Collapse,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import MenuIcon from '@mui/icons-material/Menu';
+import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import data from '../data.json';
 
-export default function Navigation({
-  onNavigate,
-  onSearch,
-  searchTerm,
-  currentPage,
-}) {
-  const [anchorEl, setAnchorEl] = useState(null);
+const navItems = [
+  { label: 'Trang Chủ', page: 'home' },
+  { label: 'Giới Thiệu', page: 'introduction' },
+  {
+    label: 'Sản Phẩm', page: 'products',
+    children: data.categories.map(c => ({ label: c.name, page: 'products' })),
+  },
+  { label: 'Sửa Chữa', page: 'services' },
+  { label: 'Tin Tức', page: 'news' },
+  { label: 'Liên Hệ', page: 'contact' },
+];
+
+export default function Navigation({ onNavigate, onSearch, searchTerm, currentPage }) {
+  const [productsAnchor, setProductsAnchor] = useState(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const menuItems = [
-    { label: 'Giới Thiệu', page: 'introduction' },
-    { label: 'Ngành Nghề', page: 'services' },
-    { label: 'Sản Phẩm', page: 'products' },
-    { label: 'Dịch Vụ', page: 'services' },
-    { label: 'Tài Liệu', page: 'documents' },
-    { label: 'Tin Tức', page: 'news' },
-    { label: 'Liên Hệ', page: 'contact' },
-  ];
-
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleNavigate = (page) => {
-    onNavigate(page);
-    handleMenuClose();
-  };
+  const navBg = 'linear-gradient(90deg, #1b5e20 0%, #2e7d32 100%)';
 
   return (
-    <AppBar
-      position="sticky"
-      sx={{
-        background: 'linear-gradient(135deg, #7cb342 0%, #558b2f 100%)',
-        top: 64,
-        zIndex: 97,
-      }}
-    >
+    <AppBar position="sticky" sx={{ background: navBg, top: 0, zIndex: 1100, boxShadow: '0 2px 8px rgba(0,0,0,0.25)' }}>
       <Container maxWidth="lg" sx={{ p: 0 }}>
-        <Toolbar sx={{ justifyContent: 'space-between', gap: { xs: 1, md: 2 }, flexWrap: 'wrap' }}>
-          {/* Main Menu Button */}
-          <Button
-            onClick={handleMenuOpen}
-            sx={{
-              background: '#f9a825',
-              color: 'white',
-              fontWeight: 700,
-              textTransform: 'none',
-              fontSize: { xs: '12px', sm: '14px', md: '16px' },
-              padding: { xs: '8px 12px', sm: '10px 16px', md: '10px 20px' },
-              borderRadius: 0,
-              '&:hover': {
-                background: '#f39c12',
-              },
-              display: 'flex',
-              alignItems: 'center',
-              gap: 1,
-            }}
-            endIcon={<KeyboardArrowDownIcon />}
-          >
-            GIỚI THIỆU
-          </Button>
+        <Toolbar sx={{ minHeight: { xs: 48, md: 52 }, px: { xs: 1, md: 2 }, gap: 0.5 }}>
+          {/* Mobile menu toggle */}
+          {isMobile && (
+            <IconButton color="inherit" onClick={() => setMobileOpen(true)} sx={{ mr: 1 }}>
+              <MenuIcon />
+            </IconButton>
+          )}
 
-          {/* Home button */}
-          <Button
-            onClick={() => handleNavigate('home')}
-            sx={{
-              color: 'white',
-              fontWeight: 700,
-              textTransform: 'none',
-              fontSize: { xs: '12px', sm: '14px', md: '16px' },
-              padding: { xs: '8px 12px', sm: '8px 16px', md: '8px 18px' },
-              borderRadius: 0,
-              '&:hover': { background: 'rgba(255,255,255,0.08)' },
-              display: { xs: 'none', sm: 'inline-flex' },
-            }}
-          >
-            TRANG CHỦ
-          </Button>
+          {/* Desktop Nav Items */}
+          {!isMobile && (
+            <Stack direction="row" spacing={0} sx={{ flex: 1 }}>
+              {navItems.map((item) =>
+                item.children ? (
+                  <Box key={item.label}>
+                    <Button
+                      endIcon={<KeyboardArrowDownIcon />}
+                      onClick={(e) => setProductsAnchor(e.currentTarget)}
+                      sx={{
+                        color: 'white', fontWeight: 600, fontSize: 14, px: 2, py: 1.5, borderRadius: 0,
+                        borderBottom: currentPage === item.page ? '3px solid #ffeb3b' : '3px solid transparent',
+                        '&:hover': { background: 'rgba(255,255,255,0.12)' },
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                    <Menu anchorEl={productsAnchor} open={Boolean(productsAnchor)} onClose={() => setProductsAnchor(null)}>
+                      <MenuItem onClick={() => { onNavigate('products'); setProductsAnchor(null); }}>
+                        Tất Cả Sản Phẩm
+                      </MenuItem>
+                      <Divider />
+                      {item.children.map((c) => (
+                        <MenuItem key={c.label} onClick={() => { onNavigate('products'); setProductsAnchor(null); }}>
+                          {c.label}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Box>
+                ) : (
+                  <Button
+                    key={item.label}
+                    onClick={() => onNavigate(item.page)}
+                    sx={{
+                      color: 'white', fontWeight: 600, fontSize: 14, px: 2, py: 1.5, borderRadius: 0,
+                      borderBottom: currentPage === item.page ? '3px solid #ffeb3b' : '3px solid transparent',
+                      '&:hover': { background: 'rgba(255,255,255,0.12)' },
+                    }}
+                  >
+                    {item.label}
+                  </Button>
+                )
+              )}
+            </Stack>
+          )}
 
-          {/* Dropdown Menu */}
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
-            sx={{
-              '& .MuiPaper-root': {
-                minWidth: '200px',
-              },
-            }}
-          >
-            {menuItems.map((item) => (
-              <MenuItem
-                key={item.page}
-                onClick={() => handleNavigate(item.page)}
-                selected={currentPage === item.page}
-              >
-                {item.label}
-              </MenuItem>
-            ))}
-          </Menu>
+          {isMobile && <Box sx={{ flex: 1 }} />}
 
-          {/* Menu Items */}
-          <Stack direction="row" spacing={0} sx={{ flex: 1, display: { xs: 'none', md: 'flex' } }}>
-            {['NGÀNH NGHỀ', 'SẢN PHẨM', 'DỊCH VỤ', 'TÀI LIỆU', 'TIN TỨC'].map((label, idx) => (
-              <Button
-                key={idx}
-                onClick={() => {
-                  const pageMap = {
-                    'NGÀNH NGHỀ': 'introduction',
-                    'SẢN PHẨM': 'products',
-                    'DỊCH VỤ': 'services',
-                    'TÀI LIỆU': 'documents',
-                    'TIN TỨC': 'news',
-                  };
-                  handleNavigate(pageMap[label]);
-                }}
-                sx={{
-                  color: 'white',
-                  fontWeight: 600,
-                  textTransform: 'none',
-                  fontSize: { xs: '12px', sm: '13px', md: '15px' },
-                  padding: { xs: '8px 12px', sm: '8px 16px', md: '10px 20px' },
-                  borderRadius: 0,
-                  '&:hover': {
-                    background: 'rgba(255, 255, 255, 0.1)',
-                  },
-                  borderBottom: currentPage === label.toLowerCase() ? '3px solid white' : 'none',
-                }}
-              >
-                {label}
-              </Button>
-            ))}
-          </Stack>
-
-          {/* Contact Button */}
-          <Button
-            onClick={() => handleNavigate('contact')}
-            sx={{
-              background: 'rgba(255, 255, 255, 0.2)',
-              color: 'white',
-              fontWeight: 600,
-              textTransform: 'none',
-              fontSize: { xs: '12px', sm: '14px', md: '15px' },
-              padding: { xs: '8px 12px', sm: '10px 16px', md: '10px 20px' },
-              borderRadius: 1,
-              border: '2px solid white',
-              '&:hover': {
-                background: 'rgba(255, 255, 255, 0.3)',
-              },
-            }}
-          >
-            LIÊN HỆ
-          </Button>
+          {/* Search Box */}
+          <Box sx={{
+            display: 'flex', alignItems: 'center',
+            background: 'rgba(255,255,255,0.15)',
+            borderRadius: 1, px: 1.5, py: 0.3,
+            border: '1px solid rgba(255,255,255,0.3)',
+            width: { xs: 160, sm: 220, md: 240 },
+            '&:focus-within': { background: 'rgba(255,255,255,0.25)' },
+          }}>
+            <InputBase
+              placeholder="Tìm kiếm sản phẩm..."
+              value={searchTerm}
+              onChange={(e) => onSearch(e.target.value)}
+              sx={{ color: 'white', fontSize: 13, flex: 1, '& input::placeholder': { color: 'rgba(255,255,255,0.7)' } }}
+            />
+            <SearchIcon sx={{ color: 'rgba(255,255,255,0.8)', fontSize: 18 }} />
+          </Box>
         </Toolbar>
       </Container>
+
+      {/* Mobile Drawer */}
+      <Drawer anchor="left" open={mobileOpen} onClose={() => setMobileOpen(false)}>
+        <Box sx={{ width: 280, pt: 1 }}>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" px={2} pb={1}>
+            <Box sx={{ fontWeight: 700, color: '#c62828', fontSize: 16 }}>MENU</Box>
+            <IconButton onClick={() => setMobileOpen(false)}><CloseIcon /></IconButton>
+          </Stack>
+          <Divider />
+          <List dense>
+            {navItems.map((item) =>
+              item.children ? (
+                <Box key={item.label}>
+                  <ListItem button onClick={() => setMobileProductsOpen(!mobileProductsOpen)}>
+                    <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600 }} />
+                    <ExpandMoreIcon sx={{ transform: mobileProductsOpen ? 'rotate(180deg)' : 'none', transition: '0.2s' }} />
+                  </ListItem>
+                  <Collapse in={mobileProductsOpen}>
+                    <List dense disablePadding>
+                      {item.children.map((c) => (
+                        <ListItem button key={c.label} sx={{ pl: 4 }}
+                          onClick={() => { onNavigate('products'); setMobileOpen(false); }}>
+                          <ListItemText primary={c.label} />
+                        </ListItem>
+                      ))}
+                    </List>
+                  </Collapse>
+                </Box>
+              ) : (
+                <ListItem button key={item.label}
+                  onClick={() => { onNavigate(item.page); setMobileOpen(false); }}
+                  selected={currentPage === item.page}>
+                  <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600 }} />
+                </ListItem>
+              )
+            )}
+          </List>
+        </Box>
+      </Drawer>
     </AppBar>
   );
 }
