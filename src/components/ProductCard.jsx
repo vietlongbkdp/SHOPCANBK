@@ -8,7 +8,7 @@ export default function ProductCard({ product, onClick }) {
   const { addItem } = useCart();
   const [snack, setSnack] = useState(false);
 
-  const discount = product.originalPrice
+  const discount = product.originalPrice > product.price
     ? Math.round((1 - product.price / product.originalPrice) * 100)
     : 0;
 
@@ -21,71 +21,109 @@ export default function ProductCard({ product, onClick }) {
   return (
     <>
       <Box
-        onClick={() => onClick && onClick(product)}
+        component="article"
+        onClick={() => onClick?.(product)}
         sx={{
-          background: 'white', border: '1px solid #e8e8e8', borderRadius: 1,
-          overflow: 'hidden', cursor: 'pointer', transition: 'all 0.25s',
-          height: '100%', display: 'flex', flexDirection: 'column',
-          '&:hover': { boxShadow: '0 6px 24px rgba(0,0,0,0.12)', transform: 'translateY(-3px)', borderColor: '#c62828' },
+          background: '#fff', border: '1px solid #ebebeb', borderRadius: 1,
+          overflow: 'hidden', cursor: 'pointer',
+          display: 'flex', flexDirection: 'column', height: '100%',
+          transition: 'transform .22s, box-shadow .22s, border-color .22s',
+          '&:hover': {
+            transform: 'translateY(-4px)',
+            boxShadow: '0 8px 24px rgba(0,0,0,.11)',
+            borderColor: '#c62828',
+          },
         }}
       >
-        <Box sx={{ position: 'relative', background: '#f9f9f9' }}>
-          <Box component="img" src={product.image} alt={product.name}
+        {/* Image wrapper */}
+        <Box sx={{ position: 'relative', background: '#f7f7f7', flexShrink: 0 }}>
+          <Box
+            component="img"
+            src={product.image}
+            alt={product.name}
+            loading="lazy"
             sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block' }}
-            onError={(e) => { e.target.src = 'https://via.placeholder.com/247x247?text=Cân+Điện+Tử'; }}
+            onError={(e) => { e.target.src = 'https://placehold.co/247x247?text=Cân+Điện+Tử'; }}
           />
           {discount > 0 && (
-            <Chip label={`-${discount}%`} size="small"
-              sx={{ position: 'absolute', top: 8, left: 8, background: '#c62828', color: 'white', fontWeight: 700, fontSize: 11 }} />
+            <Chip
+              label={`-${discount}%`} size="small"
+              sx={{ position: 'absolute', top: 7, left: 7, background: '#c62828', color: '#fff', fontWeight: 700, fontSize: 11, height: 22 }}
+            />
           )}
           {product.badge && (
-            <Chip label={product.badge} size="small"
-              sx={{ position: 'absolute', top: 8, right: 8, background: '#e65100', color: 'white', fontWeight: 600, fontSize: 10, maxWidth: 90, '& .MuiChip-label': { px: 0.8 } }} />
+            <Chip
+              label={product.badge} size="small"
+              sx={{
+                position: 'absolute', top: 7, right: 7,
+                background: '#e65100', color: '#fff', fontWeight: 600, fontSize: 10, height: 22,
+                maxWidth: 96, '& .MuiChip-label': { px: 0.8 },
+              }}
+            />
           )}
         </Box>
 
-        <Box sx={{ p: 1.5, flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Typography sx={{
-            fontSize: { xs: 12, md: 13 }, fontWeight: 600, color: '#333', lineHeight: 1.4, mb: 1,
-            display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', flex: 1,
-          }}>
+        {/* Body */}
+        <Box sx={{ p: { xs: 1.2, md: 1.5 }, flex: 1, display: 'flex', flexDirection: 'column', gap: 0.6 }}>
+          <Typography
+            component="h3"
+            sx={{
+              fontSize: { xs: 12, md: 13 }, fontWeight: 600, color: '#222',
+              lineHeight: 1.45, flex: 1,
+              display: '-webkit-box', WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical', overflow: 'hidden',
+            }}
+          >
             {product.name}
           </Typography>
 
-          <Stack direction="row" alignItems="center" spacing={0.5} mb={0.5}>
-            <Rating value={product.rating} precision={0.1} size="small" readOnly sx={{ fontSize: 14 }} />
-            <Typography sx={{ fontSize: 11, color: '#888' }}>({product.reviews})</Typography>
+          <Stack direction="row" alignItems="center" spacing={0.4}>
+            <Rating value={product.rating} precision={0.1} size="small" readOnly sx={{ fontSize: 13 }} />
+            <Typography component="span" sx={{ fontSize: 11, color: '#999' }}>({product.reviews})</Typography>
           </Stack>
 
-          <Box mb={1}>
-            <Typography sx={{ color: '#c62828', fontWeight: 700, fontSize: { xs: 15, md: 16 }, lineHeight: 1 }}>
-              {product.price.toLocaleString('vi-VN')}₫
+          <Box>
+            <Typography sx={{ color: '#c62828', fontWeight: 800, fontSize: { xs: 14, md: 16 }, lineHeight: 1 }}>
+              {Number(product.price).toLocaleString('vi-VN')}₫
             </Typography>
-            {product.originalPrice > 0 && (
-              <Typography sx={{ color: '#aaa', fontSize: 12, textDecoration: 'line-through' }}>
-                {product.originalPrice.toLocaleString('vi-VN')}₫
+            {product.originalPrice > product.price && (
+              <Typography component="s" sx={{ color: '#bbb', fontSize: 11.5, display: 'block' }}>
+                {Number(product.originalPrice).toLocaleString('vi-VN')}₫
               </Typography>
             )}
           </Box>
 
-          <Stack direction="row" spacing={0.5}>
-            <Button size="small" variant="contained" fullWidth
-              startIcon={<ShoppingCartIcon sx={{ fontSize: '14px !important' }} />}
+          <Stack direction="row" spacing={0.5} mt={0.3}>
+            <Button
+              variant="contained" size="small" fullWidth
+              startIcon={<ShoppingCartIcon sx={{ fontSize: '13px !important' }} />}
               onClick={handleAddToCart}
-              sx={{ background: '#c62828', fontSize: 11, py: 0.6, '&:hover': { background: '#8e0000' } }}>
-              Thêm vào giỏ
+              sx={{
+                background: '#c62828', fontSize: 11, py: 0.65, fontWeight: 700,
+                '&:hover': { background: '#8e0000' },
+              }}
+            >
+              Thêm giỏ
             </Button>
-            <Button size="small" variant="outlined"
-              sx={{ minWidth: 36, p: 0.6, borderColor: '#c62828', color: '#c62828', '&:hover': { background: '#fff5f5' } }}
-              onClick={(e) => { e.stopPropagation(); window.location.href = 'tel:0913331916'; }}>
-              <PhoneIcon sx={{ fontSize: 16 }} />
+            <Button
+              variant="outlined" size="small"
+              aria-label="Gọi điện đặt hàng"
+              sx={{
+                minWidth: 34, p: 0.65, borderColor: '#c62828', color: '#c62828', flexShrink: 0,
+                '&:hover': { background: '#fff5f5' },
+              }}
+              onClick={(e) => { e.stopPropagation(); window.location.href = 'tel:0913331916'; }}
+            >
+              <PhoneIcon sx={{ fontSize: 15 }} />
             </Button>
           </Stack>
         </Box>
       </Box>
 
-      <Snackbar open={snack} autoHideDuration={1800} onClose={() => setSnack(false)}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+      <Snackbar
+        open={snack} autoHideDuration={1600} onClose={() => setSnack(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
         <Alert severity="success" variant="filled" sx={{ fontSize: 13 }}>
           ✅ Đã thêm vào giỏ hàng!
         </Alert>
