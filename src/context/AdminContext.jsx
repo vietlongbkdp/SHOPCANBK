@@ -1,122 +1,133 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState } from 'react';
 import defaultData from '../data.json';
 
-const AdminContext  = createContext();
-const ADMIN_KEY     = 'bk_admin_logged';
-const PASS_KEY      = 'bk_admin_pass';
-const DEFAULT_PASS  = 'bachkhoa@2025';
-
-// ── API helpers ──────────────────────────────────────────────
-const api = {
-  get:    (url)       => fetch(url).then(r => r.json()),
-  post:   (url, body) => fetch(url, { method: 'POST',   headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()),
-  put:    (url, body) => fetch(url, { method: 'PUT',    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()),
-  delete: (url)       => fetch(url, { method: 'DELETE' }).then(r => r.json()),
-};
+const AdminContext = createContext();
+const ADMIN_KEY    = 'bk_admin_logged';
+const PASS_KEY     = 'bk_admin_pass';
+const LOCAL_KEY    = 'bk_local_edits'; // unsaved local changes
+const DEFAULT_PASS = 'bachkhoa@2025';
 
 export function AdminProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => sessionStorage.getItem(ADMIN_KEY) === 'yes'
   );
 
-  // siteData: loaded from MongoDB via API, fallback to data.json while loading
-  const [siteData, setSiteData]   = useState({
-    ...defaultData,
-    _loaded: false,   // flag: false = still loading from API
+  // Load: use defaultData (bundled, instant) — no fetch needed
+  // Merge with any unsaved local edits
+  const [siteData, setSiteData] = useState(() => {
+    try {
+      const local = localStorage.getItem(LOCAL_KEY);
+      if (local) return { ...defaultData, ...JSON.parse(local) };
+    } catch {}
+    return defaultData;
   });
-  const [loading, setLoading]     = useState(true);
-  const [apiError, setApiError]   = useState(false);
 
-  // ── Load data from MongoDB on mount ──
-  useEffect(() => {
-    let cancelled = false;
-    async function load() {
-      try {
-        const [products, categories, company] = await Promise.all([
-          api.get('/api/products'),
-          api.get('/api/categories'),
-          api.get('/api/company'),
-        ]);
-
-        if (cancelled) return;
-
-        // If DB is empty (first run), use defaultData as fallback
-        setSiteData({
-          ...defaultData,
-          products:   products.length   ? products   : defaultData.products,
-          categories: categories.length ? categories : defaultData.categories,
-          company:    Object.keys(company).length > 1 ? company : defaultData.company,
-          _loaded: true,
-        });
-      } catch (err) {
-        console.warn('API không khả dụng, dùng data.json:', err.message);
-        setApiError(true);
-        setSiteData({ ...defaultData, _loaded: true });
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-    load();
-    return () => { cancelled = true; };
-  }, []);
+  const [saving, setSaving]     = useState(false);
+  const [saveMsg, setSaveMsg]   = useState(null); // { type, text }
 
   // ── Auth ──
-  const login = (password) => {
-    const saved = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
-    if (password === saved) { sessionStorage.setItem(ADMIN_KEY, 'yes'); setIsLoggedIn(true); return true; }
+  const login = (pw) => {
+    if (pw === (localStorage.getItem(PASS_KEY) || DEFAULT_PASS)) {
+      sessionStorage.setItem(ADMIN_KEY, 'yes');
+      setIsLoggedIn(true);
+      return true;
+    }
     return false;
   };
   const logout = () => { sessionStorage.removeItem(ADMIN_KEY); setIsLoggedIn(false); };
-  const changePassword = (oldPass, newPass) => {
-    const saved = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
-    if (oldPass !== saved) return false;
-    localStorage.setItem(PASS_KEY, newPass);
+  const changePassword = (oldPw, newPw) => {
+    if (oldPw !== (localStorage.getItem(PASS_KEY) || DEFAULT_PASS)) return false;
+    localStorage.setItem(PASS_KEY, newPw);
     return true;
   };
 
+  // ── Local state update helper ──
+  const update = (fn) => {
+    setSiteData(prev => {
+      const next = fn(prev);
+      // Save locally so edits survive page refresh before publishing
+      localStorage.setItem(LOCAL_KEY, JSON.stringify({
+        products:   next.products,
+        categories: next.categories,
+        company:    next.company,
+      }));
+      return next;
+    });
+  };
+
   // ── Product CRUD ──
-  const addProduct = async (product) => {
-    const saved = await api.post('/api/products', product);
-    setSiteData(prev => ({ ...prev, products: [...prev.products, saved] }));
-  };
-  const updateProduct = async (product) => {
-    await api.put('/api/products', product);
-    setSiteData(prev => ({ ...prev, products: prev.products.map(p => p.id === product.id ? product : p) }));
-  };
-  const deleteProduct = async (id) => {
-    await api.delete(`/api/products?id=${id}`);
-    setSiteData(prev => ({ ...prev, products: prev.products.filter(p => p.id !== id) }));
-  };
+  const addProduct = (p) => update(prev => ({
+    ...prev, products: [...prev.products, { ...p, id: Math.max(0, ...prev.products.map(x => x.id)) + 1 }],
+  }));
+  const updateProduct = (p) => update(prev => ({
+    ...prev, products: prev.products.map(x => x.id === p.id ? p : x),
+  }));
+  const deleteProduct = (id) => update(prev => ({
+    ...prev, products: prev.products.filter(x => x.id !== id),
+  }));
 
   // ── Company ──
-  const updateCompany = async (info) => {
-    await api.put('/api/company', info);
-    setSiteData(prev => ({ ...prev, company: { ...prev.company, ...info } }));
-  };
+  const updateCompany = (info) => update(prev => ({
+    ...prev, company: { ...prev.company, ...info },
+  }));
 
   // ── Category CRUD ──
-  const addCategory = async (cat) => {
-    const saved = await api.post('/api/categories', cat);
-    setSiteData(prev => ({ ...prev, categories: [...prev.categories, saved] }));
-  };
-  const updateCategory = async (cat) => {
-    await api.put('/api/categories', cat);
-    setSiteData(prev => ({ ...prev, categories: prev.categories.map(c => c.id === cat.id ? cat : c) }));
-  };
-  const deleteCategory = async (id) => {
-    await api.delete(`/api/categories?id=${id}`);
-    setSiteData(prev => ({ ...prev, categories: prev.categories.filter(c => c.id !== id) }));
+  const addCategory = (c) => update(prev => ({
+    ...prev, categories: [...prev.categories, { ...c, id: Math.max(0, ...prev.categories.map(x => x.id)) + 1 }],
+  }));
+  const updateCategory = (c) => update(prev => ({
+    ...prev, categories: prev.categories.map(x => x.id === c.id ? c : x),
+  }));
+  const deleteCategory = (id) => update(prev => ({
+    ...prev, categories: prev.categories.filter(x => x.id !== id),
+  }));
+
+  // ── Publish to GitHub → triggers Vercel redeploy ──
+  const publishToGitHub = async () => {
+    setSaving(true);
+    setSaveMsg(null);
+    try {
+      const payload = {
+        ...defaultData,
+        products:   siteData.products,
+        categories: siteData.categories,
+        company:    siteData.company,
+        stats:      siteData.stats,
+        services:   siteData.services,
+        news:       siteData.news,
+      };
+      const res = await fetch('/api/save-data', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+
+      // Clear local cache after successful publish
+      localStorage.removeItem(LOCAL_KEY);
+      setSaveMsg({ type: 'success', text: '✅ Đã lưu lên GitHub! Website sẽ cập nhật sau ~1 phút.' });
+    } catch (err) {
+      setSaveMsg({ type: 'error', text: `❌ Lỗi: ${err.message}` });
+    } finally {
+      setSaving(false);
+    }
   };
 
-  const resetToDefault = async () => {
-    // Re-seed from data.json via seed endpoint (requires SEED_KEY)
-    setSiteData({ ...defaultData, _loaded: true });
+  const resetToDefault = () => {
+    localStorage.removeItem(LOCAL_KEY);
+    setSiteData(defaultData);
   };
+
+  // Có thay đổi chưa publish không?
+  const hasUnsaved = Boolean(localStorage.getItem(LOCAL_KEY));
 
   return (
     <AdminContext.Provider value={{
       isLoggedIn, login, logout, changePassword,
-      siteData, loading, apiError,
+      siteData, loading: false, // always instant now
+      saving, saveMsg, hasUnsaved,
+      publishToGitHub,
       addProduct, updateProduct, deleteProduct,
       updateCompany,
       addCategory, updateCategory, deleteCategory,
