@@ -41,7 +41,7 @@ function SectionHeader({ title, subtitle, onViewAll }) {
 
 function ProductSection({ title, subtitle, products, onProductClick, onNavigate }) {
   return (
-    <Paper component="section" elevation={0} sx={{ p: { xs: 1.5, md: 2 }, mb: 2, borderRadius: 1, border: '1px solid #ebebeb' }}>
+    <Paper component="section" elevation={0} sx={{ p: { xs: 1.2, md: 2 }, mb: 1.5, borderRadius: 1, border: '1px solid #ebebeb' }}>
       <SectionHeader title={title} subtitle={subtitle} onViewAll={() => onNavigate('products')} />
       <Grid container spacing={{ xs: 1, md: 1.5 }}>
         {products.map((p) => (
@@ -82,7 +82,7 @@ export default function Home({ onProductClick, onNavigate }) {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 3 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 1.5, md: 3 }, px: { xs: 1, sm: 2, md: 3 } }}>
         <Grid container spacing={2}>
           {/* ── Main content ── */}
           <Grid item xs={12} md={9}>

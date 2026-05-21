@@ -33,7 +33,7 @@ export default function Contact() {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 1.5, md: 4 }, px: { xs: 1, sm: 2, md: 3 } }}>
         <Grid container spacing={3}>
           {/* Contact Info */}
           <Grid item xs={12} md={5}>

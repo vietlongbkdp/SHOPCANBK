@@ -43,7 +43,7 @@ export default function Services() {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
+      <Container maxWidth="lg" sx={{ py: { xs: 1.5, md: 4 }, px: { xs: 1, sm: 2, md: 3 } }}>
         {/* Services Grid */}
         <Grid container spacing={2} mb={3}>
           {services.map((s) => (

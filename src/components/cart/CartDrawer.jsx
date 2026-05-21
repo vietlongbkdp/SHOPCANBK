@@ -21,7 +21,7 @@ export default function CartDrawer({ open, onClose }) {
 
   return (
     <Drawer anchor="right" open={open} onClose={onClose}
-      PaperProps={{ sx: { width: { xs: '100vw', sm: 420 } } }}>
+      PaperProps={{ sx: { width: { xs: '100%', sm: 400 }, maxWidth: '100vw' } }}>
       {/* Header */}
       <Stack direction="row" alignItems="center" justifyContent="space-between"
         sx={{ px: 2, py: 1.5, background: '#c62828', color: 'white' }}>
