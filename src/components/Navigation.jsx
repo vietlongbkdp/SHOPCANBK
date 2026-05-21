@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   Box, Container, AppBar, Toolbar, Button, MenuItem, Menu,
   Stack, InputBase, useMediaQuery, useTheme, IconButton, Drawer,
-  List, ListItem, ListItemButton, ListItemText, Divider, Collapse, Badge,
+  List, ListItemButton, ListItemText, Divider, Collapse, Badge, Typography,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
