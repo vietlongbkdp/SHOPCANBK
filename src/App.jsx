@@ -78,14 +78,16 @@ function AppContent() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f5f5f5' }}>
-      <Header />
-      <Navigation
+      <Box sx={{ position: 'sticky', top: 0, zIndex: 1200 }}>
+        <Header />
+        <Navigation
         currentPage={currentPage}
         onNavigate={handleNavigate}
         onSearch={setSearchTerm}
         searchTerm={searchTerm}
         onOpenCart={() => setCartOpen(true)}
       />
+      </Box>
       <Box sx={{ flex: 1 }}>{renderPage()}</Box>
       <Footer />
       <FloatingContactWidget />
