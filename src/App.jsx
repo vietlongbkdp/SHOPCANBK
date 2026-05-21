@@ -24,6 +24,7 @@ import CartDrawer from './components/cart/CartDrawer';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
 import LoadingScreen from './components/LoadingScreen';
+import AdminEntryButton from './components/AdminEntryButton';
 
 const isAdminPath = () =>
   window.location.pathname === '/admin' ||
@@ -88,6 +89,7 @@ function AppContent() {
       <Box sx={{ flex: 1 }}>{renderPage()}</Box>
       <Footer />
       <FloatingContactWidget />
+      <AdminEntryButton onClick={() => setAdminMode(isLoggedIn ? 'dashboard' : 'login')} />
       <ProductDetail product={selectedProduct} onClose={() => setSelected(null)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </Box>

@@ -72,9 +72,7 @@ export default function AdminLogin({ onSuccess }) {
             </Stack>
           </form>
 
-          <Typography sx={{ mt: 2, fontSize: 12, color: '#aaa', textAlign: 'center' }}>
-            Mật khẩu mặc định: <strong>bachkhoa@2025</strong>
-          </Typography>
+
         </Box>
       </Paper>
     </Box>
