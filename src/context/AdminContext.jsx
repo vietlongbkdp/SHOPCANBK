@@ -17,7 +17,16 @@ export function AdminProvider({ children }) {
   const [siteData, setSiteData] = useState(() => {
     try {
       const local = localStorage.getItem(LOCAL_KEY);
-      if (local) return { ...defaultData, ...JSON.parse(local) };
+      if (local) {
+        const parsed = JSON.parse(local);
+        // Validate prices — if any product has price > 100 million, data is corrupted
+        const hasCorruption = parsed.products?.some(p => p.price > 100_000_000);
+        if (hasCorruption) {
+          localStorage.removeItem(LOCAL_KEY);
+          return defaultData;
+        }
+        return { ...defaultData, ...parsed };
+      }
     } catch {}
     return defaultData;
   });
