@@ -5,11 +5,9 @@ import { Box } from '@mui/material';
 import './App.css';
 import theme from './theme';
 
-// Contexts
 import { CartProvider } from './context/CartContext';
 import { AdminProvider, useAdmin } from './context/AdminContext';
 
-// Components
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -25,65 +23,53 @@ import FloatingContactWidget from './components/FloatingContactWidget';
 import CartDrawer from './components/cart/CartDrawer';
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
+import LoadingScreen from './components/LoadingScreen';
 
-// Detect /admin path
 const isAdminPath = () =>
   window.location.pathname === '/admin' ||
   window.location.pathname.startsWith('/admin/');
 
 function AppContent() {
-  const [currentPage, setCurrentPage] = useState('home');
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [cartOpen, setCartOpen] = useState(false);
+  const [currentPage, setCurrentPage]     = useState('home');
+  const [selectedProduct, setSelected]    = useState(null);
+  const [searchTerm, setSearchTerm]       = useState('');
+  const [cartOpen, setCartOpen]           = useState(false);
+  const [adminMode, setAdminMode]         = useState(() => isAdminPath() ? 'login' : false);
+  const { isLoggedIn, loading }           = useAdmin();
 
-  // Admin mode: false | 'login' | 'dashboard'
-  const [adminMode, setAdminMode] = useState(() => isAdminPath() ? 'login' : false);
-  const { isLoggedIn } = useAdmin();
-
-  // When navigating to /admin directly, show admin
   useEffect(() => {
     if (isAdminPath() && !adminMode) setAdminMode('login');
   }, []);
 
-  // If already logged in and visiting /admin, go straight to dashboard
   useEffect(() => {
     if (isAdminPath() && isLoggedIn) setAdminMode('dashboard');
   }, [isLoggedIn]);
 
+  // Show loading screen while fetching from MongoDB
+  if (loading) return <LoadingScreen />;
+
+  if (adminMode === 'login')     return <AdminLogin onSuccess={() => setAdminMode('dashboard')} />;
+  if (adminMode === 'dashboard') return <AdminDashboard onExitAdmin={() => { setAdminMode(false); window.history.pushState({}, '', '/'); }} />;
+
   const handleNavigate = (page) => {
     setCurrentPage(page);
-    setSelectedProduct(null);
+    setSelected(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Clear /admin path when going back to site
     if (isAdminPath()) window.history.pushState({}, '', '/');
   };
-
-  const exitAdmin = () => {
-    setAdminMode(false);
-    window.history.pushState({}, '', '/');
-  };
-
-  // Admin screens take over whole page
-  if (adminMode === 'login') {
-    return <AdminLogin onSuccess={() => setAdminMode('dashboard')} />;
-  }
-  if (adminMode === 'dashboard') {
-    return <AdminDashboard onExitAdmin={exitAdmin} />;
-  }
 
   const renderPage = () => {
     switch (currentPage) {
       case 'introduction': return <Introduction />;
       case 'services':     return <Services />;
-      case 'products':     return <Products onProductClick={setSelectedProduct} />;
+      case 'products':     return <Products onProductClick={setSelected} />;
       case 'documents':    return <Documents />;
       case 'contact':      return <Contact />;
       default:
         return (
           <>
             <Hero onNavigate={handleNavigate} />
-            <Home onProductClick={setSelectedProduct} onNavigate={handleNavigate} />
+            <Home onProductClick={setSelected} onNavigate={handleNavigate} />
           </>
         );
     }
@@ -102,13 +88,13 @@ function AppContent() {
       <Box sx={{ flex: 1 }}>{renderPage()}</Box>
       <Footer />
       <FloatingContactWidget />
-      <ProductDetail product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+      <ProductDetail product={selectedProduct} onClose={() => setSelected(null)} />
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
     </Box>
   );
 }
 
-function App() {
+export default function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -120,5 +106,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;

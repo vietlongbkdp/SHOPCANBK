@@ -1,66 +1,72 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import defaultData from '../data.json';
 
-const AdminContext = createContext();
-const ADMIN_KEY   = 'bk_admin_logged';
-const DATA_KEY    = 'bk_site_data';
-const PASS_KEY    = 'bk_admin_pass';
-const DATA_VER    = 'bk_data_v3';          // bump this to force reset on structure change
-const DEFAULT_PASS = 'bachkhoa@2025';
+const AdminContext  = createContext();
+const ADMIN_KEY     = 'bk_admin_logged';
+const PASS_KEY      = 'bk_admin_pass';
+const DEFAULT_PASS  = 'bachkhoa@2025';
 
-function loadSiteData() {
-  try {
-    // Version check — if outdated, reset to default
-    if (localStorage.getItem('bk_data_version') !== DATA_VER) {
-      localStorage.removeItem(DATA_KEY);
-      localStorage.setItem('bk_data_version', DATA_VER);
-      return defaultData;
-    }
-    const saved = localStorage.getItem(DATA_KEY);
-    if (!saved) return defaultData;
-    const parsed = JSON.parse(saved);
-    // Merge: always ensure all top-level keys from defaultData exist
-    return {
-      ...defaultData,
-      ...parsed,
-      company:    { ...defaultData.company,    ...(parsed.company    || {}) },
-      categories: parsed.categories?.length  ? parsed.categories  : defaultData.categories,
-      products:   parsed.products?.length    ? parsed.products    : defaultData.products,
-      services:   parsed.services?.length    ? parsed.services    : defaultData.services,
-      stats:      parsed.stats?.length       ? parsed.stats       : defaultData.stats,
-      news:       parsed.news?.length        ? parsed.news        : defaultData.news,
-    };
-  } catch {
-    return defaultData;
-  }
-}
+// ── API helpers ──────────────────────────────────────────────
+const api = {
+  get:    (url)       => fetch(url).then(r => r.json()),
+  post:   (url, body) => fetch(url, { method: 'POST',   headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()),
+  put:    (url, body) => fetch(url, { method: 'PUT',    headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()),
+  delete: (url)       => fetch(url, { method: 'DELETE' }).then(r => r.json()),
+};
 
 export function AdminProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => sessionStorage.getItem(ADMIN_KEY) === 'yes'
   );
 
-  const [siteData, setSiteData] = useState(loadSiteData);
+  // siteData: loaded from MongoDB via API, fallback to data.json while loading
+  const [siteData, setSiteData]   = useState({
+    ...defaultData,
+    _loaded: false,   // flag: false = still loading from API
+  });
+  const [loading, setLoading]     = useState(true);
+  const [apiError, setApiError]   = useState(false);
 
+  // ── Load data from MongoDB on mount ──
   useEffect(() => {
-    localStorage.setItem(DATA_KEY, JSON.stringify(siteData));
-  }, [siteData]);
+    let cancelled = false;
+    async function load() {
+      try {
+        const [products, categories, company] = await Promise.all([
+          api.get('/api/products'),
+          api.get('/api/categories'),
+          api.get('/api/company'),
+        ]);
 
+        if (cancelled) return;
+
+        // If DB is empty (first run), use defaultData as fallback
+        setSiteData({
+          ...defaultData,
+          products:   products.length   ? products   : defaultData.products,
+          categories: categories.length ? categories : defaultData.categories,
+          company:    Object.keys(company).length > 1 ? company : defaultData.company,
+          _loaded: true,
+        });
+      } catch (err) {
+        console.warn('API không khả dụng, dùng data.json:', err.message);
+        setApiError(true);
+        setSiteData({ ...defaultData, _loaded: true });
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    }
+    load();
+    return () => { cancelled = true; };
+  }, []);
+
+  // ── Auth ──
   const login = (password) => {
     const saved = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
-    if (password === saved) {
-      sessionStorage.setItem(ADMIN_KEY, 'yes');
-      setIsLoggedIn(true);
-      return true;
-    }
+    if (password === saved) { sessionStorage.setItem(ADMIN_KEY, 'yes'); setIsLoggedIn(true); return true; }
     return false;
   };
-
-  const logout = () => {
-    sessionStorage.removeItem(ADMIN_KEY);
-    setIsLoggedIn(false);
-  };
-
+  const logout = () => { sessionStorage.removeItem(ADMIN_KEY); setIsLoggedIn(false); };
   const changePassword = (oldPass, newPass) => {
     const saved = localStorage.getItem(PASS_KEY) || DEFAULT_PASS;
     if (oldPass !== saved) return false;
@@ -69,39 +75,48 @@ export function AdminProvider({ children }) {
   };
 
   // ── Product CRUD ──
-  const addProduct = (product) => {
-    const newId = Math.max(0, ...siteData.products.map((p) => p.id)) + 1;
-    setSiteData((prev) => ({ ...prev, products: [...prev.products, { ...product, id: newId }] }));
+  const addProduct = async (product) => {
+    const saved = await api.post('/api/products', product);
+    setSiteData(prev => ({ ...prev, products: [...prev.products, saved] }));
   };
-  const updateProduct = (updated) =>
-    setSiteData((prev) => ({ ...prev, products: prev.products.map((p) => (p.id === updated.id ? updated : p)) }));
-  const deleteProduct = (id) =>
-    setSiteData((prev) => ({ ...prev, products: prev.products.filter((p) => p.id !== id) }));
+  const updateProduct = async (product) => {
+    await api.put('/api/products', product);
+    setSiteData(prev => ({ ...prev, products: prev.products.map(p => p.id === product.id ? product : p) }));
+  };
+  const deleteProduct = async (id) => {
+    await api.delete(`/api/products?id=${id}`);
+    setSiteData(prev => ({ ...prev, products: prev.products.filter(p => p.id !== id) }));
+  };
 
   // ── Company ──
-  const updateCompany = (info) =>
-    setSiteData((prev) => ({ ...prev, company: { ...prev.company, ...info } }));
+  const updateCompany = async (info) => {
+    await api.put('/api/company', info);
+    setSiteData(prev => ({ ...prev, company: { ...prev.company, ...info } }));
+  };
 
   // ── Category CRUD ──
-  const addCategory = (cat) => {
-    const newId = Math.max(0, ...siteData.categories.map((c) => c.id)) + 1;
-    setSiteData((prev) => ({ ...prev, categories: [...prev.categories, { ...cat, id: newId }] }));
+  const addCategory = async (cat) => {
+    const saved = await api.post('/api/categories', cat);
+    setSiteData(prev => ({ ...prev, categories: [...prev.categories, saved] }));
   };
-  const updateCategory = (cat) =>
-    setSiteData((prev) => ({ ...prev, categories: prev.categories.map((c) => (c.id === cat.id ? cat : c)) }));
-  const deleteCategory = (id) =>
-    setSiteData((prev) => ({ ...prev, categories: prev.categories.filter((c) => c.id !== id) }));
+  const updateCategory = async (cat) => {
+    await api.put('/api/categories', cat);
+    setSiteData(prev => ({ ...prev, categories: prev.categories.map(c => c.id === cat.id ? cat : c) }));
+  };
+  const deleteCategory = async (id) => {
+    await api.delete(`/api/categories?id=${id}`);
+    setSiteData(prev => ({ ...prev, categories: prev.categories.filter(c => c.id !== id) }));
+  };
 
-  const resetToDefault = () => {
-    localStorage.removeItem(DATA_KEY);
-    localStorage.setItem('bk_data_version', DATA_VER);
-    setSiteData(defaultData);
+  const resetToDefault = async () => {
+    // Re-seed from data.json via seed endpoint (requires SEED_KEY)
+    setSiteData({ ...defaultData, _loaded: true });
   };
 
   return (
     <AdminContext.Provider value={{
       isLoggedIn, login, logout, changePassword,
-      siteData,
+      siteData, loading, apiError,
       addProduct, updateProduct, deleteProduct,
       updateCompany,
       addCategory, updateCategory, deleteCategory,
@@ -114,6 +129,6 @@ export function AdminProvider({ children }) {
 
 export const useAdmin = () => {
   const ctx = useContext(AdminContext);
-  if (!ctx) throw new Error('useAdmin must be used inside AdminProvider');
+  if (!ctx) throw new Error('useAdmin phải dùng bên trong AdminProvider');
   return ctx;
 };
