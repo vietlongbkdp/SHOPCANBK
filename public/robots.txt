@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://candientubk.com/sitemap.xml
+
+# Block unnecessary files
+Disallow: /src/
+Disallow: /*.json$
