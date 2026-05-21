@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Box } from '@mui/material';
@@ -22,39 +22,54 @@ import Services from './components/Services';
 import Products from './components/Products';
 import Documents from './components/Documents';
 import FloatingContactWidget from './components/FloatingContactWidget';
-
-// Cart
 import CartDrawer from './components/cart/CartDrawer';
-
-// Admin
 import AdminLogin from './components/admin/AdminLogin';
 import AdminDashboard from './components/admin/AdminDashboard';
+
+// Detect /admin path
+const isAdminPath = () =>
+  window.location.pathname === '/admin' ||
+  window.location.pathname.startsWith('/admin/');
 
 function AppContent() {
   const [currentPage, setCurrentPage] = useState('home');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [cartOpen, setCartOpen] = useState(false);
-  const [adminMode, setAdminMode] = useState(false); // 'login' | 'dashboard' | false
+
+  // Admin mode: false | 'login' | 'dashboard'
+  const [adminMode, setAdminMode] = useState(() => isAdminPath() ? 'login' : false);
   const { isLoggedIn } = useAdmin();
+
+  // When navigating to /admin directly, show admin
+  useEffect(() => {
+    if (isAdminPath() && !adminMode) setAdminMode('login');
+  }, []);
+
+  // If already logged in and visiting /admin, go straight to dashboard
+  useEffect(() => {
+    if (isAdminPath() && isLoggedIn) setAdminMode('dashboard');
+  }, [isLoggedIn]);
 
   const handleNavigate = (page) => {
     setCurrentPage(page);
     setSelectedProduct(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Clear /admin path when going back to site
+    if (isAdminPath()) window.history.pushState({}, '', '/');
   };
 
-  const handleOpenAdmin = () => {
-    if (isLoggedIn) setAdminMode('dashboard');
-    else setAdminMode('login');
+  const exitAdmin = () => {
+    setAdminMode(false);
+    window.history.pushState({}, '', '/');
   };
 
-  // Admin screens take over the whole page
+  // Admin screens take over whole page
   if (adminMode === 'login') {
     return <AdminLogin onSuccess={() => setAdminMode('dashboard')} />;
   }
   if (adminMode === 'dashboard') {
-    return <AdminDashboard onExitAdmin={() => setAdminMode(false)} />;
+    return <AdminDashboard onExitAdmin={exitAdmin} />;
   }
 
   const renderPage = () => {
@@ -64,7 +79,6 @@ function AppContent() {
       case 'products':     return <Products onProductClick={setSelectedProduct} />;
       case 'documents':    return <Documents />;
       case 'contact':      return <Contact />;
-      case 'home':
       default:
         return (
           <>
@@ -84,7 +98,6 @@ function AppContent() {
         onSearch={setSearchTerm}
         searchTerm={searchTerm}
         onOpenCart={() => setCartOpen(true)}
-        onOpenAdmin={handleOpenAdmin}
       />
       <Box sx={{ flex: 1 }}>{renderPage()}</Box>
       <Footer />

@@ -10,9 +10,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import { useCart } from '../context/CartContext';
-import { useAdmin } from '../context/AdminContext';
 import data from '../data.json';
 
 const navItems = [
@@ -26,14 +24,13 @@ const navItems = [
   { label: 'Liên Hệ', page: 'contact' },
 ];
 
-export default function Navigation({ onNavigate, onSearch, searchTerm, currentPage, onOpenCart, onOpenAdmin }) {
+export default function Navigation({ onNavigate, onSearch, searchTerm, currentPage, onOpenCart }) {
   const [productsAnchor, setProductsAnchor] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { totalCount } = useCart();
-  const { isLoggedIn } = useAdmin();
 
   return (
     <AppBar position="sticky" sx={{ background: 'linear-gradient(90deg, #1b5e20 0%, #2e7d32 100%)', top: 0, zIndex: 1100, boxShadow: '0 2px 8px rgba(0,0,0,0.25)' }}>
@@ -106,11 +103,6 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
               </Badge>
             </IconButton>
 
-            {/* Admin */}
-            <IconButton onClick={onOpenAdmin} sx={{ color: isLoggedIn ? '#ffeb3b' : 'rgba(255,255,255,0.6)' }}
-              title={isLoggedIn ? 'Vào trang quản trị' : 'Đăng nhập Admin'}>
-              <AdminPanelSettingsIcon sx={{ fontSize: 22 }} />
-            </IconButton>
           </Stack>
         </Toolbar>
       </Container>

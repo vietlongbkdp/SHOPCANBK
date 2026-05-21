@@ -88,7 +88,7 @@ export default function CategoryManager() {
         <DialogTitle sx={{ fontWeight: 700, background: '#c62828', color: 'white' }}>
           {editing ? '✏️ Sửa Danh Mục' : '➕ Thêm Danh Mục'}
         </DialogTitle>
-        <DialogContent sx={{ pt: 3 }}>
+        <DialogContent sx={{ pt: "20px !important", px: 3, pb: 2 }}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8}>
               <TextField fullWidth size="small" label="Tên danh mục *" name="name" value={form.name} onChange={handleChange} required />
