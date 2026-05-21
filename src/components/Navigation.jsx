@@ -19,7 +19,6 @@ const navItems = [
     children: data.categories.map(c => ({ label: c.name, page: 'products' })),
   },
   { label: 'Sửa Chữa', page: 'services' },
-  { label: 'Tin Tức', page: 'news' },
   { label: 'Liên Hệ', page: 'contact' },
 ];
 

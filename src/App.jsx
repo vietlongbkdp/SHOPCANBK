@@ -15,7 +15,6 @@ import Introduction from './components/Introduction';
 import Services from './components/Services';
 import Products from './components/Products';
 import Documents from './components/Documents';
-import News from './components/News';
 import FloatingContactWidget from './components/FloatingContactWidget';
 
 function App() {
@@ -35,7 +34,6 @@ function App() {
       case 'services': return <Services />;
       case 'products': return <Products onProductClick={setSelectedProduct} />;
       case 'documents': return <Documents />;
-      case 'news': return <News />;
       case 'contact': return <Contact />;
       case 'home':
       default:
