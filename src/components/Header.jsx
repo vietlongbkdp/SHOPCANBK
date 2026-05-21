@@ -43,7 +43,7 @@ export default function Header() {
 
       {/* Logo bar */}
       <Box sx={{ background: '#fff', borderBottom: '2px solid #f0f0f0', py: { xs: 1, md: 1.8 } }}>
-        <Container maxWidth="lg" sx={{ px: { xs: 1.5, md: 3 } }}>
+        <Container maxWidth="lg" >
           <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
 
             {/* Logo */}

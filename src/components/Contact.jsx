@@ -23,7 +23,7 @@ export default function Contact() {
     <Box component="main" sx={{ background: '#f5f5f5', minHeight: '60vh' }}>
       {/* Header */}
       <Box sx={{ background: 'linear-gradient(135deg,#c62828,#e65100)', color: '#fff', py: { xs: 3, md: 5 } }}>
-        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
+        <Container maxWidth="lg" >
           <Typography component="h1" sx={{ fontWeight: 800, mb: 0.5, fontSize: { xs: '20px', md: '34px' } }}>
             LIÊN HỆ
           </Typography>

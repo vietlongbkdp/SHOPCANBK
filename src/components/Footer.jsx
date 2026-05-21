@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <Box component="footer" sx={{ background: '#1a1a1a', color: '#fff', pt: { xs: 3, md: 5 }, pb: 2 }}>
-      <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
+      <Container maxWidth="lg" >
         <Grid container spacing={{ xs: 3, md: 4 }} mb={{ xs: 2, md: 3 }}>
 
           {/* Brand */}

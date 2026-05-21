@@ -18,7 +18,7 @@ export default function Services() {
     <Box component="main" sx={{ background: '#f5f5f5', minHeight: '60vh' }}>
       {/* Hero */}
       <Box sx={{ background: 'linear-gradient(135deg,#8e0000,#c62828)', color: '#fff', py: { xs: 3, md: 5 } }}>
-        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
+        <Container maxWidth="lg" >
           <Typography component="h1" sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '20px', md: '34px' } }}>
             DỊCH VỤ SỬA CHỮA & BẢO TRÌ
           </Typography>

@@ -164,7 +164,7 @@ export default function Hero({ onNavigate }) {
 
       {/* Category scroll strip */}
       <Box sx={{ background: '#fff', borderBottom: '1px solid #ebebeb', py: { xs: 0.6, md: 0.8 } }}>
-        <Container maxWidth="lg" sx={{ px: { xs: 1, md: 3 } }}>
+        <Container maxWidth="lg" >
           <Box sx={{
             overflowX: 'auto', scrollbarWidth: 'none',
             '&::-webkit-scrollbar': { display: 'none' },
