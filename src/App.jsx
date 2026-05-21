@@ -78,7 +78,7 @@ function AppContent() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f5f5f5' }}>
-      <Box sx={{ position: 'sticky', top: 0, zIndex: 1200 }}>
+      <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1200, boxShadow: '0 2px 8px rgba(0,0,0,.12)' }}>
         <Header />
         <Navigation
         currentPage={currentPage}
@@ -88,7 +88,7 @@ function AppContent() {
         onOpenCart={() => setCartOpen(true)}
       />
       </Box>
-      <Box sx={{ flex: 1 }}>{renderPage()}</Box>
+      <Box sx={{ flex: 1, mt: { xs: "94px", md: "150px" } }}>{renderPage()}</Box>
       <Footer />
       <FloatingContactWidget />
       <AdminEntryButton onClick={() => setAdminMode(isLoggedIn ? 'dashboard' : 'login')} />
