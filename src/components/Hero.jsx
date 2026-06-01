@@ -71,16 +71,16 @@ export default function Hero({ onNavigate }) {
                   ))}
                 </Stack>
 
-                <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={1}>
+                <Stack direction="row" spacing={1}>
                   <Button
                     component="a"
                     href={`tel:${company.phone1.replace(/\s/g, '')}`}
                     variant="contained"
                     startIcon={<PhoneIcon />}
-                    fullWidth
                     sx={{
                       background: '#c62828', fontWeight: 700,
-                      fontSize: { xs: 13.5, md: 14 }, py: 1.1,
+                      fontSize: { xs: 12, md: 13.5 }, py: 1,
+                      whiteSpace: 'nowrap', flex: 1,
                       '&:hover': { background: '#8e0000' },
                     }}
                   >
@@ -89,15 +89,15 @@ export default function Hero({ onNavigate }) {
                   <Button
                     variant="outlined"
                     startIcon={<ShoppingCartIcon />}
-                    fullWidth
                     onClick={() => onNavigate('products')}
                     sx={{
                       color: '#fff', borderColor: 'rgba(255,255,255,.65)',
-                      fontWeight: 600, fontSize: { xs: 13, md: 13.5 }, py: 1,
+                      fontWeight: 600, fontSize: { xs: 12, md: 13.5 }, py: 1,
+                      whiteSpace: 'nowrap', flex: 1,
                       '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.1)' },
                     }}
                   >
-                    Xem Sản Phẩm
+                    Xem SP
                   </Button>
                 </Stack>
 
