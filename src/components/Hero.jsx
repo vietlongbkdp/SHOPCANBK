@@ -18,16 +18,17 @@ export default function Hero({ onNavigate }) {
 
   return (
     <Box component="section">
-      {/* ── Banner ── */}
+
+      {/* ── Banner 2 cột ── */}
       <Box sx={{
         background: 'linear-gradient(135deg,#0d1b4b 0%,#1a3a8a 60%,#0d47a1 100%)',
-        py: { xs: 1.5, md: 2.5 },
+        py: { xs: 2, md: 3 },
       }}>
         <Container maxWidth="lg">
-          <Grid container spacing={2} alignItems="center">
+          <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
 
-            {/* Ảnh banner — chứa trong box cố định, hiện đầy đủ */}
-            <Grid item xs={12} md={7}>
+            {/* Cột trái: ảnh banner */}
+            <Grid item xs={12} sm={6}>
               <Box
                 component="img"
                 src="/banner.png"
@@ -37,61 +38,84 @@ export default function Hero({ onNavigate }) {
                   height: 'auto',
                   display: 'block',
                   objectFit: 'contain',
-                  borderRadius: 1.5,
-                  border: '1px solid rgba(255,255,255,.12)',
+                  borderRadius: 2,
                 }}
               />
             </Grid>
 
-            {/* Panel CTA bên phải */}
-            <Grid item xs={12} md={5}>
-              <Box sx={{ color: '#fff', px: { xs: 0, md: 1 } }}>
+            {/* Cột phải: nội dung */}
+            <Grid item xs={12} sm={6}>
+              <Box sx={{ color: '#fff' }}>
                 <Typography sx={{
-                  fontWeight: 800, fontSize: { xs: 18, md: 22 },
-                  lineHeight: 1.2, mb: 0.6,
+                  fontWeight: 800, lineHeight: 1.2, mb: 0.6,
+                  fontSize: { xs: '20px', md: '26px' },
                 }}>
-                  Cân Điện Tử Bách Khoa
+                  Cân Điện Tử<br />Bách Khoa
                 </Typography>
-                <Typography sx={{ color: '#ffcc02', fontWeight: 700, fontSize: { xs: 12.5, md: 13.5 }, mb: 2 }}>
+
+                <Typography sx={{
+                  color: '#ffcc02', fontWeight: 700, mb: { xs: 1.5, md: 2 },
+                  fontSize: { xs: 13, md: 14 },
+                }}>
                   Uy Tín – Chuyên Nghiệp – Nhanh Chóng
                 </Typography>
 
-                <Stack spacing={0.8} mb={2.5}>
+                <Stack spacing={0.9} mb={{ xs: 2, md: 2.5 }}>
                   {HIGHLIGHTS.map((h) => (
                     <Stack key={h} direction="row" spacing={0.8} alignItems="flex-start">
-                      <CheckCircleIcon sx={{ color: '#69f0ae', fontSize: 15, mt: 0.2, flexShrink: 0 }} />
-                      <Typography sx={{ color: 'rgba(255,255,255,.9)', fontSize: { xs: 12.5, md: 13 }, lineHeight: 1.5 }}>
+                      <CheckCircleIcon sx={{ color: '#69f0ae', fontSize: 16, mt: 0.15, flexShrink: 0 }} />
+                      <Typography sx={{ color: 'rgba(255,255,255,.9)', fontSize: { xs: 13, md: 13.5 }, lineHeight: 1.5 }}>
                         {h}
                       </Typography>
                     </Stack>
                   ))}
                 </Stack>
 
-                <Stack spacing={1}>
+                <Stack direction={{ xs: 'column', sm: 'column', md: 'row' }} spacing={1}>
                   <Button
-                    component="a" href={`tel:${company.phone1.replace(/\s/g, '')}`}
-                    variant="contained" startIcon={<PhoneIcon />} fullWidth
-                    sx={{ background: '#c62828', fontWeight: 700, fontSize: { xs: 13, md: 14 }, py: 1, '&:hover': { background: '#8e0000' } }}
+                    component="a"
+                    href={`tel:${company.phone1.replace(/\s/g, '')}`}
+                    variant="contained"
+                    startIcon={<PhoneIcon />}
+                    fullWidth
+                    sx={{
+                      background: '#c62828', fontWeight: 700,
+                      fontSize: { xs: 13.5, md: 14 }, py: 1.1,
+                      '&:hover': { background: '#8e0000' },
+                    }}
                   >
                     {company.phone1}
                   </Button>
                   <Button
-                    variant="outlined" startIcon={<ShoppingCartIcon />} fullWidth
+                    variant="outlined"
+                    startIcon={<ShoppingCartIcon />}
+                    fullWidth
                     onClick={() => onNavigate('products')}
-                    sx={{ color: '#fff', borderColor: 'rgba(255,255,255,.6)', fontWeight: 600, fontSize: { xs: 12.5, md: 13.5 }, py: 0.9, '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.1)' } }}
+                    sx={{
+                      color: '#fff', borderColor: 'rgba(255,255,255,.65)',
+                      fontWeight: 600, fontSize: { xs: 13, md: 13.5 }, py: 1,
+                      '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.1)' },
+                    }}
                   >
                     Xem Sản Phẩm
                   </Button>
-                  <Button
-                    variant="text" startIcon={<BuildIcon />} fullWidth
-                    onClick={() => onNavigate('services')}
-                    sx={{ color: 'rgba(255,255,255,.75)', fontWeight: 600, fontSize: { xs: 12, md: 13 }, '&:hover': { color: '#fff', background: 'rgba(255,255,255,.08)' } }}
-                  >
-                    Dịch Vụ Sửa Chữa
-                  </Button>
                 </Stack>
+
+                <Button
+                  startIcon={<BuildIcon />}
+                  fullWidth
+                  onClick={() => onNavigate('services')}
+                  sx={{
+                    mt: 0.8, color: 'rgba(255,255,255,.7)',
+                    fontWeight: 600, fontSize: { xs: 12.5, md: 13 },
+                    '&:hover': { color: '#fff', background: 'rgba(255,255,255,.08)' },
+                  }}
+                >
+                  Dịch Vụ Sửa Chữa Cân
+                </Button>
               </Box>
             </Grid>
+
           </Grid>
         </Container>
       </Box>
