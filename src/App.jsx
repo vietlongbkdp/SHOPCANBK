@@ -79,7 +79,7 @@ function AppContent() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#f5f5f5' }}>
       <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1200, boxShadow: '0 2px 8px rgba(0,0,0,.12)' }}>
-        <Header />
+        <Header onNavigate={handleNavigate} />
         <Navigation
         currentPage={currentPage}
         onNavigate={handleNavigate}

@@ -5,7 +5,7 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import { useAdmin } from '../context/AdminContext';
 
-export default function Header() {
+export default function Header({ onNavigate }) {
   const { siteData } = useAdmin();
   const { company } = siteData;
 
@@ -42,45 +42,44 @@ export default function Header() {
       </Box>
 
       {/* Logo bar */}
-      <Box sx={{ background: '#fff', borderBottom: '2px solid #f0f0f0', py: { xs: 1, md: 1.8 } }}>
-        <Container maxWidth="lg" >
+      <Box sx={{ background: '#fff', borderBottom: '2px solid #f0f0f0', py: { xs: 0.8, md: 1.2 } }}>
+        <Container maxWidth="lg">
           <Stack direction="row" alignItems="center" justifyContent="space-between" gap={1}>
 
-            {/* Logo */}
-            <Stack direction="row" alignItems="center" spacing={{ xs: 1, md: 1.5 }} sx={{ minWidth: 0, flex: 1 }}>
-              <Box sx={{
-                width: { xs: 38, md: 56 }, height: { xs: 38, md: 56 },
-                background: 'linear-gradient(135deg,#c62828,#e65100)',
-                borderRadius: 1.5, display: 'flex', alignItems: 'center',
-                justifyContent: 'center', fontSize: { xs: 20, md: 28 }, flexShrink: 0,
-              }} role="img" aria-label="Logo">⚖️</Box>
-              <Box sx={{ minWidth: 0 }}>
-                <Typography component="h1" sx={{
-                  fontWeight: 800, color: '#c62828', lineHeight: 1.15,
-                  fontSize: { xs: '13.5px', sm: '17px', md: '22px' },
-                  letterSpacing: 0.2,
-                  whiteSpace: { xs: 'normal', sm: 'nowrap' },
-                }}>
-                  CÂN ĐIỆN TỬ BÁCH KHOA
-                </Typography>
-                <Typography sx={{
-                  color: '#999', fontStyle: 'italic',
-                  fontSize: { xs: '10px', md: '12px' },
-                  display: { xs: 'none', sm: 'block' },
-                }}>
-                  {company.slogan}
-                </Typography>
-              </Box>
-            </Stack>
+            {/* Logo — clickable → trang chủ */}
+            <Box
+              onClick={() => onNavigate?.('home')}
+              sx={{ cursor: 'pointer', display: 'flex', alignItems: 'center', flexShrink: 0 }}
+              role="link"
+              aria-label="Trang chủ Cân Điện Tử Bách Khoa"
+            >
+              <Box
+                component="img"
+                src="/logo.jpg"
+                alt="Cân Điện Tử Bách Khoa"
+                sx={{
+                  height: { xs: 52, md: 72 },
+                  width: 'auto',
+                  objectFit: 'contain',
+                  display: 'block',
+                  transition: 'opacity .2s',
+                  '&:hover': { opacity: 0.85 },
+                }}
+              />
+            </Box>
 
             {/* Phone buttons */}
-            <Stack direction="row" spacing={{ xs: 0.6, md: 1 }} flexShrink={0}>
+            <Stack direction="row" spacing={1} flexShrink={0}>
               {[
-                { label: 'CN Huế', phone: company.phone1 },
+                { label: 'CN Huế',     phone: company.phone1 },
                 { label: 'CN Đà Nẵng', phone: company.phone2 },
               ].map(({ label, phone }) => (
-                <Link key={phone} component="a" href={`tel:${phone.replace(/\s/g, '')}`}
-                  aria-label={`Gọi ${label}`}>
+                <Link
+                  key={phone}
+                  component="a"
+                  href={`tel:${phone.replace(/\s/g, '')}`}
+                  aria-label={`Gọi ${label}`}
+                >
                   <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, md: 0.8 }}
                     sx={{
                       background: '#c62828', color: '#fff',
