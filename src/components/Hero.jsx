@@ -25,10 +25,10 @@ export default function Hero({ onNavigate }) {
         py: { xs: 2, md: 3 },
       }}>
         <Container maxWidth="lg">
-          <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center">
+          <Grid container spacing={{ xs: 2, md: 3 }} alignItems="center" sx={{ flexWrap: "nowrap" }}>
 
             {/* Cột trái: ảnh banner */}
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6}>
               <Box
                 component="img"
                 src="/banner.png"
@@ -44,7 +44,7 @@ export default function Hero({ onNavigate }) {
             </Grid>
 
             {/* Cột phải: nội dung */}
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={6}>
               <Box sx={{ color: '#fff' }}>
                 <Typography sx={{
                   fontWeight: 800, lineHeight: 1.2, mb: 0.6,
