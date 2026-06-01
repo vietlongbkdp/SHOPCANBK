@@ -23,6 +23,8 @@ export default function Hero({ onNavigate }) {
       <Box sx={{
         background: 'linear-gradient(135deg,#0d1b4b 0%,#1a3a8a 60%,#0d47a1 100%)',
         position: 'relative',
+        pt: { xs: 1.5, md: 2 },
+        pb: { xs: 0, md: 2 },
       }}>
         {/* Wrapper giới hạn chiều cao + canh giữa ảnh */}
         <Box sx={{
@@ -37,12 +39,13 @@ export default function Hero({ onNavigate }) {
             alt="Cân Điện Tử Bách Khoa"
             sx={{
               display: 'block',
-              width: '100%',
+              width: { xs: '100%', md: '62%' },
               height: 'auto',
-              maxHeight: { xs: 'none', md: 380 },
-              objectFit: { xs: 'contain', md: 'contain' },
+              objectFit: 'contain',
               objectPosition: 'center center',
               mx: 'auto',
+              px: { xs: 1, md: 2 },
+              borderRadius: { xs: 1, md: 2 },
             }}
           />
 
