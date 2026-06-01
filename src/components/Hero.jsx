@@ -28,29 +28,19 @@ export default function Hero({ onNavigate }) {
 
             {/* Ảnh banner — chứa trong box cố định, hiện đầy đủ */}
             <Grid item xs={12} md={7}>
-              <Box sx={{
-                background: 'rgba(255,255,255,.06)',
-                borderRadius: 2,
-                border: '1px solid rgba(255,255,255,.12)',
-                overflow: 'hidden',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                p: { xs: 1, md: 1.5 },
-              }}>
-                <Box
-                  component="img"
-                  src="/banner.png"
-                  alt="Cân Điện Tử Bách Khoa"
-                  sx={{
-                    width: '100%',
-                    height: 'auto',
-                    display: 'block',
-                    objectFit: 'contain',
-                    borderRadius: 1,
-                  }}
-                />
-              </Box>
+              <Box
+                component="img"
+                src="/banner.png"
+                alt="Cân Điện Tử Bách Khoa"
+                sx={{
+                  width: '100%',
+                  height: 'auto',
+                  display: 'block',
+                  objectFit: 'contain',
+                  borderRadius: 1.5,
+                  border: '1px solid rgba(255,255,255,.12)',
+                }}
+              />
             </Grid>
 
             {/* Panel CTA bên phải */}
