@@ -58,7 +58,7 @@ export default function Hero({ onNavigate }) {
         transition: 'background 0.6s ease',
         position: 'relative',
         overflow: 'hidden',
-        minHeight: { xs: 'auto', md: 320 },
+        height: { xs: 320, sm: 360, md: 420 },
         display: 'flex',
         alignItems: 'center',
       }}>
@@ -66,7 +66,7 @@ export default function Hero({ onNavigate }) {
         <Box sx={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,.04)', pointerEvents: 'none' }} />
         <Box sx={{ position: 'absolute', bottom: -80, left: -40, width: 220, height: 220, borderRadius: '50%', background: 'rgba(255,255,255,.04)', pointerEvents: 'none' }} />
 
-        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, py: { xs: 2, md: 3 } }}>
+        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, py: { xs: 1.5, md: 2 } }}>
           {/* Slide 0: ảnh banner */}
           {slide.showImage && (
             <Grid container spacing={{ xs: 2, md: 4 }} alignItems="center" justifyContent="center">
@@ -75,11 +75,10 @@ export default function Hero({ onNavigate }) {
                   borderRadius: 2, overflow: 'hidden',
                   boxShadow: '0 8px 32px rgba(0,0,0,.3)',
                   border: '2px solid rgba(255,255,255,.15)',
-                  mx: 'auto',
-                  maxWidth: { xs: '100%', md: '100%' },
+                  height: { xs: 180, sm: 220, md: 300 },
                 }}>
                   <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa"
-                    sx={{ width: '100%', height: 'auto', display: 'block' }} />
+                    sx={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
                 </Box>
               </Grid>
               <Grid item xs={12} md={5}>
