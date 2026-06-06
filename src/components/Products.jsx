@@ -24,7 +24,7 @@ export default function Products({ onProductClick }) {
 
   return (
     <Box sx={{ background: '#f4f6f8', minHeight: '60vh' }}>
-      <Container maxWidth="xl" sx={{ py: { xs: 2, md: 3 } }}>
+      <Container maxWidth="xl" sx={{ py: { xs: 2, md: 3 }, px: { xs: 2, md: 3 } }}>
         <Box mb={2}>
           <Typography component="h1" sx={{ fontWeight: 800, color: '#1a1a2e', fontSize: { xs: '18px', md: '24px' } }}>
             Sản Phẩm Cân Điện Tử

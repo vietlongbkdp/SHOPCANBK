@@ -72,25 +72,25 @@ export default function Home({ onProductClick, onNavigate }) {
       {/* Stats bar */}
       <Box sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', color: '#fff', py: { xs: 1.2, md: 2 } }}>
         <Container maxWidth="xl">
-          <Grid container>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
             {stats.map((s, i) => (
-              <Grid key={i} item xs={3} sx={{
-                textAlign: 'center', px: 1,
+              <Box key={i} sx={{
+                flex: 1, textAlign: 'center', px: { xs: 0.5, md: 1 },
                 borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,.2)' : 'none',
               }}>
-                <Typography sx={{ fontWeight: 800, fontSize: { xs: '18px', sm: '22px', md: '30px' }, lineHeight: 1 }}>
+                <Typography sx={{ fontWeight: 800, fontSize: { xs: '16px', sm: '22px', md: '30px' }, lineHeight: 1 }}>
                   {s.value}
                 </Typography>
-                <Typography sx={{ opacity: .85, fontSize: { xs: '9px', sm: '11px', md: '13px' }, mt: 0.3, lineHeight: 1.3 }}>
+                <Typography sx={{ opacity: .85, fontSize: { xs: '9px', sm: '11px', md: '13px' }, mt: 0.3, lineHeight: 1.2 }}>
                   {s.label}
                 </Typography>
-              </Grid>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Container>
       </Box>
 
-      <Container maxWidth="xl" sx={{ py: { xs: 1.5, md: 3 } }}>
+      <Container maxWidth="xl" sx={{ py: { xs: 2, md: 3 } }}>
         <Grid container spacing={{ xs: 1.5, md: 2.5 }}>
 
           {/* ── Main content ── */}

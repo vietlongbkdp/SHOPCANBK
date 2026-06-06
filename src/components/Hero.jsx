@@ -58,7 +58,7 @@ export default function Hero({ onNavigate }) {
         transition: 'background 0.6s ease',
         position: 'relative',
         overflow: 'hidden',
-        minHeight: { xs: 240, sm: 280, md: 340 },
+        minHeight: { xs: 'auto', md: 320 },
         display: 'flex',
         alignItems: 'center',
       }}>
@@ -66,40 +66,41 @@ export default function Hero({ onNavigate }) {
         <Box sx={{ position: 'absolute', top: -60, right: -60, width: 300, height: 300, borderRadius: '50%', background: 'rgba(255,255,255,.04)', pointerEvents: 'none' }} />
         <Box sx={{ position: 'absolute', bottom: -80, left: -40, width: 220, height: 220, borderRadius: '50%', background: 'rgba(255,255,255,.04)', pointerEvents: 'none' }} />
 
-        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
+        <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1, py: { xs: 2, md: 3 } }}>
           {/* Slide 0: ảnh banner */}
           {slide.showImage && (
-            <Grid container spacing={{ xs: 2, md: 4 }} alignItems="center">
-              <Grid item xs={12} md={6}>
+            <Grid container spacing={{ xs: 2, md: 4 }} alignItems="center" justifyContent="center">
+              <Grid item xs={12} md={7}>
                 <Box sx={{
-                  borderRadius: { xs: 2, md: 3 },
-                  overflow: 'hidden',
+                  borderRadius: 2, overflow: 'hidden',
                   boxShadow: '0 8px 32px rgba(0,0,0,.3)',
                   border: '2px solid rgba(255,255,255,.15)',
+                  mx: 'auto',
+                  maxWidth: { xs: '100%', md: '100%' },
                 }}>
                   <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa"
                     sx={{ width: '100%', height: 'auto', display: 'block' }} />
                 </Box>
               </Grid>
-              <Grid item xs={12} md={6}>
-                <Box sx={{ color: '#fff', textAlign: { xs: 'center', md: 'left' } }}>
-                  <Typography sx={{ fontWeight: 800, fontSize: { xs: '22px', md: '32px' }, lineHeight: 1.2, mb: 1 }}>
-                    Cân Điện Tử<br />Bách Khoa
+              <Grid item xs={12} md={5}>
+                <Box sx={{ color: '#fff', textAlign: 'center' }}>
+                  <Typography sx={{ fontWeight: 800, fontSize: { xs: '20px', sm: '26px', md: '30px' }, lineHeight: 1.2, mb: 0.8 }}>
+                    Cân Điện Tử Bách Khoa
                   </Typography>
-                  <Typography sx={{ color: '#ffcc02', fontWeight: 700, fontSize: { xs: 14, md: 16 }, mb: 2 }}>
+                  <Typography sx={{ color: '#ffcc02', fontWeight: 700, fontSize: { xs: 13, md: 15 }, mb: 2 }}>
                     Uy Tín – Chuyên Nghiệp – Nhanh Chóng
                   </Typography>
-                  <Stack direction={{ xs: 'row', md: 'column' }} spacing={1.2} justifyContent={{ xs: 'center', md: 'flex-start' }}>
+                  <Stack direction="row" spacing={1} justifyContent="center" flexWrap="wrap" gap={1}>
                     <Button component="a" href={`tel:${company.phone1.replace(/\s/g,'')}`}
                       variant="contained"
                       startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 14 }} />}
-                      sx={{ background: '#c62828', fontWeight: 700, fontSize: { xs: 13, md: 15 }, py: { xs: 1, md: 1.2 }, borderRadius: 2, '&:hover': { background: '#8e0000' } }}>
+                      sx={{ background: '#c62828', fontWeight: 700, fontSize: { xs: 13, md: 14 }, py: 1, borderRadius: 2, '&:hover': { background: '#8e0000' } }}>
                       {company.phone1}
                     </Button>
                     <Button variant="outlined"
                       startIcon={<FontAwesomeIcon icon={faCartShopping} style={{ fontSize: 14 }} />}
                       onClick={() => onNavigate('products')}
-                      sx={{ color: '#fff', borderColor: 'rgba(255,255,255,.6)', fontWeight: 600, fontSize: { xs: 13, md: 14 }, py: { xs: 0.9, md: 1.1 }, borderRadius: 2, '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.12)' } }}>
+                      sx={{ color: '#fff', borderColor: 'rgba(255,255,255,.6)', fontWeight: 600, fontSize: { xs: 13, md: 14 }, py: 0.9, borderRadius: 2, '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.12)' } }}>
                       Xem Sản Phẩm
                     </Button>
                   </Stack>
