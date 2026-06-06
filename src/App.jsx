@@ -88,7 +88,7 @@ function AppContent() {
         onOpenCart={() => setCartOpen(true)}
       />
       </Box>
-      <Box sx={{ flex: 1, mt: { xs: "94px", md: "150px" } }}>{renderPage()}</Box>
+      <Box sx={{ flex: 1, mt: { xs: "124px", sm: "124px", md: "186px", lg: "186px" } }}>{renderPage()}</Box>
       <Footer />
       <FloatingContactWidget />
       <AdminEntryButton onClick={() => setAdminMode(isLoggedIn ? 'dashboard' : 'login')} />
