@@ -1,40 +1,37 @@
-import { Box, Container, Grid, Typography, Paper, Button, Stack, Divider, Avatar } from '@mui/material';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import BuildIcon from '@mui/icons-material/Build';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
-import SupportAgentIcon from '@mui/icons-material/SupportAgent';
-import StarIcon from '@mui/icons-material/Star';
+import { Box, Container, Grid, Typography, Paper, Button, Stack, Divider, Avatar, Chip } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowRight, faScrewdriverWrench, faShieldHalved, faTruck,
+  faHeadset, faStar, faFire, faPhone,
+} from '@fortawesome/free-solid-svg-icons';
 import ProductCard from './ProductCard';
 import { useAdmin } from '../context/AdminContext';
 
 const WHY_US = [
-  { icon: <VerifiedIcon sx={{ color: '#c62828', fontSize: 24 }} />, title: 'Chính Hãng 100%', desc: 'Nguồn gốc rõ ràng, bảo hành từ nhà sản xuất.' },
-  { icon: <BuildIcon sx={{ color: '#c62828', fontSize: 24 }} />, title: 'Sửa Chữa Tận Nơi', desc: 'KTV đến tận nơi tại Huế & Đà Nẵng trong 2 giờ.' },
-  { icon: <LocalShippingIcon sx={{ color: '#c62828', fontSize: 24 }} />, title: 'Giao Hàng Toàn Quốc', desc: 'Giao hàng 24–48h, hỗ trợ COD.' },
-  { icon: <SupportAgentIcon sx={{ color: '#c62828', fontSize: 24 }} />, title: 'Hỗ Trợ 24/7', desc: 'Tư vấn miễn phí qua điện thoại và Zalo.' },
+  { icon: faShieldHalved, color: '#c62828', bg: '#fff5f5', title: 'Chính Hãng 100%', desc: 'Nguồn gốc rõ ràng, bảo hành chính hãng từ nhà sản xuất.' },
+  { icon: faScrewdriverWrench, color: '#e65100', bg: '#fff8f5', title: 'Sửa Chữa Tận Nơi', desc: 'KTV đến tận nơi tại Huế & Đà Nẵng trong vòng 2 giờ.' },
+  { icon: faTruck, color: '#1565c0', bg: '#f0f4ff', title: 'Giao Hàng Toàn Quốc', desc: 'Giao hàng 24–48h, hỗ trợ COD, đóng gói kỹ càng.' },
+  { icon: faHeadset, color: '#2e7d32', bg: '#f0faf0', title: 'Hỗ Trợ 24/7', desc: 'Tư vấn kỹ thuật miễn phí qua điện thoại và Zalo.' },
 ];
 
-function SectionHeader({ title, subtitle, onViewAll }) {
+function SectionHeader({ title, subtitle, onViewAll, icon }) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="flex-start" mb={1.5} gap={1}>
+    <Stack direction="row" justifyContent="space-between" alignItems="flex-end" mb={2} gap={1}>
       <Box>
-        <Box sx={{ width: 30, height: 3, background: '#c62828', borderRadius: 2, mb: 0.5 }} />
-        <Typography component="h2" sx={{
-          fontWeight: 700, color: '#111', lineHeight: 1.2,
-          fontSize: { xs: '13px', sm: '15px', md: '18px' },
-        }}>
-          {title}
-        </Typography>
-        {subtitle && (
-          <Typography sx={{ color: '#888', fontSize: { xs: 10.5, sm: 11.5, md: 12.5 }, mt: 0.2 }}>
-            {subtitle}
+        <Stack direction="row" spacing={1} alignItems="center" mb={0.4}>
+          {icon && <FontAwesomeIcon icon={icon} style={{ fontSize: 16, color: '#c62828' }} />}
+          <Typography component="h2"
+            sx={{ fontWeight: 700, color: '#1a1a2e', fontSize: { xs: '14px', md: '18px' }, lineHeight: 1.2 }}>
+            {title}
           </Typography>
-        )}
+        </Stack>
+        <Box sx={{ width: 40, height: 3, background: 'linear-gradient(90deg,#c62828,#e65100)', borderRadius: 2 }} />
+        {subtitle && <Typography sx={{ color: '#78909c', fontSize: { xs: 11, md: 12.5 }, mt: 0.4 }}>{subtitle}</Typography>}
       </Box>
       {onViewAll && (
-        <Button size="small" endIcon={<ArrowForwardIcon sx={{ fontSize: 13 }} />} onClick={onViewAll}
-          sx={{ color: '#c62828', fontWeight: 600, fontSize: { xs: 11.5, md: 12.5 }, flexShrink: 0, '&:hover': { background: '#fff5f5' } }}>
+        <Button size="small" onClick={onViewAll}
+          endIcon={<FontAwesomeIcon icon={faArrowRight} style={{ fontSize: 11 }} />}
+          sx={{ color: '#c62828', fontWeight: 600, fontSize: 12.5, '&:hover': { background: '#fff5f5' } }}>
           Xem thêm
         </Button>
       )}
@@ -42,20 +39,23 @@ function SectionHeader({ title, subtitle, onViewAll }) {
   );
 }
 
-function ProductSection({ title, subtitle, products, onProductClick, onNavigate }) {
+function ProductSection({ title, subtitle, icon, products, onProductClick, onNavigate }) {
   if (!products.length) return null;
   return (
-    <Paper component="section" elevation={0}
-      sx={{ p: { xs: 1.2, sm: 1.5, md: 2 }, mb: { xs: 1.2, md: 2 }, borderRadius: 1, border: '1px solid #ebebeb' }}>
-      <SectionHeader title={title} subtitle={subtitle} onViewAll={() => onNavigate('products')} />
-      <Grid container spacing={{ xs: 1, sm: 1.2, md: 1.5 }}>
-        {products.map((p) => (
+    <Box component="section" sx={{
+      background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 },
+      mb: { xs: 1.5, md: 2 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)',
+      border: '1px solid #f0f0f0',
+    }}>
+      <SectionHeader title={title} subtitle={subtitle} icon={icon} onViewAll={() => onNavigate('products')} />
+      <Grid container spacing={{ xs: 1, md: 1.5 }}>
+        {products.map(p => (
           <Grid item xs={6} sm={4} md={3} key={p.id}>
             <ProductCard product={p} onClick={onProductClick} />
           </Grid>
         ))}
       </Grid>
-    </Paper>
+    </Box>
   );
 }
 
@@ -63,33 +63,25 @@ export default function Home({ onProductClick, onNavigate }) {
   const { siteData } = useAdmin();
   const { products, stats, services, company } = siteData;
 
-  const byCategory = (id) => products.filter((p) => p.category === id);
+  const byCategory = (id) => products.filter(p => p.category === id);
   const topSellers  = [...products].sort((a, b) => b.reviews - a.reviews).slice(0, 6);
 
   return (
-    <Box sx={{ background: '#f5f5f5', width: '100%' }}>
+    <Box sx={{ background: '#f4f6f8' }}>
 
       {/* Stats bar */}
-      <Box component="section" sx={{ background: '#c62828', color: '#fff', py: { xs: 1, md: 2 } }}>
-        <Container maxWidth="lg">
+      <Box sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', color: '#fff', py: { xs: 1.2, md: 2 } }}>
+        <Container maxWidth="xl">
           <Grid container>
             {stats.map((s, i) => (
               <Grid key={i} item xs={3} sx={{
-                textAlign: 'center',
+                textAlign: 'center', px: 1,
                 borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,.2)' : 'none',
-                px: { xs: 0.5, md: 1 },
               }}>
-                <Typography sx={{
-                  fontWeight: 800, lineHeight: 1,
-                  fontSize: { xs: '16px', sm: '20px', md: '28px' },
-                }}>
+                <Typography sx={{ fontWeight: 800, fontSize: { xs: '18px', sm: '22px', md: '30px' }, lineHeight: 1 }}>
                   {s.value}
                 </Typography>
-                <Typography sx={{
-                  opacity: 0.88, lineHeight: 1.2, mt: 0.3,
-                  fontSize: { xs: '9px', sm: '11px', md: '13px' },
-                  wordBreak: 'break-word',
-                }}>
+                <Typography sx={{ opacity: .85, fontSize: { xs: '9px', sm: '11px', md: '13px' }, mt: 0.3, lineHeight: 1.3 }}>
                   {s.label}
                 </Typography>
               </Grid>
@@ -98,152 +90,165 @@ export default function Home({ onProductClick, onNavigate }) {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 1.5, md: 3 } }}>
-        <Grid container spacing={{ xs: 1.5, md: 2 }}>
+      <Container maxWidth="xl" sx={{ py: { xs: 1.5, md: 3 } }}>
+        <Grid container spacing={{ xs: 1.5, md: 2.5 }}>
 
-          {/* ── Main ── */}
-          <Grid item xs={12} md={9}>
+          {/* ── Main content ── */}
+          <Grid item xs={12} lg={9}>
+            <ProductSection title="CÂN TÍNH TIỀN" subtitle="Chuyên dùng cho chợ, cửa hàng, siêu thị"
+              icon={faFire} products={byCategory(1)} onProductClick={onProductClick} onNavigate={onNavigate} />
 
-            <ProductSection
-              title="CÂN TÍNH TIỀN" subtitle="Chợ, cửa hàng, siêu thị"
-              products={byCategory(1)} onProductClick={onProductClick} onNavigate={onNavigate}
-            />
-
-            {/* Promo */}
-            <Box component="aside" sx={{
-              mb: { xs: 1.2, md: 2 }, borderRadius: 1, overflow: 'hidden',
-              background: 'linear-gradient(135deg,#1a237e,#0277bd)', color: '#fff',
-              p: { xs: 1.5, md: 2.5 },
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-              flexWrap: 'wrap', gap: 1,
+            {/* Promo banner */}
+            <Box sx={{
+              background: 'linear-gradient(135deg,#1a237e 0%,#0d47a1 60%,#0277bd 100%)',
+              borderRadius: 2, p: { xs: 2, md: 2.5 }, mb: { xs: 1.5, md: 2 },
+              display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1.5,
             }}>
-              <Box sx={{ minWidth: 0, flex: 1 }}>
-                <Typography sx={{ fontWeight: 800, fontSize: { xs: 12.5, sm: 15, md: 19 }, mb: 0.2 }}>
-                  🔧 SỬA CHỮA CÂN ĐIỆN TỬ TẬN NƠI
-                </Typography>
-                <Typography sx={{ opacity: 0.85, fontSize: { xs: 11, sm: 12, md: 13 } }}>
-                  Huế &amp; Đà Nẵng – Nhanh chóng – Bảo hành sau sửa chữa
+              <Box>
+                <Stack direction="row" spacing={1} alignItems="center" mb={0.4}>
+                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 18, color: '#ffcc02' }} />
+                  <Typography sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: 14, md: 20 } }}>
+                    SỬA CHỮA CÂN ĐIỆN TỬ TẬN NƠI
+                  </Typography>
+                </Stack>
+                <Typography sx={{ color: 'rgba(255,255,255,.8)', fontSize: { xs: 12, md: 13.5 } }}>
+                  Huế &amp; Đà Nẵng · Nhanh chóng · Bảo hành sau sửa chữa 3 tháng
                 </Typography>
               </Box>
-              <Button component="a" href={`tel:${company.phone1.replace(/\s/g, '')}`}
-                variant="contained" size="small"
-                sx={{ background: '#ffeb3b', color: '#111', fontWeight: 700, flexShrink: 0, fontSize: { xs: 11.5, md: 13 }, whiteSpace: 'nowrap', '&:hover': { background: '#fdd835' } }}>
-                📞 {company.phone1}
+              <Button component="a" href={`tel:${company.phone1.replace(/\s/g,'')}`}
+                variant="contained"
+                startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 14 }} />}
+                sx={{ background: '#ffcc02', color: '#1a1a2e', fontWeight: 800, flexShrink: 0, fontSize: { xs: 12, md: 14 }, '&:hover': { background: '#ffd740' } }}>
+                {company.phone1}
               </Button>
             </Box>
 
-            <ProductSection
-              title="CÂN BÀN ĐIỆN TỬ" subtitle="100kg – 1 tấn, công nghiệp & thương mại"
-              products={byCategory(2)} onProductClick={onProductClick} onNavigate={onNavigate}
-            />
-            <ProductSection
-              title="CÂN GHẾ ĐIỆN TỬ" subtitle="100kg – 1 tấn, nông sản, thủy sản"
-              products={byCategory(3)} onProductClick={onProductClick} onNavigate={onNavigate}
-            />
-            <ProductSection
-              title="CÂN KỸ THUẬT – TIỂU LY" subtitle="Cân vàng, cân yến, phòng thí nghiệm"
-              products={byCategory(6)} onProductClick={onProductClick} onNavigate={onNavigate}
-            />
+            <ProductSection title="CÂN BÀN ĐIỆN TỬ" subtitle="100kg – 1 tấn, công nghiệp & thương mại"
+              products={byCategory(2)} onProductClick={onProductClick} onNavigate={onNavigate} />
+
+            <ProductSection title="CÂN GHẾ ĐIỆN TỬ" subtitle="100kg – 1 tấn, nông sản, thủy sản"
+              products={byCategory(3)} onProductClick={onProductClick} onNavigate={onNavigate} />
+
+            <ProductSection title="CÂN KỸ THUẬT – TIỂU LY" subtitle="Cân vàng, cân yến, phòng thí nghiệm"
+              products={byCategory(6)} onProductClick={onProductClick} onNavigate={onNavigate} />
 
             {/* Why us */}
-            <Paper component="section" elevation={0}
-              sx={{ p: { xs: 1.5, md: 2.5 }, mb: { xs: 1.2, md: 2 }, borderRadius: 1, border: '1px solid #ebebeb' }}>
+            <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
               <SectionHeader title="TẠI SAO CHỌN BÁCH KHOA?" />
-              <Grid container spacing={{ xs: 1, md: 1.5 }}>
+              <Grid container spacing={1.5}>
                 {WHY_US.map((w, i) => (
-                  <Grid item xs={6} key={i}>
-                    <Stack direction="row" spacing={1} alignItems="flex-start"
-                      sx={{ p: { xs: 1, md: 1.5 }, borderRadius: 1, background: '#fafafa', border: '1px solid #f0f0f0', height: '100%' }}>
-                      <Avatar sx={{ background: '#fff5f5', width: { xs: 32, md: 40 }, height: { xs: 32, md: 40 }, flexShrink: 0 }}>
-                        {w.icon}
-                      </Avatar>
+                  <Grid item xs={12} sm={6} key={i}>
+                    <Stack direction="row" spacing={1.5} alignItems="flex-start"
+                      sx={{ p: 1.5, borderRadius: 2, background: w.bg, border: `1px solid ${w.color}18`, height: '100%' }}>
+                      <Box sx={{
+                        width: 40, height: 40, borderRadius: 2, background: '#fff',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                        boxShadow: '0 2px 8px rgba(0,0,0,.08)',
+                      }}>
+                        <FontAwesomeIcon icon={w.icon} style={{ fontSize: 18, color: w.color }} />
+                      </Box>
                       <Box>
-                        <Typography sx={{ fontWeight: 700, fontSize: { xs: 11.5, md: 13.5 }, mb: 0.2 }}>{w.title}</Typography>
-                        <Typography sx={{ fontSize: { xs: 10.5, md: 12.5 }, color: '#777', lineHeight: 1.5 }}>{w.desc}</Typography>
+                        <Typography sx={{ fontWeight: 700, fontSize: { xs: 12.5, md: 13.5 }, mb: 0.3, color: '#1a1a2e' }}>{w.title}</Typography>
+                        <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{w.desc}</Typography>
                       </Box>
                     </Stack>
                   </Grid>
                 ))}
               </Grid>
-            </Paper>
+            </Box>
           </Grid>
 
           {/* ── Sidebar ── */}
-          <Grid item xs={12} md={3}>
-            <Box sx={{ position: { md: 'sticky' }, top: { md: 62 }, display: 'flex', flexDirection: 'column', gap: { xs: 1.2, md: 1.5 } }}>
+          <Grid item xs={12} lg={3}>
+            <Box sx={{ position: { lg: 'sticky' }, top: 72, display: 'flex', flexDirection: 'column', gap: 2 }}>
 
               {/* Top sellers */}
-              <Paper elevation={0} sx={{ p: { xs: 1.2, md: 1.5 }, borderRadius: 1, border: '1px solid #ebebeb' }}>
-                <Stack direction="row" alignItems="center" spacing={0.5} mb={1.2}>
-                  <StarIcon sx={{ color: '#f9a825', fontSize: 16 }} />
-                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 12.5, md: 13 } }}>TOP BÁN CHẠY</Typography>
+              <Box sx={{ background: '#fff', borderRadius: 2, p: 2, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
+                <Stack direction="row" spacing={1} alignItems="center" mb={1.5}>
+                  <Box sx={{ width: 28, height: 28, borderRadius: 1.5, background: 'linear-gradient(135deg,#f9a825,#ff6f00)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <FontAwesomeIcon icon={faStar} style={{ fontSize: 14, color: '#fff' }} />
+                  </Box>
+                  <Typography sx={{ fontWeight: 700, fontSize: 14 }}>TOP BÁN CHẠY</Typography>
                 </Stack>
-                <Stack spacing={1} divider={<Divider flexItem />}>
+                <Stack spacing={1.2} divider={<Divider flexItem />}>
                   {topSellers.map((p, i) => (
-                    <Stack key={p.id} direction="row" spacing={1} alignItems="center"
+                    <Stack key={p.id} direction="row" spacing={1.2} alignItems="center"
                       sx={{ cursor: 'pointer', '&:hover .pt': { color: '#c62828' } }}
                       onClick={() => onProductClick?.(p)}>
-                      <Typography sx={{ fontWeight: 800, color: i < 3 ? '#c62828' : '#ccc', fontSize: 13, minWidth: 16, textAlign: 'center' }}>
-                        {i + 1}
-                      </Typography>
+                      <Box sx={{
+                        width: 22, height: 22, borderRadius: '50%', flexShrink: 0,
+                        background: i < 3 ? 'linear-gradient(135deg,#c62828,#e53935)' : '#f4f6f8',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      }}>
+                        <Typography sx={{ fontSize: 11, fontWeight: 800, color: i < 3 ? '#fff' : '#90a4ae', lineHeight: 1 }}>
+                          {i + 1}
+                        </Typography>
+                      </Box>
                       <Box component="img" src={p.image} alt={p.name} loading="lazy"
-                        sx={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 1, flexShrink: 0, border: '1px solid #f0f0f0' }}
-                        onError={(e) => { e.target.style.display = 'none'; }}
-                      />
+                        sx={{ width: 46, height: 46, objectFit: 'cover', borderRadius: 1.5, flexShrink: 0, border: '1px solid #f0f0f0' }}
+                        onError={(e) => { e.target.style.display = 'none'; }} />
                       <Box sx={{ flex: 1, minWidth: 0 }}>
-                        <Typography className="pt" sx={{
-                          fontSize: 11.5, fontWeight: 600, color: '#333', lineHeight: 1.3,
-                          transition: 'color .2s',
-                          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-                        }}>
+                        <Typography className="pt"
+                          sx={{ fontSize: 12, fontWeight: 600, color: '#1a1a2e', lineHeight: 1.35, transition: 'color .2s', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                           {p.name}
                         </Typography>
-                        <Typography sx={{ fontSize: 12, color: '#c62828', fontWeight: 700 }}>
+                        <Typography sx={{ fontSize: 12, color: '#c62828', fontWeight: 700, mt: 0.2 }}>
                           {Number(p.price).toLocaleString('vi-VN')}₫
                         </Typography>
                       </Box>
                     </Stack>
                   ))}
                 </Stack>
-              </Paper>
+              </Box>
 
-              {/* CTA */}
-              <Paper elevation={0} sx={{
-                p: { xs: 1.5, md: 2 }, borderRadius: 1,
-                background: 'linear-gradient(135deg,#c62828,#e65100)', color: '#fff',
+              {/* CTA card */}
+              <Box sx={{
+                borderRadius: 2, p: 2.5, overflow: 'hidden', position: 'relative',
+                background: 'linear-gradient(135deg,#c62828 0%,#e65100 100%)',
+                color: '#fff',
               }}>
-                <Typography sx={{ fontWeight: 700, fontSize: { xs: 12.5, md: 14 }, mb: 0.6 }}>🔧 CẦN SỬA CHỮA?</Typography>
-                <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, opacity: 0.9, mb: 1.5, lineHeight: 1.6 }}>
-                  Gọi ngay để KTV đến tận nơi tại Huế &amp; Đà Nẵng.
+                <Box sx={{ position: 'absolute', top: -20, right: -20, width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,.08)' }} />
+                <Box sx={{ position: 'absolute', bottom: -30, left: -10, width: 100, height: 100, borderRadius: '50%', background: 'rgba(255,255,255,.05)' }} />
+                <Stack direction="row" spacing={1.2} alignItems="center" mb={1}>
+                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 22, color: '#ffcc02' }} />
+                  <Typography sx={{ fontWeight: 800, fontSize: 15 }}>CẦN SỬA CHỮA?</Typography>
+                </Stack>
+                <Typography sx={{ fontSize: 12.5, opacity: .9, mb: 2, lineHeight: 1.6 }}>
+                  Gọi ngay để KTV đến tận nơi tại Huế &amp; Đà Nẵng trong 2 giờ.
                 </Typography>
                 <Stack spacing={0.8}>
-                  <Button component="a" href={`tel:${company.phone1.replace(/\s/g, '')}`}
-                    fullWidth variant="contained" size="small"
-                    sx={{ background: '#fff', color: '#c62828', fontWeight: 700, fontSize: { xs: 11.5, md: 13 }, '&:hover': { background: '#f5f5f5' } }}>
-                    📞 {company.phone1}
+                  <Button component="a" href={`tel:${company.phone1.replace(/\s/g,'')}`} fullWidth
+                    variant="contained"
+                    startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 13 }} />}
+                    sx={{ background: '#fff', color: '#c62828', fontWeight: 800, fontSize: 13, '&:hover': { background: '#f5f5f5' } }}>
+                    {company.phone1}
                   </Button>
-                  <Button component="a" href={`tel:${company.phone2.replace(/\s/g, '')}`}
-                    fullWidth variant="outlined" size="small"
-                    sx={{ color: '#fff', borderColor: 'rgba(255,255,255,.55)', fontWeight: 600, fontSize: { xs: 11.5, md: 13 }, '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.1)' } }}>
-                    📞 {company.phone2}
+                  <Button component="a" href={`tel:${company.phone2.replace(/\s/g,'')}`} fullWidth
+                    variant="outlined"
+                    startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 13 }} />}
+                    sx={{ color: '#fff', borderColor: 'rgba(255,255,255,.55)', fontWeight: 600, fontSize: 13, '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.1)' } }}>
+                    {company.phone2}
                   </Button>
                 </Stack>
-              </Paper>
+              </Box>
 
               {/* Services */}
-              <Paper elevation={0} sx={{ p: { xs: 1.2, md: 1.5 }, borderRadius: 1, border: '1px solid #ebebeb' }}>
-                <Typography sx={{ fontWeight: 700, fontSize: { xs: 12, md: 13 }, mb: 1 }}>DỊCH VỤ</Typography>
+              <Box sx={{ background: '#fff', borderRadius: 2, p: 2, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
+                <Typography sx={{ fontWeight: 700, fontSize: 13.5, mb: 1.2, color: '#1a1a2e' }}>
+                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ marginRight: 8, color: '#c62828', fontSize: 13 }} />
+                  DỊCH VỤ
+                </Typography>
                 <Stack spacing={0.4}>
-                  {services.map((sv) => (
-                    <Stack key={sv.id} direction="row" spacing={1} alignItems="center"
+                  {services.map(sv => (
+                    <Stack key={sv.id} direction="row" spacing={1.2} alignItems="center"
                       onClick={() => onNavigate('services')}
-                      sx={{ px: 0.8, py: 0.7, borderRadius: 1, cursor: 'pointer', '&:hover': { background: '#fff5f5' }, transition: 'background .15s' }}>
-                      <Typography sx={{ fontSize: { xs: 15, md: 16 }, lineHeight: 1 }}>{sv.icon}</Typography>
-                      <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, fontWeight: 600, color: '#333' }}>{sv.title}</Typography>
+                      sx={{ px: 1, py: 0.8, borderRadius: 1.5, cursor: 'pointer', '&:hover': { background: '#fff5f5' }, transition: 'background .15s' }}>
+                      <Typography sx={{ fontSize: 17, lineHeight: 1 }}>{sv.icon}</Typography>
+                      <Typography sx={{ fontSize: 13, fontWeight: 600, color: '#37474f' }}>{sv.title}</Typography>
                     </Stack>
                   ))}
                 </Stack>
-              </Paper>
+              </Box>
 
             </Box>
           </Grid>
