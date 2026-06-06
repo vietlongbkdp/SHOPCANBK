@@ -6,7 +6,7 @@ import {
 } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faBars, faXmark, faSearch, faShoppingCart,
+  faBars, faXmark, faSearch, faCartShopping, faPhone,
   faHouse, faInfoCircle, faBoxOpen, faScrewdriverWrench,
   faEnvelope, faChevronDown, faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
@@ -153,7 +153,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
               }}>
               <Badge badgeContent={totalCount} color="error"
                 sx={{ '& .MuiBadge-badge': { fontSize: 10, minWidth: 16, height: 16, p: 0, fontWeight: 700 } }}>
-                <FontAwesomeIcon icon={faShoppingCart} style={{ fontSize: 20 }} />
+                <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: 20 }} />
               </Badge>
             </IconButton>
           </Stack>
