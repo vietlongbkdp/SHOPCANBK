@@ -69,23 +69,25 @@ export default function Introduction() {
           <Typography sx={{ color: '#78909c', fontSize: { xs: 12.5, md: 13 }, mb: { xs: 2, md: 2.5 } }}>
             Những điều làm nên thương hiệu Bách Khoa
           </Typography>
-          <Grid container spacing={{ xs: 1.5, md: 2 }}>
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
+            gap: { xs: 1.5, md: 2 },
+          }}>
             {TEAM_VALUES.map((v, i) => (
-              <Grid item xs={6} sm={6} md={3} key={i} sx={{ display: 'flex' }}>
-                <Stack alignItems="center" textAlign="center"
-                  sx={{ p: { xs: 1.5, md: 2 }, borderRadius: 2, background: '#fafbfc', border: '1px solid #f0f0f0', width: '100%' }}>
-                  <Box sx={{
-                    width: { xs: 48, md: 56 }, height: { xs: 48, md: 56 }, borderRadius: '50%',
-                    background: `${v.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.2, flexShrink: 0,
-                  }}>
-                    <FontAwesomeIcon icon={v.icon} style={{ fontSize: 20, color: v.color }} />
-                  </Box>
-                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, md: 14 }, mb: 0.5 }}>{v.title}</Typography>
-                  <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{v.desc}</Typography>
-                </Stack>
-              </Grid>
+              <Stack key={i} alignItems="center" textAlign="center"
+                sx={{ p: { xs: 1.5, md: 2 }, borderRadius: 2, background: '#fafbfc', border: '1px solid #f0f0f0' }}>
+                <Box sx={{
+                  width: { xs: 48, md: 56 }, height: { xs: 48, md: 56 }, borderRadius: '50%',
+                  background: `${v.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.2, flexShrink: 0,
+                }}>
+                  <FontAwesomeIcon icon={v.icon} style={{ fontSize: 20, color: v.color }} />
+                </Box>
+                <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, md: 14 }, mb: 0.5 }}>{v.title}</Typography>
+                <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{v.desc}</Typography>
+              </Stack>
             ))}
-          </Grid>
+          </Box>
         </Box>
       </Container>
     </Box>
