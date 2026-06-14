@@ -44,42 +44,44 @@ export default function Services() {
       </Box>
 
       <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 } }}>
-        {/* Service cards — bọc trong 1 khung chung */}
+        {/* Service cards — lưới CSS 2x2 cố định */}
         <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 }, mb: { xs: 2, md: 3 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }}>
-          <Grid container spacing={{ xs: 1.5, md: 2 }} sx={{ alignItems: 'stretch' }}>
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' },
+            gap: { xs: 1.5, md: 2 },
+          }}>
             {services.map(s => (
-              <Grid item xs={12} sm={6} key={s.id} sx={{ display: 'flex', flexBasis: { sm: '50%' }, maxWidth: { sm: '50%' } }}>
-                <Box sx={{
-                  background: '#fafbfc', borderRadius: 2, p: { xs: 1.8, md: 2.2 },
-                  width: '100%', display: 'flex', flexDirection: 'column',
-                  border: '1px solid #eef0f3',
-                  transition: 'all .25s', '&:hover': { background: '#fff', boxShadow: '0 6px 20px rgba(198,40,40,.1)', borderColor: '#c62828' },
-                }}>
-                  <Stack direction="row" spacing={1.5} alignItems="center" mb={1.2}>
-                    <Box sx={{
-                      width: 46, height: 46, borderRadius: 2, flexShrink: 0,
-                      background: 'linear-gradient(135deg,#fff5f5,#ffe8e8)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: 25,
-                    }}>
-                      {s.icon}
-                    </Box>
-                    <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15.5 }, color: '#1a1a2e' }}>{s.title}</Typography>
-                  </Stack>
-                  <Typography sx={{ fontSize: { xs: 12.5, md: 13 }, color: '#78909c', lineHeight: 1.6, mb: 1.5, minHeight: { md: 40 } }}>{s.description}</Typography>
-                  <Divider sx={{ mb: 1.2 }} />
-                  <Stack spacing={0.7} sx={{ mt: 'auto' }}>
-                    {s.features.map((f, i) => (
-                      <Stack key={i} direction="row" spacing={0.8} alignItems="flex-start">
-                        <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: 13, color: '#2e7d32', marginTop: 3, flexShrink: 0 }} />
-                        <Typography sx={{ fontSize: { xs: 12, md: 12.5 }, color: '#546e7a' }}>{f}</Typography>
-                      </Stack>
-                    ))}
-                  </Stack>
-                </Box>
-              </Grid>
+              <Box key={s.id} sx={{
+                background: '#fafbfc', borderRadius: 2, p: { xs: 1.8, md: 2.2 },
+                display: 'flex', flexDirection: 'column',
+                border: '1px solid #eef0f3',
+                transition: 'all .25s', '&:hover': { background: '#fff', boxShadow: '0 6px 20px rgba(198,40,40,.1)', borderColor: '#c62828' },
+              }}>
+                <Stack direction="row" spacing={1.5} alignItems="center" mb={1.2}>
+                  <Box sx={{
+                    width: 46, height: 46, borderRadius: 2, flexShrink: 0,
+                    background: 'linear-gradient(135deg,#fff5f5,#ffe8e8)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 25,
+                  }}>
+                    {s.icon}
+                  </Box>
+                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15.5 }, color: '#1a1a2e' }}>{s.title}</Typography>
+                </Stack>
+                <Typography sx={{ fontSize: { xs: 12.5, md: 13 }, color: '#78909c', lineHeight: 1.6, mb: 1.5, minHeight: { md: 40 } }}>{s.description}</Typography>
+                <Divider sx={{ mb: 1.2 }} />
+                <Stack spacing={0.7} sx={{ mt: 'auto' }}>
+                  {s.features.map((f, i) => (
+                    <Stack key={i} direction="row" spacing={0.8} alignItems="flex-start">
+                      <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: 13, color: '#2e7d32', marginTop: 3, flexShrink: 0 }} />
+                      <Typography sx={{ fontSize: { xs: 12, md: 12.5 }, color: '#546e7a' }}>{f}</Typography>
+                    </Stack>
+                  ))}
+                </Stack>
+              </Box>
             ))}
-          </Grid>
+          </Box>
         </Box>
 
         {/* Process */}
