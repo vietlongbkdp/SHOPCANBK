@@ -92,25 +92,27 @@ export default function Services() {
           <Typography sx={{ color: '#78909c', fontSize: { xs: 12.5, md: 13 }, mb: { xs: 2, md: 3 } }}>
             4 bước đơn giản – minh bạch – chuyên nghiệp
           </Typography>
-          <Grid container spacing={{ xs: 1.5, md: 2 }}>
+          <Box sx={{
+            display: 'grid',
+            gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4, 1fr)' },
+            gap: { xs: 2, md: 2 },
+          }}>
             {PROCESS.map((p, i) => (
-              <Grid item xs={6} md={3} key={i}>
-                <Stack alignItems="center" textAlign="center">
-                  <Box sx={{
-                    width: { xs: 48, md: 56 }, height: { xs: 48, md: 56 }, borderRadius: '50%',
-                    background: 'linear-gradient(135deg,#c62828,#e65100)', color: '#fff',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: { xs: 17, md: 20 }, fontWeight: 800, mb: 1.2,
-                    boxShadow: '0 4px 12px rgba(198,40,40,.3)',
-                  }}>
-                    {p.step}
-                  </Box>
-                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, md: 14 }, mb: 0.5 }}>{p.title}</Typography>
-                  <Typography sx={{ fontSize: { xs: 11.5, md: 13 }, color: '#78909c', lineHeight: 1.55 }}>{p.desc}</Typography>
-                </Stack>
-              </Grid>
+              <Stack key={i} alignItems="center" textAlign="center">
+                <Box sx={{
+                  width: { xs: 48, md: 56 }, height: { xs: 48, md: 56 }, borderRadius: '50%',
+                  background: 'linear-gradient(135deg,#c62828,#e65100)', color: '#fff',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: { xs: 17, md: 20 }, fontWeight: 800, mb: 1.2, flexShrink: 0,
+                  boxShadow: '0 4px 12px rgba(198,40,40,.3)',
+                }}>
+                  {p.step}
+                </Box>
+                <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, md: 14 }, mb: 0.5 }}>{p.title}</Typography>
+                <Typography sx={{ fontSize: { xs: 11.5, md: 13 }, color: '#78909c', lineHeight: 1.55, px: 0.5 }}>{p.desc}</Typography>
+              </Stack>
             ))}
-          </Grid>
+          </Box>
         </Box>
 
         {/* CTA */}
