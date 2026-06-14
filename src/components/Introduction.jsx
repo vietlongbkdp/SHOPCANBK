@@ -1,111 +1,91 @@
-import { Box, Container, Grid, Typography, Paper, Stack, Avatar, Divider } from '@mui/material';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import BuildIcon from '@mui/icons-material/Build';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import data from '../data.json';
-
-const { company, stats } = data;
+import { Box, Container, Grid, Typography, Stack, Divider } from '@mui/material';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShieldHalved, faScrewdriverWrench, faTrophy, faHandshake, faBolt, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { useAdmin } from '../context/AdminContext';
 
 const TEAM_VALUES = [
-  { icon: '🤝', title: 'Tận Tâm', desc: 'Luôn đặt lợi ích khách hàng lên hàng đầu, tư vấn trung thực.' },
-  { icon: '🎯', title: 'Chính Xác', desc: 'Sửa chữa và kiểm định đạt chuẩn kỹ thuật chính xác tuyệt đối.' },
-  { icon: '⚡', title: 'Nhanh Chóng', desc: 'Kỹ thuật viên đến trong 2 giờ, xử lý sự cố trong ngày.' },
-  { icon: '🛡️', title: 'Uy Tín', desc: 'Hơn 10 năm phục vụ, được hàng trăm doanh nghiệp tin tưởng.' },
+  { icon: faHandshake, color: '#c62828', title: 'Tận Tâm', desc: 'Luôn đặt lợi ích khách hàng lên hàng đầu, tư vấn trung thực.' },
+  { icon: faBolt, color: '#e65100', title: 'Nhanh Chóng', desc: 'Xử lý sự cố nhanh, có mặt tận nơi trong vòng 2 giờ.' },
+  { icon: faShieldHalved, color: '#2e7d32', title: 'Uy Tín', desc: 'Cam kết chất lượng, bảo hành đầy đủ sau mỗi dịch vụ.' },
+  { icon: faUsers, color: '#1565c0', title: 'Chuyên Nghiệp', desc: 'Đội ngũ kỹ thuật viên giàu kinh nghiệm, được đào tạo bài bản.' },
 ];
 
 export default function Introduction() {
+  const { siteData } = useAdmin();
+  const { company, stats } = siteData;
+
   return (
-    <Box sx={{ background: '#f5f5f5', minHeight: '60vh' }}>
+    <Box component="main" sx={{ background: '#f4f6f8', minHeight: '60vh' }}>
       {/* Hero */}
-      <Box sx={{ background: 'linear-gradient(135deg, #c62828, #e65100)', color: 'white', py: { xs: 4, md: 6 } }}>
-        <Container maxWidth="lg">
-          <Typography variant="h3" sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '22px', md: '36px' } }}>
-            GIỚI THIỆU CÂN ĐIỆN TỬ BÁCH KHOA
+      <Box sx={{ background: 'linear-gradient(135deg,#0d1b4b,#1565c0)', color: '#fff', py: { xs: 3, md: 5 } }}>
+        <Container maxWidth="xl">
+          <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '20px', md: '32px' }, mb: 1 }}>
+            GIỚI THIỆU
           </Typography>
-          <Typography sx={{ opacity: 0.9, fontSize: { xs: 13, md: 16 }, maxWidth: 600 }}>
-            Đơn vị hàng đầu tại miền Trung chuyên sửa chữa, bảo trì và cung cấp cân điện tử chính hãng.
+          <Typography sx={{ opacity: .88, fontSize: { xs: 13, md: 15 }, maxWidth: 620, lineHeight: 1.7 }}>
+            Cân Điện Tử Bách Khoa – địa chỉ tin cậy chuyên cung cấp, sửa chữa và bảo trì cân điện tử tại Huế và Đà Nẵng.
           </Typography>
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 2, md: 4 } }}>
-        <Grid container spacing={3}>
-          {/* About */}
-          <Grid item xs={12} md={8}>
-            <Paper sx={{ p: { xs: 2, md: 3 }, mb: 2, borderRadius: 1 }}>
-              <Typography variant="h5" sx={{ fontWeight: 700, color: '#c62828', mb: 2 }}>Về Chúng Tôi</Typography>
-              <Typography sx={{ color: '#444', lineHeight: 1.9, mb: 2 }}>
-                <strong>Cân Điện Tử Bách Khoa</strong> là đơn vị chuyên nghiệp trong lĩnh vực sửa chữa, bảo trì và kinh doanh cân điện tử tại khu vực Thừa Thiên Huế và Đà Nẵng. Với hơn <strong>10 năm kinh nghiệm</strong>, chúng tôi đã phục vụ hàng trăm khách hàng từ cá nhân đến doanh nghiệp lớn.
-              </Typography>
-              <Typography sx={{ color: '#444', lineHeight: 1.9, mb: 2 }}>
-                Chúng tôi cung cấp đầy đủ các dòng cân điện tử: <strong>cân tính tiền, cân bàn, cân ghế, cân treo, cân sàn, cân tiểu ly</strong> và phụ kiện liên quan. Tất cả sản phẩm đều có nguồn gốc xuất xứ rõ ràng, được kiểm định chất lượng trước khi đến tay khách hàng.
-              </Typography>
-              <Typography sx={{ color: '#444', lineHeight: 1.9 }}>
-                Đội ngũ kỹ thuật viên được đào tạo bài bản, sẵn sàng <strong>đến tận nơi sửa chữa</strong> tại Huế và Đà Nẵng trong vòng 2 giờ làm việc. Chúng tôi cam kết mang đến dịch vụ chuyên nghiệp nhất với chi phí hợp lý nhất.
-              </Typography>
-            </Paper>
+      <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 } }}>
+        {/* About */}
+        <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 2, md: 3 }, mb: { xs: 2, md: 3 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }}>
+          <Typography sx={{ fontWeight: 700, fontSize: { xs: 16, md: 20 }, color: '#c62828', mb: 1.5 }}>
+            Về Chúng Tôi
+          </Typography>
+          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#37474f', lineHeight: 1.85, mb: 1.5 }}>
+            Với hơn <strong>10 năm kinh nghiệm</strong> trong lĩnh vực cân điện tử, Cân Điện Tử Bách Khoa tự hào là đơn vị
+            hàng đầu tại khu vực miền Trung chuyên cung cấp các loại cân chính hãng từ những thương hiệu uy tín như
+            VIBRA, A&amp;D, JADEVER, CAS...
+          </Typography>
+          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#37474f', lineHeight: 1.85 }}>
+            Chúng tôi không chỉ bán sản phẩm mà còn cung cấp dịch vụ sửa chữa, bảo trì, kiểm định cân tận nơi với đội ngũ
+            kỹ thuật viên chuyên nghiệp, đảm bảo cân của bạn luôn hoạt động chính xác và bền bỉ.
+          </Typography>
+        </Box>
 
-            {/* Core Values */}
-            <Paper sx={{ p: { xs: 2, md: 3 }, borderRadius: 1 }}>
-              <Typography variant="h5" sx={{ fontWeight: 700, color: '#212121', mb: 2 }}>Giá Trị Cốt Lõi</Typography>
-              <Grid container spacing={2}>
-                {TEAM_VALUES.map((v, i) => (
-                  <Grid item xs={12} sm={6} key={i}>
-                    <Stack direction="row" spacing={2} alignItems="flex-start" sx={{ p: 1.5, background: '#fafafa', borderRadius: 1, border: '1px solid #f0f0f0' }}>
-                      <Typography sx={{ fontSize: 28 }}>{v.icon}</Typography>
-                      <Box>
-                        <Typography sx={{ fontWeight: 700, fontSize: 14, mb: 0.3 }}>{v.title}</Typography>
-                        <Typography sx={{ fontSize: 13, color: '#666', lineHeight: 1.5 }}>{v.desc}</Typography>
-                      </Box>
-                    </Stack>
-                  </Grid>
-                ))}
+        {/* Stats */}
+        <Box sx={{
+          background: 'linear-gradient(135deg,#c62828,#e53935)', color: '#fff',
+          borderRadius: 2, p: { xs: 2, md: 3 }, mb: { xs: 2, md: 3 },
+        }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
+            {stats.map((s, i) => (
+              <Box key={i} sx={{ flex: 1, textAlign: 'center', px: 0.5,
+                borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,.2)' : 'none' }}>
+                <Typography sx={{ fontWeight: 800, fontSize: { xs: '18px', sm: '24px', md: '32px' }, lineHeight: 1 }}>{s.value}</Typography>
+                <Typography sx={{ opacity: .85, fontSize: { xs: '9px', sm: '11px', md: '13px' }, mt: 0.3, lineHeight: 1.2 }}>{s.label}</Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Values */}
+        <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 2, md: 3 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }}>
+          <Typography sx={{ fontWeight: 700, fontSize: { xs: 16, md: 20 }, color: '#1a1a2e', mb: 0.5 }}>
+            Giá Trị Cốt Lõi
+          </Typography>
+          <Typography sx={{ color: '#78909c', fontSize: { xs: 12.5, md: 13 }, mb: { xs: 2, md: 2.5 } }}>
+            Những điều làm nên thương hiệu Bách Khoa
+          </Typography>
+          <Grid container spacing={{ xs: 1.5, md: 2 }}>
+            {TEAM_VALUES.map((v, i) => (
+              <Grid item xs={6} md={3} key={i}>
+                <Stack alignItems="center" textAlign="center" sx={{ p: { xs: 1.5, md: 2 }, borderRadius: 2, background: '#fafbfc', border: '1px solid #f0f0f0', height: '100%' }}>
+                  <Box sx={{
+                    width: { xs: 48, md: 56 }, height: { xs: 48, md: 56 }, borderRadius: '50%',
+                    background: `${v.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.2,
+                  }}>
+                    <FontAwesomeIcon icon={v.icon} style={{ fontSize: 20, color: v.color }} />
+                  </Box>
+                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 13, md: 14 }, mb: 0.5 }}>{v.title}</Typography>
+                  <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{v.desc}</Typography>
+                </Stack>
               </Grid>
-            </Paper>
+            ))}
           </Grid>
-
-          {/* Info Sidebar */}
-          <Grid item xs={12} md={4}>
-            {/* Stats */}
-            <Paper sx={{ p: 2, mb: 2, borderRadius: 1, background: 'linear-gradient(135deg, #c62828, #e65100)', color: 'white' }}>
-              <Typography sx={{ fontWeight: 700, fontSize: 15, mb: 2 }}>🏆 Thành Tích Nổi Bật</Typography>
-              <Grid container spacing={1}>
-                {stats.map((s, i) => (
-                  <Grid item xs={6} key={i} sx={{ textAlign: 'center' }}>
-                    <Typography sx={{ fontWeight: 800, fontSize: 26, lineHeight: 1 }}>{s.value}</Typography>
-                    <Typography sx={{ fontSize: 12, opacity: 0.9 }}>{s.label}</Typography>
-                  </Grid>
-                ))}
-              </Grid>
-            </Paper>
-
-            {/* Branches */}
-            <Paper sx={{ p: 2, mb: 2, borderRadius: 1 }}>
-              <Typography sx={{ fontWeight: 700, fontSize: 14, color: '#c62828', mb: 1.5 }}>📍 CHI NHÁNH</Typography>
-              {[
-                { city: 'Chi Nhánh Huế', addr: company.address1, phone: company.phone1 },
-                { city: 'Chi Nhánh Đà Nẵng', addr: company.address2, phone: company.phone2 },
-              ].map((b, i) => (
-                <Box key={i}>
-                  {i > 0 && <Divider sx={{ my: 1.5 }} />}
-                  <Typography sx={{ fontWeight: 700, fontSize: 13, mb: 0.4 }}>{b.city}</Typography>
-                  <Typography sx={{ fontSize: 12.5, color: '#555', mb: 0.3 }}>📍 {b.addr}</Typography>
-                  <Typography sx={{ fontSize: 12.5, color: '#c62828', fontWeight: 600 }}>📞 {b.phone}</Typography>
-                </Box>
-              ))}
-            </Paper>
-
-            <Paper sx={{ p: 2, borderRadius: 1 }}>
-              <Typography sx={{ fontWeight: 700, fontSize: 14, color: '#212121', mb: 1.5 }}>⏰ GIỜ LÀM VIỆC</Typography>
-              <Typography sx={{ fontSize: 13, color: '#555', mb: 0.5 }}>
-                <strong>Thứ 2 – Thứ 7:</strong> 7:30 – 17:30
-              </Typography>
-              <Typography sx={{ fontSize: 13, color: '#555' }}>
-                <strong>Chủ Nhật:</strong> Hỗ trợ qua điện thoại
-              </Typography>
-            </Paper>
-          </Grid>
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );
