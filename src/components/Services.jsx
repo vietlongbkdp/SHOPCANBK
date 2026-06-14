@@ -45,9 +45,9 @@ export default function Services() {
 
       <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 } }}>
         {/* Service cards */}
-        <Grid container spacing={{ xs: 1.5, md: 2 }} mb={{ xs: 2, md: 3 }} justifyContent="center">
+        <Grid container spacing={{ xs: 1.5, md: 2.5 }} mb={{ xs: 2, md: 3 }}>
           {services.map(s => (
-            <Grid item xs={12} sm={6} md={4} key={s.id} sx={{ display: 'flex' }}>
+            <Grid item xs={12} md={6} key={s.id} sx={{ display: 'flex' }}>
               <Box sx={{
                 background: '#fff', borderRadius: 2, p: { xs: 2, md: 2.5 },
                 width: '100%', display: 'flex', flexDirection: 'column',
