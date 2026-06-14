@@ -46,9 +46,9 @@ export default function Services() {
       <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 } }}>
         {/* Service cards — bọc trong 1 khung chung */}
         <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 }, mb: { xs: 2, md: 3 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }}>
-          <Grid container spacing={{ xs: 1.5, md: 2 }}>
+          <Grid container spacing={{ xs: 1.5, md: 2 }} sx={{ alignItems: 'stretch' }}>
             {services.map(s => (
-              <Grid item xs={12} sm={6} key={s.id} sx={{ display: 'flex' }}>
+              <Grid item xs={12} sm={6} key={s.id} sx={{ display: 'flex', flexBasis: { sm: '50%' }, maxWidth: { sm: '50%' } }}>
                 <Box sx={{
                   background: '#fafbfc', borderRadius: 2, p: { xs: 1.8, md: 2.2 },
                   width: '100%', display: 'flex', flexDirection: 'column',
