@@ -135,26 +135,28 @@ export default function Home({ onProductClick, onNavigate }) {
             {/* Why us */}
             <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
               <SectionHeader title="TẠI SAO CHỌN BÁCH KHOA?" />
-              <Grid container spacing={1.5}>
+              <Box sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(4, 1fr)' },
+                gap: 1.5,
+              }}>
                 {WHY_US.map((w, i) => (
-                  <Grid item xs={12} sm={6} key={i}>
-                    <Stack direction="row" spacing={1.5} alignItems="flex-start"
-                      sx={{ p: 1.5, borderRadius: 2, background: w.bg, border: `1px solid ${w.color}18`, height: '100%' }}>
-                      <Box sx={{
-                        width: 40, height: 40, borderRadius: 2, background: '#fff',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                        boxShadow: '0 2px 8px rgba(0,0,0,.08)',
-                      }}>
-                        <FontAwesomeIcon icon={w.icon} style={{ fontSize: 18, color: w.color }} />
-                      </Box>
-                      <Box>
-                        <Typography sx={{ fontWeight: 700, fontSize: { xs: 12.5, md: 13.5 }, mb: 0.3, color: '#1a1a2e' }}>{w.title}</Typography>
-                        <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{w.desc}</Typography>
-                      </Box>
-                    </Stack>
-                  </Grid>
+                  <Stack key={i} direction="row" spacing={1.5} alignItems="flex-start"
+                    sx={{ p: 1.5, borderRadius: 2, background: w.bg, border: `1px solid ${w.color}18` }}>
+                    <Box sx={{
+                      width: 40, height: 40, borderRadius: 2, background: '#fff',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+                      boxShadow: '0 2px 8px rgba(0,0,0,.08)',
+                    }}>
+                      <FontAwesomeIcon icon={w.icon} style={{ fontSize: 18, color: w.color }} />
+                    </Box>
+                    <Box>
+                      <Typography sx={{ fontWeight: 700, fontSize: { xs: 12.5, md: 13.5 }, mb: 0.3, color: '#1a1a2e' }}>{w.title}</Typography>
+                      <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{w.desc}</Typography>
+                    </Box>
+                  </Stack>
                 ))}
-              </Grid>
+              </Box>
             </Box>
           </Grid>
 
