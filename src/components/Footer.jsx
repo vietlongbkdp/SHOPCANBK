@@ -96,7 +96,7 @@ export default function Footer() {
                     <FontAwesomeIcon icon={faLocationDot} style={{ fontSize: 13, color: b.color, marginTop: 3, flexShrink: 0 }} />
                     <Box>
                       <Typography sx={{ fontSize: 12, color: b.color, fontWeight: 600 }}>{b.city}</Typography>
-                      <Typography sx={{ fontSize: 12.5, color: '#90a4ae' }}>{b.addr}</Typography>
+                      <Typography sx={{ fontSize: 12.5, color: '#90a4ae', wordBreak: 'break-word' }}>{b.addr}</Typography>
                     </Box>
                   </Stack>
                   <Stack direction="row" spacing={1} alignItems="center" pl={0.3}>
@@ -111,7 +111,7 @@ export default function Footer() {
               <Stack direction="row" spacing={1} alignItems="center">
                 <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: 13, color: '#ef9a9a' }} />
                 <Link href={`mailto:${company.email}`}
-                  sx={{ fontSize: 13, color: '#90a4ae', '&:hover': { color: '#fff' } }}>
+                  sx={{ fontSize: 13, color: '#90a4ae', wordBreak: 'break-all', '&:hover': { color: '#fff' } }}>
                   {company.email}
                 </Link>
               </Stack>
