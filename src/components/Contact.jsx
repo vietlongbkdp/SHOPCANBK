@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Box, Container, Grid, Typography, TextField, Button, Stack, Divider, Alert, CircularProgress } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faLocationDot, faClock, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
@@ -11,17 +11,67 @@ const EMAILJS_SERVICE_ID  = 'service_oe1k7lj';
 const EMAILJS_TEMPLATE_ID = 'template_sron2yp';
 const EMAILJS_PUBLIC_KEY  = '5jSMke5lav87ETG7V';
 
+const COOLDOWN_MS   = 5 * 60 * 1000;   // 5 phút giữa 2 lần gửi
+const MIN_FILL_MS   = 3000;            // phải mất ít nhất 3 giây điền form
+const COOLDOWN_KEY  = 'bk_contact_last_sent';
+
 export default function Contact() {
   const { siteData } = useAdmin();
   const { company } = siteData;
   const [form, setForm] = useState({ name: '', phone: '', message: '' });
-  const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
+  const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error' | 'cooldown'
+  const [cooldownLeft, setCooldownLeft] = useState(0); // giây còn lại
   const formRef = useRef(null);
+  const honeypotRef = useRef('');           // bẫy bot
+  const mountTimeRef = useRef(Date.now());  // thời điểm form load
+
+  // Kiểm tra cooldown khi load + đếm ngược
+  useEffect(() => {
+    const checkCooldown = () => {
+      const last = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
+      const elapsed = Date.now() - last;
+      if (last && elapsed < COOLDOWN_MS) {
+        setCooldownLeft(Math.ceil((COOLDOWN_MS - elapsed) / 1000));
+        return true;
+      }
+      setCooldownLeft(0);
+      return false;
+    };
+    checkCooldown();
+    const t = setInterval(checkCooldown, 1000);
+    return () => clearInterval(t);
+  }, []);
+
+  const formatCooldown = (sec) => {
+    const m = Math.floor(sec / 60);
+    const s = sec % 60;
+    return m > 0 ? `${m} phút ${s} giây` : `${s} giây`;
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.name || !form.phone) return;
 
+    // 1. Honeypot — nếu field ẩn có giá trị → là bot
+    if (honeypotRef.current) {
+      setStatus('success'); // giả vờ thành công để bot không biết
+      setForm({ name: '', phone: '', message: '' });
+      return;
+    }
+
+    // 2. Điền quá nhanh → nghi ngờ bot
+    if (Date.now() - mountTimeRef.current < MIN_FILL_MS) {
+      setStatus('error');
+      setTimeout(() => setStatus(null), 4000);
+      return;
+    }
+
+    // 3. Cooldown — chặn gửi liên tục
+    const last = parseInt(localStorage.getItem(COOLDOWN_KEY) || '0', 10);
+    if (last && Date.now() - last < COOLDOWN_MS) {
+      setStatus('cooldown');
+      return;
+    }
     setStatus('sending');
     try {
       await emailjs.send(
@@ -37,6 +87,8 @@ export default function Contact() {
       );
       setStatus('success');
       setForm({ name: '', phone: '', message: '' });
+      localStorage.setItem(COOLDOWN_KEY, Date.now().toString());
+      setCooldownLeft(Math.ceil(COOLDOWN_MS / 1000));
       setTimeout(() => setStatus(null), 5000);
     } catch (err) {
       console.error('EmailJS error:', err);
@@ -143,19 +195,34 @@ export default function Contact() {
                   ❌ Gửi không thành công. Vui lòng gọi trực tiếp {company.phone1} hoặc thử lại.
                 </Alert>
               )}
+              {status === 'cooldown' && (
+                <Alert severity="warning" sx={{ mb: 2, fontSize: 13.5, borderRadius: 2 }}>
+                  ⏳ Bạn vừa gửi yêu cầu. Vui lòng đợi <strong>{formatCooldown(cooldownLeft)}</strong> trước khi gửi tiếp.
+                </Alert>
+              )}
 
               <Box component="form" ref={formRef} onSubmit={handleSubmit}>
                 <Stack spacing={1.5}>
+                  {/* Honeypot — ẩn với người dùng, bẫy bot */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    onChange={(e) => { honeypotRef.current = e.target.value; }}
+                    style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+                    aria-hidden="true"
+                  />
                   <TextField label="Họ và tên *" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required fullWidth size="small" sx={focusSx} disabled={status === 'sending'} />
                   <TextField label="Số điện thoại *" type="tel" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} required fullWidth size="small" sx={focusSx} disabled={status === 'sending'} />
                   <TextField label="Nội dung" value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} fullWidth size="small" multiline rows={4} placeholder="Mô tả sự cố hoặc yêu cầu..." sx={focusSx} disabled={status === 'sending'} />
                   <Button type="submit" variant="contained" fullWidth size="large"
-                    disabled={status === 'sending' || !form.name || !form.phone}
+                    disabled={status === 'sending' || !form.name || !form.phone || cooldownLeft > 0}
                     startIcon={status === 'sending'
                       ? <CircularProgress size={16} sx={{ color: '#fff' }} />
                       : <FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: 14 }} />}
                     sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', fontWeight: 700, py: { xs: 1, md: 1.2 }, fontSize: { xs: 13.5, md: 15 }, borderRadius: 2, '&:disabled': { background: '#ccc' } }}>
-                    {status === 'sending' ? 'Đang gửi...' : 'Gửi Yêu Cầu'}
+                    {status === 'sending' ? 'Đang gửi...' : cooldownLeft > 0 ? `Đợi ${formatCooldown(cooldownLeft)}` : 'Gửi Yêu Cầu'}
                   </Button>
                 </Stack>
               </Box>
