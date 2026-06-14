@@ -71,11 +71,12 @@ export default function Introduction() {
           </Typography>
           <Grid container spacing={{ xs: 1.5, md: 2 }}>
             {TEAM_VALUES.map((v, i) => (
-              <Grid item xs={6} md={3} key={i}>
-                <Stack alignItems="center" textAlign="center" sx={{ p: { xs: 1.5, md: 2 }, borderRadius: 2, background: '#fafbfc', border: '1px solid #f0f0f0', height: '100%' }}>
+              <Grid item xs={6} sm={6} md={3} key={i} sx={{ display: 'flex' }}>
+                <Stack alignItems="center" textAlign="center"
+                  sx={{ p: { xs: 1.5, md: 2 }, borderRadius: 2, background: '#fafbfc', border: '1px solid #f0f0f0', width: '100%' }}>
                   <Box sx={{
                     width: { xs: 48, md: 56 }, height: { xs: 48, md: 56 }, borderRadius: '50%',
-                    background: `${v.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.2,
+                    background: `${v.color}15`, display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.2, flexShrink: 0,
                   }}>
                     <FontAwesomeIcon icon={v.icon} style={{ fontSize: 20, color: v.color }} />
                   </Box>

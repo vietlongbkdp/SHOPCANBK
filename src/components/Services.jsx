@@ -45,19 +45,29 @@ export default function Services() {
 
       <Container maxWidth="xl" sx={{ py: { xs: 2, md: 4 } }}>
         {/* Service cards */}
-        <Grid container spacing={{ xs: 1.5, md: 2 }} mb={{ xs: 2, md: 3 }}>
+        <Grid container spacing={{ xs: 1.5, md: 2 }} mb={{ xs: 2, md: 3 }} justifyContent="center">
           {services.map(s => (
-            <Grid item xs={12} sm={6} md={3} key={s.id}>
+            <Grid item xs={12} sm={6} md={4} key={s.id} sx={{ display: 'flex' }}>
               <Box sx={{
-                background: '#fff', borderRadius: 2, p: { xs: 2, md: 2.5 }, height: '100%',
+                background: '#fff', borderRadius: 2, p: { xs: 2, md: 2.5 },
+                width: '100%', display: 'flex', flexDirection: 'column',
                 boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0',
                 transition: 'all .25s', '&:hover': { transform: 'translateY(-3px)', boxShadow: '0 8px 24px rgba(198,40,40,.12)', borderColor: '#c62828' },
               }}>
-                <Typography sx={{ fontSize: { xs: 30, md: 34 }, mb: 1.2 }}>{s.icon}</Typography>
-                <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15 }, mb: 0.8, color: '#1a1a2e' }}>{s.title}</Typography>
-                <Typography sx={{ fontSize: { xs: 12.5, md: 13 }, color: '#78909c', lineHeight: 1.65, mb: 1.5 }}>{s.description}</Typography>
+                <Stack direction="row" spacing={1.5} alignItems="center" mb={1}>
+                  <Box sx={{
+                    width: 48, height: 48, borderRadius: 2, flexShrink: 0,
+                    background: 'linear-gradient(135deg,#fff5f5,#ffe8e8)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    fontSize: 26,
+                  }}>
+                    {s.icon}
+                  </Box>
+                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15.5 }, color: '#1a1a2e' }}>{s.title}</Typography>
+                </Stack>
+                <Typography sx={{ fontSize: { xs: 12.5, md: 13 }, color: '#78909c', lineHeight: 1.65, mb: 1.5, minHeight: { md: 42 } }}>{s.description}</Typography>
                 <Divider sx={{ mb: 1.2 }} />
-                <Stack spacing={0.7}>
+                <Stack spacing={0.7} sx={{ mt: 'auto' }}>
                   {s.features.map((f, i) => (
                     <Stack key={i} direction="row" spacing={0.8} alignItems="flex-start">
                       <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: 13, color: '#2e7d32', marginTop: 3, flexShrink: 0 }} />
