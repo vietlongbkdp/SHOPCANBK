@@ -1,22 +1,48 @@
-import { useState } from 'react';
-import { Box, Container, Grid, Typography, TextField, Button, Stack, Divider } from '@mui/material';
+import { useState, useRef } from 'react';
+import { Box, Container, Grid, Typography, TextField, Button, Stack, Divider, Alert, CircularProgress } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faLocationDot, faClock, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import emailjs from '@emailjs/browser';
 import { useAdmin } from '../context/AdminContext';
+
+const EMAILJS_SERVICE_ID  = 'service_aj14nse';
+const EMAILJS_TEMPLATE_ID = 'template_sron2yp';
+const EMAILJS_PUBLIC_KEY  = '5jSMke5lav87ETG7V';
 
 export default function Contact() {
   const { siteData } = useAdmin();
   const { company } = siteData;
   const [form, setForm] = useState({ name: '', phone: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
+  const formRef = useRef(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: '', phone: '', message: '' });
+    if (!form.name || !form.phone) return;
+
+    setStatus('sending');
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  form.name,
+          from_phone: form.phone,
+          message:    form.message || '(Không có nội dung)',
+          to_email:   'vietlongbkdp@gmail.com',
+        },
+        EMAILJS_PUBLIC_KEY
+      );
+      setStatus('success');
+      setForm({ name: '', phone: '', message: '' });
+      setTimeout(() => setStatus(null), 5000);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setStatus('error');
+      setTimeout(() => setStatus(null), 5000);
+    }
   };
 
   const focusSx = { '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#c62828' }, '& .MuiInputLabel-root.Mui-focused': { color: '#c62828' } };
@@ -107,24 +133,29 @@ export default function Contact() {
                 Chúng tôi sẽ liên hệ lại trong vòng 30 phút trong giờ làm việc.
               </Typography>
 
-              {sent && (
-                <Box sx={{ background: '#e8f5e9', border: '1px solid #a5d6a7', borderRadius: 2, p: 1.5, mb: 2 }}>
-                  <Typography sx={{ color: '#2e7d32', fontWeight: 600, fontSize: 13.5 }}>
-                    <FontAwesomeIcon icon={faPaperPlane} style={{ marginRight: 8 }} />
-                    Cảm ơn! Chúng tôi sẽ liên hệ bạn sớm nhất.
-                  </Typography>
-                </Box>
+              {status === 'success' && (
+                <Alert severity="success" sx={{ mb: 2, fontSize: 13.5, borderRadius: 2 }}>
+                  ✅ Đã gửi yêu cầu thành công! Chúng tôi sẽ liên hệ bạn sớm nhất.
+                </Alert>
+              )}
+              {status === 'error' && (
+                <Alert severity="error" sx={{ mb: 2, fontSize: 13.5, borderRadius: 2 }}>
+                  ❌ Gửi không thành công. Vui lòng gọi trực tiếp {company.phone1} hoặc thử lại.
+                </Alert>
               )}
 
-              <Box component="form" onSubmit={handleSubmit}>
+              <Box component="form" ref={formRef} onSubmit={handleSubmit}>
                 <Stack spacing={1.5}>
-                  <TextField label="Họ và tên *" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required fullWidth size="small" sx={focusSx} />
-                  <TextField label="Số điện thoại *" type="tel" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} required fullWidth size="small" sx={focusSx} />
-                  <TextField label="Nội dung" value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} fullWidth size="small" multiline rows={4} placeholder="Mô tả sự cố hoặc yêu cầu..." sx={focusSx} />
+                  <TextField label="Họ và tên *" value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} required fullWidth size="small" sx={focusSx} disabled={status === 'sending'} />
+                  <TextField label="Số điện thoại *" type="tel" value={form.phone} onChange={e => setForm(p => ({ ...p, phone: e.target.value }))} required fullWidth size="small" sx={focusSx} disabled={status === 'sending'} />
+                  <TextField label="Nội dung" value={form.message} onChange={e => setForm(p => ({ ...p, message: e.target.value }))} fullWidth size="small" multiline rows={4} placeholder="Mô tả sự cố hoặc yêu cầu..." sx={focusSx} disabled={status === 'sending'} />
                   <Button type="submit" variant="contained" fullWidth size="large"
-                    startIcon={<FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: 14 }} />}
-                    sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', fontWeight: 700, py: { xs: 1, md: 1.2 }, fontSize: { xs: 13.5, md: 15 }, borderRadius: 2 }}>
-                    Gửi Yêu Cầu
+                    disabled={status === 'sending' || !form.name || !form.phone}
+                    startIcon={status === 'sending'
+                      ? <CircularProgress size={16} sx={{ color: '#fff' }} />
+                      : <FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: 14 }} />}
+                    sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', fontWeight: 700, py: { xs: 1, md: 1.2 }, fontSize: { xs: 13.5, md: 15 }, borderRadius: 2, '&:disabled': { background: '#ccc' } }}>
+                    {status === 'sending' ? 'Đang gửi...' : 'Gửi Yêu Cầu'}
                   </Button>
                 </Stack>
               </Box>
