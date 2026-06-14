@@ -7,7 +7,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 import emailjs from '@emailjs/browser';
 import { useAdmin } from '../context/AdminContext';
 
-const EMAILJS_SERVICE_ID  = 'service_aj14nse';
+const EMAILJS_SERVICE_ID  = 'service_oe1k7lj';
 const EMAILJS_TEMPLATE_ID = 'template_sron2yp';
 const EMAILJS_PUBLIC_KEY  = '5jSMke5lav87ETG7V';
 
