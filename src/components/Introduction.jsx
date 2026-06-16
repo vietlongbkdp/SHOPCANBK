@@ -176,11 +176,11 @@ export default function Introduction() {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' },
             gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
             {[
-              { src: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=900&q=80', label: 'Tư vấn khách hàng', big: true },
-              { src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80', label: 'Kỹ thuật viên' },
-              { src: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80', label: 'Kho hàng' },
-              { src: 'https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?auto=format&fit=crop&w=600&q=80', label: 'Cân chính xác' },
-              { src: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=600&q=80', label: 'Lắp đặt' },
+              { src: 'https://images.unsplash.com/photo-1591290619762-bb39b29fef27?auto=format&fit=crop&w=900&q=80', label: 'Cân điện tử kỹ thuật số', big: true },
+              { src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80', label: 'Mạch điện tử' },
+              { src: 'https://images.unsplash.com/photo-1607435097405-db48f377bff6?auto=format&fit=crop&w=600&q=80', label: 'Sửa chữa linh kiện' },
+              { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80', label: 'Kiểm tra kỹ thuật' },
+              { src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80', label: 'Đo lường chính xác' },
             ].map((g, i) => (
               <Box key={i} sx={{ gridColumn: g.big ? { xs: '1 / 3', md: '1 / 3' } : 'auto', gridRow: g.big ? { md: 'span 2' } : 'auto',
                 borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
