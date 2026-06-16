@@ -37,7 +37,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
   return (
     <AppBar component="nav" position="static"
       sx={{
-        background: 'linear-gradient(135deg,#1b5e20 0%,#2e7d32 100%)',
+        background: 'linear-gradient(135deg,#1565c0 0%,#00b0ff 100%)',
         boxShadow: '0 3px 12px rgba(27,94,32,.4)',
       }}>
       <Container maxWidth="xl" disableGutters>
@@ -64,7 +64,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                         color: '#fff', fontWeight: isActive(item.page) ? 700 : 500,
                         fontSize: 14, px: 1.8, py: 1,
                         borderRadius: 1.5,
-                        borderBottom: isActive(item.page) ? '2px solid #ffeb3b' : '2px solid transparent',
+                        borderBottom: isActive(item.page) ? '2px solid #69e2ff' : '2px solid transparent',
                         background: isActive(item.page) ? 'rgba(255,255,255,.12)' : 'transparent',
                         '&:hover': { background: 'rgba(255,255,255,.14)' },
                       }}>
@@ -75,7 +75,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                       PaperProps={{ sx: { mt: 0.5, minWidth: 210, borderRadius: 2, boxShadow: 3 } }}>
                       <MenuItem dense onClick={() => { onNavigate('products'); setAnchor(null); }}
                         sx={{ fontWeight: 700, fontSize: 13.5 }}>
-                        <FontAwesomeIcon icon={faBoxOpen} style={{ marginRight: 10, color: '#c62828', fontSize: 14 }} />
+                        <FontAwesomeIcon icon={faBoxOpen} style={{ marginRight: 10, color: '#1565c0', fontSize: 14 }} />
                         Tất Cả Sản Phẩm
                       </MenuItem>
                       <Divider />
@@ -92,7 +92,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                     sx={{
                       color: '#fff', fontWeight: isActive(item.page) ? 700 : 500,
                       fontSize: 14, px: 1.8, py: 1, borderRadius: 1.5,
-                      borderBottom: isActive(item.page) ? '2px solid #ffeb3b' : '2px solid transparent',
+                      borderBottom: isActive(item.page) ? '2px solid #69e2ff' : '2px solid transparent',
                       background: isActive(item.page) ? 'rgba(255,255,255,.12)' : 'transparent',
                       '&:hover': { background: 'rgba(255,255,255,.14)' },
                     }}>
@@ -164,7 +164,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
       <Drawer anchor="left" open={mobileOpen} onClose={() => setMobileOpen(false)}
         PaperProps={{ sx: { width: 280, borderRadius: '0 16px 16px 0' } }}>
         {/* Drawer header */}
-        <Box sx={{ background: 'linear-gradient(135deg,#1b5e20,#2e7d32)', p: 2, color: '#fff' }}>
+        <Box sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', p: 2, color: '#fff' }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
             <Typography sx={{ fontWeight: 700, fontSize: 15 }}>🌿 MENU</Typography>
             <IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#fff', p: 0.5 }}>
@@ -177,7 +177,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
           {NAV_ITEMS.map((item) => item.hasDropdown ? (
             <Box key={item.label}>
               <ListItemButton onClick={() => setProdsOpen(!prodsOpen)} sx={{ py: 1.2, px: 2 }}>
-                <FontAwesomeIcon icon={item.icon} style={{ fontSize: 15, marginRight: 12, color: '#2e7d32' }} />
+                <FontAwesomeIcon icon={item.icon} style={{ fontSize: 15, marginRight: 12, color: '#1565c0' }} />
                 <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600, fontSize: 14 }} />
                 <FontAwesomeIcon icon={prodsOpen ? faChevronUp : faChevronDown} style={{ fontSize: 12, color: '#888' }} />
               </ListItemButton>
@@ -198,9 +198,9 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
               onClick={() => { onNavigate(item.page); setMobileOpen(false); }}
               sx={{
                 py: 1.2, px: 2,
-                '&.Mui-selected': { background: '#e8f5e9', borderLeft: '3px solid #2e7d32' },
+                '&.Mui-selected': { background: '#e3f2ff', borderLeft: '3px solid #1565c0' },
               }}>
-              <FontAwesomeIcon icon={item.icon} style={{ fontSize: 15, marginRight: 12, color: '#2e7d32' }} />
+              <FontAwesomeIcon icon={item.icon} style={{ fontSize: 15, marginRight: 12, color: '#1565c0' }} />
               <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600, fontSize: 14 }} />
             </ListItemButton>
           ))}
@@ -210,7 +210,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
         <Box sx={{ px: 2, pb: 2 }}>
           <Button fullWidth variant="contained" component="a" href="tel:0913331916"
             startIcon={<FontAwesomeIcon icon={faPhone} />}
-            sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', fontWeight: 700, borderRadius: 2 }}>
+            sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', fontWeight: 700, borderRadius: 2 }}>
             0913 331 916
           </Button>
         </Box>

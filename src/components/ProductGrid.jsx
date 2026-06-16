@@ -18,7 +18,7 @@ export default function ProductGrid({ products, onProductClick }) {
         variant="h3"
         sx={{
           fontWeight: 700,
-          color: '#d32f2f',
+          color: '#1565c0',
           mb: { xs: 2, sm: 3, md: 4 },
           textAlign: 'center',
           textTransform: 'uppercase',

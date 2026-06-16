@@ -58,7 +58,7 @@ export default function Header({ onNavigate }) {
                 sx={{
                   fontWeight: 800, cursor: 'pointer', lineHeight: 1.15,
                   fontSize: { xs: '13px', sm: '16px', md: '21px' },
-                  background: 'linear-gradient(135deg,#1a237e,#c62828)',
+                  background: 'linear-gradient(135deg,#0d47a1,#00b0ff)',
                   WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                   whiteSpace: { xs: 'normal', sm: 'nowrap' },
                 }}>
@@ -74,8 +74,8 @@ export default function Header({ onNavigate }) {
               <Stack direction="row" spacing={0.6} mt={0.5} sx={{ display: { xs: 'none', md: 'flex' } }}>
                 {[
                   { icon: faShieldHalved, label: 'Chính hãng 100%', color: '#2e7d32' },
-                  { icon: faScrewdriverWrench, label: 'Sửa chữa tận nơi', color: '#c62828' },
-                  { icon: faLocationDot, label: 'Huế & Đà Nẵng', color: '#1565c0' },
+                  { icon: faScrewdriverWrench, label: 'Sửa chữa tận nơi', color: '#1565c0' },
+                  { icon: faLocationDot, label: 'Huế & Đà Nẵng', color: '#00838f' },
                 ].map((t) => (
                   <Chip key={t.label} size="small"
                     icon={<FontAwesomeIcon icon={t.icon} style={{ fontSize: 10, color: t.color, marginLeft: 7 }} />}
@@ -89,8 +89,8 @@ export default function Header({ onNavigate }) {
             {/* Phone buttons */}
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={0.8} flexShrink={0}>
               {[
-                { label: 'CN Huế', phone: company.phone1, grad: 'linear-gradient(135deg,#c62828,#e53935)', sh: 'rgba(198,40,40,.3)' },
-                { label: 'CN Đà Nẵng', phone: company.phone2, grad: 'linear-gradient(135deg,#1565c0,#1e88e5)', sh: 'rgba(21,101,192,.3)' },
+                { label: 'CN Huế', phone: company.phone1, grad: 'linear-gradient(135deg,#1565c0,#00b0ff)', sh: 'rgba(21,101,192,.3)' },
+                { label: 'CN Đà Nẵng', phone: company.phone2, grad: 'linear-gradient(135deg,#0d47a1,#1976d2)', sh: 'rgba(13,71,161,.3)' },
               ].map(({ label, phone, grad, sh }) => (
                 <Link key={phone} component="a" href={`tel:${phone.replace(/\s/g, '')}`}>
                   <Stack direction="row" alignItems="center" spacing={0.8}

@@ -29,7 +29,7 @@ export default function Cart({ items, onRemove, onUpdateQuantity, onClose }) {
       {/* Header */}
       <Box
         sx={{
-          background: 'linear-gradient(135deg, #d32f2f 0%, #f57c00 100%)',
+          background: 'linear-gradient(135deg, #1565c0 0%, #f57c00 100%)',
           color: 'white',
           p: 2,
           display: 'flex',
@@ -80,7 +80,7 @@ export default function Cart({ items, onRemove, onUpdateQuantity, onClose }) {
                     primary={item.name}
                     secondary={`${item.price.toLocaleString('vi-VN')}₫`}
                     primaryTypographyProps={{ variant: 'body2', fontWeight: 600 }}
-                    secondaryTypographyProps={{ sx: { color: '#d32f2f', fontWeight: 600 } }}
+                    secondaryTypographyProps={{ sx: { color: '#1565c0', fontWeight: 600 } }}
                   />
                   <Stack direction="row" spacing={1} alignItems="center" width="100%">
                     <IconButton
@@ -108,7 +108,7 @@ export default function Cart({ items, onRemove, onUpdateQuantity, onClose }) {
                       sx={{
                         ml: 'auto',
                         fontWeight: 700,
-                        color: '#d32f2f',
+                        color: '#1565c0',
                       }}
                       variant="body2"
                     >
@@ -148,7 +148,7 @@ export default function Cart({ items, onRemove, onUpdateQuantity, onClose }) {
                 <Typography variant="body1" fontWeight={700}>
                   Tổng cộng:
                 </Typography>
-                <Typography variant="body1" fontWeight={700} sx={{ color: '#d32f2f' }}>
+                <Typography variant="body1" fontWeight={700} sx={{ color: '#1565c0' }}>
                   {finalTotal.toLocaleString('vi-VN')}₫
                 </Typography>
               </Box>

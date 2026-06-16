@@ -1,56 +1,52 @@
-import { Box, Container, Grid, Typography, Paper, Button, Stack, Divider, Avatar, Chip } from '@mui/material';
+import { Box, Container, Grid, Typography, Button, Stack, Divider } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faArrowRight, faScrewdriverWrench, faShieldHalved, faTruck,
-  faHeadset, faStar, faFire, faPhone,
+  faAngleRight, faScrewdriverWrench, faShieldHalved, faTruck,
+  faHeadset, faStar, faFire, faPhone, faMedal,
 } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from './ProductCard';
 import { useAdmin } from '../context/AdminContext';
+import { T } from '../theme';
 
 const WHY_US = [
-  { icon: faShieldHalved, color: '#c62828', bg: '#fff5f5', title: 'Chính Hãng 100%', desc: 'Nguồn gốc rõ ràng, bảo hành chính hãng từ nhà sản xuất.' },
-  { icon: faScrewdriverWrench, color: '#e65100', bg: '#fff8f5', title: 'Sửa Chữa Tận Nơi', desc: 'KTV đến tận nơi tại Huế & Đà Nẵng trong vòng 2 giờ.' },
-  { icon: faTruck, color: '#1565c0', bg: '#f0f4ff', title: 'Giao Hàng Toàn Quốc', desc: 'Giao hàng 24–48h, hỗ trợ COD, đóng gói kỹ càng.' },
-  { icon: faHeadset, color: '#2e7d32', bg: '#f0faf0', title: 'Hỗ Trợ 24/7', desc: 'Tư vấn kỹ thuật miễn phí qua điện thoại và Zalo.' },
+  { icon: faShieldHalved, title: 'Chính Hãng 100%', desc: 'Nguồn gốc rõ ràng, bảo hành từ nhà sản xuất.' },
+  { icon: faScrewdriverWrench, title: 'Sửa Chữa Tận Nơi', desc: 'KTV đến tận nơi tại Huế & Đà Nẵng trong 2 giờ.' },
+  { icon: faTruck, title: 'Giao Hàng Toàn Quốc', desc: 'Giao 24–48h, hỗ trợ COD, đóng gói kỹ càng.' },
+  { icon: faHeadset, title: 'Hỗ Trợ 24/7', desc: 'Tư vấn kỹ thuật miễn phí qua điện thoại & Zalo.' },
 ];
 
-function SectionHeader({ title, subtitle, onViewAll, icon }) {
+function SectionHead({ eyebrow, title, onViewAll }) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="flex-end" mb={2} gap={1}>
+    <Stack direction="row" justifyContent="space-between" alignItems="flex-end" mb={2.5} gap={1}>
       <Box>
-        <Stack direction="row" spacing={1} alignItems="center" mb={0.4}>
-          {icon && <FontAwesomeIcon icon={icon} style={{ fontSize: 16, color: '#c62828' }} />}
-          <Typography component="h2"
-            sx={{ fontWeight: 700, color: '#1a1a2e', fontSize: { xs: '14px', md: '18px' }, lineHeight: 1.2 }}>
-            {title}
+        {eyebrow && (
+          <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+            {eyebrow}
           </Typography>
-        </Stack>
-        <Box sx={{ width: 40, height: 3, background: 'linear-gradient(90deg,#c62828,#e65100)', borderRadius: 2 }} />
-        {subtitle && <Typography sx={{ color: '#78909c', fontSize: { xs: 11, md: 12.5 }, mt: 0.4 }}>{subtitle}</Typography>}
+        )}
+        <Typography component="h2" sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '24px' }, lineHeight: 1.15, letterSpacing: '-0.01em' }}>
+          {title}
+        </Typography>
       </Box>
       {onViewAll && (
-        <Button size="small" onClick={onViewAll}
-          endIcon={<FontAwesomeIcon icon={faArrowRight} style={{ fontSize: 11 }} />}
-          sx={{ color: '#c62828', fontWeight: 600, fontSize: 12.5, '&:hover': { background: '#fff5f5' } }}>
-          Xem thêm
+        <Button onClick={onViewAll}
+          endIcon={<FontAwesomeIcon icon={faAngleRight} style={{ fontSize: 12 }} />}
+          sx={{ color: T.brand, fontWeight: 700, fontSize: 13, flexShrink: 0, '&:hover': { background: T.gradientSoft } }}>
+          Xem tất cả
         </Button>
       )}
     </Stack>
   );
 }
 
-function ProductSection({ title, subtitle, icon, products, onProductClick, onNavigate }) {
+function ProductSection({ eyebrow, title, products, onProductClick, onNavigate }) {
   if (!products.length) return null;
   return (
-    <Box component="section" sx={{
-      background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 },
-      mb: { xs: 1.5, md: 2 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)',
-      border: '1px solid #f0f0f0',
-    }}>
-      <SectionHeader title={title} subtitle={subtitle} icon={icon} onViewAll={() => onNavigate('products')} />
-      <Grid container spacing={{ xs: 1, md: 1.5 }}>
+    <Box component="section" sx={{ mb: { xs: 4, md: 6 } }}>
+      <SectionHead eyebrow={eyebrow} title={title} onViewAll={() => onNavigate('products')} />
+      <Grid container spacing={{ xs: 1.2, md: 2 }}>
         {products.map(p => (
-          <Grid item xs={6} sm={4} md={3} key={p.id}>
+          <Grid item xs={6} sm={4} md={3} lg={2.4} key={p.id}>
             <ProductCard product={p} onClick={onProductClick} />
           </Grid>
         ))}
@@ -62,26 +58,23 @@ function ProductSection({ title, subtitle, icon, products, onProductClick, onNav
 export default function Home({ onProductClick, onNavigate }) {
   const { siteData } = useAdmin();
   const { products, stats, services, company } = siteData;
-
   const byCategory = (id) => products.filter(p => p.category === id);
-  const topSellers  = [...products].sort((a, b) => b.reviews - a.reviews).slice(0, 6);
+  const topSellers = [...products].sort((a, b) => b.reviews - a.reviews).slice(0, 5);
 
   return (
-    <Box sx={{ background: '#f4f6f8' }}>
-
-      {/* Stats bar */}
-      <Box sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', color: '#fff', py: { xs: 1.2, md: 2 } }}>
+    <Box>
+      {/* Stats strip */}
+      <Box sx={{ background: T.ink, color: '#fff', py: { xs: 2, md: 2.5 } }}>
         <Container maxWidth="xl">
-          <Box sx={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
             {stats.map((s, i) => (
-              <Box key={i} sx={{
-                flex: 1, textAlign: 'center', px: { xs: 0.5, md: 1 },
-                borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,.2)' : 'none',
-              }}>
-                <Typography sx={{ fontWeight: 800, fontSize: { xs: '16px', sm: '22px', md: '30px' }, lineHeight: 1 }}>
+              <Box key={i} sx={{ flex: 1, textAlign: 'center', px: 0.5,
+                borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,.12)' : 'none' }}>
+                <Typography sx={{ fontWeight: 900, fontSize: { xs: '18px', sm: '24px', md: '32px' }, lineHeight: 1,
+                  background: `linear-gradient(135deg,${T.accentLight},#fff)`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                   {s.value}
                 </Typography>
-                <Typography sx={{ opacity: .85, fontSize: { xs: '9px', sm: '11px', md: '13px' }, mt: 0.3, lineHeight: 1.2 }}>
+                <Typography sx={{ opacity: .7, fontSize: { xs: '9px', sm: '11px', md: '12.5px' }, mt: 0.4, lineHeight: 1.2 }}>
                   {s.label}
                 </Typography>
               </Box>
@@ -90,111 +83,90 @@ export default function Home({ onProductClick, onNavigate }) {
         </Container>
       </Box>
 
-      <Container maxWidth="xl" sx={{ py: { xs: 2, md: 3 } }}>
-        <Grid container spacing={{ xs: 1.5, md: 2.5 }}>
-
-          {/* ── Main content ── */}
+      <Container maxWidth="xl" sx={{ py: { xs: 3, md: 5 } }}>
+        <Grid container spacing={{ xs: 0, lg: 4 }}>
+          {/* Main */}
           <Grid item xs={12} lg={9}>
-            <ProductSection title="CÂN TÍNH TIỀN" subtitle="Chuyên dùng cho chợ, cửa hàng, siêu thị"
-              icon={faFire} products={byCategory(1)} onProductClick={onProductClick} onNavigate={onNavigate} />
+            <ProductSection eyebrow="BÁN CHẠY NHẤT" title="Cân Tính Tiền"
+              products={byCategory(1)} onProductClick={onProductClick} onNavigate={onNavigate} />
 
-            {/* Promo banner */}
+            {/* Repair CTA band */}
             <Box sx={{
-              background: 'linear-gradient(135deg,#1a237e 0%,#0d47a1 60%,#0277bd 100%)',
-              borderRadius: 2, p: { xs: 2, md: 2.5 }, mb: { xs: 1.5, md: 2 },
-              display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 1.5,
+              position: 'relative', overflow: 'hidden', borderRadius: 4, mb: { xs: 4, md: 6 },
+              background: T.gradient, p: { xs: 2.5, md: 4 },
             }}>
-              <Box>
-                <Stack direction="row" spacing={1} alignItems="center" mb={0.4}>
-                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 18, color: '#ffcc02' }} />
-                  <Typography sx={{ fontWeight: 800, color: '#fff', fontSize: { xs: 14, md: 20 } }}>
-                    SỬA CHỮA CÂN ĐIỆN TỬ TẬN NƠI
+              <Box sx={{ position: 'absolute', top: -40, right: -20, width: 180, height: 180, borderRadius: '50%', background: 'rgba(255,255,255,.1)' }} />
+              <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 2 }}>
+                <Box sx={{ color: '#fff' }}>
+                  <Stack direction="row" spacing={1.2} alignItems="center" mb={0.8}>
+                    <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 20 }} />
+                    <Typography sx={{ fontWeight: 800, fontSize: { xs: 16, md: 22 }, letterSpacing: '-0.01em' }}>
+                      Cân hỏng? Gọi là có mặt!
+                    </Typography>
+                  </Stack>
+                  <Typography sx={{ opacity: .9, fontSize: { xs: 12.5, md: 14 } }}>
+                    Kỹ thuật viên tận nơi tại Huế &amp; Đà Nẵng · Bảo hành 3 tháng
                   </Typography>
-                </Stack>
-                <Typography sx={{ color: 'rgba(255,255,255,.8)', fontSize: { xs: 12, md: 13.5 } }}>
-                  Huế &amp; Đà Nẵng · Nhanh chóng · Bảo hành sau sửa chữa 3 tháng
-                </Typography>
+                </Box>
+                <Button component="a" href={`tel:${company.phone1.replace(/\s/g,'')}`}
+                  startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 14 }} />}
+                  sx={{ background: '#fff', color: T.brand, fontWeight: 800, px: 3, py: 1.3, borderRadius: 2.5, flexShrink: 0,
+                    boxShadow: '0 6px 20px rgba(0,0,0,.2)', '&:hover': { background: '#fff', transform: 'translateY(-2px)' }, transition: 'all .2s' }}>
+                  {company.phone1}
+                </Button>
               </Box>
-              <Button component="a" href={`tel:${company.phone1.replace(/\s/g,'')}`}
-                variant="contained"
-                startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 14 }} />}
-                sx={{ background: '#ffcc02', color: '#1a1a2e', fontWeight: 800, flexShrink: 0, fontSize: { xs: 12, md: 14 }, '&:hover': { background: '#ffd740' } }}>
-                {company.phone1}
-              </Button>
             </Box>
 
-            <ProductSection title="CÂN BÀN ĐIỆN TỬ" subtitle="100kg – 1 tấn, công nghiệp & thương mại"
+            <ProductSection eyebrow="CÔNG NGHIỆP · THƯƠNG MẠI" title="Cân Bàn Điện Tử"
               products={byCategory(2)} onProductClick={onProductClick} onNavigate={onNavigate} />
-
-            <ProductSection title="CÂN GHẾ ĐIỆN TỬ" subtitle="100kg – 1 tấn, nông sản, thủy sản"
+            <ProductSection eyebrow="NÔNG SẢN · THỦY SẢN" title="Cân Ghế Điện Tử"
               products={byCategory(3)} onProductClick={onProductClick} onNavigate={onNavigate} />
-
-            <ProductSection title="CÂN KỸ THUẬT – TIỂU LY" subtitle="Cân vàng, cân yến, phòng thí nghiệm"
+            <ProductSection eyebrow="ĐỘ CHÍNH XÁC CAO" title="Cân Kỹ Thuật · Tiểu Ly"
               products={byCategory(6)} onProductClick={onProductClick} onNavigate={onNavigate} />
 
             {/* Why us */}
-            <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 1.5, md: 2.5 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
-              <SectionHeader title="TẠI SAO CHỌN BÁCH KHOA?" />
-              <Box sx={{
-                display: 'grid',
-                gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(4, 1fr)' },
-                gap: 1.5,
-              }}>
+            <Box component="section">
+              <SectionHead eyebrow="CAM KẾT CỦA CHÚNG TÔI" title="Tại Sao Chọn Bách Khoa?" />
+              <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(4,1fr)' }, gap: 1.5 }}>
                 {WHY_US.map((w, i) => (
-                  <Stack key={i} direction="row" spacing={1.5} alignItems="flex-start"
-                    sx={{ p: 1.5, borderRadius: 2, background: w.bg, border: `1px solid ${w.color}18` }}>
-                    <Box sx={{
-                      width: 40, height: 40, borderRadius: 2, background: '#fff',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                      boxShadow: '0 2px 8px rgba(0,0,0,.08)',
-                    }}>
-                      <FontAwesomeIcon icon={w.icon} style={{ fontSize: 18, color: w.color }} />
+                  <Box key={i} sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}`,
+                    transition: 'all .25s', '&:hover': { transform: 'translateY(-4px)', boxShadow: `0 12px 28px ${T.brand}14`, borderColor: T.brandLight } }}>
+                    <Box sx={{ width: 48, height: 48, borderRadius: 2.5, background: T.gradient, mb: 1.5,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 6px 16px ${T.brand}40` }}>
+                      <FontAwesomeIcon icon={w.icon} style={{ fontSize: 19, color: '#fff' }} />
                     </Box>
-                    <Box>
-                      <Typography sx={{ fontWeight: 700, fontSize: { xs: 12.5, md: 13.5 }, mb: 0.3, color: '#1a1a2e' }}>{w.title}</Typography>
-                      <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, color: '#78909c', lineHeight: 1.55 }}>{w.desc}</Typography>
-                    </Box>
-                  </Stack>
+                    <Typography sx={{ fontWeight: 700, fontSize: 14, mb: 0.5, color: T.ink }}>{w.title}</Typography>
+                    <Typography sx={{ fontSize: 12.5, color: T.inkSoft, lineHeight: 1.6 }}>{w.desc}</Typography>
+                  </Box>
                 ))}
               </Box>
             </Box>
           </Grid>
 
-          {/* ── Sidebar ── */}
-          <Grid item xs={12} lg={3}>
-            <Box sx={{ position: { lg: 'sticky' }, top: 72, display: 'flex', flexDirection: 'column', gap: 2 }}>
-
+          {/* Sidebar */}
+          <Grid item xs={12} lg={3} sx={{ mt: { xs: 4, lg: 0 } }}>
+            <Box sx={{ position: { lg: 'sticky' }, top: 76, display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/* Top sellers */}
-              <Box sx={{ background: '#fff', borderRadius: 2, p: 2, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
-                <Stack direction="row" spacing={1} alignItems="center" mb={1.5}>
-                  <Box sx={{ width: 28, height: 28, borderRadius: 1.5, background: 'linear-gradient(135deg,#f9a825,#ff6f00)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <FontAwesomeIcon icon={faStar} style={{ fontSize: 14, color: '#fff' }} />
+              <Box sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}` }}>
+                <Stack direction="row" spacing={1} alignItems="center" mb={2}>
+                  <Box sx={{ width: 30, height: 30, borderRadius: 2, background: T.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <FontAwesomeIcon icon={faFire} style={{ fontSize: 14, color: '#fff' }} />
                   </Box>
-                  <Typography sx={{ fontWeight: 700, fontSize: 14 }}>TOP BÁN CHẠY</Typography>
+                  <Typography sx={{ fontWeight: 800, fontSize: 14 }}>Bán Chạy Nhất</Typography>
                 </Stack>
-                <Stack spacing={1.2} divider={<Divider flexItem />}>
+                <Stack spacing={1.5} divider={<Divider flexItem />}>
                   {topSellers.map((p, i) => (
                     <Stack key={p.id} direction="row" spacing={1.2} alignItems="center"
-                      sx={{ cursor: 'pointer', '&:hover .pt': { color: '#c62828' } }}
-                      onClick={() => onProductClick?.(p)}>
-                      <Box sx={{
-                        width: 22, height: 22, borderRadius: '50%', flexShrink: 0,
-                        background: i < 3 ? 'linear-gradient(135deg,#c62828,#e53935)' : '#f4f6f8',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      }}>
-                        <Typography sx={{ fontSize: 11, fontWeight: 800, color: i < 3 ? '#fff' : '#90a4ae', lineHeight: 1 }}>
-                          {i + 1}
-                        </Typography>
-                      </Box>
+                      sx={{ cursor: 'pointer', '&:hover .pt': { color: T.brand } }} onClick={() => onProductClick?.(p)}>
+                      <Typography sx={{ fontWeight: 900, fontSize: 18, width: 22, textAlign: 'center', flexShrink: 0,
+                        color: i < 3 ? T.brand : '#d4cbc4' }}>{i + 1}</Typography>
                       <Box component="img" src={p.image} alt={p.name} loading="lazy"
-                        sx={{ width: 46, height: 46, objectFit: 'cover', borderRadius: 1.5, flexShrink: 0, border: '1px solid #f0f0f0' }}
+                        sx={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 2, flexShrink: 0, border: `1px solid ${T.line}` }}
                         onError={(e) => { e.target.style.display = 'none'; }} />
                       <Box sx={{ flex: 1, minWidth: 0 }}>
-                        <Typography className="pt"
-                          sx={{ fontSize: 12, fontWeight: 600, color: '#1a1a2e', lineHeight: 1.35, transition: 'color .2s', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                          {p.name}
-                        </Typography>
-                        <Typography sx={{ fontSize: 12, color: '#c62828', fontWeight: 700, mt: 0.2 }}>
+                        <Typography className="pt" sx={{ fontSize: 12, fontWeight: 600, color: T.ink, lineHeight: 1.35, transition: 'color .2s',
+                          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>{p.name}</Typography>
+                        <Typography sx={{ fontSize: 12, color: T.brand, fontWeight: 800, mt: 0.2 }}>
                           {Number(p.price).toLocaleString('vi-VN')}₫
                         </Typography>
                       </Box>
@@ -203,55 +175,43 @@ export default function Home({ onProductClick, onNavigate }) {
                 </Stack>
               </Box>
 
-              {/* CTA card */}
-              <Box sx={{
-                borderRadius: 2, p: 2.5, overflow: 'hidden', position: 'relative',
-                background: 'linear-gradient(135deg,#c62828 0%,#e65100 100%)',
-                color: '#fff',
-              }}>
-                <Box sx={{ position: 'absolute', top: -20, right: -20, width: 80, height: 80, borderRadius: '50%', background: 'rgba(255,255,255,.08)' }} />
-                <Box sx={{ position: 'absolute', bottom: -30, left: -10, width: 100, height: 100, borderRadius: '50%', background: 'rgba(255,255,255,.05)' }} />
+              {/* CTA */}
+              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 3, p: 2.5, background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff' }}>
+                <Box sx={{ position: 'absolute', top: -30, right: -30, width: 100, height: 100, borderRadius: '50%', background: `radial-gradient(circle,${T.accent}44,transparent 70%)` }} />
                 <Stack direction="row" spacing={1.2} alignItems="center" mb={1}>
-                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 22, color: '#ffcc02' }} />
-                  <Typography sx={{ fontWeight: 800, fontSize: 15 }}>CẦN SỬA CHỮA?</Typography>
+                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 20, color: T.accentLight }} />
+                  <Typography sx={{ fontWeight: 800, fontSize: 15 }}>Cần sửa chữa?</Typography>
                 </Stack>
-                <Typography sx={{ fontSize: 12.5, opacity: .9, mb: 2, lineHeight: 1.6 }}>
-                  Gọi ngay để KTV đến tận nơi tại Huế &amp; Đà Nẵng trong 2 giờ.
+                <Typography sx={{ fontSize: 12.5, opacity: .8, mb: 2, lineHeight: 1.6 }}>
+                  Gọi ngay để kỹ thuật viên đến tận nơi nhanh nhất.
                 </Typography>
-                <Stack spacing={0.8}>
-                  <Button component="a" href={`tel:${company.phone1.replace(/\s/g,'')}`} fullWidth
-                    variant="contained"
-                    startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 13 }} />}
-                    sx={{ background: '#fff', color: '#c62828', fontWeight: 800, fontSize: 13, '&:hover': { background: '#f5f5f5' } }}>
-                    {company.phone1}
-                  </Button>
-                  <Button component="a" href={`tel:${company.phone2.replace(/\s/g,'')}`} fullWidth
-                    variant="outlined"
-                    startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 13 }} />}
-                    sx={{ color: '#fff', borderColor: 'rgba(255,255,255,.55)', fontWeight: 600, fontSize: 13, '&:hover': { borderColor: '#fff', background: 'rgba(255,255,255,.1)' } }}>
-                    {company.phone2}
-                  </Button>
-                </Stack>
-              </Box>
-
-              {/* Services */}
-              <Box sx={{ background: '#fff', borderRadius: 2, p: 2, boxShadow: '0 2px 8px rgba(0,0,0,.06)', border: '1px solid #f0f0f0' }}>
-                <Typography sx={{ fontWeight: 700, fontSize: 13.5, mb: 1.2, color: '#1a1a2e' }}>
-                  <FontAwesomeIcon icon={faScrewdriverWrench} style={{ marginRight: 8, color: '#c62828', fontSize: 13 }} />
-                  DỊCH VỤ
-                </Typography>
-                <Stack spacing={0.4}>
-                  {services.map(sv => (
-                    <Stack key={sv.id} direction="row" spacing={1.2} alignItems="center"
-                      onClick={() => onNavigate('services')}
-                      sx={{ px: 1, py: 0.8, borderRadius: 1.5, cursor: 'pointer', '&:hover': { background: '#fff5f5' }, transition: 'background .15s' }}>
-                      <Typography sx={{ fontSize: 17, lineHeight: 1 }}>{sv.icon}</Typography>
-                      <Typography sx={{ fontSize: 13, fontWeight: 600, color: '#37474f' }}>{sv.title}</Typography>
-                    </Stack>
+                <Stack spacing={1}>
+                  {[company.phone1, company.phone2].map((ph, i) => (
+                    <Button key={ph} component="a" href={`tel:${ph.replace(/\s/g,'')}`} fullWidth
+                      startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 13 }} />}
+                      sx={{ background: i === 0 ? T.gradient : 'rgba(255,255,255,.1)', color: '#fff', fontWeight: 700, fontSize: 13, py: 1, borderRadius: 2,
+                        border: i === 0 ? 'none' : '1px solid rgba(255,255,255,.25)',
+                        '&:hover': { background: i === 0 ? T.gradientDark : 'rgba(255,255,255,.18)' } }}>
+                      {ph}
+                    </Button>
                   ))}
                 </Stack>
               </Box>
 
+              {/* Services */}
+              <Box sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}` }}>
+                <Typography sx={{ fontWeight: 800, fontSize: 14, mb: 1.5 }}>Dịch Vụ</Typography>
+                <Stack spacing={0.5}>
+                  {services.map(sv => (
+                    <Stack key={sv.id} direction="row" spacing={1.2} alignItems="center" onClick={() => onNavigate('services')}
+                      sx={{ px: 1, py: 0.9, borderRadius: 2, cursor: 'pointer', '&:hover': { background: T.gradientSoft } }}>
+                      <Typography sx={{ fontSize: 18, lineHeight: 1 }}>{sv.icon}</Typography>
+                      <Typography sx={{ fontSize: 13, fontWeight: 600, color: T.ink, flex: 1 }}>{sv.title}</Typography>
+                      <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: 11, color: '#ccc' }} />
+                    </Stack>
+                  ))}
+                </Stack>
+              </Box>
             </Box>
           </Grid>
         </Grid>

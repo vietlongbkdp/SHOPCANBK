@@ -22,7 +22,7 @@ export default function CartDrawer({ open, onClose }) {
 
       {/* Header */}
       <Stack direction="row" alignItems="center" justifyContent="space-between"
-        sx={{ px: 2.5, py: 1.8, background: 'linear-gradient(135deg,#c62828,#e53935)', color: '#fff', flexShrink: 0 }}>
+        sx={{ px: 2.5, py: 1.8, background: 'linear-gradient(135deg,#1565c0,#00b0ff)', color: '#fff', flexShrink: 0 }}>
         <Stack direction="row" spacing={1.2} alignItems="center">
           <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: 18 }} />
           <Typography sx={{ fontWeight: 700, fontSize: 16 }}>Giỏ Hàng ({totalCount})</Typography>
@@ -39,7 +39,7 @@ export default function CartDrawer({ open, onClose }) {
           </Box>
           <Typography sx={{ color: '#90a4ae', fontSize: 15, fontWeight: 500 }}>Giỏ hàng trống</Typography>
           <Button variant="contained" onClick={onClose}
-            sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', borderRadius: 2 }}>
+            sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', borderRadius: 2 }}>
             Tiếp tục mua hàng
           </Button>
         </Box>
@@ -56,7 +56,7 @@ export default function CartDrawer({ open, onClose }) {
                     <Typography sx={{ fontSize: 13, fontWeight: 600, lineHeight: 1.35, color: '#1a1a2e', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                       {item.name}
                     </Typography>
-                    <Typography sx={{ fontSize: 13.5, color: '#c62828', fontWeight: 800, mt: 0.4 }}>
+                    <Typography sx={{ fontSize: 13.5, color: '#1565c0', fontWeight: 800, mt: 0.4 }}>
                       {Number(item.price).toLocaleString('vi-VN')}₫
                     </Typography>
                     <Stack direction="row" alignItems="center" spacing={0.5} mt={0.5}>
@@ -72,11 +72,11 @@ export default function CartDrawer({ open, onClose }) {
                     </Stack>
                   </Box>
                   <Box sx={{ textAlign: 'right', flexShrink: 0 }}>
-                    <Typography sx={{ fontSize: 13.5, fontWeight: 800, color: '#c62828' }}>
+                    <Typography sx={{ fontSize: 13.5, fontWeight: 800, color: '#1565c0' }}>
                       {(item.price*item.qty).toLocaleString('vi-VN')}₫
                     </Typography>
                     <IconButton size="small" onClick={() => removeItem(item.id)}
-                      sx={{ mt: 0.5, color: '#ef9a9a', '&:hover': { color: '#c62828', background: '#fff5f5' } }}>
+                      sx={{ mt: 0.5, color: '#ef9a9a', '&:hover': { color: '#1565c0', background: '#fff5f5' } }}>
                       <FontAwesomeIcon icon={faTrash} style={{ fontSize: 14 }} />
                     </IconButton>
                   </Box>
@@ -88,24 +88,24 @@ export default function CartDrawer({ open, onClose }) {
           <Box sx={{ p: 2.5, borderTop: '1px solid #eef0f3', background: '#fafbfc', flexShrink: 0 }}>
             <Stack direction="row" justifyContent="space-between" mb={2}>
               <Typography sx={{ fontWeight: 700, fontSize: 15 }}>Tổng cộng:</Typography>
-              <Typography sx={{ fontWeight: 800, fontSize: 18, color: '#c62828' }}>
+              <Typography sx={{ fontWeight: 800, fontSize: 18, color: '#1565c0' }}>
                 {totalPrice.toLocaleString('vi-VN')}₫
               </Typography>
             </Stack>
             <Stack spacing={1}>
               <Button fullWidth variant="contained" onClick={handleOrder}
                 startIcon={<FontAwesomeIcon icon={faComment} style={{ fontSize: 14 }} />}
-                sx={{ background: 'linear-gradient(135deg,#0068ff,#1e88e5)', fontWeight: 700, py: 1.2, borderRadius: 2 }}>
+                sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', fontWeight: 700, py: 1.2, borderRadius: 2 }}>
                 Đặt Hàng Qua Zalo
               </Button>
               <Button fullWidth variant="contained" component="a"
                 href={`tel:${company.phone1.replace(/\s/g,'')}`}
                 startIcon={<FontAwesomeIcon icon={faPhone} style={{ fontSize: 14 }} />}
-                sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', fontWeight: 700, py: 1.1, borderRadius: 2 }}>
+                sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', fontWeight: 700, py: 1.1, borderRadius: 2 }}>
                 Gọi {company.phone1}
               </Button>
               <Button fullWidth size="small" onClick={clearCart}
-                sx={{ color: '#90a4ae', fontSize: 12, '&:hover': { color: '#c62828' } }}>
+                sx={{ color: '#90a4ae', fontSize: 12, '&:hover': { color: '#1565c0' } }}>
                 <FontAwesomeIcon icon={faTrash} style={{ marginRight: 6, fontSize: 11 }} />
                 Xóa tất cả
               </Button>

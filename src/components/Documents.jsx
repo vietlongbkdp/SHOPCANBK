@@ -15,7 +15,7 @@ const DOCS = [
 export default function Documents() {
   return (
     <Box sx={{ background: '#f5f5f5', minHeight: '60vh' }}>
-      <Box sx={{ background: 'linear-gradient(135deg, #c62828, #e65100)', color: 'white', py: { xs: 3, md: 5 } }}>
+      <Box sx={{ background: 'linear-gradient(135deg, #1565c0, #00b0ff)', color: 'white', py: { xs: 3, md: 5 } }}>
         <Container maxWidth="lg">
           <Typography variant="h3" sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '22px', md: '36px' } }}>TÀI LIỆU KỸ THUẬT</Typography>
           <Typography sx={{ opacity: 0.9, fontSize: { xs: 13, md: 16 } }}>Hướng dẫn sử dụng, catalogue và tài liệu kỹ thuật cân điện tử</Typography>
@@ -27,7 +27,7 @@ export default function Documents() {
           {DOCS.map(doc => (
             <Grid item xs={12} sm={6} md={4} key={doc.id}>
               <Paper sx={{ p: 2.5, borderRadius: 1, border: '1px solid #e8e8e8', height: '100%', transition: 'all 0.2s',
-                '&:hover': { boxShadow: '0 4px 16px rgba(0,0,0,0.1)', borderColor: '#c62828' } }}>
+                '&:hover': { boxShadow: '0 4px 16px rgba(0,0,0,0.1)', borderColor: '#1565c0' } }}>
                 <Stack direction="row" spacing={1.5} alignItems="flex-start">
                   <Box sx={{ fontSize: 36 }}>{doc.icon}</Box>
                   <Box sx={{ flex: 1 }}>
@@ -37,7 +37,7 @@ export default function Documents() {
                       <Typography sx={{ fontSize: 12, color: '#888', alignSelf: 'center' }}>{doc.size}</Typography>
                     </Stack>
                     <Button size="small" variant="outlined" startIcon={<DownloadIcon />}
-                      sx={{ borderColor: '#c62828', color: '#c62828', fontSize: 12, '&:hover': { background: '#fff5f5' } }}>
+                      sx={{ borderColor: '#1565c0', color: '#1565c0', fontSize: 12, '&:hover': { background: '#fff5f5' } }}>
                       Tải xuống
                     </Button>
                   </Box>

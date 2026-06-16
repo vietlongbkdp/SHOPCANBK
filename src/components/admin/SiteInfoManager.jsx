@@ -57,7 +57,7 @@ export default function SiteInfoManager() {
                 fullWidth size="small" label={f.label} name={f.name}
                 value={form[f.name] || ''}
                 onChange={e => setForm(p => ({ ...p, [e.target.name]: e.target.value }))}
-                sx={{ '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor:'#c62828' }, '& .MuiInputLabel-root.Mui-focused': { color:'#c62828' } }}
+                sx={{ '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor:'#1565c0' }, '& .MuiInputLabel-root.Mui-focused': { color:'#1565c0' } }}
               />
             </Grid>
           ))}
@@ -68,7 +68,7 @@ export default function SiteInfoManager() {
             Khôi phục mặc định
           </Button>
           <Button variant="contained" startIcon={<SaveIcon />} onClick={handleSave}
-            sx={{ background:'#c62828', '&:hover':{ background:'#8e0000' } }}>
+            sx={{ background:'#1565c0', '&:hover':{ background:'#8e0000' } }}>
             Lưu Thay Đổi
           </Button>
         </Stack>

@@ -1,35 +1,47 @@
 import { createTheme } from '@mui/material/styles';
 
+// ── DESIGN TOKENS ─────────────────────────────────────
+// Tone chủ đạo: xanh dương gradient
+export const T = {
+  // Primary brand gradient
+  brand:        '#1565c0',
+  brandDark:    '#0d47a1',
+  brandLight:   '#5e92f3',
+  accent:       '#00b0ff',       // xanh sáng nhấn
+  accentLight:  '#69e2ff',
+  gradient:     'linear-gradient(135deg,#1565c0 0%,#00b0ff 100%)',
+  gradientDark: 'linear-gradient(135deg,#0d47a1 0%,#1565c0 100%)',
+  gradientSoft: 'linear-gradient(135deg,#f0f6ff 0%,#e3f2ff 100%)',
+  // Neutrals
+  ink:          '#0f1724',       // gần đen, ngả xanh
+  inkSoft:      '#4a5568',
+  line:         '#e6edf5',
+  surface:      '#ffffff',
+  bg:           '#f5f8fc',       // nền xanh nhạt
+  // States
+  success:      '#2e7d32',
+  star:         '#ffa000',
+};
+
 const theme = createTheme({
   palette: {
-    primary:    { main: '#c62828', light: '#ef5350', dark: '#8e0000', contrastText: '#fff' },
-    secondary:  { main: '#1565c0', light: '#1e88e5', dark: '#0d47a1', contrastText: '#fff' },
-    success:    { main: '#2e7d32' },
-    warning:    { main: '#e65100' },
-    info:       { main: '#0277bd' },
-    background: { default: '#f4f6f8', paper: '#ffffff' },
-    text:       { primary: '#1a1a2e', secondary: '#546e7a' },
+    primary:    { main: T.brand, light: T.brandLight, dark: T.brandDark, contrastText: '#fff' },
+    secondary:  { main: T.accent, light: T.accentLight, contrastText: '#fff' },
+    success:    { main: T.success },
+    background: { default: T.bg, paper: T.surface },
+    text:       { primary: T.ink, secondary: T.inkSoft },
   },
   typography: {
-    fontFamily: '"Be Vietnam Pro","Segoe UI","Helvetica Neue",Arial,sans-serif',
-    h1: { fontWeight: 800, letterSpacing: -0.5 },
-    h2: { fontWeight: 700 },
+    fontFamily: '"Be Vietnam Pro","Segoe UI",sans-serif',
+    h1: { fontWeight: 800, letterSpacing: '-0.02em' },
+    h2: { fontWeight: 800, letterSpacing: '-0.01em' },
     h3: { fontWeight: 700 },
     h4: { fontWeight: 700 },
-    h5: { fontWeight: 600 },
+    h5: { fontWeight: 700 },
     h6: { fontWeight: 600 },
-    button: { fontWeight: 600, textTransform: 'none' },
+    button: { fontWeight: 700, textTransform: 'none' },
   },
-  shape: { borderRadius: 8 },
-  shadows: [
-    'none',
-    '0 1px 3px rgba(0,0,0,.08)',
-    '0 2px 8px rgba(0,0,0,.1)',
-    '0 4px 16px rgba(0,0,0,.1)',
-    '0 6px 24px rgba(0,0,0,.12)',
-    '0 8px 32px rgba(0,0,0,.12)',
-    ...Array(19).fill('0 8px 32px rgba(0,0,0,.12)'),
-  ],
+  shape: { borderRadius: 12 },
   components: {
     MuiContainer: {
       styleOverrides: {
@@ -41,24 +53,15 @@ const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: {
-          textTransform: 'none', fontWeight: 600, borderRadius: 8,
-          boxShadow: 'none', '&:hover': { boxShadow: 'none' },
-        },
+        root: { textTransform: 'none', fontWeight: 700, borderRadius: 10, boxShadow: 'none', '&:hover': { boxShadow: 'none' } },
         containedPrimary: {
-          background: 'linear-gradient(135deg,#c62828,#e53935)',
-          '&:hover': { background: 'linear-gradient(135deg,#8e0000,#c62828)' },
+          background: T.gradient,
+          '&:hover': { background: T.gradientDark },
         },
       },
     },
-    MuiCard: {
-      styleOverrides: {
-        root: { borderRadius: 10, boxShadow: '0 2px 8px rgba(0,0,0,.08)' },
-      },
-    },
-    MuiChip: {
-      styleOverrides: { root: { fontWeight: 600 } },
-    },
+    MuiChip: { styleOverrides: { root: { fontWeight: 600 } } },
+    MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' } } },
   },
 });
 

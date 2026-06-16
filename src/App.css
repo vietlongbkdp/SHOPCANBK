@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap');
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{
   font-family:'Be Vietnam Pro','Segoe UI',sans-serif;
-  background:#f4f6f8;
+  background:#f5f8fc;
+  color:#0f1724;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }
@@ -11,5 +14,26 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 *{-webkit-tap-highlight-color:transparent}
 button,a{touch-action:manipulation}
-/* Font Awesome sizing fix */
-.fa-icon{vertical-align:middle}
+
+/* Scroll reveal animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes floatY {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.reveal { animation: fadeUp .6s cubic-bezier(.16,1,.3,1) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+/* Hide scrollbar utility */
+.no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
