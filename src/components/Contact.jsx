@@ -97,12 +97,12 @@ export default function Contact() {
     }
   };
 
-  const focusSx = { '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#c62828' }, '& .MuiInputLabel-root.Mui-focused': { color: '#c62828' } };
+  const focusSx = { '& .Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#d32f2f' }, '& .MuiInputLabel-root.Mui-focused': { color: '#d32f2f' } };
 
   return (
     <Box component="main" sx={{ background: '#f4f6f8', minHeight: '60vh' }}>
       {/* Hero */}
-      <Box sx={{ background: 'linear-gradient(135deg,#c62828,#e65100)', color: '#fff', py: { xs: 3, md: 5 } }}>
+      <Box sx={{ background: 'linear-gradient(135deg,#d32f2f,#ff6d00)', color: '#fff', py: { xs: 3, md: 5 } }}>
         <Container maxWidth="xl">
           <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '20px', md: '32px' }, mb: 0.5 }}>
             LIÊN HỆ
@@ -119,11 +119,11 @@ export default function Contact() {
           {/* Contact info */}
           <Grid item xs={12} md={5}>
             <Box sx={{ background: '#fff', borderRadius: 2, p: { xs: 2, md: 2.5 }, mb: { xs: 1.5, md: 2 }, boxShadow: '0 2px 8px rgba(0,0,0,.06)' }}>
-              <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15 }, color: '#c62828', mb: 2 }}>
+              <Typography sx={{ fontWeight: 700, fontSize: { xs: 14, md: 15 }, color: '#d32f2f', mb: 2 }}>
                 🏢 CÂN ĐIỆN TỬ BÁCH KHOA
               </Typography>
               {[
-                { city: 'Chi Nhánh Huế', addr: company.address1, phone: company.phone1, color: '#c62828' },
+                { city: 'Chi Nhánh Huế', addr: company.address1, phone: company.phone1, color: '#d32f2f' },
                 { city: 'Chi Nhánh Đà Nẵng', addr: company.address2, phone: company.phone2, color: '#1565c0' },
               ].map((b, i) => (
                 <Box key={i}>
@@ -149,9 +149,9 @@ export default function Contact() {
               <Divider sx={{ my: 1.5 }} />
               <Stack spacing={1}>
                 <Stack direction="row" spacing={1} alignItems="center">
-                  <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: 14, color: '#c62828' }} />
+                  <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: 14, color: '#d32f2f' }} />
                   <Typography component="a" href={`mailto:${company.email}`}
-                    sx={{ fontSize: { xs: 12.5, md: 13.5 }, color: '#37474f', '&:hover': { color: '#c62828' } }}>
+                    sx={{ fontSize: { xs: 12.5, md: 13.5 }, color: '#37474f', '&:hover': { color: '#d32f2f' } }}>
                     {company.email}
                   </Typography>
                 </Stack>
@@ -166,7 +166,7 @@ export default function Contact() {
             <Box sx={{ background: '#fff', borderRadius: 2, overflow: 'hidden', boxShadow: '0 2px 8px rgba(0,0,0,.06)' }}>
               <Box sx={{ p: 1.2, background: '#fafbfc', borderBottom: '1px solid #eef0f3' }}>
                 <Typography sx={{ fontWeight: 700, fontSize: 12.5 }}>
-                  <FontAwesomeIcon icon={faLocationDot} style={{ marginRight: 6, color: '#c62828' }} />
+                  <FontAwesomeIcon icon={faLocationDot} style={{ marginRight: 6, color: '#d32f2f' }} />
                   Bản đồ Chi Nhánh Huế
                 </Typography>
               </Box>
@@ -221,7 +221,7 @@ export default function Contact() {
                     startIcon={status === 'sending'
                       ? <CircularProgress size={16} sx={{ color: '#fff' }} />
                       : <FontAwesomeIcon icon={faPaperPlane} style={{ fontSize: 14 }} />}
-                    sx={{ background: 'linear-gradient(135deg,#c62828,#e53935)', fontWeight: 700, py: { xs: 1, md: 1.2 }, fontSize: { xs: 13.5, md: 15 }, borderRadius: 2, '&:disabled': { background: '#ccc' } }}>
+                    sx={{ background: 'linear-gradient(135deg,#d32f2f,#ff6d00)', fontWeight: 700, py: { xs: 1, md: 1.2 }, fontSize: { xs: 13.5, md: 15 }, borderRadius: 2, '&:disabled': { background: '#ccc' } }}>
                     {status === 'sending' ? 'Đang gửi...' : cooldownLeft > 0 ? `Đợi ${formatCooldown(cooldownLeft)}` : 'Gửi Yêu Cầu'}
                   </Button>
                 </Stack>
@@ -231,7 +231,7 @@ export default function Contact() {
               <Typography sx={{ fontWeight: 700, fontSize: 13, mb: 1.2 }}>Hoặc liên hệ trực tiếp:</Typography>
               <Grid container spacing={1}>
                 {[
-                  { icon: faPhone, label: company.phone1, href: `tel:${company.phone1.replace(/\s/g,'')}`, color: '#c62828' },
+                  { icon: faPhone, label: company.phone1, href: `tel:${company.phone1.replace(/\s/g,'')}`, color: '#d32f2f' },
                   { icon: faPhone, label: company.phone2, href: `tel:${company.phone2.replace(/\s/g,'')}`, color: '#1565c0' },
                   { icon: faComment, label: 'Zalo Tư Vấn', href: `https://zalo.me/${company.zalo}`, color: '#0068ff' },
                   { icon: faFacebook, label: 'Facebook', href: company.facebook, color: '#1877f2' },
