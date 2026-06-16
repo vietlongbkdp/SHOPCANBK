@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, Grid, Typography, Button, Stack, Chip, Divider, IconButton, Box } from '@mui/material';
+import { Dialog, DialogContent, Grid, Typography, Button, Stack, Chip, Divider, IconButton, Box, useMediaQuery, useTheme } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark, faPhone, faCartShopping, faShieldHalved, faTruck, faStar } from '@fortawesome/free-solid-svg-icons';
 import { useAdmin } from '../context/AdminContext';
@@ -9,6 +9,8 @@ export default function ProductDetail({ product, onClose }) {
   const { siteData } = useAdmin();
   const { addItem }  = useCart();
   const { company }  = siteData;
+  const theme    = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   if (!product) return null;
 
@@ -16,8 +18,8 @@ export default function ProductDetail({ product, onClose }) {
     ? Math.round((1 - product.price / product.originalPrice) * 100) : 0;
 
   return (
-    <Dialog open={Boolean(product)} onClose={onClose} maxWidth="md" fullWidth
-      PaperProps={{ sx: { borderRadius: { xs: 0, sm: 4 }, m: { xs: 0, sm: 2 }, maxHeight: { xs: '100dvh', sm: '92vh' } } }}>
+    <Dialog open={Boolean(product)} onClose={onClose} maxWidth="md" fullWidth fullScreen={fullScreen}
+      PaperProps={{ sx: { borderRadius: { xs: 0, sm: 4 }, m: { xs: 0, sm: 2 }, width: { xs: '100%', sm: 'auto' }, maxWidth: { xs: '100%', sm: 'md' }, maxHeight: { xs: '100dvh', sm: '92vh' } } }}>
       <Box sx={{ position: 'absolute', top: 12, right: 12, zIndex: 10 }}>
         <IconButton onClick={onClose} size="small" sx={{ background: 'rgba(0,0,0,.06)', backdropFilter: 'blur(4px)', '&:hover': { background: 'rgba(0,0,0,.12)' } }}>
           <FontAwesomeIcon icon={faXmark} style={{ fontSize: 16 }} />
