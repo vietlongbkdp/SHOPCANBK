@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Container, Grid, Typography, Button, Stack, Chip, TextField, InputAdornment, Collapse, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box, Container, Typography, Button, Stack, Chip, TextField, InputAdornment, Collapse, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faSliders, faXmark } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from './ProductCard';
@@ -87,13 +87,13 @@ export default function Products({ onProductClick }) {
         </Box>
 
         {filtered.length > 0 ? (
-          <Grid container spacing={{ xs: 1.2, md: 2 }}>
+          <Box sx={{ display: 'grid',
+            gridTemplateColumns: { xs: 'repeat(2,1fr)', sm: 'repeat(3,1fr)', md: 'repeat(4,1fr)', lg: 'repeat(5,1fr)' },
+            gap: { xs: 1, md: 2 } }}>
             {filtered.map(p => (
-              <Grid item xs={6} sm={4} md={3} lg={2.4} key={p.id}>
-                <ProductCard product={p} onClick={onProductClick} />
-              </Grid>
+              <ProductCard key={p.id} product={p} onClick={onProductClick} />
             ))}
-          </Grid>
+          </Box>
         ) : (
           <Box sx={{ textAlign: 'center', py: 8, background: T.surface, borderRadius: 3, border: `1px solid ${T.line}` }}>
             <FontAwesomeIcon icon={faSearch} style={{ fontSize: 44, color: '#d4cbc4', marginBottom: 14 }} />
