@@ -178,10 +178,10 @@ export default function Introduction() {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' },
             gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
             {[
-              { src: scaleImg(0), label: 'Cân điện tử kỹ thuật số', big: true, product: true },
+              { src: 'https://m.media-amazon.com/images/I/617QKSEsazL.jpg', label: 'Cân điện tử kỹ thuật số', big: true, product: true },
               { src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80', label: 'Mạch điện tử' },
-              { src: scaleImg(8), label: 'Cân sàn công nghiệp', product: true },
-              { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80', label: 'Kiểm tra kỹ thuật' },
+              { src: 'https://m.weighbridgescales.com/photo/pl87849629-1000kg_digital_weight_scale_machine_platform_floor_scale_industrial_1_ton.jpg', label: 'Cân sàn công nghiệp', product: true },
+              { src: 'https://www.viasion.com/wp-content/uploads/2024/03/How-to-Test-a-PCB-with-a-Multimeter.jpg', label: 'Kiểm tra kỹ thuật' },
               { src: scaleImg(11), label: 'Cân phân tích chính xác', product: true },
             ].map((g, i) => (
               <Box key={i} sx={{ gridColumn: g.big ? { xs: '1 / 3', md: '1 / 3' } : 'auto', gridRow: g.big ? { md: 'span 2' } : 'auto',

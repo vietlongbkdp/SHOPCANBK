@@ -155,7 +155,7 @@ export default function Services() {
             {[
               { src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=600&q=80', caption: 'Kiểm tra & chẩn đoán' },
               { src: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80', caption: 'Thay thế linh kiện' },
-              { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80', caption: 'Hiệu chỉnh độ chính xác' },
+              { src: 'https://www.viasion.com/wp-content/uploads/2024/03/How-to-Test-a-PCB-with-a-Multimeter.jpg', caption: 'Hiệu chỉnh độ chính xác' },
             ].map((g, i) => (
               <Box key={i} sx={{ borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
                 <Box component="img" src={g.src} alt={g.caption} loading="lazy"
