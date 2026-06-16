@@ -20,7 +20,7 @@ export default function Footer() {
             <Typography sx={{ fontWeight: 800, fontSize: 15, color: '#fff', mb: 0.4 }}>
               CÂN ĐIỆN TỬ BÁCH KHOA
             </Typography>
-            <Typography sx={{ fontSize: 12.5, color: '#ef9a9a', fontStyle: 'italic', mb: 1.5 }}>
+            <Typography sx={{ fontSize: 12.5, color: '#69e2ff', fontStyle: 'italic', mb: 1.5 }}>
               {company.slogan}
             </Typography>
             <Typography sx={{ fontSize: 13, color: '#90a4ae', lineHeight: 1.75, mb: 2.5 }}>
@@ -47,7 +47,7 @@ export default function Footer() {
 
           {/* Products */}
           <Grid item xs={6} md={2}>
-            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#ef9a9a', textTransform: 'uppercase', letterSpacing: 0.8, mb: 1.5 }}>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#69e2ff', textTransform: 'uppercase', letterSpacing: 0.8, mb: 1.5 }}>
               Sản Phẩm
             </Typography>
             <Stack spacing={0.8} component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
@@ -65,7 +65,7 @@ export default function Footer() {
 
           {/* Services */}
           <Grid item xs={6} md={2}>
-            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#ef9a9a', textTransform: 'uppercase', letterSpacing: 0.8, mb: 1.5 }}>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#69e2ff', textTransform: 'uppercase', letterSpacing: 0.8, mb: 1.5 }}>
               Dịch Vụ
             </Typography>
             <Stack spacing={0.8} component="ul" sx={{ listStyle: 'none', p: 0, m: 0 }}>
@@ -83,12 +83,12 @@ export default function Footer() {
 
           {/* Contact */}
           <Grid item xs={12} md={4}>
-            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#ef9a9a', textTransform: 'uppercase', letterSpacing: 0.8, mb: 1.5 }}>
+            <Typography sx={{ fontWeight: 700, fontSize: 13, color: '#69e2ff', textTransform: 'uppercase', letterSpacing: 0.8, mb: 1.5 }}>
               Liên Hệ
             </Typography>
             <Stack spacing={1.5}>
               {[
-                { city: 'CN Huế', addr: company.address1, phone: company.phone1, color: '#ef9a9a' },
+                { city: 'CN Huế', addr: company.address1, phone: company.phone1, color: '#69e2ff' },
                 { city: 'CN Đà Nẵng', addr: company.address2, phone: company.phone2, color: '#90caf9' },
               ].map(b => (
                 <Box key={b.city}>
@@ -109,7 +109,7 @@ export default function Footer() {
                 </Box>
               ))}
               <Stack direction="row" spacing={1} alignItems="center">
-                <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: 13, color: '#ef9a9a' }} />
+                <FontAwesomeIcon icon={faEnvelope} style={{ fontSize: 13, color: '#69e2ff' }} />
                 <Link href={`mailto:${company.email}`}
                   sx={{ fontSize: 13, color: '#90a4ae', wordBreak: 'break-all', '&:hover': { color: '#fff' } }}>
                   {company.email}
@@ -134,7 +134,7 @@ export default function Footer() {
           </Typography>
           <Stack direction="row" spacing={2}>
             {['Chính sách bảo mật', 'Điều khoản'].map(t => (
-              <Link key={t} href="#" sx={{ fontSize: 12, color: '#546e7a', '&:hover': { color: '#ef9a9a' } }}>{t}</Link>
+              <Link key={t} href="#" sx={{ fontSize: 12, color: '#546e7a', '&:hover': { color: '#69e2ff' } }}>{t}</Link>
             ))}
           </Stack>
         </Stack>

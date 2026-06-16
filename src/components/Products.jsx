@@ -29,7 +29,7 @@ export default function Products({ onProductClick }) {
       <Box sx={{ background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff', py: { xs: 3, md: 4 } }}>
         <Container maxWidth="xl">
           <Typography sx={{ color: T.accentLight, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
-            CHÍNH HÃNG · BẢO HÀNH 12–36 THÁNG
+            CHÍNH HÃNG · BẢO HÀNH 6–12 THÁNG
           </Typography>
           <Typography component="h1" sx={{ fontWeight: 800, fontSize: { xs: '22px', md: '32px' }, letterSpacing: '-0.01em' }}>
             Sản Phẩm Cân Điện Tử

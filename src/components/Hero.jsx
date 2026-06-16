@@ -65,7 +65,7 @@ export default function Hero({ onNavigate }) {
                 fontSize: { xs: 14, md: 16.5 }, opacity: .82, mb: 3,
                 maxWidth: 460, mx: { xs: 'auto', md: 0 }, lineHeight: 1.7,
               }}>
-                Hơn 10 năm kinh nghiệm phục vụ tiểu thương, nhà máy, kho bãi tại Huế &amp; Đà Nẵng.
+                Nhiều năm kinh nghiệm phục vụ tiểu thương, nhà máy, kho bãi tại Huế &amp; Đà Nẵng.
                 Kỹ thuật viên có mặt tận nơi nhanh chóng.
               </Typography>
 
