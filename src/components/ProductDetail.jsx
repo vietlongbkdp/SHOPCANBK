@@ -5,6 +5,25 @@ import { useAdmin } from '../context/AdminContext';
 import { useCart } from '../context/CartContext';
 import { T } from '../theme';
 
+// Việt hóa nhãn thông số kỹ thuật
+const SPEC_LABELS = {
+  weight:    'Mức cân tối đa',
+  accuracy:  'Độ chính xác',
+  material:  'Vật liệu',
+  warranty:  'Bảo hành',
+  capacity:  'Tải trọng',
+  division:  'Bước nhảy',
+  size:      'Kích thước',
+  power:     'Nguồn điện',
+  display:   'Màn hình',
+  platform:  'Mặt bàn cân',
+  battery:   'Pin',
+  brand:     'Thương hiệu',
+  origin:    'Xuất xứ',
+  dimension: 'Kích thước',
+};
+const specLabel = (k) => SPEC_LABELS[k.toLowerCase()] || k;
+
 export default function ProductDetail({ product, onClose }) {
   const { siteData } = useAdmin();
   const { addItem }  = useCart();
@@ -82,7 +101,7 @@ export default function ProductDetail({ product, onClose }) {
                   {Object.entries(product.specifications).filter(([,v]) => v).map(([k,v]) => (
                     <Grid item xs={6} key={k}>
                       <Box sx={{ background: T.bg, borderRadius: 2, px: 1.4, py: 0.8 }}>
-                        <Typography sx={{ fontSize: 11, color: T.inkSoft, textTransform: 'capitalize' }}>{k}</Typography>
+                        <Typography sx={{ fontSize: 11, color: T.inkSoft }}>{specLabel(k)}</Typography>
                         <Typography sx={{ fontSize: 12.5, fontWeight: 700, color: T.ink }}>{v}</Typography>
                       </Box>
                     </Grid>

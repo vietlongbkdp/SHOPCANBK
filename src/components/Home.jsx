@@ -11,7 +11,7 @@ import { T } from '../theme';
 const WHY_US = [
   { icon: faShieldHalved, title: 'Chính Hãng 100%', desc: 'Nguồn gốc rõ ràng, bảo hành từ nhà sản xuất.' },
   { icon: faScrewdriverWrench, title: 'Sửa Chữa Tận Nơi', desc: 'KTV đến tận nơi tại Huế & Đà Nẵng trong 2 giờ.' },
-  { icon: faTruck, title: 'Giao Hàng Toàn Quốc', desc: 'Giao 24–48h, hỗ trợ COD, đóng gói kỹ càng.' },
+  { icon: faTruck, title: 'Giao Hàng Toàn Quốc', desc: 'Giao 24–48h, thanh toán khi nhận hàng, đóng gói kỹ càng.' },
   { icon: faHeadset, title: 'Hỗ Trợ 24/7', desc: 'Tư vấn kỹ thuật miễn phí qua điện thoại & Zalo.' },
 ];
 
