@@ -79,7 +79,7 @@ function AppContent() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#faf7f5' }}>
       <Box sx={{ position: 'sticky', top: 0, zIndex: 1200, boxShadow: '0 2px 12px rgba(0,0,0,.1)' }}>
-        <Header onNavigate={handleNavigate} />
+        <Header onNavigate={handleNavigate} onSearch={setSearchTerm} searchTerm={searchTerm} />
         <Navigation
         currentPage={currentPage}
         onNavigate={handleNavigate}
@@ -89,7 +89,7 @@ function AppContent() {
       />
       </Box>
       <Box sx={{ flex: 1 }}>{renderPage()}</Box>
-      <Footer />
+      <Footer onNavigate={handleNavigate} />
       <FloatingContactWidget />
       <AdminEntryButton onClick={() => setAdminMode(isLoggedIn ? 'dashboard' : 'login')} />
       <ProductDetail product={selectedProduct} onClose={() => setSelected(null)} />

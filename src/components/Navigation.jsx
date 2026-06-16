@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars, faXmark, faSearch, faCartShopping, faPhone,
   faHouse, faCircleInfo, faBoxOpen, faScrewdriverWrench,
-  faEnvelope, faChevronDown, faChevronUp, faAngleRight,
+  faEnvelope, faChevronDown, faChevronUp, faAngleRight, faTruckFast,
 } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import { useAdmin } from '../context/AdminContext';
@@ -26,7 +26,6 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
   const [anchor, setAnchor]         = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [prodsOpen, setProdsOpen]   = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const theme    = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { totalCount } = useCart();
@@ -88,28 +87,16 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
 
           {isMobile && <Box sx={{ flex: 1 }} />}
 
-          {/* Search + Cart */}
-          <Stack direction="row" alignItems="center" spacing={0.5}>
-            {isMobile ? (
-              searchOpen ? (
-                <Box sx={searchBoxSx(180)}>
-                  <InputBase autoFocus placeholder="Tìm kiếm..." value={searchTerm}
-                    onChange={(e) => onSearch(e.target.value)}
-                    sx={searchInputSx} />
-                  <FontAwesomeIcon icon={faXmark} style={{ color: 'rgba(255,255,255,.8)', fontSize: 15, cursor: 'pointer' }}
-                    onClick={() => { setSearchOpen(false); onSearch(''); }} />
-                </Box>
-              ) : (
-                <IconButton onClick={() => setSearchOpen(true)} sx={{ color: '#fff', p: 1 }}>
-                  <FontAwesomeIcon icon={faSearch} style={{ fontSize: 17 }} />
-                </IconButton>
-              )
-            ) : (
-              <Box sx={searchBoxSx(240)}>
-                <FontAwesomeIcon icon={faSearch} style={{ color: 'rgba(255,255,255,.7)', fontSize: 13 }} />
-                <InputBase placeholder="Tìm kiếm sản phẩm..." value={searchTerm}
-                  onChange={(e) => onSearch(e.target.value)} sx={searchInputSx} />
-              </Box>
+          {/* Hotline (desktop) + Cart */}
+          <Stack direction="row" alignItems="center" spacing={1.5}>
+            {!isMobile && (
+              <Stack direction="row" alignItems="center" spacing={1}
+                sx={{ background: 'rgba(255,255,255,.14)', borderRadius: 2.5, px: 1.5, py: 0.6, border: '1px solid rgba(255,255,255,.2)' }}>
+                <FontAwesomeIcon icon={faTruckFast} style={{ fontSize: 14, color: '#fff' }} />
+                <Typography sx={{ fontSize: 12.5, fontWeight: 600, color: '#fff' }}>
+                  Miễn phí giao hàng nội thành
+                </Typography>
+              </Stack>
             )}
 
             <IconButton onClick={onOpenCart} aria-label={`Giỏ hàng ${totalCount}`}
