@@ -176,9 +176,9 @@ export default function Introduction() {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' },
             gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
             {[
-              { src: 'https://images.unsplash.com/photo-1591290619762-bb39b29fef27?auto=format&fit=crop&w=900&q=80', label: 'Cân điện tử kỹ thuật số', big: true },
+              { src: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=900&q=80', label: 'Cân điện tử kỹ thuật số', big: true },
               { src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80', label: 'Mạch điện tử' },
-              { src: 'https://images.unsplash.com/photo-1607435097405-db48f377bff6?auto=format&fit=crop&w=600&q=80', label: 'Sửa chữa linh kiện' },
+              { src: 'https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=600&q=80', label: 'Sửa chữa linh kiện' },
               { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80', label: 'Kiểm tra kỹ thuật' },
               { src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80', label: 'Đo lường chính xác' },
             ].map((g, i) => (
