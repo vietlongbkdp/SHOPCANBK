@@ -1,6 +1,9 @@
-import { Box, Container, Typography, Stack } from '@mui/material';
+import { Box, Container, Typography, Stack, Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHandshake, faBolt, faShieldHalved, faUsers } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHandshake, faBolt, faShieldHalved, faUsers, faQuoteLeft,
+  faCheckCircle, faAward, faTruckFast, faScrewdriverWrench, faGears,
+} from '@fortawesome/free-solid-svg-icons';
 import { useAdmin } from '../context/AdminContext';
 import { T } from '../theme';
 
@@ -11,9 +14,18 @@ const VALUES = [
   { icon: faUsers, title: 'Chuyên Nghiệp', desc: 'Đội ngũ kỹ thuật viên giàu kinh nghiệm, đào tạo bài bản.' },
 ];
 
+const COMMITMENTS = [
+  { icon: faAward, title: 'Sản phẩm chính hãng', desc: 'Cam kết 100% hàng chính hãng, có nguồn gốc xuất xứ rõ ràng, đầy đủ giấy tờ kiểm định.' },
+  { icon: faScrewdriverWrench, title: 'Bảo hành chu đáo', desc: 'Chính sách bảo hành 6–12 tháng, hỗ trợ kỹ thuật trọn đời sản phẩm.' },
+  { icon: faTruckFast, title: 'Giao hàng nhanh', desc: 'Giao hàng toàn quốc, lắp đặt và hướng dẫn sử dụng tận nơi miễn phí trong nội thành.' },
+  { icon: faGears, title: 'Linh kiện sẵn có', desc: 'Kho linh kiện loadcell, đầu cân, mạch hiển thị đa dạng, thay thế nhanh chóng.' },
+];
+
+const BRANDS = ['VIBRA', 'A&D', 'JADEVER', 'CAS', 'OHAUS', 'YAOHUA'];
+
 export default function Introduction() {
   const { siteData } = useAdmin();
-  const { stats } = siteData;
+  const { stats, company } = siteData;
 
   return (
     <Box>
@@ -33,31 +45,107 @@ export default function Introduction() {
       </Box>
 
       <Container maxWidth="xl" sx={{ py: { xs: 3, md: 5 } }}>
-        {/* About */}
-        <Box sx={{ background: T.surface, borderRadius: 3, p: { xs: 2.5, md: 4 }, mb: { xs: 3, md: 4 }, border: `1px solid ${T.line}` }}>
-          <Typography sx={{ fontWeight: 800, fontSize: { xs: 18, md: 22 }, mb: 2,
-            background: T.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'inline-block' }}>
-            Về Chúng Tôi
-          </Typography>
-          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9, mb: 1.5 }}>
-            Với <strong style={{ color: T.brand }}>3+ năm kinh nghiệm</strong> trong lĩnh vực cân điện tử, Cân Điện Tử Bách Khoa
-            tự hào là đơn vị hàng đầu tại miền Trung chuyên cung cấp các loại cân chính hãng từ những thương hiệu uy tín như
-            VIBRA, A&amp;D, JADEVER, CAS...
-          </Typography>
-          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9 }}>
-            Chúng tôi không chỉ bán sản phẩm mà còn cung cấp dịch vụ sửa chữa, bảo trì, kiểm định cân tận nơi với đội ngũ
-            kỹ thuật viên chuyên nghiệp, đảm bảo cân của bạn luôn hoạt động chính xác và bền bỉ.
-          </Typography>
-        </Box>
+        {/* About — 2 cột: text + ảnh */}
+        <Grid container spacing={{ xs: 2.5, md: 4 }} alignItems="center" sx={{ mb: { xs: 3, md: 5 } }}>
+          <Grid item xs={12} md={6}>
+            <Typography sx={{ fontWeight: 800, fontSize: { xs: 18, md: 24 }, mb: 2,
+              background: T.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'inline-block' }}>
+              Câu Chuyện Của Chúng Tôi
+            </Typography>
+            <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9, mb: 1.5 }}>
+              Với <strong style={{ color: T.brand }}>5+ năm kinh nghiệm</strong> trong lĩnh vực cân điện tử, Cân Điện Tử Bách Khoa
+              tự hào là đơn vị uy tín tại miền Trung chuyên cung cấp các loại cân chính hãng từ những thương hiệu hàng đầu như
+              VIBRA, A&amp;D, JADEVER, CAS...
+            </Typography>
+            <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9, mb: 2 }}>
+              Chúng tôi không chỉ bán sản phẩm mà còn cung cấp dịch vụ sửa chữa, bảo trì, kiểm định cân tận nơi với đội ngũ
+              kỹ thuật viên chuyên nghiệp, đảm bảo cân của bạn luôn hoạt động chính xác và bền bỉ.
+            </Typography>
+            <Stack spacing={1.2}>
+              {['Phục vụ tiểu thương, cửa hàng, siêu thị, nhà máy', 'Hệ thống 2 chi nhánh tại Huế và Đà Nẵng', 'Kỹ thuật viên tận nơi, hỗ trợ nhanh chóng'].map((t, i) => (
+                <Stack key={i} direction="row" spacing={1.2} alignItems="center">
+                  <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: 16, color: T.brand, flexShrink: 0 }} />
+                  <Typography sx={{ fontSize: { xs: 13, md: 14 }, color: T.ink, fontWeight: 500 }}>{t}</Typography>
+                </Stack>
+              ))}
+            </Stack>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Box sx={{ position: 'relative' }}>
+              <Box component="img"
+                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80"
+                alt="Kỹ thuật viên Bách Khoa"
+                sx={{ width: '100%', height: { xs: 240, md: 360 }, objectFit: 'cover', borderRadius: 4,
+                  boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
+                onError={(e) => { e.target.src = '/banner.png'; }} />
+              {/* Floating stat badge */}
+              <Box sx={{ position: 'absolute', bottom: { xs: 12, md: -24 }, left: { xs: 12, md: -24 },
+                background: T.gradient, color: '#fff', borderRadius: 3, px: 2.5, py: 1.5,
+                boxShadow: `0 12px 32px ${T.brand}55` }}>
+                <Typography sx={{ fontWeight: 900, fontSize: { xs: 22, md: 28 }, lineHeight: 1 }}>2000+</Typography>
+                <Typography sx={{ fontSize: { xs: 11, md: 12.5 }, opacity: .9 }}>Cân đã sửa chữa</Typography>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
 
         {/* Stats */}
-        <Box sx={{ background: T.gradient, borderRadius: 3, p: { xs: 2.5, md: 3.5 }, mb: { xs: 3, md: 4 }, color: '#fff' }}>
+        <Box sx={{ background: T.gradient, borderRadius: 3, p: { xs: 2.5, md: 3.5 }, mb: { xs: 3, md: 5 }, color: '#fff' }}>
           <Box sx={{ display: 'flex', justifyContent: 'space-around' }}>
             {stats.map((s, i) => (
               <Box key={i} sx={{ flex: 1, textAlign: 'center', px: 0.5,
                 borderRight: i < stats.length - 1 ? '1px solid rgba(255,255,255,.25)' : 'none' }}>
                 <Typography sx={{ fontWeight: 900, fontSize: { xs: '20px', sm: '26px', md: '34px' }, lineHeight: 1 }}>{s.value}</Typography>
                 <Typography sx={{ opacity: .85, fontSize: { xs: '9px', sm: '11px', md: '13px' }, mt: 0.4, lineHeight: 1.2 }}>{s.label}</Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Commitments — 4 cam kết */}
+        <Box sx={{ mb: { xs: 3, md: 5 } }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 2.5, md: 4 } }}>
+            <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+              CAM KẾT CỦA BÁCH KHOA
+            </Typography>
+            <Typography sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '26px' } }}>
+              Vì Sự Hài Lòng Của Khách Hàng
+            </Typography>
+          </Box>
+          <Grid container spacing={{ xs: 1.5, md: 2.5 }}>
+            {COMMITMENTS.map((c, i) => (
+              <Grid item xs={12} sm={6} key={i}>
+                <Stack direction="row" spacing={2} sx={{ background: T.surface, borderRadius: 3, p: { xs: 2, md: 2.8 },
+                  border: `1px solid ${T.line}`, height: '100%',
+                  transition: 'all .25s', '&:hover': { transform: 'translateY(-4px)', boxShadow: `0 14px 36px ${T.brand}14`, borderColor: T.brandLight } }}>
+                  <Box sx={{ width: 52, height: 52, borderRadius: 3, background: T.gradient, flexShrink: 0,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 8px 20px ${T.brand}40` }}>
+                    <FontAwesomeIcon icon={c.icon} style={{ fontSize: 21, color: '#fff' }} />
+                  </Box>
+                  <Box>
+                    <Typography sx={{ fontWeight: 700, fontSize: { xs: 14.5, md: 16 }, mb: 0.6, color: T.ink }}>{c.title}</Typography>
+                    <Typography sx={{ fontSize: { xs: 12.5, md: 13.5 }, color: T.inkSoft, lineHeight: 1.65 }}>{c.desc}</Typography>
+                  </Box>
+                </Stack>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Brands distributed */}
+        <Box sx={{ background: T.surface, borderRadius: 3, p: { xs: 2.5, md: 4 }, mb: { xs: 3, md: 5 }, border: `1px solid ${T.line}`, textAlign: 'center' }}>
+          <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+            THƯƠNG HIỆU PHÂN PHỐI
+          </Typography>
+          <Typography sx={{ fontWeight: 800, color: T.ink, mb: { xs: 2.5, md: 3 }, fontSize: { xs: '18px', md: '24px' } }}>
+            Đối Tác Chính Hãng
+          </Typography>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(3,1fr)', md: 'repeat(6,1fr)' }, gap: { xs: 1.5, md: 2 } }}>
+            {BRANDS.map((b) => (
+              <Box key={b} sx={{ py: { xs: 2, md: 2.5 }, borderRadius: 2.5, background: T.bg, border: `1px solid ${T.line}`,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                transition: 'all .25s', '&:hover': { background: T.gradientSoft, borderColor: T.brandLight, transform: 'translateY(-3px)' } }}>
+                <Typography sx={{ fontWeight: 900, fontSize: { xs: 15, md: 18 }, color: T.brand, letterSpacing: '0.02em' }}>{b}</Typography>
               </Box>
             ))}
           </Box>

@@ -1,6 +1,9 @@
-import { Box, Container, Typography, Stack, Button, Divider } from '@mui/material';
+import { Box, Container, Typography, Stack, Button, Divider, Grid } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheckCircle, faPhone, faScrewdriverWrench, faPhoneVolume, faMagnifyingGlass, faWrench, faHandshake } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCheckCircle, faPhone, faPhoneVolume, faMagnifyingGlass, faWrench, faHandshake,
+  faTriangleExclamation, faGaugeHigh, faMicrochip, faPlug, faBatteryHalf, faWeightHanging,
+} from '@fortawesome/free-solid-svg-icons';
 import { useAdmin } from '../context/AdminContext';
 import { T } from '../theme';
 
@@ -10,6 +13,17 @@ const PROCESS = [
   { step: '03', icon: faWrench, title: 'Sửa Chữa', desc: 'Thực hiện nhanh, thay linh kiện chính hãng.' },
   { step: '04', icon: faHandshake, title: 'Bàn Giao', desc: 'Kiểm tra lại, bảo hành sau sửa chữa 3 tháng.' },
 ];
+
+const COMMON_ISSUES = [
+  { icon: faGaugeHigh, title: 'Cân sai số, nhảy số', desc: 'Cân không chính xác, số liệu nhảy loạn, lệch trọng lượng.' },
+  { icon: faMicrochip, title: 'Hỏng mạch, đầu cân', desc: 'Màn hình không lên, mạch hiển thị lỗi, phím bấm không nhạy.' },
+  { icon: faWeightHanging, title: 'Hỏng loadcell', desc: 'Cảm biến lực bị quá tải, đứt cáp, không nhận tải trọng.' },
+  { icon: faBatteryHalf, title: 'Lỗi nguồn, pin', desc: 'Không sạc được pin, sụt nguồn, tự tắt khi đang dùng.' },
+  { icon: faPlug, title: 'Lỗi kết nối', desc: 'Mất kết nối máy in, cổng giao tiếp, cáp tín hiệu.' },
+  { icon: faTriangleExclamation, title: 'Báo lỗi trên màn hình', desc: 'Hiển thị mã lỗi Err, không về 0, treo máy.' },
+];
+
+const SCALE_TYPES = ['Cân bàn', 'Cân ghế', 'Cân treo', 'Cân sàn', 'Cân tính tiền', 'Cân tiểu ly', 'Cân kỹ thuật', 'Cân ô tô'];
 
 export default function Services() {
   const { siteData } = useAdmin();
@@ -43,6 +57,38 @@ export default function Services() {
       </Box>
 
       <Container maxWidth="xl" sx={{ py: { xs: 3, md: 5 } }}>
+        {/* Intro 2 cột: ảnh + loại cân */}
+        <Grid container spacing={{ xs: 2.5, md: 4 }} alignItems="center" sx={{ mb: { xs: 3, md: 5 } }}>
+          <Grid item xs={12} md={6}>
+            <Box component="img"
+              src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&q=80"
+              alt="Sửa chữa cân điện tử"
+              sx={{ width: '100%', height: { xs: 220, md: 340 }, objectFit: 'cover', borderRadius: 4, boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
+              onError={(e) => { e.target.src = '/banner.png'; }} />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+              SỬA CHỮA MỌI LOẠI CÂN
+            </Typography>
+            <Typography sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: 18, md: 26 }, mb: 1.5 }}>
+              Cân nào hỏng, Bách Khoa sửa được
+            </Typography>
+            <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.85, mb: 2.5 }}>
+              Đội ngũ kỹ thuật viên giàu kinh nghiệm, trang thiết bị chuyên dụng và kho linh kiện chính hãng sẵn có,
+              chúng tôi nhận sửa chữa nhanh chóng tất cả các dòng cân điện tử trên thị trường.
+            </Typography>
+            <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(4,1fr)' }, gap: 1 }}>
+              {SCALE_TYPES.map((s) => (
+                <Stack key={s} direction="row" spacing={0.8} alignItems="center"
+                  sx={{ background: T.gradientSoft, borderRadius: 2, px: 1.2, py: 0.8 }}>
+                  <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: 12, color: T.brand, flexShrink: 0 }} />
+                  <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, fontWeight: 600, color: T.ink }}>{s}</Typography>
+                </Stack>
+              ))}
+            </Box>
+          </Grid>
+        </Grid>
+
         {/* Service cards 2x2 */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: { xs: 1.5, md: 2.5 }, mb: { xs: 3, md: 5 } }}>
           {services.map(s => (
@@ -67,17 +113,46 @@ export default function Services() {
           ))}
         </Box>
 
+        {/* Common issues — NEW */}
+        <Box sx={{ mb: { xs: 3, md: 5 } }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 2.5, md: 4 } }}>
+            <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+              CÁC LỖI THƯỜNG GẶP
+            </Typography>
+            <Typography sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '26px' } }}>
+              Cân Của Bạn Đang Gặp Vấn Đề Gì?
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', md: 'repeat(3,1fr)' }, gap: { xs: 1.5, md: 2 } }}>
+            {COMMON_ISSUES.map((it, i) => (
+              <Stack key={i} direction="row" spacing={1.8} sx={{ background: T.surface, borderRadius: 3, p: { xs: 2, md: 2.4 },
+                border: `1px solid ${T.line}`, transition: 'all .25s', '&:hover': { transform: 'translateY(-3px)', boxShadow: `0 12px 28px ${T.brand}12`, borderColor: T.brandLight } }}>
+                <Box sx={{ width: 46, height: 46, borderRadius: 2.5, background: T.gradientSoft, flexShrink: 0,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <FontAwesomeIcon icon={it.icon} style={{ fontSize: 19, color: T.brand }} />
+                </Box>
+                <Box>
+                  <Typography sx={{ fontWeight: 700, fontSize: { xs: 13.5, md: 14.5 }, mb: 0.4, color: T.ink }}>{it.title}</Typography>
+                  <Typography sx={{ fontSize: { xs: 12, md: 12.5 }, color: T.inkSoft, lineHeight: 1.6 }}>{it.desc}</Typography>
+                </Box>
+              </Stack>
+            ))}
+          </Box>
+        </Box>
+
         {/* Process */}
         <Box sx={{ background: T.surface, borderRadius: 3, p: { xs: 2.5, md: 4 }, mb: { xs: 3, md: 5 }, border: `1px solid ${T.line}` }}>
-          <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
-            4 BƯỚC ĐƠN GIẢN
-          </Typography>
-          <Typography sx={{ fontWeight: 800, color: T.ink, mb: { xs: 3, md: 4 }, fontSize: { xs: '18px', md: '24px' } }}>
-            Quy Trình Làm Việc
-          </Typography>
-          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' }, gap: { xs: 2.5, md: 2 }, position: 'relative' }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
+            <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+              4 BƯỚC ĐƠN GIẢN
+            </Typography>
+            <Typography sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '26px' } }}>
+              Quy Trình Làm Việc
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' }, gap: { xs: 2.5, md: 2 } }}>
             {PROCESS.map((p, i) => (
-              <Stack key={i} alignItems="center" textAlign="center" sx={{ position: 'relative' }}>
+              <Stack key={i} alignItems="center" textAlign="center">
                 <Box sx={{ width: { xs: 58, md: 68 }, height: { xs: 58, md: 68 }, borderRadius: '50%', background: T.gradient, color: '#fff',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', mb: 1.5, flexShrink: 0, position: 'relative',
                   boxShadow: `0 8px 20px ${T.brand}40` }}>
