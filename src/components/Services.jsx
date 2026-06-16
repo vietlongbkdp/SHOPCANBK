@@ -27,7 +27,8 @@ const SCALE_TYPES = ['Cân bàn', 'Cân ghế', 'Cân treo', 'Cân sàn', 'Cân 
 
 export default function Services() {
   const { siteData } = useAdmin();
-  const { services, company } = siteData;
+  const { services, company, products } = siteData;
+  const galleryImgs = products.filter(p => p.image).slice(0, 6).map(p => p.image);
 
   return (
     <Box>
@@ -61,10 +62,9 @@ export default function Services() {
         <Grid container spacing={{ xs: 2.5, md: 4 }} alignItems="center" sx={{ mb: { xs: 3, md: 5 } }}>
           <Grid item xs={12} md={6}>
             <Box component="img"
-              src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=800&q=80"
+              src="/banner.png"
               alt="Sửa chữa cân điện tử"
-              sx={{ width: '100%', height: { xs: 220, md: 340 }, objectFit: 'cover', borderRadius: 4, boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
-              onError={(e) => { e.target.src = '/banner.png'; }} />
+              sx={{ width: '100%', height: { xs: 220, md: 340 }, objectFit: 'cover', borderRadius: 4, boxShadow: '0 16px 48px rgba(15,23,36,.18)' }} />
           </Grid>
           <Grid item xs={12} md={6}>
             <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
@@ -136,6 +136,36 @@ export default function Services() {
                   <Typography sx={{ fontSize: { xs: 12, md: 12.5 }, color: T.inkSoft, lineHeight: 1.6 }}>{it.desc}</Typography>
                 </Box>
               </Stack>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Gallery sửa chữa — NEW */}
+        <Box sx={{ mb: { xs: 3, md: 5 } }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 2.5, md: 4 } }}>
+            <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+              HÌNH ẢNH THỰC TẾ
+            </Typography>
+            <Typography sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '26px' } }}>
+              Công Việc Sửa Chữa Tại Bách Khoa
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(3,1fr)' },
+            gridAutoRows: { xs: 130, md: 200 }, gap: { xs: 1, md: 1.5 } }}>
+            {[
+              { src: galleryImgs[0], caption: 'Cân tính tiền điện tử' },
+              { src: galleryImgs[2], caption: 'Cân bàn công nghiệp' },
+              { src: galleryImgs[5] || galleryImgs[1], caption: 'Cân sàn tải trọng lớn' },
+            ].map((g, i) => (
+              <Box key={i} sx={{ borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
+                <Box component="img" src={g.src} alt={g.caption} loading="lazy"
+                  sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }}
+                  onError={(e) => { e.target.src = '/banner.png'; }} />
+                <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(15,23,36,.8) 0%,transparent 50%)' }} />
+                <Typography sx={{ position: 'absolute', bottom: 10, left: 12, color: '#fff', fontWeight: 700, fontSize: { xs: 12, md: 13.5 } }}>
+                  {g.caption}
+                </Typography>
+              </Box>
             ))}
           </Box>
         </Box>

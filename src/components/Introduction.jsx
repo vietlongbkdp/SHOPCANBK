@@ -21,11 +21,19 @@ const COMMITMENTS = [
   { icon: faGears, title: 'Linh kiện sẵn có', desc: 'Kho linh kiện loadcell, đầu cân, mạch hiển thị đa dạng, thay thế nhanh chóng.' },
 ];
 
-const BRANDS = ['VIBRA', 'A&D', 'JADEVER', 'CAS', 'OHAUS', 'YAOHUA'];
+const BRANDS = [
+  { name: 'VIBRA', sub: 'Japan', color: '#c8102e' },
+  { name: 'A&D', sub: 'Japan', color: '#003da5' },
+  { name: 'JADEVER', sub: 'Taiwan', color: '#0066b3' },
+  { name: 'CAS', sub: 'Korea', color: '#e30613' },
+  { name: 'OHAUS', sub: 'USA', color: '#005eb8' },
+  { name: 'YAOHUA', sub: 'China', color: '#d2232a' },
+];
 
 export default function Introduction() {
   const { siteData } = useAdmin();
-  const { stats, company } = siteData;
+  const { stats, company, products } = siteData;
+  const galleryImgs = products.filter(p => p.image).slice(0, 5).map(p => p.image);
 
   return (
     <Box>
@@ -73,11 +81,10 @@ export default function Introduction() {
           <Grid item xs={12} md={6}>
             <Box sx={{ position: 'relative' }}>
               <Box component="img"
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&q=80"
-                alt="Kỹ thuật viên Bách Khoa"
+                src="/banner.png"
+                alt="Cân Điện Tử Bách Khoa"
                 sx={{ width: '100%', height: { xs: 240, md: 360 }, objectFit: 'cover', borderRadius: 4,
-                  boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
-                onError={(e) => { e.target.src = '/banner.png'; }} />
+                  boxShadow: '0 16px 48px rgba(15,23,36,.18)' }} />
               {/* Floating stat badge */}
               <Box sx={{ position: 'absolute', bottom: { xs: 12, md: -24 }, left: { xs: 12, md: -24 },
                 background: T.gradient, color: '#fff', borderRadius: 3, px: 2.5, py: 1.5,
@@ -142,10 +149,51 @@ export default function Introduction() {
           </Typography>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: 'repeat(3,1fr)', md: 'repeat(6,1fr)' }, gap: { xs: 1.5, md: 2 } }}>
             {BRANDS.map((b) => (
-              <Box key={b} sx={{ py: { xs: 2, md: 2.5 }, borderRadius: 2.5, background: T.bg, border: `1px solid ${T.line}`,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                transition: 'all .25s', '&:hover': { background: T.gradientSoft, borderColor: T.brandLight, transform: 'translateY(-3px)' } }}>
-                <Typography sx={{ fontWeight: 900, fontSize: { xs: 15, md: 18 }, color: T.brand, letterSpacing: '0.02em' }}>{b}</Typography>
+              <Box key={b.name} sx={{ py: { xs: 2, md: 2.5 }, px: 1, borderRadius: 2.5, background: '#fff', border: `1px solid ${T.line}`,
+                display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 0.4,
+                transition: 'all .25s', '&:hover': { borderColor: b.color, transform: 'translateY(-4px)', boxShadow: `0 12px 28px ${b.color}22` } }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 36 }}>
+                  <Typography sx={{ fontWeight: 900, fontSize: { xs: 17, md: 22 }, color: b.color, letterSpacing: '-0.02em',
+                    fontStyle: 'italic', lineHeight: 1 }}>{b.name}</Typography>
+                </Box>
+                <Typography sx={{ fontSize: { xs: 9.5, md: 11 }, color: T.inkSoft, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                  {b.sub}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Gallery — hình ảnh hoạt động */}
+        <Box sx={{ mb: { xs: 3, md: 5 } }}>
+          <Box sx={{ textAlign: 'center', mb: { xs: 2.5, md: 4 } }}>
+            <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+              HÌNH ẢNH HOẠT ĐỘNG
+            </Typography>
+            <Typography sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '26px' } }}>
+              Bách Khoa Trong Công Việc
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' },
+            gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
+            {/* Ảnh banner lớn */}
+            <Box sx={{ gridColumn: { xs: '1 / 3', md: '1 / 3' }, gridRow: { md: 'span 2' }, borderRadius: 3, overflow: 'hidden', position: 'relative',
+              '&:hover img': { transform: 'scale(1.05)' } }}>
+              <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa" loading="lazy"
+                sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }} />
+              <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(15,23,36,.7) 0%,transparent 55%)' }} />
+              <Box sx={{ position: 'absolute', bottom: 14, left: 16 }}>
+                <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: { xs: 14, md: 18 } }}>Cửa hàng Bách Khoa</Typography>
+                <Typography sx={{ color: 'rgba(255,255,255,.85)', fontSize: { xs: 11, md: 12.5 } }}>Đa dạng các dòng cân chính hãng</Typography>
+              </Box>
+            </Box>
+            {/* Ảnh sản phẩm thật */}
+            {galleryImgs.map((src, i) => (
+              <Box key={i} sx={{ borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg,
+                '&:hover img': { transform: 'scale(1.06)' } }}>
+                <Box component="img" src={src} alt={`Sản phẩm ${i + 1}`} loading="lazy"
+                  sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }}
+                  onError={(e) => { e.target.src = '/banner.png'; }} />
               </Box>
             ))}
           </Box>
