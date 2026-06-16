@@ -32,7 +32,9 @@ const BRANDS = [
 
 export default function Introduction() {
   const { siteData } = useAdmin();
-  const { stats, company } = siteData;
+  const { stats, company, products } = siteData;
+  // Ảnh cân thật từ sản phẩm
+  const scaleImg = (i) => products.filter(p => p.image)[i]?.image;
 
   return (
     <Box>
@@ -176,18 +178,18 @@ export default function Introduction() {
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' },
             gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
             {[
-              { src: 'https://images.unsplash.com/photo-1610557892470-55d9e80c0bce?auto=format&fit=crop&w=900&q=80', label: 'Cân điện tử kỹ thuật số', big: true },
+              { src: scaleImg(0), label: 'Cân điện tử kỹ thuật số', big: true, product: true },
               { src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80', label: 'Mạch điện tử' },
-              { src: 'https://images.unsplash.com/photo-1588508065123-287b28e013da?auto=format&fit=crop&w=600&q=80', label: 'Sửa chữa linh kiện' },
+              { src: scaleImg(8), label: 'Cân sàn công nghiệp', product: true },
               { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80', label: 'Kiểm tra kỹ thuật' },
-              { src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80', label: 'Đo lường chính xác' },
+              { src: scaleImg(11), label: 'Cân phân tích chính xác', product: true },
             ].map((g, i) => (
               <Box key={i} sx={{ gridColumn: g.big ? { xs: '1 / 3', md: '1 / 3' } : 'auto', gridRow: g.big ? { md: 'span 2' } : 'auto',
-                borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
+                borderRadius: 3, overflow: 'hidden', position: 'relative', background: g.product ? '#fff' : T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
                 <Box component="img" src={g.src} alt={g.label} loading="lazy"
-                  sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }}
+                  sx={{ width: '100%', height: '100%', objectFit: g.product ? 'contain' : 'cover', p: g.product ? 1.5 : 0, transition: 'transform .4s' }}
                   onError={(e) => { e.target.src = '/banner.png'; }} />
-                <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(15,23,36,.75) 0%,transparent 55%)' }} />
+                <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(15,23,36,.75) 0%,transparent 55%)', pointerEvents: 'none' }} />
                 <Typography sx={{ position: 'absolute', bottom: 10, left: 12, color: '#fff', fontWeight: 700, fontSize: { xs: 11.5, md: g.big ? 16 : 13 } }}>
                   {g.label}
                 </Typography>
