@@ -18,7 +18,7 @@ export default function Services() {
   return (
     <Box>
       {/* Header band */}
-      <Box sx={{ background: `linear-gradient(135deg,${T.ink},#3d1410)`, color: '#fff', py: { xs: 3.5, md: 5 } }}>
+      <Box sx={{ background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff', py: { xs: 3.5, md: 5 } }}>
         <Container maxWidth="xl">
           <Typography sx={{ color: T.accentLight, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.6 }}>
             TẬN TÂM · NHANH CHÓNG · UY TÍN

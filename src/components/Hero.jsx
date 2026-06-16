@@ -20,7 +20,7 @@ export default function Hero({ onNavigate }) {
       {/* Hero */}
       <Box sx={{
         position: 'relative', overflow: 'hidden',
-        background: `linear-gradient(135deg,#1a1410 0%,#3d1410 55%,#9a0007 100%)`,
+        background: `linear-gradient(135deg,#0f1724 0%,#102a52 55%,#0d47a1 100%)`,
       }}>
         {/* Ambient glow */}
         <Box sx={{ position: 'absolute', top: '-30%', right: '-10%', width: 500, height: 500, borderRadius: '50%',

@@ -44,7 +44,7 @@ export default function CategoryManager() {
         </Typography>
         <Button variant="contained" startIcon={<AddIcon />} onClick={openAdd}
           size={isMobile ? 'small' : 'medium'}
-          sx={{ background: '#c62828', fontWeight: 700, '&:hover': { background: '#8e0000' } }}>
+          sx={{ background: '#1565c0', fontWeight: 700, '&:hover': { background: '#8e0000' } }}>
           Thêm Mới
         </Button>
       </Stack>
@@ -72,7 +72,7 @@ export default function CategoryManager() {
                 <Button size="small" startIcon={<EditIcon />} onClick={() => openEdit(c)}
                   sx={{ color: '#1565c0', fontWeight: 600, fontSize: 12.5 }}>Sửa</Button>
                 <Button size="small" startIcon={<DeleteIcon />} onClick={() => setDelConf(c)}
-                  sx={{ color: '#c62828', fontWeight: 600, fontSize: 12.5 }}>Xóa</Button>
+                  sx={{ color: '#1565c0', fontWeight: 600, fontSize: 12.5 }}>Xóa</Button>
               </CardActions>
             </Card>
           ))}
@@ -105,7 +105,7 @@ export default function CategoryManager() {
                         </IconButton>
                       </Tooltip>
                       <Tooltip title="Xóa">
-                        <IconButton size="small" onClick={() => setDelConf(c)} sx={{ color: '#c62828' }}>
+                        <IconButton size="small" onClick={() => setDelConf(c)} sx={{ color: '#1565c0' }}>
                           <DeleteIcon fontSize="small" />
                         </IconButton>
                       </Tooltip>
@@ -121,7 +121,7 @@ export default function CategoryManager() {
       {/* Add/Edit Dialog */}
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth
         PaperProps={{ sx: { borderRadius: { xs: 0, sm: 2 }, m: { xs: 0, sm: 2 } } }}>
-        <DialogTitle sx={{ fontWeight: 700, background: '#c62828', color: '#fff', py: 1.5, fontSize: 15 }}>
+        <DialogTitle sx={{ fontWeight: 700, background: '#1565c0', color: '#fff', py: 1.5, fontSize: 15 }}>
           {editing ? '✏️ Sửa Danh Mục' : '➕ Thêm Danh Mục'}
         </DialogTitle>
         <DialogContent sx={{ pt: '20px !important', px: { xs: 2, md: 3 } }}>
@@ -143,7 +143,7 @@ export default function CategoryManager() {
         <DialogActions sx={{ p: 2, gap: 1 }}>
           <Button onClick={() => setOpen(false)} variant="outlined" size="small">Hủy</Button>
           <Button onClick={handleSave} variant="contained" disabled={!form.name}
-            sx={{ background: '#c62828', '&:hover': { background: '#8e0000' } }}>
+            sx={{ background: '#1565c0', '&:hover': { background: '#8e0000' } }}>
             Lưu
           </Button>
         </DialogActions>

@@ -36,7 +36,7 @@ function DashboardOverview({ onNavigate }) {
   };
 
   const stats = [
-    { label: 'Sản phẩm', value: siteData.products.length, color: '#c62828', icon: '📦', tab: 'products' },
+    { label: 'Sản phẩm', value: siteData.products.length, color: '#1565c0', icon: '📦', tab: 'products' },
     { label: 'Danh mục', value: siteData.categories.length, color: '#1565c0', icon: '🗂️', tab: 'categories' },
     { label: 'Dịch vụ', value: siteData.services?.length || 0, color: '#2e7d32', icon: '🔧', tab: 'siteinfo' },
   ];
@@ -66,7 +66,7 @@ function DashboardOverview({ onNavigate }) {
             startIcon={<CloudUploadIcon />}
             onClick={handlePublish}
             disabled={saving || !hasUnsaved}
-            sx={{ background: '#c62828', fontWeight: 700, '&:hover': { background: '#8e0000' }, '&:disabled': { background: '#ccc' } }}
+            sx={{ background: '#1565c0', fontWeight: 700, '&:hover': { background: '#8e0000' }, '&:disabled': { background: '#ccc' } }}
           >
             {saving ? 'Đang xuất bản...' : 'Xuất Bản'}
           </Button>
@@ -119,7 +119,7 @@ export default function AdminDashboard({ onExitAdmin }) {
 
   const DrawerContent = () => (
     <Box sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <Box sx={{ p: 2, background: 'linear-gradient(135deg,#c62828,#e65100)', color: '#fff', textAlign: 'center' }}>
+      <Box sx={{ p: 2, background: 'linear-gradient(135deg,#1565c0,#00b0ff)', color: '#fff', textAlign: 'center' }}>
         <Typography sx={{ fontSize: 26 }}>⚖️</Typography>
         <Typography sx={{ fontWeight: 700, fontSize: 13, lineHeight: 1.2 }}>BÁCH KHOA ADMIN</Typography>
         <Chip label="Quản trị" size="small"
@@ -133,7 +133,7 @@ export default function AdminDashboard({ onExitAdmin }) {
             onClick={() => { setTab(m.id); setMobile(false); }}
             sx={{
               borderRadius: 1, mx: 1, mb: 0.3,
-              '&.Mui-selected': { background: '#fff5f5', color: '#c62828', '& .MuiListItemIcon-root': { color: '#c62828' } },
+              '&.Mui-selected': { background: '#fff5f5', color: '#1565c0', '& .MuiListItemIcon-root': { color: '#1565c0' } },
             }}>
             <ListItemIcon sx={{ minWidth: 36 }}>{m.icon}</ListItemIcon>
             <ListItemText primary={m.label} primaryTypographyProps={{ fontSize: 13.5, fontWeight: tab === m.id ? 700 : 400 }} />
@@ -144,7 +144,7 @@ export default function AdminDashboard({ onExitAdmin }) {
       <Box sx={{ p: 1 }}>
         {hasUnsaved && (
           <Box sx={{ px: 1, py: 0.6, mb: 0.5, background: '#fff3e0', borderRadius: 1 }}>
-            <Typography sx={{ fontSize: 11.5, color: '#e65100', fontWeight: 600 }}>
+            <Typography sx={{ fontSize: 11.5, color: '#00b0ff', fontWeight: 600 }}>
               ⚠️ Có thay đổi chưa xuất bản
             </Typography>
           </Box>
@@ -153,8 +153,8 @@ export default function AdminDashboard({ onExitAdmin }) {
           <ListItemIcon sx={{ minWidth: 36, color: '#1565c0' }}><HomeIcon /></ListItemIcon>
           <ListItemText primary="Về trang chủ" primaryTypographyProps={{ fontSize: 13 }} />
         </ListItemButton>
-        <ListItemButton onClick={handleLogout} sx={{ borderRadius: 1, color: '#c62828' }}>
-          <ListItemIcon sx={{ minWidth: 36, color: '#c62828' }}><LogoutIcon /></ListItemIcon>
+        <ListItemButton onClick={handleLogout} sx={{ borderRadius: 1, color: '#1565c0' }}>
+          <ListItemIcon sx={{ minWidth: 36, color: '#1565c0' }}><LogoutIcon /></ListItemIcon>
           <ListItemText primary="Đăng xuất" primaryTypographyProps={{ fontSize: 13 }} />
         </ListItemButton>
       </Box>
@@ -196,14 +196,14 @@ export default function AdminDashboard({ onExitAdmin }) {
             </Typography>
             {hasUnsaved && (
               <Chip label="Chưa xuất bản" size="small"
-                sx={{ background: '#fff3e0', color: '#e65100', fontWeight: 600, mr: 1, fontSize: 11 }} />
+                sx={{ background: '#fff3e0', color: '#00b0ff', fontWeight: 600, mr: 1, fontSize: 11 }} />
             )}
             <Button size="small" startIcon={<HomeIcon />} onClick={() => onExitAdmin?.()}
               sx={{ color: '#1565c0', mr: 0.5, fontSize: 12 }}>
               {!isMobile && 'Trang chủ'}
             </Button>
             <Button size="small" startIcon={<LogoutIcon />} onClick={handleLogout}
-              sx={{ color: '#c62828', fontSize: 12 }}>
+              sx={{ color: '#1565c0', fontSize: 12 }}>
               {!isMobile && 'Đăng xuất'}
             </Button>
           </Toolbar>

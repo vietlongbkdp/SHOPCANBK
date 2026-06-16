@@ -176,7 +176,7 @@ export default function Home({ onProductClick, onNavigate }) {
               </Box>
 
               {/* CTA */}
-              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 3, p: 2.5, background: `linear-gradient(135deg,${T.ink},#3d1410)`, color: '#fff' }}>
+              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 3, p: 2.5, background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff' }}>
                 <Box sx={{ position: 'absolute', top: -30, right: -30, width: 100, height: 100, borderRadius: '50%', background: `radial-gradient(circle,${T.accent}44,transparent 70%)` }} />
                 <Stack direction="row" spacing={1.2} alignItems="center" mb={1}>
                   <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 20, color: T.accentLight }} />

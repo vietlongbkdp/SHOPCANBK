@@ -85,12 +85,12 @@ export default function ProductManager() {
                 </Typography>
                 <Stack direction="row" spacing={0.8} alignItems="center" flexWrap="wrap" gap={0.5}>
                   <Typography sx={{ fontSize: 12, color: '#888' }}>{catName(p.category)}</Typography>
-                  <Typography sx={{ fontSize: 13, color: '#c62828', fontWeight: 700 }}>
+                  <Typography sx={{ fontSize: 13, color: '#1565c0', fontWeight: 700 }}>
                     {Number(p.price).toLocaleString('vi-VN')}₫
                   </Typography>
                   {p.badge && (
                     <Chip label={p.badge} size="small"
-                      sx={{ background: '#e65100', color: '#fff', fontSize: 10, height: 20 }} />
+                      sx={{ background: '#00b0ff', color: '#fff', fontSize: 10, height: 20 }} />
                   )}
                 </Stack>
               </Box>
@@ -103,7 +103,7 @@ export default function ProductManager() {
               Sửa
             </Button>
             <Button size="small" startIcon={<DeleteIcon />} onClick={() => setDelConf(p)}
-              sx={{ color: '#c62828', fontWeight: 600, fontSize: 12.5 }}>
+              sx={{ color: '#1565c0', fontWeight: 600, fontSize: 12.5 }}>
               Xóa
             </Button>
           </CardActions>
@@ -143,12 +143,12 @@ export default function ProductManager() {
               </TableCell>
               <TableCell><Typography sx={{ fontSize: 12.5, color: '#666' }}>{catName(p.category)}</Typography></TableCell>
               <TableCell>
-                <Typography sx={{ fontSize: 13, fontWeight: 700, color: '#c62828', whiteSpace: 'nowrap' }}>
+                <Typography sx={{ fontSize: 13, fontWeight: 700, color: '#1565c0', whiteSpace: 'nowrap' }}>
                   {Number(p.price).toLocaleString('vi-VN')}₫
                 </Typography>
               </TableCell>
               <TableCell>
-                {p.badge && <Chip label={p.badge} size="small" sx={{ background: '#e65100', color: '#fff', fontSize: 10 }} />}
+                {p.badge && <Chip label={p.badge} size="small" sx={{ background: '#00b0ff', color: '#fff', fontSize: 10 }} />}
               </TableCell>
               <TableCell>
                 <Stack direction="row" spacing={0.5}>
@@ -158,7 +158,7 @@ export default function ProductManager() {
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Xóa">
-                    <IconButton size="small" onClick={() => setDelConf(p)} sx={{ color: '#c62828' }}>
+                    <IconButton size="small" onClick={() => setDelConf(p)} sx={{ color: '#1565c0' }}>
                       <DeleteIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
@@ -179,7 +179,7 @@ export default function ProductManager() {
           Sản Phẩm ({products.length})
         </Typography>
         <Button variant="contained" startIcon={<AddIcon />} onClick={openAdd} size={isMobile ? 'small' : 'medium'}
-          sx={{ background: '#c62828', fontWeight: 700, '&:hover': { background: '#8e0000' } }}>
+          sx={{ background: '#1565c0', fontWeight: 700, '&:hover': { background: '#8e0000' } }}>
           Thêm Mới
         </Button>
       </Stack>
@@ -221,7 +221,7 @@ export default function ProductManager() {
       {/* Add/Edit Dialog */}
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth
         PaperProps={{ sx: { borderRadius: { xs: 0, sm: 2 }, m: { xs: 0, sm: 2 }, maxHeight: { xs: '100dvh', sm: '90vh' } } }}>
-        <DialogTitle sx={{ fontWeight: 700, background: '#c62828', color: '#fff', py: 1.5, fontSize: { xs: 15, md: 17 } }}>
+        <DialogTitle sx={{ fontWeight: 700, background: '#1565c0', color: '#fff', py: 1.5, fontSize: { xs: 15, md: 17 } }}>
           {editing ? '✏️ Chỉnh Sửa Sản Phẩm' : '➕ Thêm Sản Phẩm Mới'}
         </DialogTitle>
         <DialogContent sx={{ pt: '20px !important', px: { xs: 2, md: 3 }, overflowY: 'auto' }}>
@@ -280,7 +280,7 @@ export default function ProductManager() {
         <DialogActions sx={{ p: 2, gap: 1 }}>
           <Button onClick={() => setOpen(false)} variant="outlined" size="small">Hủy</Button>
           <Button onClick={handleSave} variant="contained" disabled={!form.name || !form.price}
-            sx={{ background: '#c62828', '&:hover': { background: '#8e0000' } }}>
+            sx={{ background: '#1565c0', '&:hover': { background: '#8e0000' } }}>
             {editing ? 'Lưu Thay Đổi' : 'Thêm Sản Phẩm'}
           </Button>
         </DialogActions>
@@ -294,7 +294,7 @@ export default function ProductManager() {
           <Typography sx={{ fontSize: 13.5 }}>
             Xóa sản phẩm <strong>"{deleteConfirm?.name}"</strong>?
           </Typography>
-          <Typography sx={{ color: '#c62828', fontSize: 12.5, mt: 0.8 }}>⚠️ Không thể hoàn tác.</Typography>
+          <Typography sx={{ color: '#1565c0', fontSize: 12.5, mt: 0.8 }}>⚠️ Không thể hoàn tác.</Typography>
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setDelConf(null)} size="small">Hủy</Button>

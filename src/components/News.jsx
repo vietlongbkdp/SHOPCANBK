@@ -15,7 +15,7 @@ const allNews = [...news, ...extraNews];
 export default function News() {
   return (
     <Box sx={{ background: '#f5f5f5', minHeight: '60vh' }}>
-      <Box sx={{ background: 'linear-gradient(135deg, #c62828, #e65100)', color: 'white', py: { xs: 3, md: 5 } }}>
+      <Box sx={{ background: 'linear-gradient(135deg, #1565c0, #00b0ff)', color: 'white', py: { xs: 3, md: 5 } }}>
         <Container maxWidth="lg">
           <Typography variant="h3" sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '22px', md: '36px' } }}>TIN TỨC & KIẾN THỨC</Typography>
           <Typography sx={{ opacity: 0.9, fontSize: { xs: 13, md: 16 } }}>Kinh nghiệm mua cân, hướng dẫn sử dụng và sửa chữa cân điện tử</Typography>
@@ -36,14 +36,14 @@ export default function News() {
               )}
               <Grid item xs={12} sm={n.image ? 8 : 12}>
                 <Box sx={{ p: { xs: 2, md: 3 } }}>
-                  <Chip label="Nổi bật" size="small" sx={{ background: '#c62828', color: 'white', mb: 1.5, fontWeight: 600 }} />
+                  <Chip label="Nổi bật" size="small" sx={{ background: '#1565c0', color: 'white', mb: 1.5, fontWeight: 600 }} />
                   <Typography variant="h5" sx={{ fontWeight: 700, mb: 1.5, color: '#212121', fontSize: { xs: 16, md: 22 } }}>{n.title}</Typography>
                   <Stack direction="row" spacing={0.5} alignItems="center" mb={1.5}>
                     <CalendarTodayIcon sx={{ fontSize: 14, color: '#888' }} />
                     <Typography sx={{ fontSize: 12, color: '#888' }}>{n.date}</Typography>
                   </Stack>
                   <Typography sx={{ color: '#555', lineHeight: 1.7, fontSize: { xs: 13, md: 14 } }}>{n.summary}</Typography>
-                  <Button sx={{ mt: 2, color: '#c62828', fontWeight: 600, p: 0, '&:hover': { background: 'none', textDecoration: 'underline' } }}>
+                  <Button sx={{ mt: 2, color: '#1565c0', fontWeight: 600, p: 0, '&:hover': { background: 'none', textDecoration: 'underline' } }}>
                     Đọc thêm →
                   </Button>
                 </Box>

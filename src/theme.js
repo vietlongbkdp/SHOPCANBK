@@ -1,23 +1,23 @@
 import { createTheme } from '@mui/material/styles';
 
 // ── DESIGN TOKENS ─────────────────────────────────────
-// Tone chủ đạo: đỏ-cam gradient (lấy từ logo BK)
+// Tone chủ đạo: xanh dương gradient
 export const T = {
   // Primary brand gradient
-  brand:        '#d32f2f',
-  brandDark:    '#9a0007',
-  brandLight:   '#ff6659',
-  accent:       '#ff6d00',       // cam nhấn
-  accentLight:  '#ff9e40',
-  gradient:     'linear-gradient(135deg,#d32f2f 0%,#ff6d00 100%)',
-  gradientDark: 'linear-gradient(135deg,#9a0007 0%,#d32f2f 100%)',
-  gradientSoft: 'linear-gradient(135deg,#fff5f3 0%,#ffece4 100%)',
+  brand:        '#1565c0',
+  brandDark:    '#0d47a1',
+  brandLight:   '#5e92f3',
+  accent:       '#00b0ff',       // xanh sáng nhấn
+  accentLight:  '#69e2ff',
+  gradient:     'linear-gradient(135deg,#1565c0 0%,#00b0ff 100%)',
+  gradientDark: 'linear-gradient(135deg,#0d47a1 0%,#1565c0 100%)',
+  gradientSoft: 'linear-gradient(135deg,#f0f6ff 0%,#e3f2ff 100%)',
   // Neutrals
-  ink:          '#1a1410',       // gần đen, ấm
-  inkSoft:      '#5d544e',
-  line:         '#efe9e5',
+  ink:          '#0f1724',       // gần đen, ngả xanh
+  inkSoft:      '#4a5568',
+  line:         '#e6edf5',
   surface:      '#ffffff',
-  bg:           '#faf7f5',       // nền ấm nhạt
+  bg:           '#f5f8fc',       // nền xanh nhạt
   // States
   success:      '#2e7d32',
   star:         '#ffa000',

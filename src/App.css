@@ -4,8 +4,8 @@
 html{scroll-behavior:smooth}
 body{
   font-family:'Be Vietnam Pro','Segoe UI',sans-serif;
-  background:#faf7f5;
-  color:#1a1410;
+  background:#f5f8fc;
+  color:#0f1724;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
 }

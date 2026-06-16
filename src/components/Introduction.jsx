@@ -18,7 +18,7 @@ export default function Introduction() {
   return (
     <Box>
       {/* Header band */}
-      <Box sx={{ background: `linear-gradient(135deg,${T.ink},#3d1410)`, color: '#fff', py: { xs: 3.5, md: 5 } }}>
+      <Box sx={{ background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff', py: { xs: 3.5, md: 5 } }}>
         <Container maxWidth="xl">
           <Typography sx={{ color: T.accentLight, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.6 }}>
             VỀ CÂN ĐIỆN TỬ BÁCH KHOA
@@ -39,12 +39,12 @@ export default function Introduction() {
             background: T.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', display: 'inline-block' }}>
             Về Chúng Tôi
           </Typography>
-          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#37312c', lineHeight: 1.9, mb: 1.5 }}>
+          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9, mb: 1.5 }}>
             Với hơn <strong style={{ color: T.brand }}>10 năm kinh nghiệm</strong> trong lĩnh vực cân điện tử, Cân Điện Tử Bách Khoa
             tự hào là đơn vị hàng đầu tại miền Trung chuyên cung cấp các loại cân chính hãng từ những thương hiệu uy tín như
             VIBRA, A&amp;D, JADEVER, CAS...
           </Typography>
-          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#37312c', lineHeight: 1.9 }}>
+          <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9 }}>
             Chúng tôi không chỉ bán sản phẩm mà còn cung cấp dịch vụ sửa chữa, bảo trì, kiểm định cân tận nơi với đội ngũ
             kỹ thuật viên chuyên nghiệp, đảm bảo cân của bạn luôn hoạt động chính xác và bền bỉ.
           </Typography>

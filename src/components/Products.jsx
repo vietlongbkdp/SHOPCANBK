@@ -26,7 +26,7 @@ export default function Products({ onProductClick }) {
   return (
     <Box sx={{ minHeight: '60vh' }}>
       {/* Page header band */}
-      <Box sx={{ background: `linear-gradient(135deg,${T.ink},#3d1410)`, color: '#fff', py: { xs: 3, md: 4 } }}>
+      <Box sx={{ background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff', py: { xs: 3, md: 4 } }}>
         <Container maxWidth="xl">
           <Typography sx={{ color: T.accentLight, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
             CHÍNH HÃNG · BẢO HÀNH 12–36 THÁNG
