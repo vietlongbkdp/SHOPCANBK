@@ -77,8 +77,8 @@ function AppContent() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', background: '#faf7f5' }}>
-      <Box sx={{ position: 'sticky', top: 0, zIndex: 1200, boxShadow: '0 2px 12px rgba(0,0,0,.1)' }}>
+    <Box sx={{ minHeight: '100vh', background: '#faf7f5', display: 'flex', flexDirection: 'column' }}>
+      <Box sx={{ position: 'sticky', top: 0, zIndex: 1200, boxShadow: '0 2px 12px rgba(0,0,0,.1)', flexShrink: 0 }}>
         <Header onNavigate={handleNavigate} />
         <Navigation
         currentPage={currentPage}
