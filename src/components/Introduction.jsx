@@ -32,8 +32,7 @@ const BRANDS = [
 
 export default function Introduction() {
   const { siteData } = useAdmin();
-  const { stats, company, products } = siteData;
-  const galleryImgs = products.filter(p => p.image).slice(0, 5).map(p => p.image);
+  const { stats, company } = siteData;
 
   return (
     <Box>
@@ -81,10 +80,10 @@ export default function Introduction() {
           <Grid item xs={12} md={6}>
             <Box sx={{ position: 'relative' }}>
               <Box component="img"
-                src="/banner.png"
-                alt="Cân Điện Tử Bách Khoa"
-                sx={{ width: '100%', height: { xs: 240, md: 360 }, objectFit: 'cover', borderRadius: 4,
-                  boxShadow: '0 16px 48px rgba(15,23,36,.18)' }} />
+                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80"
+                alt="Kỹ thuật viên Bách Khoa"
+                sx={{ width: '100%', height: { xs: 240, md: 360 }, objectFit: 'cover', borderRadius: 4, display: 'block', boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
+                onError={(e) => { e.target.src = '/banner.png'; }} />
               {/* Floating stat badge */}
               <Box sx={{ position: 'absolute', bottom: { xs: 12, md: -24 }, left: { xs: 12, md: -24 },
                 background: T.gradient, color: '#fff', borderRadius: 3, px: 2.5, py: 1.5,
@@ -176,24 +175,22 @@ export default function Introduction() {
           </Box>
           <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', md: 'repeat(4,1fr)' },
             gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
-            {/* Ảnh banner lớn */}
-            <Box sx={{ gridColumn: { xs: '1 / 3', md: '1 / 3' }, gridRow: { md: 'span 2' }, borderRadius: 3, overflow: 'hidden', position: 'relative',
-              '&:hover img': { transform: 'scale(1.05)' } }}>
-              <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa" loading="lazy"
-                sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }} />
-              <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(15,23,36,.7) 0%,transparent 55%)' }} />
-              <Box sx={{ position: 'absolute', bottom: 14, left: 16 }}>
-                <Typography sx={{ color: '#fff', fontWeight: 800, fontSize: { xs: 14, md: 18 } }}>Cửa hàng Bách Khoa</Typography>
-                <Typography sx={{ color: 'rgba(255,255,255,.85)', fontSize: { xs: 11, md: 12.5 } }}>Đa dạng các dòng cân chính hãng</Typography>
-              </Box>
-            </Box>
-            {/* Ảnh sản phẩm thật */}
-            {galleryImgs.map((src, i) => (
-              <Box key={i} sx={{ borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg,
-                '&:hover img': { transform: 'scale(1.06)' } }}>
-                <Box component="img" src={src} alt={`Sản phẩm ${i + 1}`} loading="lazy"
+            {[
+              { src: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=900&q=80', label: 'Tư vấn khách hàng', big: true },
+              { src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80', label: 'Kỹ thuật viên' },
+              { src: 'https://images.unsplash.com/photo-1607799279861-4dd421887fb3?auto=format&fit=crop&w=600&q=80', label: 'Kho hàng' },
+              { src: 'https://images.unsplash.com/photo-1453928582365-b6ad33cbcf64?auto=format&fit=crop&w=600&q=80', label: 'Cân chính xác' },
+              { src: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?auto=format&fit=crop&w=600&q=80', label: 'Lắp đặt' },
+            ].map((g, i) => (
+              <Box key={i} sx={{ gridColumn: g.big ? { xs: '1 / 3', md: '1 / 3' } : 'auto', gridRow: g.big ? { md: 'span 2' } : 'auto',
+                borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
+                <Box component="img" src={g.src} alt={g.label} loading="lazy"
                   sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }}
                   onError={(e) => { e.target.src = '/banner.png'; }} />
+                <Box sx={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top,rgba(15,23,36,.75) 0%,transparent 55%)' }} />
+                <Typography sx={{ position: 'absolute', bottom: 10, left: 12, color: '#fff', fontWeight: 700, fontSize: { xs: 11.5, md: g.big ? 16 : 13 } }}>
+                  {g.label}
+                </Typography>
               </Box>
             ))}
           </Box>
