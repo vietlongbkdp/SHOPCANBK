@@ -40,7 +40,7 @@ export default function Introduction() {
             Về Chúng Tôi
           </Typography>
           <Typography sx={{ fontSize: { xs: 13.5, md: 14.5 }, color: '#2a3441', lineHeight: 1.9, mb: 1.5 }}>
-            Với <strong style={{ color: T.brand }}>nhiều năm kinh nghiệm</strong> trong lĩnh vực cân điện tử, Cân Điện Tử Bách Khoa
+            Với <strong style={{ color: T.brand }}>3+ năm kinh nghiệm</strong> trong lĩnh vực cân điện tử, Cân Điện Tử Bách Khoa
             tự hào là đơn vị hàng đầu tại miền Trung chuyên cung cấp các loại cân chính hãng từ những thương hiệu uy tín như
             VIBRA, A&amp;D, JADEVER, CAS...
           </Typography>
