@@ -82,7 +82,7 @@ export default function Introduction() {
           <Grid item xs={12} md={6}>
             <Box sx={{ position: 'relative' }}>
               <Box component="img"
-                src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=800&q=80"
+                src="https://images.pexels.com/photos/8005368/pexels-photo-8005368.jpeg?auto=compress&cs=tinysrgb&w=800"
                 alt="Kỹ thuật viên Bách Khoa"
                 sx={{ width: '100%', height: { xs: 240, md: 360 }, objectFit: 'cover', borderRadius: 4, display: 'block', boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
                 onError={(e) => { e.target.src = '/banner.png'; }} />
@@ -179,9 +179,9 @@ export default function Introduction() {
             gridAutoRows: { xs: 140, md: 190 }, gap: { xs: 1, md: 1.5 } }}>
             {[
               { src: scaleImg(0), label: 'Cân điện tử kỹ thuật số', big: true, product: true },
-              { src: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80', label: 'Mạch điện tử' },
+              { src: 'https://images.pexels.com/photos/8005397/pexels-photo-8005397.jpeg?auto=compress&cs=tinysrgb&w=600', label: 'Sửa mạch điện tử' },
               { src: scaleImg(8), label: 'Cân sàn công nghiệp', product: true },
-              { src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80', label: 'Kiểm tra kỹ thuật' },
+              { src: 'https://images.pexels.com/photos/3846517/pexels-photo-3846517.jpeg?auto=compress&cs=tinysrgb&w=600', label: 'Kiểm tra linh kiện' },
               { src: scaleImg(11), label: 'Cân phân tích chính xác', product: true },
             ].map((g, i) => (
               <Box key={i} sx={{ gridColumn: g.big ? { xs: '1 / 3', md: '1 / 3' } : 'auto', gridRow: g.big ? { md: 'span 2' } : 'auto',
