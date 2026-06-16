@@ -7,16 +7,15 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars, faXmark, faSearch, faCartShopping, faPhone,
-  faHouse, faCircleInfo, faBoxOpen, faScrewdriverWrench,
-  faEnvelope, faChevronDown, faChevronUp, faAngleRight, faTruckFast,
+  faHouse, faInfoCircle, faBoxOpen, faScrewdriverWrench,
+  faEnvelope, faChevronDown, faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import { useAdmin } from '../context/AdminContext';
-import { T } from '../theme';
 
 const NAV_ITEMS = [
   { label: 'Trang Chủ',  page: 'home',         icon: faHouse },
-  { label: 'Giới Thiệu', page: 'introduction',  icon: faCircleInfo },
+  { label: 'Giới Thiệu', page: 'introduction',  icon: faInfoCircle },
   { label: 'Sản Phẩm',   page: 'products',      icon: faBoxOpen, hasDropdown: true },
   { label: 'Sửa Chữa',   page: 'services',      icon: faScrewdriverWrench },
   { label: 'Liên Hệ',    page: 'contact',       icon: faEnvelope },
@@ -26,6 +25,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
   const [anchor, setAnchor]         = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [prodsOpen, setProdsOpen]   = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const theme    = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const { totalCount } = useCart();
@@ -35,114 +35,159 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
   const isActive = (page) => currentPage === page;
 
   return (
-    <AppBar component="nav" position="static" elevation={0}
-      sx={{ background: T.gradient, boxShadow: `0 4px 20px ${T.brand}38` }}>
+    <AppBar component="nav" position="static"
+      sx={{
+        background: 'linear-gradient(135deg,#1565c0 0%,#00b0ff 100%)',
+        boxShadow: '0 3px 12px rgba(27,94,32,.4)',
+      }}>
       <Container maxWidth="xl" disableGutters>
-        <Toolbar sx={{ minHeight: { xs: 50, md: 56 }, px: { xs: 1.5, md: 2.5 }, gap: 1 }}>
+        <Toolbar sx={{ minHeight: { xs: 48, md: 54 }, px: { xs: 1.5, md: 2.5 }, gap: 1 }}>
 
-          {/* Hamburger (mobile) */}
+          {/* Mobile hamburger */}
           {isMobile && (
-            <IconButton color="inherit" onClick={() => setMobileOpen(true)} aria-label="Mở menu"
+            <IconButton color="inherit" onClick={() => setMobileOpen(true)} aria-label="Menu"
               sx={{ p: 1, mr: 0.5 }}>
-              <FontAwesomeIcon icon={faBars} style={{ fontSize: 19 }} />
+              <FontAwesomeIcon icon={faBars} style={{ fontSize: 20 }} />
             </IconButton>
           )}
 
-          {/* Desktop links */}
+          {/* Desktop nav links */}
           {!isMobile && (
-            <Stack direction="row" sx={{ flex: 1, gap: 0.4 }}>
-              {NAV_ITEMS.map((item) => item.hasDropdown ? (
-                <Box key={item.label}>
-                  <Button
-                    onClick={(e) => setAnchor(e.currentTarget)}
-                    endIcon={<FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 10 }} />}
-                    sx={navBtnSx(isActive(item.page))}>
-                    <FontAwesomeIcon icon={item.icon} style={{ fontSize: 13, marginRight: 7 }} />
+            <Stack direction="row" sx={{ flex: 1, gap: 0.5 }}>
+              {NAV_ITEMS.map((item) => (
+                item.hasDropdown ? (
+                  <Box key={item.label}>
+                    <Button
+                      endIcon={<FontAwesomeIcon icon={faChevronDown} style={{ fontSize: 11 }} />}
+                      onClick={(e) => setAnchor(e.currentTarget)}
+                      sx={{
+                        color: '#fff', fontWeight: isActive(item.page) ? 700 : 500,
+                        fontSize: 14, px: 1.8, py: 1,
+                        borderRadius: 1.5,
+                        borderBottom: isActive(item.page) ? '2px solid #69e2ff' : '2px solid transparent',
+                        background: isActive(item.page) ? 'rgba(255,255,255,.12)' : 'transparent',
+                        '&:hover': { background: 'rgba(255,255,255,.14)' },
+                      }}>
+                      <FontAwesomeIcon icon={item.icon} style={{ fontSize: 13, marginRight: 6 }} />
+                      {item.label}
+                    </Button>
+                    <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}
+                      PaperProps={{ sx: { mt: 0.5, minWidth: 210, borderRadius: 2, boxShadow: 3 } }}>
+                      <MenuItem dense onClick={() => { onNavigate('products'); setAnchor(null); }}
+                        sx={{ fontWeight: 700, fontSize: 13.5 }}>
+                        <FontAwesomeIcon icon={faBoxOpen} style={{ marginRight: 10, color: '#1565c0', fontSize: 14 }} />
+                        Tất Cả Sản Phẩm
+                      </MenuItem>
+                      <Divider />
+                      {categories.map((c) => (
+                        <MenuItem dense key={c.id} onClick={() => { onNavigate('products'); setAnchor(null); }}
+                          sx={{ fontSize: 13 }}>
+                          <span style={{ marginRight: 10, fontSize: 15 }}>{c.icon}</span>{c.name}
+                        </MenuItem>
+                      ))}
+                    </Menu>
+                  </Box>
+                ) : (
+                  <Button key={item.label} onClick={() => onNavigate(item.page)}
+                    sx={{
+                      color: '#fff', fontWeight: isActive(item.page) ? 700 : 500,
+                      fontSize: 14, px: 1.8, py: 1, borderRadius: 1.5,
+                      borderBottom: isActive(item.page) ? '2px solid #69e2ff' : '2px solid transparent',
+                      background: isActive(item.page) ? 'rgba(255,255,255,.12)' : 'transparent',
+                      '&:hover': { background: 'rgba(255,255,255,.14)' },
+                    }}>
+                    <FontAwesomeIcon icon={item.icon} style={{ fontSize: 13, marginRight: 6 }} />
                     {item.label}
                   </Button>
-                  <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}
-                    PaperProps={{ sx: { mt: 1, minWidth: 220, borderRadius: 2.5, overflow: 'hidden', boxShadow: '0 12px 40px rgba(0,0,0,.16)' } }}>
-                    <MenuItem dense onClick={() => { onNavigate('products'); setAnchor(null); }}
-                      sx={{ fontWeight: 700, fontSize: 13.5, py: 1.2, color: T.brand }}>
-                      <FontAwesomeIcon icon={faBoxOpen} style={{ marginRight: 10, fontSize: 13 }} />
-                      Tất Cả Sản Phẩm
-                    </MenuItem>
-                    <Divider />
-                    {categories.map((c) => (
-                      <MenuItem dense key={c.id} onClick={() => { onNavigate('products'); setAnchor(null); }}
-                        sx={{ fontSize: 13, py: 1 }}>
-                        <span style={{ marginRight: 10, fontSize: 15 }}>{c.icon}</span>{c.name}
-                      </MenuItem>
-                    ))}
-                  </Menu>
-                </Box>
-              ) : (
-                <Button key={item.label} onClick={() => onNavigate(item.page)} sx={navBtnSx(isActive(item.page))}>
-                  <FontAwesomeIcon icon={item.icon} style={{ fontSize: 13, marginRight: 7 }} />
-                  {item.label}
-                </Button>
+                )
               ))}
             </Stack>
           )}
 
           {isMobile && <Box sx={{ flex: 1 }} />}
 
-          {/* Hotline (desktop) + Cart */}
-          <Stack direction="row" alignItems="center" spacing={1.5}>
-            {!isMobile && (
-              <Stack direction="row" alignItems="center" spacing={1}
-                sx={{ background: 'rgba(255,255,255,.14)', borderRadius: 2.5, px: 1.5, py: 0.6, border: '1px solid rgba(255,255,255,.2)' }}>
-                <FontAwesomeIcon icon={faTruckFast} style={{ fontSize: 14, color: '#fff' }} />
-                <Typography sx={{ fontSize: 12.5, fontWeight: 600, color: '#fff' }}>
-                  Miễn phí giao hàng nội thành
-                </Typography>
-              </Stack>
+          {/* Search + Cart */}
+          <Stack direction="row" alignItems="center" spacing={0.5}>
+            {isMobile ? (
+              <>
+                {searchOpen ? (
+                  <Box sx={{
+                    display: 'flex', alignItems: 'center',
+                    background: 'rgba(255,255,255,.18)', borderRadius: 2,
+                    px: 1.5, py: 0.4, width: 180,
+                    border: '1px solid rgba(255,255,255,.3)',
+                  }}>
+                    <InputBase autoFocus placeholder="Tìm kiếm..." value={searchTerm}
+                      onChange={(e) => onSearch(e.target.value)}
+                      sx={{ color: '#fff', fontSize: 13, flex: 1, '& input::placeholder': { color: 'rgba(255,255,255,.6)' } }} />
+                    <FontAwesomeIcon icon={faXmark} style={{ color: 'rgba(255,255,255,.7)', fontSize: 15, cursor: 'pointer' }}
+                      onClick={() => { setSearchOpen(false); onSearch(''); }} />
+                  </Box>
+                ) : (
+                  <IconButton onClick={() => setSearchOpen(true)} sx={{ color: '#fff', p: 1 }}>
+                    <FontAwesomeIcon icon={faSearch} style={{ fontSize: 18 }} />
+                  </IconButton>
+                )}
+              </>
+            ) : (
+              <Box sx={{
+                display: 'flex', alignItems: 'center', gap: 1,
+                background: 'rgba(255,255,255,.15)', borderRadius: 2,
+                px: 1.5, py: 0.5, width: 230,
+                border: '1px solid rgba(255,255,255,.25)',
+                '&:focus-within': { background: 'rgba(255,255,255,.22)', borderColor: 'rgba(255,255,255,.5)' },
+                transition: 'all .2s',
+              }}>
+                <FontAwesomeIcon icon={faSearch} style={{ color: 'rgba(255,255,255,.6)', fontSize: 14 }} />
+                <InputBase placeholder="Tìm kiếm sản phẩm..." value={searchTerm}
+                  onChange={(e) => onSearch(e.target.value)}
+                  inputProps={{ 'aria-label': 'Tìm kiếm' }}
+                  sx={{ color: '#fff', fontSize: 13, flex: 1, '& input::placeholder': { color: 'rgba(255,255,255,.55)' } }} />
+              </Box>
             )}
 
             <IconButton onClick={onOpenCart} aria-label={`Giỏ hàng ${totalCount}`}
-              sx={{ color: '#fff', p: 1, '&:hover': { background: 'rgba(255,255,255,.15)' } }}>
-              <Badge badgeContent={totalCount}
-                sx={{ '& .MuiBadge-badge': { background: '#fff', color: T.brand, fontSize: 10, minWidth: 16, height: 16, p: 0, fontWeight: 800 } }}>
-                <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: 19 }} />
+              sx={{
+                color: '#fff', p: 1, position: 'relative',
+                '&:hover': { background: 'rgba(255,255,255,.15)' },
+              }}>
+              <Badge badgeContent={totalCount} color="error"
+                sx={{ '& .MuiBadge-badge': { fontSize: 10, minWidth: 16, height: 16, p: 0, fontWeight: 700 } }}>
+                <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: 20 }} />
               </Badge>
             </IconButton>
           </Stack>
         </Toolbar>
       </Container>
 
-      {/* Mobile drawer */}
+      {/* Mobile Drawer */}
       <Drawer anchor="left" open={mobileOpen} onClose={() => setMobileOpen(false)}
-        PaperProps={{ sx: { width: 288, borderRadius: '0 20px 20px 0' } }}>
-        <Box sx={{ background: T.gradient, p: 2.5, color: '#fff' }}>
+        PaperProps={{ sx: { width: 280, borderRadius: '0 16px 16px 0' } }}>
+        {/* Drawer header */}
+        <Box sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', p: 2, color: '#fff' }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
-            <Box>
-              <Typography sx={{ fontWeight: 900, fontSize: 16, lineHeight: 1 }}>BÁCH KHOA</Typography>
-              <Typography sx={{ fontSize: 11, opacity: .85, mt: 0.4 }}>Cân điện tử chính hãng</Typography>
-            </Box>
+            <Typography sx={{ fontWeight: 700, fontSize: 15 }}>🌿 MENU</Typography>
             <IconButton onClick={() => setMobileOpen(false)} sx={{ color: '#fff', p: 0.5 }}>
               <FontAwesomeIcon icon={faXmark} style={{ fontSize: 20 }} />
             </IconButton>
           </Stack>
         </Box>
 
-        <List disablePadding sx={{ pt: 1, flex: 1 }}>
+        <List disablePadding sx={{ pt: 1 }}>
           {NAV_ITEMS.map((item) => item.hasDropdown ? (
             <Box key={item.label}>
-              <ListItemButton onClick={() => setProdsOpen(!prodsOpen)} sx={{ py: 1.3, px: 2.5 }}>
-                <Box sx={drawerIconSx(isActive(item.page))}>
-                  <FontAwesomeIcon icon={item.icon} style={{ fontSize: 14 }} />
-                </Box>
+              <ListItemButton onClick={() => setProdsOpen(!prodsOpen)} sx={{ py: 1.2, px: 2 }}>
+                <FontAwesomeIcon icon={item.icon} style={{ fontSize: 15, marginRight: 12, color: '#1565c0' }} />
                 <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600, fontSize: 14 }} />
-                <FontAwesomeIcon icon={prodsOpen ? faChevronUp : faChevronDown} style={{ fontSize: 11, color: '#999' }} />
+                <FontAwesomeIcon icon={prodsOpen ? faChevronUp : faChevronDown} style={{ fontSize: 12, color: '#888' }} />
               </ListItemButton>
               <Collapse in={prodsOpen}>
-                <List disablePadding sx={{ background: T.bg }}>
+                <List disablePadding>
                   {[{ id: 0, name: 'Tất Cả Sản Phẩm', icon: '📦' }, ...categories].map((c) => (
-                    <ListItemButton key={c.id} sx={{ pl: 6, py: 0.9 }}
+                    <ListItemButton key={c.id} sx={{ pl: 5, py: 0.9 }}
                       onClick={() => { onNavigate('products'); setMobileOpen(false); }}>
-                      <span style={{ marginRight: 10, fontSize: 14 }}>{c.icon}</span>
+                      <span style={{ marginRight: 8, fontSize: 14 }}>{c.icon}</span>
                       <ListItemText primary={c.name} primaryTypographyProps={{ fontSize: 13 }} />
-                      <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: 11, color: '#ccc' }} />
                     </ListItemButton>
                   ))}
                 </List>
@@ -151,45 +196,25 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
           ) : (
             <ListItemButton key={item.label} selected={isActive(item.page)}
               onClick={() => { onNavigate(item.page); setMobileOpen(false); }}
-              sx={{ py: 1.3, px: 2.5, '&.Mui-selected': { background: T.gradientSoft } }}>
-              <Box sx={drawerIconSx(isActive(item.page))}>
-                <FontAwesomeIcon icon={item.icon} style={{ fontSize: 14 }} />
-              </Box>
+              sx={{
+                py: 1.2, px: 2,
+                '&.Mui-selected': { background: '#e3f2ff', borderLeft: '3px solid #1565c0' },
+              }}>
+              <FontAwesomeIcon icon={item.icon} style={{ fontSize: 15, marginRight: 12, color: '#1565c0' }} />
               <ListItemText primary={item.label} primaryTypographyProps={{ fontWeight: 600, fontSize: 14 }} />
             </ListItemButton>
           ))}
         </List>
 
-        <Box sx={{ p: 2 }}>
+        <Divider sx={{ my: 1 }} />
+        <Box sx={{ px: 2, pb: 2 }}>
           <Button fullWidth variant="contained" component="a" href="tel:0913331916"
             startIcon={<FontAwesomeIcon icon={faPhone} />}
-            sx={{ background: T.gradient, fontWeight: 800, py: 1.2, borderRadius: 2.5 }}>
-            Gọi 0913 331 916
+            sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', fontWeight: 700, borderRadius: 2 }}>
+            0913 331 916
           </Button>
         </Box>
       </Drawer>
     </AppBar>
   );
 }
-
-const navBtnSx = (active) => ({
-  color: '#fff', fontWeight: active ? 700 : 500, fontSize: 14,
-  px: 1.6, py: 1, borderRadius: 2.5, position: 'relative',
-  background: active ? 'rgba(255,255,255,.16)' : 'transparent',
-  '&:hover': { background: 'rgba(255,255,255,.12)' },
-});
-const searchBoxSx = (w) => ({
-  display: 'flex', alignItems: 'center', gap: 1,
-  background: 'rgba(255,255,255,.16)', borderRadius: 2.5,
-  px: 1.5, py: 0.5, width: w,
-  border: '1px solid rgba(255,255,255,.22)',
-  '&:focus-within': { background: 'rgba(255,255,255,.24)' },
-  transition: 'all .2s',
-});
-const searchInputSx = { color: '#fff', fontSize: 13, flex: 1, '& input::placeholder': { color: 'rgba(255,255,255,.6)' } };
-const drawerIconSx = (active) => ({
-  width: 32, height: 32, borderRadius: 2, mr: 1.5, flexShrink: 0,
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
-  background: active ? T.gradient : T.gradientSoft,
-  color: active ? '#fff' : T.brand,
-});
