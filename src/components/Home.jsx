@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography, Button, Stack, Divider } from '@mui/material';
+import { Box, Container, Typography, Button, Stack, Divider } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faAngleRight, faScrewdriverWrench, faShieldHalved, faTruck,
@@ -17,23 +17,32 @@ const WHY_US = [
 
 function SectionHead({ eyebrow, title, onViewAll }) {
   return (
-    <Stack direction="row" justifyContent="space-between" alignItems="flex-end" mb={2.5} gap={1}>
-      <Box>
+    <Stack direction="row" justifyContent="space-between" alignItems="center" mb={{ xs: 1.8, md: 2.5 }} gap={1}>
+      <Box sx={{ minWidth: 0 }}>
         {eyebrow && (
-          <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
+          <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 10, md: 12 }, letterSpacing: '0.1em', mb: 0.3 }}>
             {eyebrow}
           </Typography>
         )}
-        <Typography component="h2" sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '18px', md: '24px' }, lineHeight: 1.15, letterSpacing: '-0.01em' }}>
+        <Typography component="h2" sx={{ fontWeight: 800, color: T.ink, fontSize: { xs: '17px', md: '24px' }, lineHeight: 1.15, letterSpacing: '-0.01em' }}>
           {title}
         </Typography>
       </Box>
       {onViewAll && (
-        <Button onClick={onViewAll}
-          endIcon={<FontAwesomeIcon icon={faAngleRight} style={{ fontSize: 12 }} />}
-          sx={{ color: T.brand, fontWeight: 700, fontSize: 13, flexShrink: 0, '&:hover': { background: T.gradientSoft } }}>
-          Xem tất cả
-        </Button>
+        <>
+          {/* Desktop: nút chữ */}
+          <Button onClick={onViewAll}
+            endIcon={<FontAwesomeIcon icon={faAngleRight} style={{ fontSize: 12 }} />}
+            sx={{ display: { xs: 'none', sm: 'flex' }, color: T.brand, fontWeight: 700, fontSize: 13, flexShrink: 0, '&:hover': { background: T.gradientSoft } }}>
+            Xem tất cả
+          </Button>
+          {/* Mobile: mũi tên nhỏ */}
+          <Box onClick={onViewAll} role="button" aria-label="Xem tất cả"
+            sx={{ display: { xs: 'flex', sm: 'none' }, alignItems: 'center', justifyContent: 'center',
+              width: 30, height: 30, borderRadius: '50%', background: T.gradientSoft, flexShrink: 0, cursor: 'pointer' }}>
+            <FontAwesomeIcon icon={faAngleRight} style={{ fontSize: 13, color: T.brand }} />
+          </Box>
+        </>
       )}
     </Stack>
   );
@@ -44,13 +53,13 @@ function ProductSection({ eyebrow, title, products, onProductClick, onNavigate }
   return (
     <Box component="section" sx={{ mb: { xs: 4, md: 6 } }}>
       <SectionHead eyebrow={eyebrow} title={title} onViewAll={() => onNavigate('products')} />
-      <Grid container spacing={{ xs: 1.2, md: 2 }}>
+      <Box sx={{ display: 'grid',
+        gridTemplateColumns: { xs: 'repeat(2,1fr)', sm: 'repeat(3,1fr)', md: 'repeat(4,1fr)', lg: 'repeat(5,1fr)' },
+        gap: { xs: 1, md: 2 } }}>
         {products.map(p => (
-          <Grid item xs={6} sm={4} md={3} lg={2.4} key={p.id}>
-            <ProductCard product={p} onClick={onProductClick} />
-          </Grid>
+          <ProductCard key={p.id} product={p} onClick={onProductClick} />
         ))}
-      </Grid>
+      </Box>
     </Box>
   );
 }
@@ -84,9 +93,9 @@ export default function Home({ onProductClick, onNavigate }) {
       </Box>
 
       <Container maxWidth="xl" sx={{ py: { xs: 3, md: 5 } }}>
-        <Grid container spacing={{ xs: 0, lg: 4 }}>
+        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 320px' }, gap: { xs: 0, lg: 4 } }}>
           {/* Main */}
-          <Grid item xs={12} lg={9}>
+          <Box sx={{ minWidth: 0 }}>
             <ProductSection eyebrow="BÁN CHẠY NHẤT" title="Cân Tính Tiền"
               products={byCategory(1)} onProductClick={onProductClick} onNavigate={onNavigate} />
 
@@ -141,10 +150,10 @@ export default function Home({ onProductClick, onNavigate }) {
                 ))}
               </Box>
             </Box>
-          </Grid>
+          </Box>
 
           {/* Sidebar */}
-          <Grid item xs={12} lg={3} sx={{ mt: { xs: 4, lg: 0 } }}>
+          <Box sx={{ mt: { xs: 4, lg: 0 }, minWidth: 0 }}>
             <Box sx={{ position: { lg: 'sticky' }, top: 76, display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/* Top sellers */}
               <Box sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}` }}>
@@ -213,8 +222,8 @@ export default function Home({ onProductClick, onNavigate }) {
                 </Stack>
               </Box>
             </Box>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Container>
     </Box>
   );
