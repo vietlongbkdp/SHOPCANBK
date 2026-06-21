@@ -34,7 +34,7 @@ export default function Footer() {
               ].map(s => (
                 <Link key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
                   <Box sx={{
-                    width: 36, height: 36, borderRadius: 1.5, background: s.bg,
+                    width: 36, height: 36, borderRadius: 0.75, background: s.bg,
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     transition: 'all .2s', '&:hover': { transform: 'translateY(-2px)', opacity: .9 },
                   }}>
