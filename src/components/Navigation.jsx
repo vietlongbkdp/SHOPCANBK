@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars, faXmark, faSearch, faCartShopping, faPhone,
   faHouse, faInfoCircle, faBoxOpen, faScrewdriverWrench,
-  faEnvelope, faChevronDown, faChevronUp,
+  faEnvelope, faNewspaper, faChevronDown, faChevronUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { useCart } from '../context/CartContext';
 import { useAdmin } from '../context/AdminContext';
@@ -19,6 +19,7 @@ const NAV_ITEMS = [
   { label: 'Sản Phẩm',   page: 'products',      icon: faBoxOpen, hasDropdown: true },
   { label: 'Sửa Chữa',   page: 'services',      icon: faScrewdriverWrench },
   { label: 'Liên Hệ',    page: 'contact',       icon: faEnvelope },
+  { label: 'Tin Tức',     page: 'blog',          icon: faNewspaper },
 ];
 
 export default function Navigation({ onNavigate, onSearch, searchTerm, currentPage, onOpenCart }) {
