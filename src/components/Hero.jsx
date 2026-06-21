@@ -40,7 +40,7 @@ export default function Hero({ onNavigate }) {
                 display: 'inline-flex', alignItems: 'center', gap: 1,
                 background: 'rgba(255,255,255,.1)', backdropFilter: 'blur(8px)',
                 border: '1px solid rgba(255,255,255,.18)',
-                borderRadius: 10, px: 1.8, py: 0.6, mb: 2.5,
+                borderRadius: 4, px: 1.8, py: 0.6, mb: 2.5,
               }}>
                 <Box sx={{ width: 7, height: 7, borderRadius: '50%', background: T.accentLight,
                   boxShadow: `0 0 8px ${T.accentLight}`, animation: 'floatY 2s ease-in-out infinite' }} />
@@ -101,14 +101,14 @@ export default function Hero({ onNavigate }) {
             {/* Right: banner card */}
             <Box className="reveal" sx={{ animationDelay: '.15s' }}>
               <Box sx={{
-                position: 'relative', borderRadius: 4, overflow: 'hidden',
+                position: 'relative', borderRadius: 2, overflow: 'hidden',
                 border: '1px solid rgba(255,255,255,.16)',
                 boxShadow: '0 24px 64px rgba(0,0,0,.4)',
                 background: 'rgba(255,255,255,.05)',
                 p: 1, minHeight: { xs: 200, md: 380 },
               }}>
                 <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa - Sửa chữa cân tại Huế và Đà Nẵng" width={665} height={380} fetchpriority="high"
-                  sx={{ width: '100%', height: 'auto', display: 'block', borderRadius: 3 }} />
+                  sx={{ width: '100%', height: 'auto', display: 'block', borderRadius: 1.5 }} />
               </Box>
             </Box>
           </Box>
@@ -123,7 +123,7 @@ export default function Hero({ onNavigate }) {
               {categories.map((cat) => (
                 <Button key={cat.id} onClick={() => onNavigate('products')} size="small"
                   sx={{ color: T.inkSoft, fontWeight: 600, fontSize: { xs: 12, md: 13 },
-                    px: { xs: 1.4, md: 2 }, py: { xs: 0.7, md: 0.9 }, borderRadius: 2.5, whiteSpace: 'nowrap',
+                    px: { xs: 1.4, md: 2 }, py: { xs: 0.7, md: 0.9 }, borderRadius: 1, whiteSpace: 'nowrap',
                     '&:hover': { color: T.brand, background: T.gradientSoft } }}
                   startIcon={<span style={{ fontSize: 15 }}>{cat.icon}</span>}>
                   {cat.name}
