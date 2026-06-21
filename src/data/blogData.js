@@ -8,7 +8,8 @@ const blogData = [
     categoryLabel: 'Tư Vấn',
     date: '2026-06-15',
     author: 'Bách Khoa Cân Điện Tử',
-    image: '/images/blog/can-ban-hang.jpg',
+    image: 'https://images.unsplash.com/photo-1612012060851-20f943c02d3d?w=800&h=400&fit=crop&auto=format&q=75',
+    imageAlt: 'Cân điện tử bán hàng tại chợ Huế Đà Nẵng',
     tags: ['cân bán hàng', 'cân điện tử', 'Huế', 'Đà Nẵng'],
     content: `<h2>Cân điện tử bán hàng là gì?</h2>
 <p>Cân điện tử bán hàng (hay còn gọi là cân tính tiền) là thiết bị đo lường không thể thiếu trong các cửa hàng tạp hóa, siêu thị mini, chợ truyền thống tại Huế và Đà Nẵng. Cân không chỉ hiển thị khối lượng mà còn tự động tính ra số tiền cần thu, giúp việc buôn bán trở nên nhanh chóng và chính xác hơn.</p>
@@ -45,7 +46,8 @@ const blogData = [
     categoryLabel: 'Sửa Chữa',
     date: '2026-06-10',
     author: 'Bách Khoa Cân Điện Tử',
-    image: '/images/blog/sua-chua-can.jpg',
+    image: 'https://images.unsplash.com/photo-1563770660941-20978e870e26?w=800&h=400&fit=crop&auto=format&q=75',
+    imageAlt: 'Kỹ thuật viên sửa chữa thiết bị điện tử',
     tags: ['sửa cân', 'sửa cân điện tử Huế', 'bảo trì cân'],
     content: `<h2>Các lỗi thường gặp ở cân điện tử</h2>
 <p>Qua nhiều năm kinh nghiệm sửa chữa cân tại Huế, đội ngũ kỹ thuật của chúng tôi nhận thấy những lỗi sau đây xuất hiện thường xuyên nhất:</p>
@@ -72,7 +74,8 @@ const blogData = [
     categoryLabel: 'Kiến Thức',
     date: '2026-06-05',
     author: 'Bách Khoa Cân Điện Tử',
-    image: '/images/blog/kiem-dinh-can.jpg',
+    image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=800&h=400&fit=crop&auto=format&q=75',
+    imageAlt: 'Kiểm định thiết bị đo lường chính xác',
     tags: ['kiểm định cân', 'pháp lý cân điện tử', 'đo lường'],
     content: `<h2>Tại sao phải kiểm định cân điện tử?</h2>
 <p>Theo Luật Đo lường số 04/2011/QH13 và Nghị định 105/2016/NĐ-CP, các phương tiện đo lường dùng trong mua bán, thanh toán thương mại bắt buộc phải được kiểm định bởi cơ quan có thẩm quyền. Cân điện tử là phương tiện đo lường thuộc nhóm phải kiểm định bắt buộc.</p>
@@ -98,7 +101,8 @@ const blogData = [
     categoryLabel: 'Tư Vấn',
     date: '2026-05-28',
     author: 'Bách Khoa Cân Điện Tử',
-    image: '/images/blog/can-tinh-tien.jpg',
+    image: 'https://images.unsplash.com/photo-1607349913338-fca6f7fc42d0?w=800&h=400&fit=crop&auto=format&q=75',
+    imageAlt: 'Cửa hàng tạp hóa chợ truyền thống Việt Nam',
     tags: ['cân tính tiền', 'chợ', 'cửa hàng tạp hóa', 'Huế', 'Đà Nẵng'],
     content: `<h2>Cân tính tiền khác cân thông thường như thế nào?</h2>
 <p>Cân tính tiền (price computing scale) tích hợp thêm chức năng nhập đơn giá và tự động hiển thị số tiền phải trả. Người bán chỉ cần gõ giá/kg, đặt hàng lên cân là máy hiện ngay số tiền — không cần tính nhẩm hay dùng máy tính riêng, tiết kiệm thời gian và tránh nhầm lẫn.</p>
@@ -121,7 +125,8 @@ const blogData = [
     categoryLabel: 'Kiến Thức',
     date: '2026-05-20',
     author: 'Bách Khoa Cân Điện Tử',
-    image: '/images/blog/can-san.jpg',
+    image: 'https://images.unsplash.com/photo-1586528116022-aeda1613c63d?w=800&h=400&fit=crop&auto=format&q=75',
+    imageAlt: 'Kho hàng logistics công nghiệp',
     tags: ['cân sàn', 'cân công nghiệp', 'logistics', 'kho hàng'],
     content: `<h2>Cân sàn công nghiệp là gì?</h2>
 <p>Cân sàn công nghiệp (platform scale) là loại cân có bề mặt đo lường rộng, thiết kế thấp để dễ đặt hàng hóa lên, tải trọng từ 60kg đến vài tấn. Chúng được sử dụng phổ biến trong kho hàng, xưởng sản xuất, vựa hải sản, bến cảng và các cơ sở logistics tại Đà Nẵng.</p>
@@ -144,7 +149,8 @@ const blogData = [
     categoryLabel: 'Mua Sắm',
     date: '2026-05-15',
     author: 'Bách Khoa Cân Điện Tử',
-    image: '/images/blog/mua-can-da-nang.jpg',
+    image: 'https://images.unsplash.com/photo-1605371924599-2d0365da1ae0?w=800&h=400&fit=crop&auto=format&q=75',
+    imageAlt: 'Cửa hàng mua cân điện tử tại Đà Nẵng',
     tags: ['mua cân Đà Nẵng', 'cân điện tử', 'địa chỉ uy tín'],
     content: `<h2>Thị trường cân điện tử tại Đà Nẵng</h2>
 <p>Đà Nẵng với vai trò là trung tâm thương mại miền Trung có nhu cầu rất lớn về các loại cân điện tử, từ cân bán hàng tại chợ Hàn, chợ Cồn cho đến cân sàn công nghiệp phục vụ cảng Tiên Sa và các khu công nghiệp. Tuy nhiên, thị trường cũng có nhiều loại cân kém chất lượng, hàng tái chế trà trộn.</p>
