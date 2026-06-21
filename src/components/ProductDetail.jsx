@@ -39,7 +39,7 @@ export default function ProductDetail({ product, onClose }) {
   return (
     <Dialog open={Boolean(product)} onClose={onClose} maxWidth="md" fullWidth fullScreen={fullScreen}
       PaperProps={{ sx: {
-        borderRadius: fullScreen ? 0 : 4,
+        borderRadius: fullScreen ? 0 : 2,
         m: fullScreen ? 0 : 2,
         width: fullScreen ? '100%' : 'auto',
         maxWidth: fullScreen ? '100%' : 'md',
@@ -58,10 +58,10 @@ export default function ProductDetail({ product, onClose }) {
           <Grid item xs={12} sm={5}>
             <Box sx={{ position: 'relative' }}>
               <Box component="img" src={product.image} alt={product.name}
-                sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', borderRadius: 3, border: `1px solid ${T.line}` }}
+                sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', borderRadius: 1.5, border: `1px solid ${T.line}` }}
                 onError={(e) => { e.target.src = 'https://placehold.co/400/faf7f5/d32f2f?text=Cân'; }} />
               {discount > 0 && (
-                <Box sx={{ position: 'absolute', top: 12, left: 12, background: T.gradient, color: '#fff', borderRadius: 2, px: 1.2, py: 0.5,
+                <Box sx={{ position: 'absolute', top: 12, left: 12, background: T.gradient, color: '#fff', borderRadius: 1, px: 1.2, py: 0.5,
                   boxShadow: `0 4px 12px ${T.brand}55` }}>
                   <Typography sx={{ fontSize: 12, fontWeight: 800, lineHeight: 1 }}>Giảm {discount}%</Typography>
                 </Box>
@@ -82,7 +82,7 @@ export default function ProductDetail({ product, onClose }) {
               <Typography sx={{ fontSize: 12.5, color: T.inkSoft }}>({product.reviews} đánh giá)</Typography>
             </Stack>
 
-            <Box sx={{ background: T.gradientSoft, borderRadius: 3, p: 2, mb: 2 }}>
+            <Box sx={{ background: T.gradientSoft, borderRadius: 1.5, p: 2, mb: 2 }}>
               <Typography sx={{ background: T.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
                 fontWeight: 900, fontSize: { xs: '24px', md: '30px' }, lineHeight: 1 }}>
                 {Number(product.price).toLocaleString('vi-VN')}₫
@@ -100,7 +100,7 @@ export default function ProductDetail({ product, onClose }) {
                 <Grid container spacing={0.8}>
                   {Object.entries(product.specifications).filter(([,v]) => v).map(([k,v]) => (
                     <Grid item xs={6} key={k}>
-                      <Box sx={{ background: T.bg, borderRadius: 2, px: 1.4, py: 0.8 }}>
+                      <Box sx={{ background: T.bg, borderRadius: 1, px: 1.4, py: 0.8 }}>
                         <Typography sx={{ fontSize: 11, color: T.inkSoft }}>{specLabel(k)}</Typography>
                         <Typography sx={{ fontSize: 12.5, fontWeight: 700, color: T.ink }}>{v}</Typography>
                       </Box>
