@@ -26,8 +26,8 @@ export default function ProductCard({ product, onClick }) {
         }}>
 
         {/* Image */}
-        <Box sx={{ position: 'relative', background: T.bg, overflow: 'hidden' }}>
-          <Box component="img" src={product.image} alt={product.name} width={247} height={247} loading="lazy"
+        <Box sx={{ position: 'relative', background: T.bg, overflow: 'hidden', minHeight: 210, aspectRatio: '1/1' }}>
+          <Box component="img" src={product.image} alt={product.name} loading="lazy"
             sx={{ width: '100%', aspectRatio: '1/1', objectFit: 'cover', display: 'block', transition: 'transform .4s', '.card:hover &': { transform: 'scale(1.06)' } }}
             onError={(e) => { e.target.src = 'https://placehold.co/300/faf7f5/d32f2f?text=Cân+Điện+Tử'; }} />
           {discount > 0 && (
