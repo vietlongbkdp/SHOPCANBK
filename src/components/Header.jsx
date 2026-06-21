@@ -97,7 +97,7 @@ export default function Header({ onNavigate }) {
                     sx={{
                       background: grad, color: '#fff',
                       px: { xs: 1, md: 1.8 }, py: { xs: 0.6, md: 0.9 },
-                      borderRadius: 2, boxShadow: `0 3px 10px ${sh}`,
+                      borderRadius: 1, boxShadow: `0 3px 10px ${sh}`,
                       transition: 'all .2s', '&:hover': { transform: 'translateY(-2px)', boxShadow: `0 5px 16px ${sh}` },
                     }}>
                     <FontAwesomeIcon icon={faPhone} style={{ fontSize: { xs: 13, md: 15 } }} />
