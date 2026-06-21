@@ -63,7 +63,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                       sx={{
                         color: '#fff', fontWeight: isActive(item.page) ? 700 : 500,
                         fontSize: 14, px: 1.8, py: 1,
-                        borderRadius: 1.5,
+                        borderRadius: 0.75,
                         borderBottom: isActive(item.page) ? '2px solid #69e2ff' : '2px solid transparent',
                         background: isActive(item.page) ? 'rgba(255,255,255,.12)' : 'transparent',
                         '&:hover': { background: 'rgba(255,255,255,.14)' },
@@ -72,7 +72,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                       {item.label}
                     </Button>
                     <Menu anchorEl={anchor} open={Boolean(anchor)} onClose={() => setAnchor(null)}
-                      PaperProps={{ sx: { mt: 0.5, minWidth: 210, borderRadius: 2, boxShadow: 3 } }}>
+                      PaperProps={{ sx: { mt: 0.5, minWidth: 210, borderRadius: 1, boxShadow: 3 } }}>
                       <MenuItem dense onClick={() => { onNavigate('products'); setAnchor(null); }}
                         sx={{ fontWeight: 700, fontSize: 13.5 }}>
                         <FontAwesomeIcon icon={faBoxOpen} style={{ marginRight: 10, color: '#1565c0', fontSize: 14 }} />
@@ -91,7 +91,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                   <Button key={item.label} onClick={() => onNavigate(item.page)}
                     sx={{
                       color: '#fff', fontWeight: isActive(item.page) ? 700 : 500,
-                      fontSize: 14, px: 1.8, py: 1, borderRadius: 1.5,
+                      fontSize: 14, px: 1.8, py: 1, borderRadius: 0.75,
                       borderBottom: isActive(item.page) ? '2px solid #69e2ff' : '2px solid transparent',
                       background: isActive(item.page) ? 'rgba(255,255,255,.12)' : 'transparent',
                       '&:hover': { background: 'rgba(255,255,255,.14)' },
@@ -113,7 +113,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
                 {searchOpen ? (
                   <Box sx={{
                     display: 'flex', alignItems: 'center',
-                    background: 'rgba(255,255,255,.18)', borderRadius: 2,
+                    background: 'rgba(255,255,255,.18)', borderRadius: 1,
                     px: 1.5, py: 0.4, width: 180,
                     border: '1px solid rgba(255,255,255,.3)',
                   }}>
@@ -132,7 +132,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
             ) : (
               <Box sx={{
                 display: 'flex', alignItems: 'center', gap: 1,
-                background: 'rgba(255,255,255,.15)', borderRadius: 2,
+                background: 'rgba(255,255,255,.15)', borderRadius: 1,
                 px: 1.5, py: 0.5, width: 230,
                 border: '1px solid rgba(255,255,255,.25)',
                 '&:focus-within': { background: 'rgba(255,255,255,.22)', borderColor: 'rgba(255,255,255,.5)' },
@@ -162,7 +162,7 @@ export default function Navigation({ onNavigate, onSearch, searchTerm, currentPa
 
       {/* Mobile Drawer */}
       <Drawer anchor="left" open={mobileOpen} onClose={() => setMobileOpen(false)}
-        PaperProps={{ sx: { width: 280, borderRadius: '0 16px 16px 0' } }}>
+        PaperProps={{ sx: { width: 280, borderRadius: '0 8px 8px 0' } }}>
         {/* Drawer header */}
         <Box sx={{ background: 'linear-gradient(135deg,#1565c0,#00b0ff)', p: 2, color: '#fff' }}>
           <Stack direction="row" justifyContent="space-between" alignItems="center">
