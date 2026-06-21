@@ -63,7 +63,7 @@ export default function Services() {
             <Box component="img"
               src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=800&q=80"
               alt="Sửa chữa cân điện tử"
-              sx={{ width: '100%', height: { xs: 220, md: 340 }, objectFit: 'cover', borderRadius: 4, boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
+              sx={{ width: '100%', height: { xs: 220, md: 340 }, objectFit: 'cover', borderRadius: 2, boxShadow: '0 16px 48px rgba(15,23,36,.18)' }}
               onError={(e) => { e.target.src = '/banner.png'; }} />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -80,7 +80,7 @@ export default function Services() {
             <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: 'repeat(4,1fr)' }, gap: 1 }}>
               {SCALE_TYPES.map((s) => (
                 <Stack key={s} direction="row" spacing={0.8} alignItems="center"
-                  sx={{ background: T.gradientSoft, borderRadius: 2, px: 1.2, py: 0.8 }}>
+                  sx={{ background: T.gradientSoft, borderRadius: 0.75, px: 1.2, py: 0.8 }}>
                   <FontAwesomeIcon icon={faCheckCircle} style={{ fontSize: 12, color: T.brand, flexShrink: 0 }} />
                   <Typography sx={{ fontSize: { xs: 11.5, md: 12.5 }, fontWeight: 600, color: T.ink }}>{s}</Typography>
                 </Stack>
@@ -92,10 +92,10 @@ export default function Services() {
         {/* Service cards 2x2 */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr' }, gap: { xs: 1.5, md: 2.5 }, mb: { xs: 3, md: 5 } }}>
           {services.map(s => (
-            <Box key={s.id} sx={{ background: T.surface, borderRadius: 3, p: { xs: 2.2, md: 2.8 }, display: 'flex', flexDirection: 'column',
+            <Box key={s.id} sx={{ background: T.surface, borderRadius: 1.5, p: { xs: 2.2, md: 2.8 }, display: 'flex', flexDirection: 'column',
               border: `1px solid ${T.line}`, transition: 'all .25s', '&:hover': { transform: 'translateY(-4px)', boxShadow: `0 16px 40px ${T.brand}14`, borderColor: T.brandLight } }}>
               <Stack direction="row" spacing={1.8} alignItems="center" mb={1.5}>
-                <Box sx={{ width: 54, height: 54, borderRadius: 3, background: T.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center',
+                <Box sx={{ width: 54, height: 54, borderRadius: 1.5, background: T.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center',
                   fontSize: 26, flexShrink: 0, boxShadow: `0 8px 20px ${T.brand}40` }}>{s.icon}</Box>
                 <Typography sx={{ fontWeight: 800, fontSize: { xs: 15, md: 17 }, color: T.ink }}>{s.title}</Typography>
               </Stack>
@@ -127,7 +127,7 @@ export default function Services() {
             {COMMON_ISSUES.map((it, i) => (
               <Stack key={i} direction="row" spacing={1.8} sx={{ background: T.surface, borderRadius: 3, p: { xs: 2, md: 2.4 },
                 border: `1px solid ${T.line}`, transition: 'all .25s', '&:hover': { transform: 'translateY(-3px)', boxShadow: `0 12px 28px ${T.brand}12`, borderColor: T.brandLight } }}>
-                <Box sx={{ width: 46, height: 46, borderRadius: 2.5, background: T.gradientSoft, flexShrink: 0,
+                <Box sx={{ width: 46, height: 46, borderRadius: 1, background: T.gradientSoft, flexShrink: 0,
                   display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   <FontAwesomeIcon icon={it.icon} style={{ fontSize: 19, color: T.brand }} />
                 </Box>
@@ -157,7 +157,7 @@ export default function Services() {
               { src: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=600&q=80', caption: 'Thay thế linh kiện' },
               { src: 'https://www.viasion.com/wp-content/uploads/2024/03/How-to-Test-a-PCB-with-a-Multimeter.jpg', caption: 'Hiệu chỉnh độ chính xác' },
             ].map((g, i) => (
-              <Box key={i} sx={{ borderRadius: 3, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
+              <Box key={i} sx={{ borderRadius: 1.5, overflow: 'hidden', position: 'relative', background: T.bg, '&:hover img': { transform: 'scale(1.06)' } }}>
                 <Box component="img" src={g.src} alt={g.caption} loading="lazy"
                   sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform .4s' }}
                   onError={(e) => { e.target.src = '/banner.png'; }} />
@@ -171,7 +171,7 @@ export default function Services() {
         </Box>
 
         {/* Process */}
-        <Box sx={{ background: T.surface, borderRadius: 3, p: { xs: 2.5, md: 4 }, mb: { xs: 3, md: 5 }, border: `1px solid ${T.line}` }}>
+        <Box sx={{ background: T.surface, borderRadius: 1.5, p: { xs: 2.5, md: 4 }, mb: { xs: 3, md: 5 }, border: `1px solid ${T.line}` }}>
           <Box sx={{ textAlign: 'center', mb: { xs: 3, md: 4 } }}>
             <Typography sx={{ color: T.brand, fontWeight: 700, fontSize: { xs: 11, md: 12 }, letterSpacing: '0.1em', mb: 0.5 }}>
               4 BƯỚC ĐƠN GIẢN
@@ -198,7 +198,7 @@ export default function Services() {
         </Box>
 
         {/* CTA */}
-        <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 4, p: { xs: 3, md: 5 }, textAlign: 'center', background: T.gradient, color: '#fff' }}>
+        <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 2, p: { xs: 3, md: 5 }, textAlign: 'center', background: T.gradient, color: '#fff' }}>
           <Box sx={{ position: 'absolute', top: -50, right: -30, width: 200, height: 200, borderRadius: '50%', background: 'rgba(255,255,255,.1)' }} />
           <Box sx={{ position: 'relative' }}>
             <Typography sx={{ fontWeight: 800, mb: 1, fontSize: { xs: '18px', md: '26px' } }}>Cân của bạn đang gặp sự cố?</Typography>
