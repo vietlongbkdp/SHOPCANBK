@@ -49,7 +49,7 @@ export default function Hero({ onNavigate }) {
                 </Typography>
               </Box>
 
-              <Typography component="h2" sx={{
+              <Typography component="h1" sx={{
                 fontWeight: 900, lineHeight: 1.08, mb: 2,
                 fontSize: { xs: '30px', sm: '42px', md: '54px' },
                 letterSpacing: '-0.02em',
@@ -107,7 +107,7 @@ export default function Hero({ onNavigate }) {
                 background: 'rgba(255,255,255,.05)',
                 p: 1,
               }}>
-                <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa"
+                <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa - Sửa chữa cân tại Huế và Đà Nẵng" width={665} height={380} fetchpriority="high"
                   sx={{ width: '100%', height: 'auto', display: 'block', borderRadius: 3 }} />
               </Box>
             </Box>
