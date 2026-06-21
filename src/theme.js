@@ -41,7 +41,7 @@ const theme = createTheme({
     h6: { fontWeight: 600 },
     button: { fontWeight: 700, textTransform: 'none' },
   },
-  shape: { borderRadius: 12 },
+  shape: { borderRadius: 6 },
   components: {
     MuiContainer: {
       styleOverrides: {
@@ -53,7 +53,7 @@ const theme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
-        root: { textTransform: 'none', fontWeight: 700, borderRadius: 10, boxShadow: 'none', '&:hover': { boxShadow: 'none' } },
+        root: { textTransform: 'none', fontWeight: 700, borderRadius: 4, boxShadow: 'none', '&:hover': { boxShadow: 'none' } },
         containedPrimary: {
           background: T.gradient,
           '&:hover': { background: T.gradientDark },
