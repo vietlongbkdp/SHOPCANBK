@@ -47,14 +47,14 @@ export default function Header({ onNavigate }) {
 
             {/* Logo */}
             <Box onClick={() => onNavigate?.('home')} sx={{ cursor: 'pointer', flexShrink: 0 }}>
-              <Box component="img" src="/logo.jpg" alt="Cân Điện Tử Bách Khoa"
+              <Box component="img" src="/logo.jpg" alt="Logo Cân Điện Tử Bách Khoa" width={72} height={72}
                 sx={{ height: { xs: 48, sm: 58, md: 72 }, width: 'auto', objectFit: 'contain', display: 'block',
                   transition: 'opacity .2s', '&:hover': { opacity: .85 } }} />
             </Box>
 
             {/* Company info */}
             <Box sx={{ flex: 1, minWidth: 0 }}>
-              <Typography component="h1" onClick={() => onNavigate?.('home')}
+              <Typography component="p" aria-label="Cân Điện Tử Bách Khoa - Trang Chủ" onClick={() => onNavigate?.('home')}
                 sx={{
                   fontWeight: 800, cursor: 'pointer', lineHeight: 1.15,
                   fontSize: { xs: '13px', sm: '16px', md: '21px' },
