@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Cân Điện Tử Bách Khoa</title>
+  <script>
+    // GitHub Pages SPA redirect trick
+    // Converts path to hash-compatible URL and redirects
+    var path = window.location.pathname;
+    var search = window.location.search;
+    var hash = window.location.hash;
+    
+    // Redirect to home with path stored in sessionStorage
+    sessionStorage.setItem('spaRedirect', path + search + hash);
+    window.location.replace('/');
+  </script>
+  <meta name="robots" content="noindex">
+</head>
+<body>
+  <p>Đang chuyển hướng... / Redirecting...</p>
+</body>
+</html>
