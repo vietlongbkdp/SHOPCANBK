@@ -105,7 +105,7 @@ export default function Hero({ onNavigate }) {
                 border: '1px solid rgba(255,255,255,.16)',
                 boxShadow: '0 24px 64px rgba(0,0,0,.4)',
                 background: 'rgba(255,255,255,.05)',
-                p: 1,
+                p: 1, minHeight: { xs: 200, md: 380 },
               }}>
                 <Box component="img" src="/banner.png" alt="Cân Điện Tử Bách Khoa - Sửa chữa cân tại Huế và Đà Nẵng" width={665} height={380} fetchpriority="high"
                   sx={{ width: '100%', height: 'auto', display: 'block', borderRadius: 3 }} />
