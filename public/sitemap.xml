@@ -1,125 +1,175 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
 
+  <!-- ═══ Core Pages ═══ -->
   <url>
     <loc>https://candientubk.com/</loc>
-    <lastmod>2026-06-21</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="vi" href="https://candientubk.com/"/>
     <image:image>
-      <image:loc>https://candientubk.com/thumbnail.jpg</image:loc>
+      <image:loc>https://candientubk.com/banner.png</image:loc>
       <image:title>Cân Điện Tử Bách Khoa – Sửa Chữa &amp; Mua Bán Cân Tại Huế &amp; Đà Nẵng</image:title>
     </image:image>
   </url>
 
-  <url>
-    <loc>https://candientubk.com/#gioi-thieu</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
+  <!-- ═══ Product Categories ═══ -->
   <url>
     <loc>https://candientubk.com/#san-pham</loc>
-    <lastmod>2026-06-21</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
-
   <url>
     <loc>https://candientubk.com/#can-tinh-tien</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://candientubk.com/#can-ban</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://candientubk.com/#can-ghe</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <url>
-    <loc>https://candientubk.com/#can-ky-thuat</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
+  <url>
+    <loc>https://candientubk.com/#can-ban</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#can-ghe</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#can-san</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#can-treo</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://candientubk.com/#dich-vu</loc>
-    <lastmod>2026-06-21</lastmod>
+    <lastmod>2026-06-22</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#lien-he</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ═══ Blog Listing ═══ -->
+  <url>
+    <loc>https://candientubk.com/tin-tuc</loc>
+    <lastmod>2026-06-22</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- ═══ Blog Articles ═══ -->
   <url>
-    <loc>https://candientubk.com/#sua-chua</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.88</priority>
-  </url>
-
-  <url>
-    <loc>https://candientubk.com/#lien-he</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-
-  <!-- Blog articles -->
-  <url>
-    <loc>https://candientubk.com/#blog</loc>
-    <lastmod>2026-06-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://candientubk.com/#blog/can-dien-tu-ban-hang-loai-nao-tot-hue-da-nang</loc>
+    <loc>https://candientubk.com/bai-viet/can-dien-tu-ban-hang-loai-nao-tot-hue-da-nang</loc>
     <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1612012060851-20f943c02d3d?w=800&amp;h=400&amp;fit=crop</image:loc>
+      <image:title>Cân điện tử bán hàng tại Huế Đà Nẵng</image:title>
+    </image:image>
+    <news:news>
+      <news:publication>
+        <news:name>Cân Điện Tử Bách Khoa</news:name>
+        <news:language>vi</news:language>
+      </news:publication>
+      <news:publication_date>2026-06-15</news:publication_date>
+      <news:title>Cân Điện Tử Bán Hàng Loại Nào Tốt? Top 5 Dòng Cân Phổ Biến Tại Huế &amp; Đà Nẵng</news:title>
+    </news:news>
   </url>
+
   <url>
-    <loc>https://candientubk.com/#blog/sua-chua-can-dien-tu-tai-hue</loc>
+    <loc>https://candientubk.com/bai-viet/sua-chua-can-dien-tu-tai-hue</loc>
     <lastmod>2026-06-10</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1563770660941-20978e870e26?w=800&amp;h=400&amp;fit=crop</image:loc>
+      <image:title>Sửa chữa cân điện tử tại Huế</image:title>
+    </image:image>
+    <news:news>
+      <news:publication>
+        <news:name>Cân Điện Tử Bách Khoa</news:name>
+        <news:language>vi</news:language>
+      </news:publication>
+      <news:publication_date>2026-06-10</news:publication_date>
+      <news:title>Sửa Chữa Cân Điện Tử Tại Huế – Nhanh, Uy Tín, Giá Rẻ</news:title>
+    </news:news>
   </url>
+
   <url>
-    <loc>https://candientubk.com/#blog/kiem-dinh-can-dien-tu-can-biet-gi</loc>
+    <loc>https://candientubk.com/bai-viet/kiem-dinh-can-dien-tu-can-biet-gi</loc>
     <lastmod>2026-06-05</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Cân Điện Tử Bách Khoa</news:name>
+        <news:language>vi</news:language>
+      </news:publication>
+      <news:publication_date>2026-06-05</news:publication_date>
+      <news:title>Kiểm Định Cân Điện Tử – Những Điều Doanh Nghiệp Cần Biết Để Tránh Phạt</news:title>
+    </news:news>
   </url>
+
   <url>
-    <loc>https://candientubk.com/#blog/can-tinh-tien-cho-cho-cua-hang-tap-hoa</loc>
+    <loc>https://candientubk.com/bai-viet/can-tinh-tien-cho-cho-cua-hang-tap-hoa</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Cân Điện Tử Bách Khoa</news:name>
+        <news:language>vi</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-28</news:publication_date>
+      <news:title>Cân Tính Tiền Cho Chợ &amp; Cửa Hàng Tạp Hóa – Hướng Dẫn Chọn Mua Đúng Nhu Cầu</news:title>
+    </news:news>
   </url>
+
   <url>
-    <loc>https://candientubk.com/#blog/can-san-cong-nghiep-la-gi-ung-dung</loc>
+    <loc>https://candientubk.com/bai-viet/can-san-cong-nghiep-la-gi-ung-dung</loc>
     <lastmod>2026-05-20</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Cân Điện Tử Bách Khoa</news:name>
+        <news:language>vi</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-20</news:publication_date>
+      <news:title>Cân Sàn Công Nghiệp Là Gì? Ứng Dụng Thực Tế Trong Sản Xuất &amp; Logistics</news:title>
+    </news:news>
   </url>
+
   <url>
-    <loc>https://candientubk.com/#blog/mua-can-dien-tu-o-da-nang-o-dau</loc>
+    <loc>https://candientubk.com/bai-viet/mua-can-dien-tu-o-da-nang-o-dau</loc>
     <lastmod>2026-05-15</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>Cân Điện Tử Bách Khoa</news:name>
+        <news:language>vi</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-15</news:publication_date>
+      <news:title>Mua Cân Điện Tử Ở Đà Nẵng Ở Đâu? Địa Chỉ Uy Tín Nhất 2026</news:title>
+    </news:news>
   </url>
+
 </urlset>
