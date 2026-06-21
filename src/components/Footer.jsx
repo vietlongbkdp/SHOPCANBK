@@ -16,7 +16,7 @@ export default function Footer() {
 
           {/* Brand */}
           <Grid item xs={12} md={4}>
-            <Box component="img" src="/logo.jpg" alt="Logo" sx={{ height: 72, width: 'auto', mb: 2, filter: 'brightness(1.1)' }} />
+            <Box component="img" src="/logo.jpg" alt="Logo Cân Điện Tử Bách Khoa" width={72} height={72} sx={{ height: 72, width: 'auto', mb: 2, filter: 'brightness(1.1)' }} />
             <Typography sx={{ fontWeight: 800, fontSize: 15, color: '#fff', mb: 0.4 }}>
               CÂN ĐIỆN TỬ BÁCH KHOA
             </Typography>
@@ -28,9 +28,9 @@ export default function Footer() {
             </Typography>
             <Stack direction="row" spacing={1}>
               {[
-                { icon: faFacebook, href: company.facebook, bg: '#1877f2', label: 'Facebook' },
-                { icon: faYoutube, href: '#', bg: '#ff0000', label: 'YouTube' },
-                { icon: faTiktok, href: '#', bg: '#000', label: 'TikTok' },
+                { icon: faFacebook, href: company.facebook, bg: '#1877f2', label: 'Cân Điện Tử Bách Khoa trên Facebook' },
+                { icon: faYoutube, href: '#', bg: '#ff0000', label: 'Cân Điện Tử Bách Khoa trên YouTube' },
+                { icon: faTiktok, href: '#', bg: '#010101', label: 'Cân Điện Tử Bách Khoa trên TikTok' },
               ].map(s => (
                 <Link key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
                   <Box sx={{
