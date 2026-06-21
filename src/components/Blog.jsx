@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Container, Grid, Typography, Card, CardContent, CardActionArea, Chip, Stack, Button, Divider } from '@mui/material';
 import { faNewspaper, faCalendar, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import blogData from '../data/blogData';
+
+const SITE_URL = 'https://candientubk.com';
+const SITE_NAME = 'Cân Điện Tử Bách Khoa';
 
 const CATEGORIES = [
   { value: 'all', label: 'Tất Cả' },
@@ -24,6 +27,74 @@ export default function Blog({ onNavigate, onReadPost }) {
     ? blogData
     : blogData.filter(p => p.category === activeCategory);
 
+  // ─── SEO for blog listing page ─────────────────────────────
+  useEffect(() => {
+    const pageTitle = 'Blog Cân Điện Tử – Tin Tức & Kiến Thức | ' + SITE_NAME;
+    const desc = 'Blog chia sẻ kiến thức, kinh nghiệm về cân điện tử: sửa cân, kiểm định, mua cân, tư vấn lựa chọn cân phù hợp cho doanh nghiệp tại Huế và Đà Nẵng.';
+    
+    document.title = pageTitle;
+
+    const setMeta = (sel, val) => {
+      if (!val) return;
+      let el = document.querySelector(sel);
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(sel.includes('property=') ? 'property' : 'name', sel.match(/["']([^"']+)["']/)?.[1] || '');
+        document.head.appendChild(el);
+      }
+      el.setAttribute('content', val);
+    };
+
+    setMeta('meta[name="description"]', desc);
+    setMeta('meta[property="og:title"]', pageTitle);
+    setMeta('meta[property="og:description"]', desc);
+    setMeta('meta[property="og:type"]', 'website');
+    setMeta('meta[property="og:url"]', SITE_URL + '/tin-tuc');
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) { canonical = document.createElement('link'); canonical.rel = 'canonical'; document.head.appendChild(canonical); }
+    canonical.href = SITE_URL + '/tin-tuc';
+
+    // CollectionPage + ItemList schema
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'CollectionPage',
+      'name': 'Blog – Tin Tức & Kiến Thức Cân Điện Tử',
+      'description': desc,
+      'url': SITE_URL + '/tin-tuc',
+      'publisher': { '@type': 'Organization', 'name': SITE_NAME, 'url': SITE_URL },
+      'mainEntity': {
+        '@type': 'ItemList',
+        'itemListElement': blogData.map((post, i) => ({
+          '@type': 'ListItem',
+          'position': i + 1,
+          'url': SITE_URL + '/bai-viet/' + post.slug,
+          'name': post.title
+        }))
+      }
+    };
+
+    const old = document.getElementById('blog-list-schema');
+    if (old) old.remove();
+    const s = document.createElement('script');
+    s.type = 'application/ld+json';
+    s.id = 'blog-list-schema';
+    s.textContent = JSON.stringify(schema);
+    document.head.appendChild(s);
+
+    if (window.history && window.history.pushState) {
+      window.history.pushState({}, pageTitle, '/tin-tuc');
+    }
+
+    return () => {
+      document.title = SITE_NAME + ' – Sửa Chữa & Mua Bán Cân Tại Huế & Đà Nẵng';
+      const el = document.getElementById('blog-list-schema');
+      if (el) el.remove();
+      if (canonical) canonical.href = SITE_URL + '/';
+      if (window.history && window.history.pushState) window.history.pushState({}, SITE_NAME, '/');
+    };
+  }, []);
+
   return (
     <Box sx={{ minHeight: '100vh', background: '#f0f4ff', py: 6 }}>
       <Container maxWidth="lg">
@@ -33,7 +104,7 @@ export default function Blog({ onNavigate, onReadPost }) {
             <FontAwesomeIcon icon={faNewspaper} />
             <Typography variant="subtitle1" fontWeight={700} sx={{ letterSpacing: 1 }}>TIN TỨC & KIẾN THỨC</Typography>
           </Box>
-          <Typography variant="h4" fontWeight={800} color="#0d47a1" sx={{ mb: 1 }}>
+          <Typography component="h1" variant="h4" fontWeight={800} color="#0d47a1" sx={{ mb: 1 }}>
             Blog Cân Điện Tử Bách Khoa
           </Typography>
           <Typography color="text.secondary" sx={{ maxWidth: 580, mx: 'auto' }}>
@@ -44,20 +115,8 @@ export default function Blog({ onNavigate, onReadPost }) {
         {/* Category Filter */}
         <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap justifyContent="center" sx={{ mb: 4 }}>
           {CATEGORIES.map(cat => (
-            <Chip
-              key={cat.value}
-              label={cat.label}
-              onClick={() => setActiveCategory(cat.value)}
-              sx={{
-                fontWeight: activeCategory === cat.value ? 700 : 500,
-                background: activeCategory === cat.value ? 'linear-gradient(135deg, #0d47a1, #00b0ff)' : '#fff',
-                color: activeCategory === cat.value ? '#fff' : '#555',
-                border: '1.5px solid',
-                borderColor: activeCategory === cat.value ? '#0d47a1' : '#ddd',
-                borderRadius: 1,
-                cursor: 'pointer',
-                '&:hover': { borderColor: '#0d47a1', color: '#0d47a1' }
-              }}
+            <Chip key={cat.value} label={cat.label} onClick={() => setActiveCategory(cat.value)}
+              sx={{ fontWeight: activeCategory === cat.value ? 700 : 500, background: activeCategory === cat.value ? 'linear-gradient(135deg, #0d47a1, #00b0ff)' : '#fff', color: activeCategory === cat.value ? '#fff' : '#555', border: '1.5px solid', borderColor: activeCategory === cat.value ? '#0d47a1' : '#ddd', borderRadius: 1, cursor: 'pointer', '&:hover': { borderColor: '#0d47a1', color: '#0d47a1' } }}
             />
           ))}
         </Stack>
@@ -66,50 +125,34 @@ export default function Blog({ onNavigate, onReadPost }) {
         <Grid container spacing={3}>
           {filtered.map((post) => (
             <Grid item xs={12} sm={6} md={4} key={post.id}>
-              <Card
-                elevation={0}
-                sx={{
-                  height: '100%',
-                  border: '1.5px solid #dce8ff',
-                  borderRadius: 1.5,
-                  overflow: 'hidden',
-                  transition: 'all 0.25s ease',
-                  '&:hover': { borderColor: '#0d47a1', boxShadow: '0 6px 24px rgba(13,71,161,0.12)', transform: 'translateY(-3px)' }
-                }}
-              >
+              <Card elevation={0} sx={{ height: '100%', border: '1.5px solid #dce8ff', borderRadius: 1.5, overflow: 'hidden', transition: 'all 0.25s ease', '&:hover': { borderColor: '#0d47a1', boxShadow: '0 6px 24px rgba(13,71,161,0.12)', transform: 'translateY(-3px)' } }}>
                 <CardActionArea onClick={() => onReadPost && onReadPost(post.id)} sx={{ height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'stretch' }}>
-                  {/* Image */}
                   <Box sx={{ position: 'relative', height: 200, overflow: 'hidden', background: 'linear-gradient(135deg, #e3f2fd, #bbdefb)' }}>
-                    <Box
-                      component="img"
-                      src={post.image}
-                      alt={post.imageAlt || post.title}
+                    <Box component="img" src={post.image} alt={post.imageAlt || post.title}
                       sx={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', transition: 'transform 0.35s ease', '&:hover': { transform: 'scale(1.04)' } }}
-                      onError={(e) => { e.target.style.display = 'none'; }}
-                    />
-                    <Chip
-                      label={post.categoryLabel}
-                      size="small"
-                      sx={{ position: 'absolute', top: 12, left: 12, background: 'linear-gradient(135deg, #0d47a1, #1565c0)', color: '#fff', fontWeight: 700, borderRadius: 0.75, fontSize: '0.7rem', backdropFilter: 'blur(4px)' }}
-                    />
+                      onError={(e) => { e.target.style.display = 'none'; }} />
+                    <Chip label={post.categoryLabel} size="small"
+                      sx={{ position: 'absolute', top: 12, left: 12, background: 'linear-gradient(135deg, #0d47a1, #1565c0)', color: '#fff', fontWeight: 700, borderRadius: 0.75, fontSize: '0.7rem' }} />
                   </Box>
                   <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1.5, p: 2.5 }}>
-                    <Typography variant="h6" fontWeight={700} color="#0d47a1" sx={{ fontSize: '1rem', lineHeight: 1.45, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                    <Typography component="h2" variant="h6" fontWeight={700} color="#0d47a1"
+                      sx={{ fontSize: '1rem', lineHeight: 1.45, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                       {post.title}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary" sx={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.6 }}>
+                    <Typography variant="body2" color="text.secondary"
+                      sx={{ display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden', lineHeight: 1.6 }}>
                       {post.summary}
                     </Typography>
                     <Box sx={{ mt: 'auto' }}>
                       <Divider sx={{ mb: 1.5 }} />
                       <Stack direction="row" alignItems="center" justifyContent="space-between">
-                        <Stack direction="row" alignItems="center" spacing={0.75} sx={{ color: '#999', fontSize: '0.78rem' }}>
-                          <FontAwesomeIcon icon={faCalendar} size="sm" />
+                        <Stack direction="row" alignItems="center" spacing={0.75}>
+                          <FontAwesomeIcon icon={faCalendar} size="sm" color="#999" />
                           <Typography variant="caption" color="text.secondary">{formatDate(post.date)}</Typography>
                         </Stack>
-                        <Stack direction="row" alignItems="center" spacing={0.5} sx={{ color: '#0d47a1', fontWeight: 700, fontSize: '0.82rem' }}>
+                        <Stack direction="row" alignItems="center" spacing={0.5}>
                           <Typography variant="caption" fontWeight={700} color="#0d47a1">Đọc tiếp</Typography>
-                          <FontAwesomeIcon icon={faArrowRight} size="sm" />
+                          <FontAwesomeIcon icon={faArrowRight} size="sm" color="#0d47a1" />
                         </Stack>
                       </Stack>
                     </Box>
@@ -120,13 +163,9 @@ export default function Blog({ onNavigate, onReadPost }) {
           ))}
         </Grid>
 
-        {/* Back to home */}
         <Box sx={{ textAlign: 'center', mt: 6 }}>
-          <Button
-            variant="outlined"
-            onClick={() => onNavigate && onNavigate('home')}
-            sx={{ borderColor: '#0d47a1', color: '#0d47a1', borderRadius: 1, px: 4, '&:hover': { background: '#0d47a1', color: '#fff' } }}
-          >
+          <Button variant="outlined" onClick={() => onNavigate && onNavigate('home')}
+            sx={{ borderColor: '#0d47a1', color: '#0d47a1', borderRadius: 1, px: 4, '&:hover': { background: '#0d47a1', color: '#fff' } }}>
             ← Về Trang Chủ
           </Button>
         </Box>
