@@ -227,10 +227,10 @@ export default function Home({ onProductClick, onNavigate }) {
         </Box>
   
       {/* === BLOG PREVIEW SECTION === */}
-      <Box sx={{ py: 7, background: '#fff' }}>
+      <Box sx={{ py: 7, background: '#f0f4ff' }}>
         <Container maxWidth="lg">
           <Box sx={{ textAlign: 'center', mb: 5 }}>
-            <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, background: 'linear-gradient(135deg, #e53935 0%, #c62828 100%)', color: '#fff', px: 3, py: 1, borderRadius: 1, mb: 2 }}>
+            <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, background: 'linear-gradient(135deg, #0d47a1 0%, #00b0ff 100%)', color: '#fff', px: 3, py: 1, borderRadius: 1, mb: 2 }}>
               <FontAwesomeIcon icon={faNewspaper} size="sm" />
               <Typography variant="subtitle1" fontWeight={700} sx={{ letterSpacing: 1 }}>TIN TỨC & KIẾN THỨC</Typography>
             </Box>
@@ -246,22 +246,26 @@ export default function Home({ onProductClick, onNavigate }) {
               <Box
                 key={post.id}
                 onClick={() => onNavigate && onNavigate('blog')}
-                sx={{ flex: '1 1 280px', maxWidth: 340, border: '1.5px solid #eee', borderRadius: 1.5, overflow: 'hidden', cursor: 'pointer', transition: '0.25s', '&:hover': { borderColor: '#e53935', boxShadow: '0 4px 20px rgba(229,57,53,0.1)', transform: 'translateY(-2px)' } }}
+                sx={{ flex: '1 1 280px', maxWidth: 340, border: '1.5px solid #eee', borderRadius: 1.5, overflow: 'hidden', cursor: 'pointer', transition: '0.25s', '&:hover': { borderColor: '#0d47a1', boxShadow: '0 4px 20px rgba(13,71,161,0.1)', transform: 'translateY(-2px)' } }}
               >
-                <Box sx={{ background: 'linear-gradient(135deg, #ffeaea, #fff5f5)', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  <Box sx={{ width: 50, height: 50, background: 'linear-gradient(135deg, #e53935, #c62828)', borderRadius: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <FontAwesomeIcon icon={faNewspaper} color="#fff" />
-                  </Box>
+                <Box sx={{ height: 130, overflow: 'hidden', background: 'linear-gradient(135deg, #e3f2fd, #bbdefb)', position: 'relative' }}>
+                  <Box
+                    component="img"
+                    src={post.image}
+                    alt={post.imageAlt || post.title}
+                    sx={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s ease' }}
+                    onError={(e) => { e.target.style.display='none'; }}
+                  />
                 </Box>
                 <Box sx={{ p: 2.5 }}>
-                  <Box sx={{ background: '#e53935', color: '#fff', display: 'inline-block', px: 1.5, py: 0.3, borderRadius: 0.75, fontSize: '0.7rem', fontWeight: 700, mb: 1.5 }}>
+                  <Box sx={{ background: 'linear-gradient(135deg, #0d47a1, #1565c0)', color: '#fff', display: 'inline-block', px: 1.5, py: 0.3, borderRadius: 0.75, fontSize: '0.7rem', fontWeight: 700, mb: 1.5 }}>
                     {post.categoryLabel}
                   </Box>
                   <Typography variant="body2" fontWeight={700} color="#1a1a2e" sx={{ lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', mb: 1 }}>
                     {post.title}
                   </Typography>
                   <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-                    <FontAwesomeIcon icon={faAngleRight} size="sm" color="#e53935" />
+                    <FontAwesomeIcon icon={faAngleRight} size="sm" color="#0d47a1" />
                     Đọc tiếp
                   </Typography>
                 </Box>
@@ -272,7 +276,7 @@ export default function Home({ onProductClick, onNavigate }) {
             <Button
               variant="outlined"
               onClick={() => onNavigate && onNavigate('blog')}
-              sx={{ borderColor: '#e53935', color: '#e53935', borderRadius: 1, px: 4, fontWeight: 700, '&:hover': { background: '#e53935', color: '#fff' } }}
+              sx={{ borderColor: '#0d47a1', color: '#0d47a1', borderRadius: 1, px: 4, fontWeight: 700, '&:hover': { background: '#0d47a1', color: '#fff' } }}
             >
               Xem Tất Cả Bài Viết →
             </Button>
