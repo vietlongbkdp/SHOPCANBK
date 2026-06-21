@@ -19,6 +19,8 @@ import Introduction from './components/Introduction';
 import Services from './components/Services';
 import Products from './components/Products';
 import Documents from './components/Documents';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
 import FloatingContactWidget from './components/FloatingContactWidget';
 import CartDrawer from './components/cart/CartDrawer';
 import AdminLogin from './components/admin/AdminLogin';
@@ -32,6 +34,7 @@ const isAdminPath = () =>
 
 function AppContent() {
   const [currentPage, setCurrentPage]     = useState('home');
+  const [selectedBlogPost, setSelectedBlogPost] = useState(null);
   const [selectedProduct, setSelected]    = useState(null);
   const [searchTerm, setSearchTerm]       = useState('');
   const [cartOpen, setCartOpen]           = useState(false);
@@ -65,6 +68,8 @@ function AppContent() {
       case 'services':     return <Services />;
       case 'products':     return <Products onProductClick={setSelected} />;
       case 'documents':    return <Documents />;
+      case 'blog':         return <Blog onNavigate={handleNavigate} onReadPost={(id) => { setSelectedBlogPost(id); setCurrentPage('blogpost'); }} />;
+      case 'blogpost':     return <BlogPost postId={selectedBlogPost} onNavigate={handleNavigate} onBackToBlog={(id) => { if(id) { setSelectedBlogPost(id); setCurrentPage('blogpost'); } else { setCurrentPage('blog'); } }} />;
       case 'contact':      return <Contact />;
       default:
         return (
