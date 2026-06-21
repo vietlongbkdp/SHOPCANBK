@@ -1,7 +1,7 @@
 /* Product Card Styles */
 .product-card {
   background-color: var(--bg-white);
-  border-radius: 8px;
+  border-radius: 2px;
   overflow: hidden;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
@@ -45,7 +45,7 @@
   background-color: var(--primary);
   color: white;
   padding: 6px 12px;
-  border-radius: 20px;
+  border-radius: 3px;
   font-weight: bold;
   font-size: 14px;
 }
@@ -122,7 +122,7 @@
   flex: 1;
   padding: 8px 10px;
   border: none;
-  border-radius: 4px;
+  border-radius: 2px;
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
@@ -151,7 +151,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .product-card {
-    border-radius: 6px;
+    border-radius: 3px;
   }
 
   .product-image-container {
