@@ -1,10 +1,11 @@
 import { Box, Container, Typography, Button, Stack, Divider } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faAngleRight, faScrewdriverWrench, faShieldHalved, faTruck,
+  faAngleRight, faNewspaper, faScrewdriverWrench, faShieldHalved, faTruck,
   faHeadset, faStar, faFire, faPhone, faMedal,
 } from '@fortawesome/free-solid-svg-icons';
 import ProductCard from './ProductCard';
+import blogData from '../data/blogData';
 import { useAdmin } from '../context/AdminContext';
 import { T } from '../theme';
 
@@ -224,7 +225,61 @@ export default function Home({ onProductClick, onNavigate }) {
             </Box>
           </Box>
         </Box>
-      </Container>
+  
+      {/* === BLOG PREVIEW SECTION === */}
+      <Box sx={{ py: 7, background: '#fff' }}>
+        <Container maxWidth="lg">
+          <Box sx={{ textAlign: 'center', mb: 5 }}>
+            <Box sx={{ display: 'inline-flex', alignItems: 'center', gap: 1.5, background: 'linear-gradient(135deg, #e53935 0%, #c62828 100%)', color: '#fff', px: 3, py: 1, borderRadius: 1, mb: 2 }}>
+              <FontAwesomeIcon icon={faNewspaper} size="sm" />
+              <Typography variant="subtitle1" fontWeight={700} sx={{ letterSpacing: 1 }}>TIN TỨC & KIẾN THỨC</Typography>
+            </Box>
+            <Typography variant="h5" fontWeight={800} color="#1a1a2e" sx={{ mb: 1 }}>
+              Bài Viết Mới Nhất
+            </Typography>
+            <Typography color="text.secondary">
+              Kiến thức hữu ích về cân điện tử cho doanh nghiệp tại Huế &amp; Đà Nẵng
+            </Typography>
+          </Box>
+          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.5} flexWrap="wrap" useFlexGap justifyContent="center">
+            {blogData.slice(0, 3).map(post => (
+              <Box
+                key={post.id}
+                onClick={() => onNavigate && onNavigate('blog')}
+                sx={{ flex: '1 1 280px', maxWidth: 340, border: '1.5px solid #eee', borderRadius: 1.5, overflow: 'hidden', cursor: 'pointer', transition: '0.25s', '&:hover': { borderColor: '#e53935', boxShadow: '0 4px 20px rgba(229,57,53,0.1)', transform: 'translateY(-2px)' } }}
+              >
+                <Box sx={{ background: 'linear-gradient(135deg, #ffeaea, #fff5f5)', height: 120, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Box sx={{ width: 50, height: 50, background: 'linear-gradient(135deg, #e53935, #c62828)', borderRadius: 1.5, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <FontAwesomeIcon icon={faNewspaper} color="#fff" />
+                  </Box>
+                </Box>
+                <Box sx={{ p: 2.5 }}>
+                  <Box sx={{ background: '#e53935', color: '#fff', display: 'inline-block', px: 1.5, py: 0.3, borderRadius: 0.75, fontSize: '0.7rem', fontWeight: 700, mb: 1.5 }}>
+                    {post.categoryLabel}
+                  </Box>
+                  <Typography variant="body2" fontWeight={700} color="#1a1a2e" sx={{ lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', mb: 1 }}>
+                    {post.title}
+                  </Typography>
+                  <Typography variant="caption" color="text.secondary" sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
+                    <FontAwesomeIcon icon={faAngleRight} size="sm" color="#e53935" />
+                    Đọc tiếp
+                  </Typography>
+                </Box>
+              </Box>
+            ))}
+          </Stack>
+          <Box sx={{ textAlign: 'center', mt: 4 }}>
+            <Button
+              variant="outlined"
+              onClick={() => onNavigate && onNavigate('blog')}
+              sx={{ borderColor: '#e53935', color: '#e53935', borderRadius: 1, px: 4, fontWeight: 700, '&:hover': { background: '#e53935', color: '#fff' } }}
+            >
+              Xem Tất Cả Bài Viết →
+            </Button>
+          </Box>
+        </Container>
+      </Box>
+    </Container>
     </Box>
   );
 }
