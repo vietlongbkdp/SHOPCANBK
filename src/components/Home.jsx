@@ -101,7 +101,7 @@ export default function Home({ onProductClick, onNavigate }) {
 
             {/* Repair CTA band */}
             <Box sx={{
-              position: 'relative', overflow: 'hidden', borderRadius: 4, mb: { xs: 4, md: 6 },
+              position: 'relative', overflow: 'hidden', borderRadius: 2, mb: { xs: 4, md: 6 },
               background: T.gradient, p: { xs: 2.5, md: 4 },
             }}>
               <Box sx={{ position: 'absolute', top: -40, right: -20, width: 180, height: 180, borderRadius: '50%', background: 'rgba(255,255,255,.1)' }} />
@@ -138,9 +138,9 @@ export default function Home({ onProductClick, onNavigate }) {
               <SectionHead eyebrow="CAM KẾT CỦA CHÚNG TÔI" title="Tại Sao Chọn Bách Khoa?" />
               <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', sm: '1fr 1fr', lg: 'repeat(4,1fr)' }, gap: 1.5 }}>
                 {WHY_US.map((w, i) => (
-                  <Box key={i} sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}`,
+                  <Box key={i} sx={{ background: T.surface, borderRadius: 1.5, p: 2.2, border: `1px solid ${T.line}`,
                     transition: 'all .25s', '&:hover': { transform: 'translateY(-4px)', boxShadow: `0 12px 28px ${T.brand}14`, borderColor: T.brandLight } }}>
-                    <Box sx={{ width: 48, height: 48, borderRadius: 2.5, background: T.gradient, mb: 1.5,
+                    <Box sx={{ width: 48, height: 48, borderRadius: 1, background: T.gradient, mb: 1.5,
                       display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: `0 6px 16px ${T.brand}40` }}>
                       <FontAwesomeIcon icon={w.icon} style={{ fontSize: 19, color: '#fff' }} />
                     </Box>
@@ -156,9 +156,9 @@ export default function Home({ onProductClick, onNavigate }) {
           <Box sx={{ mt: { xs: 4, lg: 0 }, minWidth: 0 }}>
             <Box sx={{ position: { lg: 'sticky' }, top: 76, display: 'flex', flexDirection: 'column', gap: 2 }}>
               {/* Top sellers */}
-              <Box sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}` }}>
+              <Box sx={{ background: T.surface, borderRadius: 1.5, p: 2.2, border: `1px solid ${T.line}` }}>
                 <Stack direction="row" spacing={1} alignItems="center" mb={2}>
-                  <Box sx={{ width: 30, height: 30, borderRadius: 2, background: T.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Box sx={{ width: 30, height: 30, borderRadius: 1, background: T.gradient, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <FontAwesomeIcon icon={faFire} style={{ fontSize: 14, color: '#fff' }} />
                   </Box>
                   <Typography sx={{ fontWeight: 800, fontSize: 14 }}>Bán Chạy Nhất</Typography>
@@ -170,7 +170,7 @@ export default function Home({ onProductClick, onNavigate }) {
                       <Typography sx={{ fontWeight: 900, fontSize: 18, width: 22, textAlign: 'center', flexShrink: 0,
                         color: i < 3 ? T.brand : '#d4cbc4' }}>{i + 1}</Typography>
                       <Box component="img" src={p.image} alt={p.name} loading="lazy"
-                        sx={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 2, flexShrink: 0, border: `1px solid ${T.line}` }}
+                        sx={{ width: 48, height: 48, objectFit: 'cover', borderRadius: 1, flexShrink: 0, border: `1px solid ${T.line}` }}
                         onError={(e) => { e.target.style.display = 'none'; }} />
                       <Box sx={{ flex: 1, minWidth: 0 }}>
                         <Typography className="pt" sx={{ fontSize: 12, fontWeight: 600, color: T.ink, lineHeight: 1.35, transition: 'color .2s',
@@ -185,7 +185,7 @@ export default function Home({ onProductClick, onNavigate }) {
               </Box>
 
               {/* CTA */}
-              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 3, p: 2.5, background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff' }}>
+              <Box sx={{ position: 'relative', overflow: 'hidden', borderRadius: 1.5, p: 2.5, background: `linear-gradient(135deg,${T.ink},#102a52)`, color: '#fff' }}>
                 <Box sx={{ position: 'absolute', top: -30, right: -30, width: 100, height: 100, borderRadius: '50%', background: `radial-gradient(circle,${T.accent}44,transparent 70%)` }} />
                 <Stack direction="row" spacing={1.2} alignItems="center" mb={1}>
                   <FontAwesomeIcon icon={faScrewdriverWrench} style={{ fontSize: 20, color: T.accentLight }} />
@@ -208,7 +208,7 @@ export default function Home({ onProductClick, onNavigate }) {
               </Box>
 
               {/* Services */}
-              <Box sx={{ background: T.surface, borderRadius: 3, p: 2.2, border: `1px solid ${T.line}` }}>
+              <Box sx={{ background: T.surface, borderRadius: 1.5, p: 2.2, border: `1px solid ${T.line}` }}>
                 <Typography sx={{ fontWeight: 800, fontSize: 14, mb: 1.5 }}>Dịch Vụ</Typography>
                 <Stack spacing={0.5}>
                   {services.map(sv => (
