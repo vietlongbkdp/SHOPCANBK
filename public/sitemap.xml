@@ -78,4 +78,48 @@
     <priority>0.8</priority>
   </url>
 
+
+  <!-- Blog articles -->
+  <url>
+    <loc>https://candientubk.com/#blog</loc>
+    <lastmod>2026-06-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#blog/can-dien-tu-ban-hang-loai-nao-tot-hue-da-nang</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#blog/sua-chua-can-dien-tu-tai-hue</loc>
+    <lastmod>2026-06-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#blog/kiem-dinh-can-dien-tu-can-biet-gi</loc>
+    <lastmod>2026-06-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#blog/can-tinh-tien-cho-cho-cua-hang-tap-hoa</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#blog/can-san-cong-nghiep-la-gi-ung-dung</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://candientubk.com/#blog/mua-can-dien-tu-o-da-nang-o-dau</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
