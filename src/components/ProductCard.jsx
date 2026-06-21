@@ -18,7 +18,7 @@ export default function ProductCard({ product, onClick }) {
     <>
       <Box component="article" onClick={() => onClick?.(product)} className="card"
         sx={{
-          background: T.surface, borderRadius: 3, overflow: 'hidden',
+          background: T.surface, borderRadius: 1.5, overflow: 'hidden',
           border: `1px solid ${T.line}`, cursor: 'pointer',
           display: 'flex', flexDirection: 'column', height: '100%',
           transition: 'all .25s cubic-bezier(.16,1,.3,1)',
@@ -32,13 +32,13 @@ export default function ProductCard({ product, onClick }) {
             onError={(e) => { e.target.src = 'https://placehold.co/300/faf7f5/d32f2f?text=Cân+Điện+Tử'; }} />
           {discount > 0 && (
             <Box sx={{ position: 'absolute', top: 10, left: 10, background: T.gradient, color: '#fff',
-              borderRadius: 2, px: 1, py: 0.4, boxShadow: `0 4px 12px ${T.brand}55` }}>
+              borderRadius: 0.75, px: 1, py: 0.4, boxShadow: `0 4px 12px ${T.brand}55` }}>
               <Typography sx={{ fontSize: 11, fontWeight: 800, lineHeight: 1 }}>-{discount}%</Typography>
             </Box>
           )}
           {product.badge && (
             <Box sx={{ position: 'absolute', top: 10, right: 10, background: 'rgba(26,20,16,.82)', backdropFilter: 'blur(6px)',
-              color: '#fff', borderRadius: 2, px: 1, py: 0.4 }}>
+              color: '#fff', borderRadius: 0.75, px: 1, py: 0.4 }}>
               <Typography sx={{ fontSize: 10, fontWeight: 700, lineHeight: 1, whiteSpace: 'nowrap' }}>{product.badge}</Typography>
             </Box>
           )}
@@ -76,14 +76,14 @@ export default function ProductCard({ product, onClick }) {
 
           <Stack direction="row" spacing={0.6}>
             <Button variant="contained" size="small" fullWidth onClick={handleAdd}
-              sx={{ background: T.gradient, fontSize: { xs: 11, md: 12 }, py: 0.75, borderRadius: 2, gap: 0.6,
+              sx={{ background: T.gradient, fontSize: { xs: 11, md: 12 }, py: 0.75, borderRadius: 1, gap: 0.6,
                 '&:hover': { background: T.gradientDark } }}>
               <FontAwesomeIcon icon={faCartShopping} style={{ fontSize: 11 }} />
               Thêm giỏ
             </Button>
             <Button variant="outlined" size="small" aria-label="Gọi đặt hàng"
               onClick={(e) => { e.stopPropagation(); window.location.href = 'tel:0913331916'; }}
-              sx={{ minWidth: 36, p: 0.75, borderRadius: 2, borderColor: T.line, color: T.brand,
+              sx={{ minWidth: 36, p: 0.75, borderRadius: 1, borderColor: T.line, color: T.brand,
                 '&:hover': { borderColor: T.brand, background: T.gradientSoft } }}>
               <FontAwesomeIcon icon={faPhone} style={{ fontSize: 13 }} />
             </Button>
