@@ -297,6 +297,96 @@
         "material": "Inox + nhôm",
         "warranty": "36 tháng"
       }
+    },
+    {
+      "name": "Cân Điện Tử Sạc USB Kết Nối Bluetooth Phân Tích Chỉ Số Cơ Thể",
+      "category": 6,
+      "price": 169999,
+      "originalPrice": 322000,
+      "rating": 4.8,
+      "reviews": 22,
+      "image": "https://down-vn.img.susercontent.com/file/sg-11134201-81zvg-mn1275xrjeo67d_tn",
+      "badge": "Yêu thích",
+      "description": "Cân sức khỏe gia đình sạc USB, kết nối Bluetooth, phân tích 18 chỉ số cơ thể (BMI, mỡ cơ thể, mỡ nội tạng, cơ bắp, xương...). Màn hình LCD HD, kính cường lực, hiển thị nhiệt độ phòng. App OKOK INTERNATIONAL.",
+      "specifications": {
+        "weight": "180kg",
+        "accuracy": "50g",
+        "material": "Kính cường lực",
+        "warranty": "3 tháng"
+      },
+      "id": 17
+    },
+    {
+      "name": "Cân Điện Tử Bluetooth Thông Minh ZODAN BL998 Đo Thông Số Cơ Thể INBODY",
+      "category": 6,
+      "price": 79000,
+      "originalPrice": 270000,
+      "rating": 4.9,
+      "reviews": 2700,
+      "image": "https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mockvj6hg8ht85_tn",
+      "badge": "Shopee Mall – Bán Chạy",
+      "description": "Cân điện tử Bluetooth ZODAN BL998, kết nối app OKOK, phân tích 18 chỉ số cơ thể INBODY (BMI, mỡ, cơ bắp, nước, xương...). Kính cường lực, màn hình LED. Tải trọng tối đa 180kg. Pin AAA. Bảo hành chính hãng 12 tháng.",
+      "specifications": {
+        "weight": "180kg",
+        "accuracy": "100g",
+        "material": "Kính cường lực",
+        "warranty": "12 tháng"
+      },
+      "id": 18
+    },
+    {
+      "name": "Cân Điện Tử Sức Khỏe Lenovo Chịu Tải 180kg Màn Hình LED Mặt Kính Cường Lực",
+      "category": 6,
+      "price": 196000,
+      "originalPrice": 268000,
+      "rating": 4.8,
+      "reviews": 1800,
+      "image": "https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mpgbffgti230bf_tn",
+      "badge": "Lenovo Chính Hãng",
+      "description": "Cân sức khỏe Lenovo, cảm biến chữ G độ chính xác cao, chip BIA kiểm soát trọng lượng cơ thể, thiết kế đơn giản sạch sẽ. 3 pin AAA dùng được 12 tháng. Màn hình LED, kính cường lực. Tải trọng 180kg.",
+      "specifications": {
+        "weight": "180kg",
+        "accuracy": "50g",
+        "material": "Kính cường lực",
+        "warranty": "12 tháng"
+      },
+      "id": 19
+    },
+    {
+      "name": "Cân Điện Tử VICHITA 30kg/5g – Cân Tính Giá Tiền Điện Tử V699 Cao Cấp",
+      "category": 1,
+      "price": 1465000,
+      "originalPrice": 1494000,
+      "rating": 4.9,
+      "reviews": 28,
+      "image": "https://down-vn.img.susercontent.com/file/vn-11134207-81ztc-mpotek3qgv7zba_tn",
+      "badge": "Bán Chạy",
+      "description": "Cân điện tử tính giá tiền VICHITA V699, kích thước mặt cân 34×24cm, màn hình LED kép hiển thị trọng lượng và giá tiền, bàn phím tiếng Việt, nguồn sạc điện. Chuyên dùng bán hàng thực phẩm, nông sản.",
+      "specifications": {
+        "weight": "30kg",
+        "accuracy": "5g",
+        "material": "Kim loại + inox",
+        "warranty": "12 tháng"
+      },
+      "id": 20
+    },
+    {
+      "name": "Cân Điện Tử ISCALE Sức Khỏe Gia Đình 180kg Kính Cường Lực 6mm",
+      "category": 6,
+      "price": 78000,
+      "originalPrice": 85000,
+      "rating": 4.8,
+      "reviews": 490,
+      "image": "https://down-vn.img.susercontent.com/file/0e88e64cecda7543c62e67b5d333927e",
+      "badge": "Yêu Thích+",
+      "description": "Cân sức khỏe ISCALE nhỏ gọn, kính cường lực dày 6mm, cảm biến thông minh độ chính xác cao. Tải trọng 180kg, trọng lượng máy 1.34kg. Hiển thị nhiệt độ phòng, nhiều đơn vị đo (st/kg/lb). Giao màu ngẫu nhiên.",
+      "specifications": {
+        "weight": "180kg",
+        "accuracy": "100g",
+        "material": "Kính cường lực + nhựa + kim loại",
+        "warranty": "Đổi trả 15 ngày"
+      },
+      "id": 21
     }
   ],
   "services": [
